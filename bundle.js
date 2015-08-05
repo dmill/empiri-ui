@@ -1,55 +1,43 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var ExperimentComponent, React;
+var ExperimentComponent, ExperimentStore, React;
 
 React = require("react");
 
 ExperimentComponent = require("./components/experiment_component.cjsx");
 
-React.render(React.createElement(ExperimentComponent, null), document.getElementById("root"));
+ExperimentStore = require("./stores/experiment_store.coffee");
+
+React.render(React.createElement(ExperimentComponent, {
+  "data": ExperimentStore.getAll()
+}), document.getElementById("root"));
 
 
-},{"./components/experiment_component.cjsx":2,"react":165}],2:[function(require,module,exports){
-var ExperimentComponent, ExperimentStore, React, _;
+},{"./components/experiment_component.cjsx":2,"./stores/experiment_store.coffee":4,"react":165}],2:[function(require,module,exports){
+var ExperimentComponent, React;
 
 React = require("react");
 
-ExperimentStore = require("../stores/experiment_store.coffee");
-
-_ = require("underscore");
-
 ExperimentComponent = React.createClass({displayName: "ExperimentComponent",
-  getInitialState: function() {
-    return _.clone(ExperimentStore.attributes);
-  },
-  componentDidMount: function() {
-    return ExperimentStore.listenTo(this, "change", this._onChange);
-  },
-  componentWillUnmount: function() {
-    return ExperimentStore.stopListening(this, "change", this._onChange);
-  },
   render: function() {
     return React.createElement("div", {
       "id": "experiment-component"
     }, React.createElement("section", {
       "className": "introduction"
-    }, React.createElement("h1", null, this.state.title), React.createElement("h2", null, this.state.date), React.createElement("p", null, this.state.synopsis)), React.createElement("section", {
+    }, React.createElement("h1", null, this.props.data.title), React.createElement("h2", null, this.props.data.date), React.createElement("p", null, this.props.data.synopsis)), React.createElement("section", {
       "className": "content"
     }, React.createElement("div", {
       "className": "results-container"
-    }, React.createElement("h1", null, "Results"), React.createElement("p", null, this.state.results[0].text)), React.createElement("h2", null, "Discussion"), React.createElement("p", null, this.state.discussion)));
-  },
-  _onChange: function() {
-    return this.setState(getInitialState());
+    }, React.createElement("h1", null, "Results"), React.createElement("p", null, this.props.data.results[0].text)), React.createElement("h2", null, "Discussion"), React.createElement("p", null, this.props.data.discussion)));
   }
 });
 
 module.exports = ExperimentComponent;
 
 
-},{"../stores/experiment_store.coffee":4,"react":165,"underscore":166}],3:[function(require,module,exports){
+},{"react":165}],3:[function(require,module,exports){
 var Dispatcher, ExperimentDispatcher;
 
-Dispatcher = require('flux').Dispatcher;
+Dispatcher = require("flux").Dispatcher;
 
 ExperimentDispatcher = new Dispatcher();
 
@@ -83,19 +71,25 @@ ExperimentModel = (function(superClass) {
       figures: [],
       text: ""
     },
-    discussion: "",
-    initialize: function() {
-      return this.dispatchToken = ExperimentDispatcher.register(this.dispatchCallback);
-    },
-    dispatchCallback: function(payload) {
-      var attributes;
-      switch (payload.actionType) {
-        case "experiment-update":
-          attributes = _.clone(this.attributes);
-          _.extend(attributes, payload);
-          return this.set(attributes);
-      }
+    discussion: ""
+  };
+
+  ExperimentModel.prototype.initialize = function() {
+    return this.dispatchToken = ExperimentDispatcher.register(this.dispatchCallback);
+  };
+
+  ExperimentModel.prototype.dispatchCallback = function(payload) {
+    var attributes;
+    switch (payload.actionType) {
+      case "experiment-update":
+        attributes = _.clone(this.attributes);
+        _.extend(attributes, payload);
+        return this.set(attributes);
     }
+  };
+
+  ExperimentModel.prototype.getAll = function() {
+    return _.clone(this.attributes);
   };
 
   return ExperimentModel;

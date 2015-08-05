@@ -1,4 +1,4 @@
-Dispatcher = require('flux').Dispatcher
+Dispatcher = require("flux").Dispatcher
 ExperimentDispatcher = new Dispatcher()
 
 module.exports = ExperimentDispatcher

@@ -13,15 +13,18 @@ class ExperimentModel extends Backbone.Model
       text: ""
     discussion: ""
 
-    initialize: ->
-      @dispatchToken = ExperimentDispatcher.register(@dispatchCallback)
+  initialize: ->
+    @dispatchToken = ExperimentDispatcher.register(@dispatchCallback)
 
-    dispatchCallback: (payload) ->
-      switch payload.actionType
-        when "experiment-update"
-          attributes = _.clone(@attributes)
-          _.extend(attributes, payload)
-          @set(attributes)
+  dispatchCallback: (payload) ->
+    switch payload.actionType
+      when "experiment-update"
+        attributes = _.clone(@attributes)
+        _.extend(attributes, payload)
+        @set(attributes)
+
+  getAll: ->
+    _.clone(@attributes)
 
 testData =
   id: 1
