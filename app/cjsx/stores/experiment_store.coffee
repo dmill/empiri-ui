@@ -2,6 +2,7 @@ Backbone = require("backbone")
 ExperimentDispatcher = require("../dispatchers/experiment_dispatcher.coffee")
 _ = require("underscore")
 
+
 class ExperimentModel extends Backbone.Model
   defaults:
     id: null
@@ -26,6 +27,8 @@ class ExperimentModel extends Backbone.Model
   getAll: ->
     _.clone(@attributes)
 
+
+
 testData =
   id: 1
   thread_id: 1
@@ -38,6 +41,9 @@ testData =
   discussion: "this shit works"
 
 
+
 ExperimentStore = new ExperimentModel(testData)
+
+
 
 module.exports = ExperimentStore
