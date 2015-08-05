@@ -1,5 +1,5 @@
 Backbone = require("backbone")
-ExperimentDispatcher = require("../dispatchers/experiment_dispatcher")
+ExperimentDispatcher = require("../dispatchers/experiment_dispatcher.coffee")
 _ = require("underscore")
 
 class ExperimentModel extends Backbone.Model
@@ -23,6 +23,18 @@ class ExperimentModel extends Backbone.Model
           _.extend(attributes, payload)
           @set(attributes)
 
-ExperimentStore = new ExperimentModel()
+testData =
+  id: 1
+  thread_id: 1
+  title: "The Effects of Nootropics"
+  synopsis: "I took Modafinil every day for 30 days and measured my productivity."
+  results: [
+      figures: []
+      text: "measured 43% increased productivity"
+    ]
+  discussion: "this shit works"
+
+
+ExperimentStore = new ExperimentModel(testData)
 
 module.exports = ExperimentStore
