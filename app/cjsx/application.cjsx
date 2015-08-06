@@ -1,6 +1,6 @@
 React = require("react")
-ExperimentComponent = require("./components/experiment_component.cjsx")
 ExperimentStore = require("./stores/experiment_store.coffee")
+ExperimentComponent = require("./components/experiment_component.coffee")
 
 
 React.render(
