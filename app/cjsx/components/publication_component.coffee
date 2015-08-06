@@ -1,6 +1,6 @@
 React = require("react")
 ExperimentDispatcher = require("../dispatchers/experiment_dispatcher.coffee")
-template = require("./templates/experiments_component_template.cjsx")
+template = require("./templates/publication_component_template.cjsx")
 
 
 ExperimentsComponent = React.createClass

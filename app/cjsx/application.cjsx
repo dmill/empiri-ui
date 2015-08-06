@@ -1,9 +1,9 @@
 React = require("react")
-ExperimentStore = require("./stores/experiment_store.coffee")
-ExperimentsComponent = require("./components/experiments_component.coffee")
+PublicationStore = require("./stores/publication_store.coffee")
+PublicationComponent = require("./components/publication_component.coffee")
 
 
 React.render(
-  <ExperimentsComponent experiments={[ExperimentStore.A.getAll(), ExperimentStore.B.getAll()]} />,
+  <PublicationComponent data={PublicationStore.getAll()} />,
   document.getElementById("root")
 )

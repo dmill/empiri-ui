@@ -8,7 +8,7 @@ ExperimentComponent = React.createClass
 
   handleClick: ->
     ExperimentDispatcher.dispatch
-      actionType: "click-experiment-component"
+      actionType: "click.experiment-component"
       experimentId: @props.data.id
 
 
