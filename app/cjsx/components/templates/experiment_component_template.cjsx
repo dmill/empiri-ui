@@ -2,7 +2,7 @@ React = require("react")
 
 
 module.exports = ->
-  <div id="experiment-component">
+  <div onClick={@handleClick} className="experiment-component">
     <section className="introduction">
       <h1>{@props.data.title}</h1>
 

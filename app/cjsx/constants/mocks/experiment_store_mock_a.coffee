@@ -1,7 +1,7 @@
 module.exports =
   id: 1
   thread_id: 1
-  title: "The Effects of Nootropics"
+  title: "The Effects of Modafinil"
   synopsis: "I took Modafinil every day for 100 days and measured my productivity."
   results: [
       figures: []

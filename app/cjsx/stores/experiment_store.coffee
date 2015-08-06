@@ -1,6 +1,7 @@
 Backbone = require("backbone")
 ExperimentDispatcher = require("../dispatchers/experiment_dispatcher.coffee")
-EXPERIMENT_STORE_MOCK = require("../constants/mocks/experiment_store_mock.coffee")
+EXPERIMENT_STORE_MOCK_A = require("../constants/mocks/experiment_store_mock_a.coffee")
+EXPERIMENT_STORE_MOCK_B = require("../constants/mocks/experiment_store_mock_b.coffee")
 _ = require("underscore")
 
 
@@ -16,21 +17,14 @@ class ExperimentModel extends Backbone.Model
     discussion: ""
 
 
-  initialize: ->
-    @dispatchToken = ExperimentDispatcher.register(@dispatchCallback)
-
-  dispatchCallback: (payload) ->
-    switch payload.actionType
-      when "experiment-update"
-        attributes = _.clone(@attributes)
-        _.extend(attributes, payload)
-        @set(attributes)
-
   getAll: ->
     _.clone(@attributes)
 
 
-ExperimentStore = new ExperimentModel(EXPERIMENT_STORE_MOCK)
+ExperimentStoreA = new ExperimentModel(EXPERIMENT_STORE_MOCK_A)
+ExperimentStoreB = new ExperimentModel(EXPERIMENT_STORE_MOCK_B)
 
+module.exports =
+  A: ExperimentStoreA
+  B: ExperimentStoreB
 
-module.exports = ExperimentStore

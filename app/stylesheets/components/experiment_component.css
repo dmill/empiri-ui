@@ -1,0 +1,13 @@
+.experiment-component {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 3px;
+  max-width: 400px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.experiment-component:hover {
+  background-color: #ddddff;
+  cursor: pointer;
+}

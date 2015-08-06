@@ -4,6 +4,6 @@ ExperimentsComponent = require("./components/experiments_component.coffee")
 
 
 React.render(
-  <ExperimentsComponent experiments={[ExperimentStore.getAll(), ExperimentStore.getAll()]} />,
+  <ExperimentsComponent experiments={[ExperimentStore.A.getAll(), ExperimentStore.B.getAll()]} />,
   document.getElementById("root")
 )
