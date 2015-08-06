@@ -1,9 +1,9 @@
 React = require("react")
 ExperimentStore = require("./stores/experiment_store.coffee")
-ExperimentComponent = require("./components/experiment_component.coffee")
+ExperimentsComponent = require("./components/experiments_component.coffee")
 
 
 React.render(
-  <ExperimentComponent data={ExperimentStore.getAll()} />,
+  <ExperimentsComponent experiments={[ExperimentStore.getAll(), ExperimentStore.getAll()]} />,
   document.getElementById("root")
 )
