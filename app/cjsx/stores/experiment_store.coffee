@@ -1,5 +1,6 @@
 Backbone = require("backbone")
 ExperimentDispatcher = require("../dispatchers/experiment_dispatcher.coffee")
+EXPERIMENT_STORE_MOCK = require("../constants/mocks/experiment_store_mock.coffee")
 _ = require("underscore")
 
 
@@ -13,6 +14,7 @@ class ExperimentModel extends Backbone.Model
       figures: []
       text: ""
     discussion: ""
+
 
   initialize: ->
     @dispatchToken = ExperimentDispatcher.register(@dispatchCallback)
@@ -28,22 +30,7 @@ class ExperimentModel extends Backbone.Model
     _.clone(@attributes)
 
 
-
-testData =
-  id: 1
-  thread_id: 1
-  title: "The Effects of Nootropics"
-  synopsis: "I took Modafinil every day for 30 days and measured my productivity."
-  results: [
-      figures: []
-      text: "measured 43% increased productivity"
-    ]
-  discussion: "this shit works"
-
-
-
-ExperimentStore = new ExperimentModel(testData)
-
+ExperimentStore = new ExperimentModel(EXPERIMENT_STORE_MOCK)
 
 
 module.exports = ExperimentStore
