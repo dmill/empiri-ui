@@ -1,7 +1,14 @@
 import React from "react";
 import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js";
 
-class ExperimentComponent extends React.Component {
+var ExperimentComponent = React.createClass({
+
+  handleClick () {
+    ExperimentDispatcher.dispatch({
+      actionType: "click.experiment-component",
+      experimentId: this.props.data.id
+    });
+  },
 
   render () {
     return (
@@ -26,7 +33,7 @@ class ExperimentComponent extends React.Component {
     );
   }
 
-};
+});
 
 
 export default ExperimentComponent;

@@ -4,6 +4,7 @@ import { EXPERIMENT_STORE_MOCK_A, EXPERIMENT_STORE_MOCK_B } from "../constants/m
 import  _ from "underscore"
 
 var ExperimentModel = Backbone.Model.extend({
+
   defaults: {
     id: null,
     date: new Date().toISOString(),
@@ -19,6 +20,7 @@ var ExperimentModel = Backbone.Model.extend({
   getAll: function () {
     return _.clone(this.attributes);
   }
+
 });
 
 var ExperimentStoreA = new ExperimentModel(EXPERIMENT_STORE_MOCK_A);

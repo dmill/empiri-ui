@@ -3,6 +3,7 @@ import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js"
 import _ from "underscore"
 
 var PublicationModel = Backbone.Model.extend({
+
   defaults: {
     id: null,
     date: new Date().toISOString(),
@@ -14,6 +15,7 @@ var PublicationModel = Backbone.Model.extend({
   getAll: function () {
     return _.clone(this.attributes)
   }
+
 });
 
 var PublicationStore = new PublicationModel()

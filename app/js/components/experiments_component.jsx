@@ -2,15 +2,11 @@ import React from "react";
 import ExperimentDispatcher from "../dispatchers/experiment_dispatcher";
 import ExperimentComponent from "./experiment_component.jsx";
 
-class ExperimentsComponent extends React.Component {
+var ExperimentsComponent = React.createClass({
 
   getInitialState () {
     return {activeId: null};
-  }
-
-  componentDidMount () {
-    ExperimentDispatcher.register(this.dispatchCallBack);
-  }
+  },
 
   render () {
     return (
@@ -24,7 +20,7 @@ class ExperimentsComponent extends React.Component {
     );
   }
 
-}
+});
 
 
 export default ExperimentsComponent;

@@ -3,23 +3,23 @@ import ExperimentsComponent from "./experiments_component.jsx";
 import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js";
 import { ExperimentStoreA, ExperimentStoreB } from "../stores/experiment_store.js";
 
-class PublicationComponent extends React.Component {
+var PublicationComponent = React.createClass({
 
   dispatchCallBack (payload) {
     switch(payload.actionType) {
       case "click.experiment-component":
         this.setState({activeId: payload.experimentId});
         break;
-    }
-  }
+    };
+  },
 
   getInitialState () {
-    return {activeId: null}
-  }
+    return {activeId: null};
+  },
 
   componentDidMount () {
     ExperimentDispatcher.register(this.dispatchCallBack);
-  }
+  },
 
   render () {
     return (
@@ -38,7 +38,7 @@ class PublicationComponent extends React.Component {
     );
   }
 
-};
+});
 
 
 export default PublicationComponent;
