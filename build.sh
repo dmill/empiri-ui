@@ -1,3 +1,3 @@
 #!/bin/sh
-browserify app/cjsx/application.jsx -t babelify --outfile bundle.js
+browserify -t [babelify] app/cjsx/application.jsx -o bundle.js
 http-server

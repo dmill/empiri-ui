@@ -1,8 +1,13 @@
-import React from "react";
-import ExperimentComponent from "./components/experiment_component"
+var React = require("react");
+var ExperimentsComponent = require("./components/experiments_component.jsx");
 
 
 React.render(
-  <ExperimentComponent data={{title: "hello"}} />,
+  <ExperimentsComponent experiments={[{title: "hi1"}, {title: "hi2"}]} />,
   document.getElementById("root")
-)
+);
+
+// React.render(
+//   <ExperimentComponent data={{title: "hi1"}} />,
+//   document.getElementById("root")
+// );
