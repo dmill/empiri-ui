@@ -1,7 +1,7 @@
 var React = require("react")
 var ExperimentsComponent = require("./experiments_component.jsx")
 var ExperimentDispatcher = require("../dispatchers/experiment_dispatcher.js")
-
+var ExperimentStore = require("../stores/experiment_store.js")
 
 class PublicationComponent extends React.Component {
   render () {
@@ -15,7 +15,7 @@ class PublicationComponent extends React.Component {
         </section>
 
         <section className="content">
-          <ExperimentsComponent experiments={[{title: "hello1"}, {title: "h2"}]} />
+          <ExperimentsComponent experiments={[ExperimentStore.A.getAll(), ExperimentStore.B.getAll()]} />
         </section>
       </div>
     );
