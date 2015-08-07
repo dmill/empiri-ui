@@ -9,7 +9,6 @@ class ExperimentsComponent extends React.Component {
       <div className="experiments-component">
         {this.props.experiments.map(
           function(experiment, i) {
-            debugger
            return <ExperimentComponent data={experiment} key={i} />
           }
         )}

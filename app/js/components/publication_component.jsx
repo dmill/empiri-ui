@@ -39,4 +39,5 @@ class PublicationComponent extends React.Component {
 
 }
 
-module.exports = PublicationComponent
+
+export default PublicationComponent
