@@ -1,9 +1,9 @@
 var React = require("react");
-var ExperimentsComponent = require("./components/experiments_component.jsx");
+var PublicationComponent = require("./components/publication_component.jsx");
 
 
 React.render(
-  <ExperimentsComponent experiments={[{title: "hi1"}, {title: "hi2"}]} />,
+  <PublicationComponent data={{title: "yo"}} />,
   document.getElementById("root")
 );
 
