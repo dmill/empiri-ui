@@ -1,20 +1,8 @@
-var React = require("react");
-var ExperimentDispatcher = require("../dispatchers/experiment_dispatcher");
-var ExperimentComponent = require("./experiment_component.jsx");
+import React from "react";
+import ExperimentDispatcher from "../dispatchers/experiment_dispatcher";
+import ExperimentComponent from "./experiment_component.jsx";
 
 class ExperimentsComponent extends React.Component {
-
-  render () {
-    return (
-      <div className="experiments-component">
-        {this.props.experiments.map(
-          function(experiment, i) {
-           return <ExperimentComponent data={experiment} key={i} />
-          }
-        )}
-      </div>
-    );
-  }
 
   getInitialState () {
     return {activeId: null};
@@ -24,7 +12,19 @@ class ExperimentsComponent extends React.Component {
     ExperimentDispatcher.register(this.dispatchCallBack);
   }
 
+  render () {
+    return (
+      <div className="experiments-component">
+        {this.props.experiments.map(
+          function(experiment, i) {
+            return <ExperimentComponent data={experiment} key={i} />;
+          }
+        )}
+      </div>
+    );
+  }
+
 }
 
 
-module.exports = ExperimentsComponent;
+export default ExperimentsComponent;

@@ -1,8 +1,7 @@
-var Backbone = require("backbone")
-var ExperimentDispatcher = require("../dispatchers/experiment_dispatcher.js")
-var EXPERIMENT_STORE_MOCK_A = require("../constants/mocks/experiment_store_mock_a.js")
-var EXPERIMENT_STORE_MOCK_B = require("../constants/mocks/experiment_store_mock_b.js")
-var _ = require("underscore")
+import Backbone from "backbone";
+import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js";
+import { EXPERIMENT_STORE_MOCK_A, EXPERIMENT_STORE_MOCK_B } from "../constants/mocks/experiment_store_mock.js";
+import  _ from "underscore"
 
 var ExperimentModel = Backbone.Model.extend({
   defaults: {
@@ -18,13 +17,14 @@ var ExperimentModel = Backbone.Model.extend({
   },
 
   getAll: function () {
-    return _.clone(this.attributes)
+    return _.clone(this.attributes);
   }
 });
 
+var ExperimentStoreA = new ExperimentModel(EXPERIMENT_STORE_MOCK_A);
+var ExperimentStoreB = new ExperimentModel(EXPERIMENT_STORE_MOCK_B);
 
-var ExperimentStoreA = new ExperimentModel(EXPERIMENT_STORE_MOCK_A)
-var ExperimentStoreB = new ExperimentModel(EXPERIMENT_STORE_MOCK_B)
 
-module.exports = {A: ExperimentStoreA, B: ExperimentStoreB}
+export { ExperimentStoreA };
+export { ExperimentStoreB };
 
