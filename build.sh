@@ -1,3 +1,3 @@
 #!/bin/sh
-browserify -t coffee-reactify app/cjsx/application.cjsx > bundle.js
+browserify app/cjsx/application.jsx -t babelify --outfile bundle.js
 http-server
