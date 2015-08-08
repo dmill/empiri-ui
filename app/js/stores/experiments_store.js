@@ -23,10 +23,13 @@ var ExperimentModel = Backbone.Model.extend({
 
 });
 
+var ExperimentsCollection = Backbone.Collection.extend({
+  model: ExperimentModel
+});
+
 var ExperimentStoreA = new ExperimentModel(EXPERIMENT_STORE_MOCK_A);
 var ExperimentStoreB = new ExperimentModel(EXPERIMENT_STORE_MOCK_B);
+var ExperimentsStore = new ExperimentsCollection([ExperimentStoreA, ExperimentStoreB])
 
 
-export { ExperimentStoreA };
-export { ExperimentStoreB };
-
+export default ExperimentsStore;

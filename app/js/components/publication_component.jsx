@@ -1,14 +1,17 @@
 import React from "react";
 import ExperimentsComponent from "./experiments_component.jsx";
 import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js";
-import { ExperimentStoreA, ExperimentStoreB } from "../stores/experiment_store.js";
+import ExperimentsStore from "../stores/experiments_store.js";
 
 var PublicationComponent = React.createClass({
 
   dispatchCallBack (payload) {
     switch(payload.actionType) {
-      case "click.experiment-component":
+      case "click.experiment-preview-component":
         this.setState({activeId: payload.experimentId});
+        break;
+      case "close.experiment-component":
+        this.setState({activeId: null});
         break;
     };
   },
@@ -32,7 +35,7 @@ var PublicationComponent = React.createClass({
         </section>
 
         <section className="content">
-          <ExperimentsComponent experiments={[ExperimentStoreA.getAll(), ExperimentStoreB.getAll()]} />
+          <ExperimentsComponent activeId={this.state.activeId} experimentsStore={ExperimentsStore} />
         </section>
       </div>
     );

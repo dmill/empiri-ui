@@ -3,16 +3,17 @@ import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js";
 
 var ExperimentComponent = React.createClass({
 
-  handleClick () {
+  close () {
     ExperimentDispatcher.dispatch({
-      actionType: "click.experiment-component",
+      actionType: "close.experiment-component",
       experimentId: this.props.data.id
     });
   },
 
   render () {
     return (
-      <div onClick={this.handleClick} className="experiment-component">
+      <div className="experiment-component">
+        <a href="#" onClick={this.close}>Go Back</a>
         <section className="introduction">
           <h1>{this.props.data.title}</h1>
 
