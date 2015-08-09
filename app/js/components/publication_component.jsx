@@ -1,7 +1,8 @@
 import React from "react";
-import ExperimentsComponent from "./experiments_component.jsx";
 import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js";
 import ExperimentsStore from "../stores/experiments_store.js";
+import ExperimentComponent from "./experiment_component.jsx";
+import ExperimentPreviewsComponent from "./experiment_previews_component.jsx";
 
 var PublicationComponent = React.createClass({
 
@@ -24,18 +25,29 @@ var PublicationComponent = React.createClass({
     ExperimentDispatcher.register(this.dispatchCallBack);
   },
 
+  getActiveComponent () {
+    if(this.state.activeId) {
+      return <ExperimentComponent data={this.getActiveExperiment().getAll()} />;
+    } else {
+      return <ExperimentPreviewsComponent experiments={ExperimentsStore.models} />;
+    }
+  },
+
+  getActiveExperiment () {
+    return ExperimentsStore.findWhere({id: this.state.activeId});
+  },
+
   render () {
     return (
       <div className="publication-component">
         <section className="introduction">
           <h1>{this.props.data.title}</h1>
-
           <h2>{this.props.data.date}</h2>
           <p>{this.props.data.synopsis}</p>
         </section>
 
-        <section className="content">
-          <ExperimentsComponent activeId={this.state.activeId} experimentsStore={ExperimentsStore} />
+        <section className="experiments-container">
+          {this.getActiveComponent()}
         </section>
       </div>
     );
