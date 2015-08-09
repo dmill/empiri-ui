@@ -1,10 +1,10 @@
 import React from "react";
-import PublicationComponent from "./publication_component_view.jsx";
+import PublicationView from "./publication_view.jsx";
 
 var MainControllerView = React.createClass({
 
   getInitialState () {
-    return {activeView: <PublicationComponent />};
+    return {activeView: <PublicationView />};
   },
 
   render () {
