@@ -1,10 +1,9 @@
 import React from "react";
-import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js";
 
 var ExperimentPreviewComponent = React.createClass({
 
   handleClick () {
-    ExperimentDispatcher.dispatch({
+    this.props.dispatcher.dispatch({
       actionType: "click.experiment-preview-component",
       experimentId: this.props.data.id
     });

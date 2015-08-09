@@ -2,7 +2,7 @@ import React from "react";
 import PublicationComponent from "../components/publication_component.jsx";
 import PublicationStore from "../stores/publication_store.js";
 
-var PublicationComponentView = React.createClass({
+var PublicationView = React.createClass({
 
   render () {
     return (
@@ -12,4 +12,4 @@ var PublicationComponentView = React.createClass({
 
 });
 
-export default PublicationComponentView;
+export default PublicationView;

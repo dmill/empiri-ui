@@ -1,5 +1,4 @@
 import Backbone from "backbone";
-import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js";
 import { EXPERIMENT_STORE_MOCK_A, EXPERIMENT_STORE_MOCK_B } from "../constants/mocks/experiment_store_mock.js";
 import  _ from "underscore"
 

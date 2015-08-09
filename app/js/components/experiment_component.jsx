@@ -1,10 +1,9 @@
 import React from "react";
-import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js";
 
 var ExperimentComponent = React.createClass({
 
   close () {
-    ExperimentDispatcher.dispatch({
+    this.props.dispatcher.dispatch({
       actionType: "close.experiment-component",
       experimentId: this.props.data.id
     });

@@ -1,5 +1,5 @@
 import React from "react";
-import ExperimentDispatcher from "../dispatchers/experiment_dispatcher.js";
+import PublicationDispatcher from "../dispatchers/publication_dispatcher.js";
 import ExperimentsStore from "../stores/experiments_store.js";
 import ExperimentComponent from "./experiment_component.jsx";
 import ExperimentPreviewsComponent from "./experiment_previews_component.jsx";
@@ -22,14 +22,14 @@ var PublicationComponent = React.createClass({
   },
 
   componentDidMount () {
-    ExperimentDispatcher.register(this.dispatchCallBack);
+    PublicationDispatcher.register(this.dispatchCallBack);
   },
 
   getActiveComponent () {
     if(this.state.activeId) {
-      return <ExperimentComponent data={this.getActiveExperiment().getAll()} />;
+      return <ExperimentComponent dispatcher={PublicationDispatcher} data={this.getActiveExperiment().getAll()} />;
     } else {
-      return <ExperimentPreviewsComponent experiments={ExperimentsStore.models} />;
+      return <ExperimentPreviewsComponent dispatcher={PublicationDispatcher} experiments={ExperimentsStore.models} />;
     }
   },
 
