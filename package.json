@@ -14,7 +14,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bash ./build.sh"
+    "start": "bash ./bin/dev-server.sh"
   },
   "repository": {
     "type": "git",
