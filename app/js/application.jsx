@@ -1,8 +1,4 @@
 import React from "react";
-import PublicationComponent from "./components/publication_component.jsx";
-import PublicationStore from "./stores/publication_store.js";
+import MainControllerView from "./views/main_controller_view.jsx"
 
-React.render(
-  <PublicationComponent data={PublicationStore.getAll()} />,
-  document.getElementById("root")
-);
+React.render(<MainControllerView />, document.getElementById("root"));
