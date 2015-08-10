@@ -1,0 +1,47 @@
+#main-content {
+  width: 960px;
+  margin: 0 auto;
+  padding: 40px;
+
+  .image-container {
+    padding: 10px;
+    text-align: center;
+  }
+
+  h1 {
+    line-height: 1.4;
+    font-size: 38px;
+    font-weight: 300;
+  }
+
+  h2 {
+    line-height: 36px;
+    font-size: 24px;
+    font-weight: 100;
+    color: #3d464d;
+  }
+
+  .heading-container {
+    float: left;
+    width: 75%;
+  }
+
+  .waitlist-form {
+    width: 25%;
+    float: left;
+
+    & > * {
+      box-sizing: border-box;
+    }
+
+    input,
+    button {
+      width: 100%;
+    }
+
+    .name {
+      float: left;
+      width: 50%;
+    }
+  }
+}
