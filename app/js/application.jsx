@@ -1,4 +1,4 @@
-import React from "react";
-import MainControllerView from "./views/main_controller_view.jsx"
+import React from "bower_components/react/react";
+import ExperimentComponent from "./components/experiment_component";
 
-React.render(<MainControllerView />, document.getElementById("root"));
+React.render(<ExperimentComponent data={{title: "helloy"}} />, document.getElementById("root"));

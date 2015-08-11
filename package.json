@@ -4,17 +4,11 @@
   "description": "The UI for Empiri",
   "main": "index.html",
   "dependencies": {
-    "backbone": "^1.2.1",
-    "browserify": "^11.0.1",
-    "coffee-reactify": "^4.0.0",
-    "flux": "^2.0.3",
-    "http-server": "^0.8.0",
-    "react": "^0.13.3"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bash ./bin/dev-server.sh"
+    "start": "bash ./bin/build.sh"
   },
   "repository": {
     "type": "git",
