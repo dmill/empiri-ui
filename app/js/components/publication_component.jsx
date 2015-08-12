@@ -1,8 +1,8 @@
-import React from "react";
-import PublicationDispatcher from "../dispatchers/publication_dispatcher.js";
-import ExperimentsStore from "../stores/experiments_store.js";
-import ExperimentComponent from "./experiment_component.jsx";
-import ExperimentPreviewsComponent from "./experiment_previews_component.jsx";
+import React from "bower_components/react/react";
+import PublicationDispatcher from "../dispatchers/publication_dispatcher";
+import ExperimentsStore from "../stores/experiments_store";
+import ExperimentComponent from "./experiment_component";
+import ExperimentPreviewsComponent from "./experiment_previews_component";
 
 var PublicationComponent = React.createClass({
 

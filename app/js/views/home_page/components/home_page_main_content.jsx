@@ -1,4 +1,4 @@
-import React from "react";
+import React from "bower_components/react/react";
 
 var HomePageMainContent = React.createClass({
 

@@ -1,4 +1,4 @@
-import React from "react";
-import MainControllerView from "./views/main_controller_view.jsx"
+import React from "bower_components/react/react";
+import PublicationView from "./views/publication_view";
 
-React.render(<MainControllerView />, document.getElementById("root"));
+React.render(<PublicationView />, document.getElementById("root"));

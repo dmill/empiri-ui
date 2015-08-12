@@ -1,6 +1,6 @@
-import Backbone from "backbone";
-import { EXPERIMENT_STORE_MOCK_A, EXPERIMENT_STORE_MOCK_B } from "../constants/mocks/experiment_store_mock.js";
-import  _ from "underscore"
+import Backbone from "bower_components/backbone/backbone";
+import { EXPERIMENT_STORE_MOCK_A, EXPERIMENT_STORE_MOCK_B } from "../constants/mocks/experiment_store_mock";
+import _ from "underscore";
 
 var ExperimentModel = Backbone.Model.extend({
 

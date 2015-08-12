@@ -1,6 +1,6 @@
-import React from "react";
-import PublicationComponent from "../components/publication_component.jsx";
-import PublicationStore from "../stores/publication_store.js";
+import React from "bower_components/react/react";
+import PublicationComponent from "../components/publication_component";
+import PublicationStore from "../stores/publication_store";
 
 var PublicationView = React.createClass({
 

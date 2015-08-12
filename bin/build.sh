@@ -1,3 +1,4 @@
 #!/bin/sh
-browserify -t [babelify] ./app/js/application.jsx -o ./build/bundle.js
-node-sass --output-style compressed ./app/stylesheets/application.scss > ./build/application.css
+babel --watch --modules amd app/js --out-dir build/js &
+node-sass --watch --output-style compressed ./app/stylesheets/application.scss ./build/application.css &
+http-server

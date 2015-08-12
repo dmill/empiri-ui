@@ -1,6 +1,6 @@
-import React from "react";
-import PublicationView from "./publication_view.jsx";
-import HomePageView from "./home_page/home_page_view.jsx";
+import React from "bower_components/react/react";
+import PublicationView from "./publication_view";
+import HomePageView from "./home_page/home_page_view";
 
 var MainControllerView = React.createClass({
 

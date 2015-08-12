@@ -1,5 +1,5 @@
-import Backbone from "backbone"
-import _ from "underscore"
+import Backbone from "bower_components/backbone/backbone";
+import _ from "underscore";
 
 var PublicationModel = Backbone.Model.extend({
 
@@ -12,7 +12,7 @@ var PublicationModel = Backbone.Model.extend({
   },
 
   getAll: function () {
-    return _.clone(this.attributes)
+    return _.clone(this.attributes);
   }
 
 });
