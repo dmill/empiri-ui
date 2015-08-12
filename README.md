@@ -8,4 +8,4 @@ To get started:
 
 All done.  To start the server:
 
-`npm start`
+`$ npm start`
