@@ -1,5 +1,5 @@
-import React from "react";
-import ExperimentPreviewComponent from "./experiment_preview_component.jsx";
+import React from "bower_components/react/react";
+import ExperimentPreviewComponent from "./experiment_preview_component";
 
 var ExperimentPreviewsComponent = React.createClass({
 

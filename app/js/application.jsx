@@ -1,4 +1,4 @@
 import React from "bower_components/react/react";
-import ExperimentComponent from "./components/experiment_component";
+import PublicationView from "./views/publication_view";
 
-React.render(<ExperimentComponent data={{title: "helloy"}} />, document.getElementById("root"));
+React.render(<PublicationView />, document.getElementById("root"));

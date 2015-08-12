@@ -3,9 +3,12 @@
   "version": "0.0.0",
   "description": "The UI for Empiri",
   "main": "index.html",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "latest",
+    "babel": "latest",
+    "node-sass": "latest"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "bash ./bin/build.sh"
