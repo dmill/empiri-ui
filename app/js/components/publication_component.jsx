@@ -17,8 +17,11 @@ var PublicationComponent = React.createClass({
     };
   },
 
-  getInitialState () {
-    return {activeId: null};
+  getInitialState () { // smelly
+    return {
+      activeId: null,
+      experiments: []
+    };
   },
 
   componentDidMount () {
@@ -29,7 +32,7 @@ var PublicationComponent = React.createClass({
     if(this.state.activeId) {
       return <ExperimentComponent dispatcher={PublicationDispatcher} data={this.getActiveExperiment().getAll()} />;
     } else {
-      return <ExperimentPreviewsComponent dispatcher={PublicationDispatcher} experiments={ExperimentsStore.models} />;
+      return <ExperimentPreviewsComponent dispatcher={PublicationDispatcher} experiments={this.state.experiments} />;
     }
   },
 

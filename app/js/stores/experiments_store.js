@@ -1,3 +1,4 @@
+import Config from "../config";
 import Backbone from "bower_components/backbone/backbone";
 import { EXPERIMENT_STORE_MOCK_A, EXPERIMENT_STORE_MOCK_B } from "../constants/mocks/experiment_store_mock";
 import _ from "underscore";
@@ -23,12 +24,13 @@ var ExperimentModel = Backbone.Model.extend({
 });
 
 var ExperimentsCollection = Backbone.Collection.extend({
+  url: Config.empiriApiEndpoint + "/" + Config.publicationPath,
   model: ExperimentModel
 });
 
-var ExperimentStoreA = new ExperimentModel(EXPERIMENT_STORE_MOCK_A);
-var ExperimentStoreB = new ExperimentModel(EXPERIMENT_STORE_MOCK_B);
-var ExperimentsStore = new ExperimentsCollection([ExperimentStoreA, ExperimentStoreB])
+// var ExperimentStoreA = new ExperimentModel(EXPERIMENT_STORE_MOCK_A);
+// var ExperimentStoreB = new ExperimentModel(EXPERIMENT_STORE_MOCK_B);
+var ExperimentsStore = new ExperimentsCollection()
 
 
 export default ExperimentsStore;
