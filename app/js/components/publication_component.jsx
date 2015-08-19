@@ -17,10 +17,15 @@ var PublicationComponent = React.createClass({
     };
   },
 
+  getDefaultProps() {
+    return {
+      experiments: []
+    }
+  },
+
   getInitialState () { // smelly
     return {
-      activeId: null,
-      experiments: []
+      activeId: null
     };
   },
 
@@ -32,7 +37,7 @@ var PublicationComponent = React.createClass({
     if(this.state.activeId) {
       return <ExperimentComponent dispatcher={PublicationDispatcher} data={this.getActiveExperiment().getAll()} />;
     } else {
-      return <ExperimentPreviewsComponent dispatcher={PublicationDispatcher} experiments={this.state.experiments} />;
+      return <ExperimentPreviewsComponent dispatcher={PublicationDispatcher} experiments={this.props.experiments} />;
     }
   },
 
@@ -43,12 +48,6 @@ var PublicationComponent = React.createClass({
   render () {
     return (
       <div className="publication-component">
-        <section className="introduction">
-          <h1>{this.props.data.title}</h1>
-          <h2>{this.props.data.date}</h2>
-          <p>{this.props.data.synopsis}</p>
-        </section>
-
         <section className="experiments-container">
           {this.getActiveComponent()}
         </section>

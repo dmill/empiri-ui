@@ -1,24 +1,29 @@
 import React from "bower_components/react/react";
+import PublicationDispatcher from "../dispatchers/publication_dispatcher";
 import PublicationComponent from "../components/publication_component";
 import PublicationStore from "../stores/publication_store";
-import ExperimentStore from "../stores/experiments_store";
 
 var PublicationView = React.createClass({
 
+  getInitialState: function() {
+    return {experiments: []}
+  },
+
   componentDidMount () {
-    ExperimentStore.fetch({
-      success: function(collection, response) {
-        this.setState({experiments: collection})
-      },
-      error: function() {
-        console.log("AHHHHHHHHHHH");
+    PublicationDispatcher.dispatch({
+      actionType: "publicationView:initialize",
+      fetchOptions: {
+        success: function(collection, response) {
+          this.setState({experiments: collection.models});
+        }.bind(this),
+        error: function() { console.error("error with 'publicationView:initialize'") }
       }
     });
   },
 
   render () {
     return (
-      <PublicationComponent data={PublicationStore.getAll()} />
+      <PublicationComponent experiments={this.state.experiments} />
     );
   }
 

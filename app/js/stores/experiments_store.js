@@ -24,7 +24,7 @@ var ExperimentModel = Backbone.Model.extend({
 });
 
 var ExperimentsCollection = Backbone.Collection.extend({
-  url: Config.empiriApiEndpoint + "/" + Config.publicationPath,
+  url: `${Config.empiriApiEndpoint}/${Config.publicationPath}`,
   model: ExperimentModel
 });
 

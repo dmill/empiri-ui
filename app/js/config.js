@@ -3,11 +3,11 @@ var env = process.env.NODE_ENV || "development";
 var environments = {
   development: {
     empiriApiEndpoint: "http://localhost:9292",
-    publicationPath: "dev"
+    publicationPath: "publications"
   },
   production: {
     empiriApiEndpoint: "http://localhost:9292",
-    publicationPath: "prod"
+    publicationPath: "publications"
   }
 };
 
