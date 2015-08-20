@@ -3,12 +3,12 @@ import React from "bower_components/react/react";
 var HoverCardComponent = React.createClass({
 
   propTypes: {
-    tooltip: React.PropTypes.string.isRequired
+    // tooltip: React.PropTypes.string.isRequired
   },
 
   render () {
     return (
-      <div style={tooltipStyle}>{this.props.tooltip}</div>
+      <span style={tooltipStyle}>{this.props.tooltip}</span>
     );
   }
 
@@ -22,7 +22,8 @@ var tooltipStyle = {
   color: "#000000",
   padding: "5px",
   fontSize: "12px",
-  boxSizing: "border-box"
+  boxSizing: "border-box",
+  float: "left"
 }
 
 export default HoverCardComponent;

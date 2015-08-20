@@ -20,7 +20,8 @@ var NavComponent = React.createClass({
 
 var imgStyle = {
   width: "20px",
-  borderRadius: "3px"
+  borderRadius: "3px",
+  marginTop: "5px"
 };
 
 var accountDropdown = (
