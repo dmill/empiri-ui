@@ -1,8 +1,5 @@
 import React from "bower_components/react/react";
 
-var iconStyle = {
-  float: "left"
-};
 
 var FontawesomeComponent = React.createClass({
 
@@ -12,10 +9,11 @@ var FontawesomeComponent = React.createClass({
 
   render () {
     return (
-      <i style={iconStyle} className={"fa fa-" + this.props.iconName}></i>
+      <i style={this.props.style} className={"fa fa-" + this.props.iconName}></i>
     );
   }
 
 });
+
 
 export default FontawesomeComponent;

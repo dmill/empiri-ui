@@ -1,7 +1,8 @@
 import React from "bower_components/react/react";
 import HoverCardComponent from "./hover_card_component";
 
-var ListComponent = React.createClass({
+
+var DropdownItemsComponent = React.createClass({
 
   propTypes: {
     items: React.PropTypes.array.isRequired
@@ -9,7 +10,7 @@ var ListComponent = React.createClass({
 
   render () {
     return (
-      <div style={listStyle}>
+      <div style={itemsStyle}>
         {this.props.items.map(function(item, i) {
           return <HoverCardComponent text={item} key={i} />
         })}
@@ -19,12 +20,13 @@ var ListComponent = React.createClass({
 
 });
 
-var listStyle = {
+var itemsStyle = {
   position: "absolute",
   borderRadius: "3px",
   border: "1px solid #000000",
   backgroundColor: "#FFFFFF",
-  boxSizing: "border-box",
+  boxSizing: "border-box"
 }
 
-export default ListComponent;
+
+export default DropdownItemsComponent;

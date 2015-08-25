@@ -1,6 +1,7 @@
 import React from "bower_components/react/react";
-import ListComponent from "./list_component";
+import DropdownItemsComponent from "./dropdown_items_component";
 import FontawesomeComponent from "./fontawesome_component";
+
 
 var DropdownComponent = React.createClass({
 
@@ -9,38 +10,39 @@ var DropdownComponent = React.createClass({
   },
 
   propTypes: {
-    content: React.PropTypes.element.isRequired
+    content: React.PropTypes.element.isRequired,
+    items: React.PropTypes.arrayOf(React.PropTypes.string).isRequired
   },
 
   handleClick () {
-    var currentState = this.state.open;
-    this.setState({open: !currentState});
+    this.setState({open: !this.state.open});
   },
 
-  renderList () {
+  renderItems () {
     if(this.state.open) {
-      return <ListComponent items={this.props.items} />;
+      return <DropdownItemsComponent items={this.props.items} />;
     }
   },
 
   render () {
     return (
-      <div style={{cursor: "pointer"}} onClick={this.handleClick}>
+      <div className="noselect" style={{cursor: "pointer"}} onClick={this.handleClick}>
         {this.props.content}
-        <div style={{display: "inline-block", marginLeft: "5px"}}>
-          <FontawesomeComponent style={{float: "left"}} iconName="caret-down" />
-        </div>
-        <div style={{listContainerStyle}}>
-          {this.renderList()}
-        </div>
+
+        <FontawesomeComponent style={caretStyle} iconName="caret-down" />
+
+        {this.renderItems()}
       </div>
     );
   }
 
 });
 
-var listContainerStyle = {
-
+var caretStyle = {
+  marginLeft: "5px",
+  marginTop: "-10px",
+  verticalAlign: "middle"
 }
+
 
 export default DropdownComponent;

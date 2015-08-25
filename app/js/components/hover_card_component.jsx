@@ -1,7 +1,12 @@
 import React from "bower_components/react/react";
 import _ from "underscore";
 
+
 var HoverCardComponent = React.createClass({
+
+  propTypes: {
+    text: React.PropTypes.string.isRequired
+  },
 
   getInitialState () {
     return {hover: false}
@@ -15,27 +20,31 @@ var HoverCardComponent = React.createClass({
     this.setState({hover: false})
   },
 
-  propTypes: {
-    text: React.PropTypes.string.isRequired
-  },
+  getHoverStyle () {
+    if(this.state.hover) {
+      return hoverStyle;
+    } else {
+      return cardStyle;
+    }
+  }
 
   render () {
-    if(this.state.hover) {
-      return (
-        <div onMouseOut={this.handleMouseOut} onMouseOver={this.handleMouseOver} style={_.extend(_.clone(cardStyle), hoverStyle)}>{this.props.text}</div>
-      );
-    } else {
-      return (
-        <div onMouseOut={this.handleMouseOut} onMouseOver={this.handleMouseOver} style={cardStyle}>{this.props.text}</div>
-      );
-    }
+    return (
+      <div style={this.getHoverStyle()}
+      onMouseOut={this.handleMouseOut} onMouseOver={this.handleMouseOver}>
+        {this.props.text}
+      </div>
+    );
   }
 
 });
 
 var hoverStyle = {
   backgroundColor: "#666",
-  color: "#FFF"
+  color: "#FFF",
+  padding: "3px 5px",
+  fontSize: "12px",
+  boxSizing: "border-box"
 };
 
 var cardStyle = {
@@ -45,5 +54,6 @@ var cardStyle = {
   fontSize: "12px",
   boxSizing: "border-box"
 };
+
 
 export default HoverCardComponent;
