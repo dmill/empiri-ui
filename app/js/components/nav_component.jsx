@@ -10,8 +10,7 @@ var NavComponent = React.createClass({
           <span style={spanStyle}><img style={logoStyle} src="./assets/images/logo.png" /></span>
           <span style={spanStyle}><input type="text" /></span>
           <span style={spanStyle}>Browse</span>
-          <span style={spanStyle}><TooltipComponent text="New Publication" tooltip="new pub" /></span>
-          <span style={spanStyle}><DropdownComponent content={accountDropdown} /></span>
+          <span style={spanStyle}><DropdownComponent content={accountDropdown} items={["log out", "log in", "view profile"]} /></span>
       </nav>
     );
   }

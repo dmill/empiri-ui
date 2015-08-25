@@ -1,5 +1,5 @@
 import React from "bower_components/react/react";
-import HoverCardComponent from "./hover_card_component";
+import ListComponent from "./list_component";
 import FontawesomeComponent from "./fontawesome_component";
 
 var DropdownComponent = React.createClass({
@@ -9,7 +9,7 @@ var DropdownComponent = React.createClass({
   },
 
   propTypes: {
-    // content: React.PropTypes.element.isRequired
+    content: React.PropTypes.element.isRequired
   },
 
   handleClick () {
@@ -19,7 +19,7 @@ var DropdownComponent = React.createClass({
 
   renderList () {
     if(this.state.open) {
-      return <HoverCardComponent tooltip="test" />;
+      return <ListComponent items={this.props.items} />;
     }
   },
 
@@ -28,13 +28,19 @@ var DropdownComponent = React.createClass({
       <div style={{cursor: "pointer"}} onClick={this.handleClick}>
         {this.props.content}
         <div style={{display: "inline-block", marginLeft: "5px"}}>
-          {this.renderList()}
           <FontawesomeComponent style={{float: "left"}} iconName="caret-down" />
+        </div>
+        <div style={{listContainerStyle}}>
+          {this.renderList()}
         </div>
       </div>
     );
   }
 
 });
+
+var listContainerStyle = {
+
+}
 
 export default DropdownComponent;
