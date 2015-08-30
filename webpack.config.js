@@ -1,11 +1,16 @@
 module.exports = {
-  entry: "./app/js/application.jsx",
+  entry: {
+    main: "./app/js/application.jsx",
+    test: "./__tests__/hover_card_component_spec.jsx"
+  },
   output: {
-    filename: "./build/application.js"
+    path: "build",
+    filename: "[name].js"
   },
   module: {
     loaders: [
-      { app: /\.jsx$/, loader: "babel-loader" }
+      { app: /\.jsx$/, loader: "babel-loader", include: "app/js" },
+      { __tests__: /\.jsx$/, loaders: ["babel-loader"] }
     ]
   },
   resolve: {
