@@ -1,20 +1,34 @@
-var React = require("react/addons"),
-    assert = require("assert"),
-    HoverCardComponent = require("../app/js/components/hover_card_component.jsx"),
-    TestUtils = React.addons.TestUtils;
+import React from "react/addons";
+var TestUtils = React.addons.TestUtils;
 
-describe("HoverCardComponent", function(){
+import chai from "chai";
+var expect = chai.expect
+
+import HoverCardComponent from "../app/js/components/hover_card_component";
+
+var spec = describe("HoverCardComponent", function() {
+
   before("render and locate element", function() {
-    var renderedComponent = TestUtils.renderIntoDocument(
+
+    var renderedComponent, divComponent;
+
+    // render component into DOM
+    renderedComponent = TestUtils.renderIntoDocument(
       <HoverCardComponent text="test text" />
     );
 
+    // find element
     var divComponent = TestUtils.findRenderedDOMComponentWithTag(renderedComponent, "div");
-
     this.divElement = divComponent.getDOMNode();
+
   });
 
   it("<div> should render its props.text", function() {
-    assert.equal(this.divElement.textContent, "test text");
+
+    expect(this.divElement.textContent).to.equal("test text");
+
   });
+
 });
+
+export default spec;

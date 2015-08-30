@@ -9,8 +9,7 @@ chai.use(sinonChai);
 
 import DropdownListComponent from "../app/js/components/dropdown_list_component";
 
-
-describe("DropdownListComponent", function(){
+var spec = describe("DropdownListComponent", function(){
 
   before("render and locate element", function() {
 
@@ -69,3 +68,5 @@ describe("DropdownListComponent", function(){
   });
 
 });
+
+export default spec;
