@@ -4,7 +4,8 @@
   "description": "The UI for Empiri",
   "main": "index.js",
   "scripts": {
-    "start": "bash bin/build.sh"
+    "start": "webpack --watch",
+    "test": "open __tests__/index.html"
   },
   "author": "",
   "license": "ISC",

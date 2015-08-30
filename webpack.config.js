@@ -1,7 +1,7 @@
 module.exports = {
   entry: {
     main: "./app/js/application.jsx",
-    test: "./__tests__/spec.js"
+    test: "./__tests__/spec_runner.js"
   },
   output: {
     path: "build",
@@ -9,8 +9,17 @@ module.exports = {
   },
   module: {
     loaders: [
-      { app: /\.jsx$/, loader: "babel-loader", query: { blacklist: ["strict"] } },
-      { __tests__: /\.jsx$/, loader: "babel-loader", query: { blacklist: ["strict"] } }
+      {
+        app: /\.jsx$/, loader: "babel-loader",
+        query: { blacklist: ["strict"] },
+        exclude: /node_modules/
+      },
+      {
+        __tests__: /\.jsx$/,
+        loader: "babel-loader",
+        query: { blacklist: ["strict"] } ,
+        exclude: /node_modules/
+      }
     ]
   },
   resolve: {
