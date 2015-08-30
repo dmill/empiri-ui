@@ -1,4 +1,4 @@
 import React from "react";
-import HoverCardComponent from "./components/hover_card_component";
+import HoverCardComponent from "./components/dropdown_list_component";
 
-React.render(<HoverCardComponent text="aasdfasdfasdfasdfasdf s" />, document.getElementById("root"));
+React.render(<HoverCardComponent items={["item1", "item2", "item3"]} />, document.getElementById("root"));

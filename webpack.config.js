@@ -1,7 +1,7 @@
 module.exports = {
   entry: {
     main: "./app/js/application.jsx",
-    test: "./__tests__/hover_card_component_spec.jsx"
+    test: "./__tests__/spec.js"
   },
   output: {
     path: "build",
@@ -9,8 +9,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { app: /\.jsx$/, loader: "babel-loader", include: "app/js" },
-      { __tests__: /\.jsx$/, loaders: ["babel-loader"] }
+      { app: /\.jsx$/, loader: "babel-loader", query: { blacklist: ["strict"] } },
+      { __tests__: /\.jsx$/, loader: "babel-loader", query: { blacklist: ["strict"] } }
     ]
   },
   resolve: {

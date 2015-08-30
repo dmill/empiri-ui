@@ -17,12 +17,4 @@ describe("HoverCardComponent", function(){
   it("<div> should render its props.text", function() {
     assert.equal(this.divElement.textContent, "test text");
   });
-
-  it("<div> should render its props.text", function() {
-    assert.equal(this.divElement.textContent, "test text");
-  });
-
-  it("<div> should render its props.text", function() {
-    assert.equal(this.divElement.textContent, "test text");
-  });
 });

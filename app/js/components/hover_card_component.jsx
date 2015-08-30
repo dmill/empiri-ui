@@ -8,13 +8,11 @@ var HoverCardComponent = React.createClass({
   },
 
   render () {
+    var {text, ...other} = this.props;
+
     return (
-      <div
-        style={this.props.style}
-        onMouseOver={this.props.onMouseOver}
-        onMouseOut={this.props.onMouseOut}
-      >
-        {this.props.text}
+      <div {...other}>
+        {text}
       </div>
     );
   }
