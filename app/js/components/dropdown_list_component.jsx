@@ -2,7 +2,9 @@ import React from "react";
 import HoverCardComponent from "./hover_card_component";
 
 
-var DropdownItemsComponent = React.createClass({
+var DropdownListComponent = React.createClass({
+
+  displayName: "DropdownListComponent",
 
   propTypes: {
     items: React.PropTypes.array.isRequired
@@ -74,4 +76,4 @@ var defaultStyle = {
 };
 
 
-export default DropdownItemsComponent;
+export default DropdownListComponent;
