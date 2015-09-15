@@ -1,15 +1,13 @@
 import React from "react/addons";
-var TestUtils = React.addons.TestUtils;
-
 import chai from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
+import DropdownListComponent from "../app/js/components/dropdown_list_component";
+var TestUtils = React.addons.TestUtils;
 var expect = chai.expect;
 chai.use(sinonChai);
 
-import DropdownListComponent from "../app/js/components/dropdown_list_component";
-
-var spec = describe("DropdownListComponent", function(){
+module.exports = describe("DropdownListComponent", function(){
 
   before("render and locate element", function() {
 
@@ -69,4 +67,3 @@ var spec = describe("DropdownListComponent", function(){
 
 });
 
-export default spec;

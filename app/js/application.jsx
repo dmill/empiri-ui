@@ -1,4 +1,7 @@
 import React from "react";
-import HoverCardComponent from "./components/dropdown_list_component";
+import DropdownComponent from "./components/dropdown_component";
 
-React.render(<HoverCardComponent items={["item1", "item2", "item3"]} />, document.getElementById("root"));
+React.render(
+  <DropdownComponent content={<div>Menu</div>} items={["item1", "item2", "item3"]} />,
+  document.getElementById("root")
+);

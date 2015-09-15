@@ -1,29 +1,25 @@
 import React from "react";
-import HoverCardComponent from "./hover_card_component";
-
 
 var DropdownListComponent = React.createClass({
-
-  displayName: "DropdownListComponent",
 
   propTypes: {
     items: React.PropTypes.array.isRequired
   },
 
   getInitialState () {
-    return {hoveredCardKey: null};
+    return {hoveredDivKey: null};
   },
 
   handleMouseOver (key, event) {
-    this.setState({hoveredCardKey: key});
+    this.setState({hoveredDivKey: key});
   },
 
   handleMouseOut () {
-    this.setState({hoveredCardKey: null});
+    this.setState({hoveredDivKey: null});
   },
 
   getStyle (key) {
-    if(key === this.state.hoveredCardKey) {
+    if(key === this.state.hoveredDivKey) {
       return hoverStyle;
     } else {
       return defaultStyle;
@@ -35,12 +31,14 @@ var DropdownListComponent = React.createClass({
       <div style={listStyle}>
         {this.props.items.map(function(item, i) {
           return (
-              <HoverCardComponent
+              <div
                 key={i}
-                text={item}
                 onMouseOver={this.handleMouseOver.bind(null, i)}
                 onMouseOut={this.handleMouseOut}
-                style={this.getStyle(i)} />
+                style={this.getStyle(i)}
+              >
+                {item}
+              </div>
           );
         }.bind(this))}
       </div>
@@ -57,15 +55,6 @@ var listStyle = {
   boxSizing: "border-box"
 };
 
-var hoverStyle = {
-  backgroundColor: "#666",
-  color: "#FFF",
-  padding: "3px 5px",
-  fontSize: "12px",
-  boxSizing: "border-box",
-  cursor: "pointer"
-};
-
 var defaultStyle = {
   backgroundColor: "#FFFFFF",
   color: "#000000",
@@ -75,5 +64,13 @@ var defaultStyle = {
   cursor: "pointer"
 };
 
+var hoverStyle = {
+  backgroundColor: "#666",
+  color: "#FFF",
+  padding: "3px 5px",
+  fontSize: "12px",
+  boxSizing: "border-box",
+  cursor: "pointer"
+};
 
 export default DropdownListComponent;

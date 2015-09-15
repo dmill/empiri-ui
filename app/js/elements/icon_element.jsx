@@ -1,6 +1,6 @@
 import React from "react";
 
-var FontawesomeComponent = React.createClass({
+var iconElement = React.createClass({
 
   propTypes: {
     iconName: React.PropTypes.string.isRequired
@@ -12,4 +12,4 @@ var FontawesomeComponent = React.createClass({
 
 });
 
-export default FontawesomeComponent;
+export default iconElement;

@@ -1,16 +1,14 @@
 import React from "react/addons";
-var TestUtils = React.addons.TestUtils;
-
 import chai from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
+import DropdownComponent from "../app/js/components/dropdown_component";
+import DropdownListComponent from "../app/js/components/dropdown_list_component";
+var TestUtils = React.addons.TestUtils;
 var expect = chai.expect;
 chai.use(sinonChai);
 
-import DropdownComponent from "../app/js/components/dropdown_component";
-import DropdownListComponent from "../app/js/components/dropdown_list_component";
-
-var spec = describe("DropdownComponent", function() {
+module.exports = describe("DropdownComponent", function() {
 
   before("render and locate element", function() {
 
@@ -47,7 +45,7 @@ var spec = describe("DropdownComponent", function() {
   it("<div> should pass its props.items down to its DropdownListComponent", function() {
 
     var divTags = TestUtils.scryRenderedDOMComponentsWithTag(this.renderedComponent, "div");
-    var listItems = divTags.slice(3);
+    var listItems = divTags.slice(2);
 
     expect(listItems[0].getDOMNode().textContent).to.equal("item1");
 
@@ -57,14 +55,13 @@ var spec = describe("DropdownComponent", function() {
 
   });
 
-  it("<div> should render a caret-down FontawesomeComponent", function() {
+  it("<div> should render a caret-down IconElement", function() {
 
-    var fontAwesomeComponent = TestUtils.findRenderedDOMComponentWithClass(this.renderedComponent, "fa-caret-down");
+    var iconElement = TestUtils.findRenderedDOMComponentWithClass(this.renderedComponent, "fa-caret-down");
 
-    expect(fontAwesomeComponent).to.exist;
+    expect(iconElement).to.exist;
 
   });
 
 });
 
-export default spec;
