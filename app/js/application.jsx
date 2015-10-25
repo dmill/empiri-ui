@@ -1,7 +1,4 @@
 import React from "react";
-import DropdownComponent from "./components/dropdown_component";
+import NavBarView from "./views/nav_bar_view";
 
-React.render(
-  <DropdownComponent content={<div>Menu</div>} items={["item1", "item2", "item3"]} />,
-  document.getElementById("root")
-);
+React.render(<NavBarView />, document.getElementById("root"));
