@@ -1,6 +1,6 @@
 import React from "react";
 
-var iconElement = React.createClass({
+var IconElement = React.createClass({
 
   getDefaultProps () {
     return {iconType: "fontawesome"};
@@ -18,10 +18,10 @@ var iconElement = React.createClass({
       case "material":
         return <i style={this.props.style} className="material-icons">{this.props.iconName}</i>;
       default:
-        return console.error("iconElement: Please specify a correct iconType.");
+        return console.error("IconElement: Please specify a correct iconType.");
     }
   }
 
 });
 
-export default iconElement;
+export default IconElement;

@@ -2,7 +2,7 @@ import React from "react/addons";
 import chai from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
-import Icon from "../app/js/elements/icon_element";
+import IconElement from "../app/js/elements/icon_element";
 var TestUtils = React.addons.TestUtils;
 var expect = chai.expect;
 chai.use(sinonChai);
@@ -11,11 +11,11 @@ module.exports = describe("Icon", function() {
 
   before("render and locate element", function() {
 
-    // render component into DOM
+    // render elements into DOM
     this.renderedComponent = TestUtils.renderIntoDocument(
       <div>
-        <Icon iconName="close" />
-        <Icon iconType="material" iconName="close" />
+        <IconElement iconName="close" />
+        <IconElement iconType="material" iconName="close" />
       </div>
     );
 

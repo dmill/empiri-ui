@@ -1,34 +1,15 @@
 import React from "react";
 
-var NavBarView = React.createClass({
+var UserProfileView = React.createClass({
 
   render () {
     return (
-      <nav>
-        <div className="container">
-          <div className="row">
-            <img src="images/symbol.png" width="20px" />
-
-            <input type="text" placeholder="Search Empiri" />
-
-            <span>
-              <a href="#">Browse</a>
-            </span>
-
-            <span>
-              <a href="#">FAQ</a>
-            </span>
-
-            <MaterialIconElement iconName="face" />
-
-            <button>Sign up</button>
-            <button>Sign in</button>
-          </div>
-        </div>
-      </nav>
+      <div>
+        <h1>User Profile</h1>
+      </div>
     );
   }
 
 });
 
-export default NavBarView;
+export default UserProfileView;

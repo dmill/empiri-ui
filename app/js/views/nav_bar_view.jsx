@@ -1,6 +1,6 @@
 import React from "react";
 import DropdownComponent from "../components/dropdown_component";
-import Icon from "../elements/icon_element";
+import IconElement from "../elements/icon_element";
 
 var NavBarView = React.createClass({
 
@@ -21,7 +21,7 @@ var NavBarView = React.createClass({
               <a href="#">FAQ</a>
             </span>
 
-            <Icon iconType="material" iconName="face" />
+            <IconElement iconType="material" iconName="face" />
 
             <button>Sign up</button>
             <button>Sign in</button>
