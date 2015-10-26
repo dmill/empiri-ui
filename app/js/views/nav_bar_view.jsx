@@ -21,7 +21,7 @@ var NavBarView = React.createClass({
               <a href="#">FAQ</a>
             </span>
 
-            <IconElement iconType="material" iconName="face" />
+            <img src={this.props.user.avatar} height="20" />
 
             <button>Sign up</button>
             <button>Sign in</button>
