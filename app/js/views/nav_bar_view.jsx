@@ -1,6 +1,8 @@
 import React from "react";
 import DropdownComponent from "../components/dropdown_component";
 import IconElement from "../elements/icon_element";
+import PopoverSelectComponent from "../components/popover_select_component";
+import PopoverComponent from "../components/popover_component";
 
 var NavBarView = React.createClass({
 
@@ -21,7 +23,10 @@ var NavBarView = React.createClass({
               <a href="#">FAQ</a>
             </span>
 
-            <img src={this.props.user.avatar} height="20" />
+            <PopoverSelectComponent
+              content={<img src={this.props.user.avatar}
+              height="20" />}
+              popoverContent={<PopoverComponent content="hi" />} />
 
             <button>Sign up</button>
             <button>Sign in</button>
