@@ -13,18 +13,18 @@ var Layout = React.createClass({
     UserStore.removeListener("change", this.onChange);
   },
 
-  onChange() {
-    this.setState({currentUser: UserStore.get("user")});
+  onChange(payload) {
+    this.setState({currentUser: payload.user});
   },
 
   getInitialState() {
-    return {currentUser: UserStore.get("user")};
+    return {currentUser: null};
   },
 
   render() {
     return (
       <div>
-        <NavBarView user={this.state.currentUser} />
+        <NavBarView currentUser={this.state.currentUser} />
         <UserProfileView user={this.state.currentUser} />
       </div>
     );

@@ -5,31 +5,13 @@ class UserStore extends EventEmitter {
 
   constructor() {
     super();
-    this.user = {
-      name: "",
-      avatar: "http://www.riverstagetheatre.org/wp-content/uploads/2012/06/missing.png",
-      affiliation: ""
-    };
-    this.fetch();
+    this.fetch(1);
   }
 
-  fetch() {
-    $.get("http://private-a1f4c-djayapi.apiary-mock.com/users/1", function(data) {
-      this.set("user", data);
+  fetch(userId) {
+    $.get("http://private-a1f4c-djayapi.apiary-mock.com/users/" + userId, function(data) {
+      this.emit("change", {user: data});
     }.bind(this));
-  }
-
-  get(attr) {
-    try {
-      return this[attr];
-    } catch(err) {
-      console.error("UserStore: Can't find the attribute: " + attr);
-    }
-  }
-
-  set(attr, value) {
-    this[attr] = value;
-    this.emit("change");
   }
 
 };

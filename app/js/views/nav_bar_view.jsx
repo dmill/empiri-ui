@@ -7,33 +7,37 @@ import PopoverComponent from "../components/popover_component";
 var NavBarView = React.createClass({
 
   render () {
-    return (
-      <nav>
-        <div className="container">
-          <div className="row">
-            <img src="images/symbol.png" width="20px" />
+    if(!this.props.currentUser) {
+      return (<div>please log in</div>);
+    } else {
+      return (
+        <nav>
+          <div className="container">
+            <div className="row">
+              <img src="images/symbol.png" width="20px" />
 
-            <input type="text" placeholder="Search Empiri" />
+              <input type="text" placeholder="Search Empiri" />
 
-            <span>
-              <a href="#">Browse</a>
-            </span>
+              <span>
+                <a href="#">Browse</a>
+              </span>
 
-            <span>
-              <a href="#">FAQ</a>
-            </span>
+              <span>
+                <a href="#">FAQ</a>
+              </span>
 
-            <PopoverSelectComponent
-              content={<img src={this.props.user.avatar}
-              height="20" />}
-              popoverContent={<PopoverComponent content="hi" />} />
+              <PopoverSelectComponent
+                content={<img src={this.props.currentUser.avatar}
+                height="25" width="25" />}
+                popoverContent={<PopoverComponent content="hi" />} />
 
-            <button>Sign up</button>
-            <button>Sign in</button>
+              <button>Sign up</button>
+              <button>Sign in</button>
+            </div>
           </div>
-        </div>
-      </nav>
-    );
+        </nav>
+      );
+    }
   }
 
 });
