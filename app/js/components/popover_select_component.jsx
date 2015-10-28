@@ -25,7 +25,7 @@ var PopoverSelectComponent = React.createClass({
 
   render () {
     return (
-      <span onClick={this.handleClick} style={{position: "relative"}}>
+      <span className="popover-select-component" onClick={this.handleClick}>
         {this.props.content}
         {this.renderPopover()}
       </span>

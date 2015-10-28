@@ -4,23 +4,12 @@ var PopoverComponent = React.createClass({
 
   render () {
     return (
-      <div className="caretUp" style={popoverStyle}>
+      <div className="popover-component props-caret-up">
         {this.props.content}
       </div>
     );
   }
 
 });
-
-var popoverStyle = {
-  position: "absolute",
-  border: "1px solid #eee",
-  borderRadius: "2px",
-  backgroundColor: "#fff",
-  width: "120px",
-  left: "-41px",
-  padding: "5px",
-  boxSizing: "border-box"
-};
 
 export default PopoverComponent;
