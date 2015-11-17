@@ -1,12 +1,18 @@
 import React from "react";
-import DropdownComponent from "../components/dropdown_component";
+import DropdownListComponent from "../components/dropdown_list_component";
 import IconElement from "../elements/icon_element";
 import PopoverSelectComponent from "../components/popover_select_component";
 import PopoverComponent from "../components/popover_component";
 
-var NavBarView = React.createClass({
+class NavBarView extends React.Component {
 
-  render () {
+  renderAccountDropdown() {
+    return (
+      <DropdownListComponent items={["your account", "support", "log out"]}/>
+    );
+  }
+
+  render() {
     if(!this.props.currentUser) {
       return (<div>please log in</div>);
     } else {
@@ -29,7 +35,7 @@ var NavBarView = React.createClass({
               <PopoverSelectComponent
                 content={<img src={this.props.currentUser.avatar}
                 height="25" width="25" />}
-                popoverContent={<PopoverComponent content="hi" />} />
+                popoverContent={<PopoverComponent direction="up" content={this.renderAccountDropdown()} />} />
 
               <button>Sign up</button>
               <button>Sign in</button>
@@ -40,6 +46,6 @@ var NavBarView = React.createClass({
     }
   }
 
-});
+};
 
 export default NavBarView;
