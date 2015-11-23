@@ -4,7 +4,7 @@ import Auth0 from "./auth0/auth0-variables";
 import Home from "./auth0/home";
 import UserProfileView from "./views/user_profile_view";
 import store from "./redux/store";
-import { SET_CURRENT_USER, SET_ID_TOKEN } from "./redux/actions";
+import { SET_CURRENT_USER, SET_ID_TOKEN, setCurrentUser, setIdToken } from "./redux/actions";
 
 class App extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class App extends React.Component {
         console.log("Error loading the Profile", err);
         alert("Error loading the Profile");
       }
-      store.dispatch({ type: SET_CURRENT_USER, payload: profile });
+      store.dispatch(setCurrentUser(profile));
     });
   }
 
@@ -51,7 +51,7 @@ class App extends React.Component {
         console.log("Error signing in", authHash);
       }
     }
-    store.dispatch({ type: SET_ID_TOKEN, payload: idToken });
+    store.dispatch(setIdToken(idToken));
   }
 
   render() {

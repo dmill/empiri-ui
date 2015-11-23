@@ -1,9 +1,9 @@
 import React from "react";
 
 class UserProfileView extends React.Component {
+
   constructor(props) {
     super(props);
-
     const store = this.props.store;
     this.state = { profile: store.getState().currentUser.profile };
     this.props.store.subscribe(() => this.setState({ profile: store.getState().currentUser.profile }));
