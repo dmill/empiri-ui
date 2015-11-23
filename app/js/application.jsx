@@ -1,7 +1,10 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import Auth0 from "./auth0/auth0-variables";
 import Home from "./auth0/home";
 import UserProfileView from "./views/user_profile_view";
+import store from "./redux/store";
+import { SET_CURRENT_USER, SET_ID_TOKEN } from "./redux/actions";
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +14,14 @@ class App extends React.Component {
   componentWillMount() {
     this.setupAjax();
     this.createLock();
-    this.setState({idToken: this.getIdToken()});
+    this.setIdToken();
+    this.lock.getProfile(store.getState().currentUser.idToken, function (err, profile) {
+      if (err) {
+        console.log("Error loading the Profile", err);
+        alert("Error loading the Profile");
+      }
+      store.dispatch({ type: SET_CURRENT_USER, payload: profile });
+    });
   }
 
   createLock() {
@@ -29,7 +39,7 @@ class App extends React.Component {
     });
   }
 
-  getIdToken() {
+  setIdToken() {
     var idToken = localStorage.getItem('userToken');
     var authHash = this.lock.parseHash(window.location.hash);
     if (!idToken && authHash) {
@@ -41,18 +51,18 @@ class App extends React.Component {
         console.log("Error signing in", authHash);
       }
     }
-    return idToken;
+    store.dispatch({ type: SET_ID_TOKEN, payload: idToken });
   }
 
   render() {
-    if (this.state.idToken) {
-      return (<UserProfileView lock={this.lock} idToken={this.state.idToken} />);
+    if (store.getState().currentUser.idToken) {
+      return (<UserProfileView store={store} />);
     } else {
       return (<Home lock={this.lock} />);
     }
   }
 };
 
-React.render(<App clientId={Auth0.AUTH0_CLIENT_ID} domain={Auth0.AUTH0_DOMAIN} />,
+ReactDOM.render(<App clientId={Auth0.AUTH0_CLIENT_ID} domain={Auth0.AUTH0_DOMAIN} />,
   document.getElementById('root'));
 

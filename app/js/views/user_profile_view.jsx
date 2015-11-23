@@ -3,17 +3,10 @@ import React from "react";
 class UserProfileView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {profile: null};
-  }
 
-  componentDidMount() {
-    this.props.lock.getProfile(this.props.idToken, function (err, profile) {
-      if (err) {
-        console.log("Error loading the Profile", err);
-        alert("Error loading the Profile");
-      }
-      this.setState({profile: profile});
-    }.bind(this));
+    const store = this.props.store;
+    this.state = { profile: store.getState().currentUser.profile };
+    this.props.store.subscribe(() => this.setState({ profile: store.getState().currentUser.profile }));
   }
 
   render() {
