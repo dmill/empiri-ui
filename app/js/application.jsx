@@ -11,7 +11,7 @@ function getIdToken(authHash) {
   if (!idToken && authHash) {
     if (authHash.id_token) {
       idToken = authHash.id_token
-      localStorage.setItem('userToken', authHash.id_token)
+      localStorage.setItem('userToken', idToken)
     }
     if (authHash.error) {
       console.error('Error signing in', authHash)
@@ -21,11 +21,12 @@ function getIdToken(authHash) {
 }
 
 function setAuthorizationHeader(idToken) {
-  if (idToken) {
-    $.ajaxSetup({
-      beforeSend: (xhr) => { xhr.setRequestHeader('Authorization', 'Bearer ' + idToken) }
-    })
+  if (!idToken) {
+    console.error("No idToken to set in Authorization Header.")
   }
+  $.ajaxSetup({
+    beforeSend: (xhr) => { xhr.setRequestHeader('Authorization', 'Bearer ' + idToken) }
+  })
 }
 
 function dispatchCurrentUser(err, idToken, profile) {

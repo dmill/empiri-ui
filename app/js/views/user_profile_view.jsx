@@ -1,18 +1,18 @@
-import React from "react";
+import React, { Component } from "react";
 
-class UserProfileView extends React.Component {
+class UserProfileView extends Component {
 
   constructor(props) {
-    super(props);
-    const store = this.props.store;
-    this.state = { profile: store.getState().currentUser.profile };
-    this.props.store.subscribe(() => this.setState({ profile: store.getState().currentUser.profile }));
+    super(props)
+    const store = this.props.store
+    this.state = { profile: store.getState().currentUser.profile }
+    store.subscribe(() => this.setState({ profile: store.getState().currentUser.profile }))
   }
 
   render() {
-    const profile = this.state.profile;
+    const profile = this.state.profile
     if(!profile) {
-      return <div>no user</div>;
+      return <div>no user</div>
     } else {
       return (
         <div>
@@ -21,10 +21,10 @@ class UserProfileView extends React.Component {
           <img src={profile.picture} />
           <p>{profile.summary}</p>
         </div>
-      );
+      )
     }
   }
 
-};
+}
 
 export default UserProfileView;
