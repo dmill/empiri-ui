@@ -2,7 +2,7 @@ import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from './auth0/auth0-variables'
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import store from './redux/store'
-import { SET_CURRENT_USER, SET_ID_TOKEN, setCurrentUser, setIdToken } from './redux/actions'
+import { setCurrentUser, setIdToken } from './redux/actions'
 import UserProfileView from './views/user_profile_view'
 import Home from './auth0/home'
 
