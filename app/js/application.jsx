@@ -1,68 +1,55 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Auth0 from "./auth0/auth0-variables";
-import Home from "./auth0/home";
-import UserProfileView from "./views/user_profile_view";
-import store from "./redux/store";
-import { SET_CURRENT_USER, SET_ID_TOKEN, setCurrentUser, setIdToken } from "./redux/actions";
+import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from './auth0/auth0-variables'
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import store from './redux/store'
+import { SET_CURRENT_USER, SET_ID_TOKEN, setCurrentUser, setIdToken } from './redux/actions'
+import UserProfileView from './views/user_profile_view'
+import Home from './auth0/home'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentWillMount() {
-    this.setupAjax();
-    this.createLock();
-    this.setIdToken();
-    this.lock.getProfile(store.getState().currentUser.idToken, function (err, profile) {
-      if (err) {
-        console.log("Error loading the Profile", err);
-        alert("Error loading the Profile");
-      }
-      store.dispatch(setCurrentUser(profile));
-    });
-  }
-
-  createLock() {
-    this.lock = new Auth0Lock(this.props.clientId, this.props.domain);
-  }
-
-  setupAjax() {
+function setAuthorizationHeader() {
+  if (localStorage.getItem('userToken')) {
     $.ajaxSetup({
-      'beforeSend': function(xhr) {
-        if (localStorage.getItem('userToken')) {
-          xhr.setRequestHeader('Authorization',
-                'Bearer ' + localStorage.getItem('userToken'));
-        }
+      'beforeSend': (xhr) => {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('userToken'))
       }
-    });
+    })
   }
+}
 
-  setIdToken() {
-    var idToken = localStorage.getItem('userToken');
-    var authHash = this.lock.parseHash(window.location.hash);
-    if (!idToken && authHash) {
-      if (authHash.id_token) {
-        idToken = authHash.id_token
-        localStorage.setItem('userToken', authHash.id_token);
-      }
-      if (authHash.error) {
-        console.log("Error signing in", authHash);
-      }
+function getIdToken() {
+  let idToken = localStorage.getItem('userToken')
+  if (!idToken && authHash) {
+    if (authHash.id_token) {
+      idToken = authHash.id_token
+      localStorage.setItem('userToken', authHash.id_token)
     }
-    store.dispatch(setIdToken(idToken));
-  }
-
-  render() {
-    if (store.getState().currentUser.idToken) {
-      return (<UserProfileView store={store} />);
-    } else {
-      return (<Home lock={this.lock} />);
+    if (authHash.error) {
+      console.error('Error signing in', authHash)
     }
   }
-};
+  return idToken
+}
 
-ReactDOM.render(<App clientId={Auth0.AUTH0_CLIENT_ID} domain={Auth0.AUTH0_DOMAIN} />,
-  document.getElementById('root'));
+function dispatchCurrentUser(err, profile, idToken) {
+  if (err) {
+    console.error('Error loading the Profile', err)
+    alert('Error loading the Profile')
+  }
+  store.dispatch(setCurrentUser(profile))
+  store.dispatch(setIdToken(idToken))
+}
 
+const App = ({idToken, lock, store}) => {
+  if (idToken) {
+    return <UserProfileView store={store} />
+  } else {
+    return <Home lock={lock} />
+  }
+}
+
+setAuthorizationHeader()
+const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
+const authHash = lock.parseHash(window.location.hash)
+const idToken = getIdToken()
+lock.getProfile(idToken, (err, profile) => dispatchCurrentUser(err, profile, idToken))
+ReactDOM.render(<App idToken={idToken} lock={lock} store={store} />, document.getElementById('root'))
