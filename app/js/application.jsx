@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import store from './redux/store'
 import { setProfile, setIdToken } from './redux/actions'
 import UserProfileView from './views/user_profile_view'
+import NavBarView from './views/nav_bar_view'
 import Home from './auth0/home'
 
 function getIdToken(authHash) {
@@ -40,7 +41,12 @@ function dispatchCurrentUser(err, idToken, profile) {
 
 const App = ({idToken, lock, store}) => {
   if (idToken) {
-    return <UserProfileView store={store} />
+    return (
+      <div id="layout">
+        <NavBarView />
+        <UserProfileView store={store} />
+      </div>
+    )
   } else {
     return <Home lock={lock} />
   }
