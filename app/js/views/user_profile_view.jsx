@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
+import store from '../redux/store'
 
-class UserProfileView extends Component {
+export default class UserProfileView extends Component {
 
   constructor(props) {
     super(props)
-    const store = this.props.store
     this.state = { profile: store.getState().currentUser.profile }
     store.subscribe(() => this.setState({ profile: store.getState().currentUser.profile }))
   }
@@ -26,5 +26,3 @@ class UserProfileView extends Component {
   }
 
 }
-
-export default UserProfileView;

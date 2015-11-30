@@ -32,23 +32,32 @@ function setAuthorizationHeader(idToken) {
 
 function dispatchCurrentUser(err, idToken, profile) {
   if (err) {
-    console.error('Error loading the Profile', err)
-    alert('Error loading the Profile')
+    console.error('userToken expired, please sign in again')
+    localStorage.removeItem('userToken')
+  } else {
+    store.dispatch(setProfile(profile))
+    store.dispatch(setIdToken(idToken))
   }
-  store.dispatch(setProfile(profile))
-  store.dispatch(setIdToken(idToken))
 }
 
-const App = ({idToken, lock, store}) => {
-  if (idToken) {
-    return (
-      <div id="layout">
-        <NavBarView />
-        <UserProfileView store={store} />
-      </div>
-    )
-  } else {
-    return <Home lock={lock} />
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { idToken: store.getState().currentUser.idToken }
+    store.subscribe(() => this.setState({ idToken: store.getState().currentUser.idToken }))
+  }
+
+  render() {
+    if (this.state.idToken) {
+      return (
+        <div id="layout">
+          <NavBarView />
+          <UserProfileView />
+        </div>
+      )
+    } else {
+      return <Home lock={this.props.lock} />
+    }
   }
 }
 
@@ -56,4 +65,4 @@ const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
 const idToken = getIdToken(lock.parseHash(window.location.hash))
 lock.getProfile(idToken, (err, profile) => dispatchCurrentUser(err, idToken, profile))
 setAuthorizationHeader(idToken)
-ReactDOM.render(<App idToken={idToken} lock={lock} store={store} />, document.getElementById('root'))
+ReactDOM.render(<App lock={lock} />, document.getElementById('root'))
