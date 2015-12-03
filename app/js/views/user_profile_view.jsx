@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import store from '../redux/store'
 
 export default class UserProfileView extends Component {
-
   constructor(props) {
     super(props)
     this.state = { profile: store.getState().currentUser.profile }
@@ -15,14 +14,13 @@ export default class UserProfileView extends Component {
       return <div>no user</div>
     } else {
       return (
-        <div>
+        <div id="user-profile-view" className="sidebar four columns">
+          <img src={profile.picture} />
           <h2>{profile.name}</h2>
           <h6>{profile.headline}</h6>
-          <img src={profile.picture} />
           <p>{profile.summary}</p>
         </div>
       )
     }
   }
-
 }

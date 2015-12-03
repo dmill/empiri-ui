@@ -10,14 +10,13 @@ module.exports = {
   module: {
     loaders: [
       {
-        app: /\.jsx$/, loader: "babel-loader",
-        query: { blacklist: ["strict"] },
+        test: /\.jsx$|\.js$/,
+        loader: "babel-loader",
         exclude: /node_modules/
       },
       {
-        __tests__: /\.jsx$/,
-        loader: "babel-loader",
-        query: { blacklist: ["strict"] } ,
+        test: /\.scss$/,
+        loader: "style!css!sass",
         exclude: /node_modules/
       }
     ]

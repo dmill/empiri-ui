@@ -1,22 +1,36 @@
+.container {
+  max-width: 1200px;
+}
+
 body, html {
   margin: 0;
 }
 
-nav button {
-  margin-bottom: 0;
-}
-
-nav input {
-  margin-bottom: 0;
-}
-
 nav {
   padding: 1em;
+  border-bottom: 1px solid #999;
+
+  button {
+    margin-bottom: 0;
+  }
+
+  input {
+    margin-bottom: 0;
+  }
+
+  .container > .row > * {
+    vertical-align: middle;
+    margin-left: 1em;
+  }
 }
 
-nav > .container > .row > * {
-  vertical-align: middle;
-  margin-left: 1em;
+#user-profile-view {
+  padding: 3em;
+
+  img {
+    border-radius: 5px;
+    width: 100%;
+  }
 }
 
 .popover-select-component {
