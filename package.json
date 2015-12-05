@@ -15,14 +15,14 @@
     "chai": "^3.2.0",
     "mocha": "^2.2.5",
     "mocha-loader": "^0.7.1",
+    "node-sass": "^3.4.2",
     "redux-devtools": "^2.1.5",
-    "sinon": "git://github.com/cjohansen/Sinon.JS#sinon-2.0",
+    "sass-loader": "^3.1.2",
+    "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
     "webpack": "^1.12.0"
   },
   "dependencies": {
-    "events": "^1.1.0",
-    "flux": "^2.1.1",
     "jquery": "^2.1.4",
     "react": "^0.14.2",
     "react-dom": "^0.14.3",

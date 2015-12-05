@@ -6,6 +6,7 @@ import { setProfile, setIdToken } from './redux/actions'
 import UserProfileView from './views/user_profile_view'
 import NavBarView from './views/nav_bar_view'
 import Home from './auth0/home'
+import style from '../stylesheets/application.scss'
 
 function getIdToken(authHash) {
   let idToken = localStorage.getItem('userToken')
@@ -52,7 +53,11 @@ class App extends Component {
       return (
         <div id="layout">
           <NavBarView />
-          <UserProfileView />
+          <div className="container">
+            <div className="row">
+              <UserProfileView />
+            </div>
+          </div>
         </div>
       )
     } else {
@@ -65,4 +70,4 @@ const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
 const idToken = getIdToken(lock.parseHash(window.location.hash))
 lock.getProfile(idToken, (err, profile) => dispatchCurrentUser(err, idToken, profile))
 setAuthorizationHeader(idToken)
-ReactDOM.render(<App lock={lock} />, document.getElementById('root'))
+ReactDOM.render(<App lock={lock} style={style} />, document.getElementById('root'))

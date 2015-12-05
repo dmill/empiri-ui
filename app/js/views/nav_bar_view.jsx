@@ -5,7 +5,7 @@ import IconElement from '../elements/icon_element'
 import PopoverSelectComponent from '../components/popover_select_component'
 import PopoverComponent from '../components/popover_component'
 
-class NavBarView extends Component {
+export default class NavBarView extends Component {
   componentWillMount() {
     this.state = { profile: store.getState().currentUser.profile }
     store.subscribe(() => this.setState({ profile: store.getState().currentUser.profile }))
@@ -49,5 +49,3 @@ class NavBarView extends Component {
     }
   }
 }
-
-export default NavBarView
