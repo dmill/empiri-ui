@@ -8,6 +8,7 @@ import NavBarView from './views/nav_bar_view'
 import Home from './auth0/home'
 import style from '../stylesheets/application.scss'
 import HypothesisView from './views/hypothesis_view'
+import BrowseView from './views/browse_view'
 
 function getIdToken(authHash) {
   let idToken = localStorage.getItem('userToken')
@@ -56,7 +57,7 @@ class App extends Component {
           <NavBarView />
           <div className="container">
             <div className="row">
-              <HypothesisView data={data} />
+              <BrowseView data={data} />
             </div>
           </div>
         </div>
