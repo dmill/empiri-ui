@@ -1,4 +1,4 @@
-import Auth0 from './auth0/auth0-variables'
+import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from './auth0/auth0-variables'
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import store from './redux/store'
@@ -66,7 +66,7 @@ class App extends Component {
   }
 }
 
-const lock = new Auth0Lock(Auth0.AUTH0_CLIENT_ID, Auth0.AUTH0_DOMAIN)
+const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
 const idToken = getIdToken(lock.parseHash(window.location.hash))
 lock.getProfile(idToken, (err, profile) => dispatchCurrentUser(err, idToken, profile))
 setAuthorizationHeader(idToken)
