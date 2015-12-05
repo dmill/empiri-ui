@@ -7,6 +7,7 @@ import UserProfileView from './views/user_profile_view'
 import NavBarView from './views/nav_bar_view'
 import Home from './auth0/home'
 import style from '../stylesheets/application.scss'
+import HypothesisView from './views/hypothesis_view'
 
 function getIdToken(authHash) {
   let idToken = localStorage.getItem('userToken')
@@ -55,7 +56,7 @@ class App extends Component {
           <NavBarView />
           <div className="container">
             <div className="row">
-              <UserProfileView />
+              <HypothesisView data={data} />
             </div>
           </div>
         </div>
@@ -71,3 +72,10 @@ const idToken = getIdToken(lock.parseHash(window.location.hash))
 lock.getProfile(idToken, (err, profile) => dispatchCurrentUser(err, idToken, profile))
 setAuthorizationHeader(idToken)
 ReactDOM.render(<App lock={lock} style={style} />, document.getElementById('root'))
+
+
+const data = {
+  category: "Bioinformatics",
+  title: "TIPR: transcription initiation pattern recognition on a genome scale",
+  abstract: "The computational identification of gene transcription start sites (TSSs) can provide insights into the regulation and function of genes without performing expensive experiments, particularly in organisms with incomplete annotations. High-resolution general-purpose TSS prediction remains a challenging problem, with little recent progress on the identification and differentiation of TSSs which are arranged in different spatial patterns along the chromosome."
+}
