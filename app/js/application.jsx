@@ -1,6 +1,6 @@
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from './auth0/auth0-variables'
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import store from './redux/store'
 import { setProfile, setIdToken } from './redux/actions'
 import UserProfileView from './views/user_profile_view'
@@ -9,6 +9,12 @@ import Home from './auth0/home'
 import style from '../stylesheets/application.scss'
 import HypothesisView from './views/hypothesis_view'
 import BrowseView from './views/browse_view'
+import { Router, Route, IndexRoute, Link } from 'react-router'
+import { createHistory, useBasename } from 'history'
+
+const history = useBasename(createHistory)({
+  basename: '/'
+})
 
 function getIdToken(authHash) {
   let idToken = localStorage.getItem('userToken')
@@ -54,10 +60,11 @@ class App extends Component {
     if (this.state.idToken) {
       return (
         <div id="layout">
+          <Link to="/user">Click</Link>
           <NavBarView />
           <div className="container">
             <div className="row">
-              <BrowseView data={data} />
+              {this.props.children}
             </div>
           </div>
         </div>
@@ -72,11 +79,11 @@ const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
 const idToken = getIdToken(lock.parseHash(window.location.hash))
 lock.getProfile(idToken, (err, profile) => dispatchCurrentUser(err, idToken, profile))
 setAuthorizationHeader(idToken)
-ReactDOM.render(<App lock={lock} style={style} />, document.getElementById('root'))
-
-
-const data = {
-  category: "Bioinformatics",
-  title: "TIPR: transcription initiation pattern recognition on a genome scale",
-  abstract: "The computational identification of gene transcription start sites (TSSs) can provide insights into the regulation and function of genes without performing expensive experiments, particularly in organisms with incomplete annotations. High-resolution general-purpose TSS prediction remains a challenging problem, with little recent progress on the identification and differentiation of TSSs which are arranged in different spatial patterns along the chromosome."
-}
+render((
+  <Router history={history}>
+    <Route path="/" component={App}>
+      <IndexRoute component={BrowseView} />
+      <Route path="/user" component={UserProfileView} />
+    </Route>
+  </Router>
+), document.getElementById('root'))
