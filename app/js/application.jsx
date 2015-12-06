@@ -60,7 +60,6 @@ class App extends Component {
     if (this.state.idToken) {
       return (
         <div id="layout">
-          <Link to="/user">Click</Link>
           <NavBarView />
           <div className="container">
             <div className="row">
@@ -84,6 +83,7 @@ render((
     <Route path="/" component={App}>
       <IndexRoute component={BrowseView} />
       <Route path="/user" component={UserProfileView} />
+      <Route path="/hypothesis" component={HypothesisView} />
     </Route>
   </Router>
 ), document.getElementById('root'))

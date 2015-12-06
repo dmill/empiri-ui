@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
+import { Link } from 'react-router'
 
 const PublicationPreview = (props) => {
   return (
     <div style={{border: "1px solid #bbb", borderRadius: "3px"}}>
-      <h4>{props.title}</h4>
+      <Link to="/hypothesis"><h4>{props.title}</h4></Link>
       <img src={props.picture} />
       {props.name}
     </div>

@@ -4,6 +4,7 @@ import DropdownListComponent from '../components/dropdown_list_component'
 import IconElement from '../elements/icon_element'
 import PopoverSelectComponent from '../components/popover_select_component'
 import PopoverComponent from '../components/popover_component'
+import { Link } from 'react-router'
 
 export default class NavBarView extends Component {
   componentWillMount() {
@@ -25,7 +26,7 @@ export default class NavBarView extends Component {
         <nav>
           <div className="container">
             <div className="row">
-              <img src="images/symbol.png" width="20px" />
+              <Link to="/"><img src="images/symbol.png" width="20px" /></Link>
               <input type="text" placeholder="Search Empiri" />
               <span>
                 <a href="#">Browse</a>
@@ -41,7 +42,7 @@ export default class NavBarView extends Component {
                 } />
 
               <button>Sign up</button>
-              <button>Sign in</button>
+              <Link to="/user"><button>Sign in</button></Link>
             </div>
           </div>
         </nav>
