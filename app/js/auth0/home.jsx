@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import lock from './lock'
 
 export default class Home extends Component {
   showLock() {
-    lock.show()
+    this.props.lock.show()
   }
 
   render() {
@@ -12,7 +11,7 @@ export default class Home extends Component {
         <img src="https://i.cloudup.com/StzWWrY34s.png" />
         <h3>Auth0 Example</h3>
         <p>Zero friction identity infrastructure, built for developers</p>
-        <a onClick={this.showLock} className="btn btn-primary btn-lg btn-login btn-block">Sign In</a>
+        <a onClick={this.showLock.bind(this)} className="btn btn-primary btn-lg btn-login btn-block">Sign In</a>
       </div>
     )
   }

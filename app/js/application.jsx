@@ -9,6 +9,7 @@ import UserProfileView from './views/user_profile_view'
 import NavBarView from './views/nav_bar_view'
 import HypothesisView from './views/hypothesis_view'
 import style from '../stylesheets/application.scss'
+import Auth0 from './auth0/auth0'
 
 class App extends Component {
   componentWillMount() {
@@ -29,21 +30,25 @@ class App extends Component {
         </div>
       )
     } else {
-      return <Home />
+      return <Home lock={this.props.route.lock} />
     }
   }
 }
 
-const history = useBasename(createHistory)({
-  basename: '/'
-})
+class AppRouter {
+  start() {
+    const history = useBasename(createHistory)({ basename: '/' })
+    render((
+      <Router history={history}>
+        <Route path="/" component={App} lock={lock}>
+          <IndexRoute component={BrowseView} />
+          <Route path="/user" component={UserProfileView} />
+          <Route path="/hypothesis" component={HypothesisView} />
+        </Route>
+      </Router>
+    ), document.getElementById('root'))
+  }
+}
 
-render((
-  <Router history={history}>
-    <Route path="/" component={App}>
-      <IndexRoute component={BrowseView} />
-      <Route path="/user" component={UserProfileView} />
-      <Route path="/hypothesis" component={HypothesisView} />
-    </Route>
-  </Router>
-), document.getElementById('root'))
+const lock = new Auth0().authenticate()
+new AppRouter().start(lock)
