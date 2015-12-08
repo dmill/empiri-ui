@@ -11,12 +11,8 @@ const Avatar = (props) => {
 }
 
 export default class HypothesisView extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
-    const data = this.props.data
+    const data = store.getState().currentUser.data
     const user = store.getState().currentUser.profile
     return (
       <div id="hypothesis-view">
