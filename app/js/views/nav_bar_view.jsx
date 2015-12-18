@@ -20,7 +20,25 @@ export default class NavBarView extends Component {
 
   render() {
     if (!this.state.profile) {
-      return <div>please log in</div>
+      return (
+        <nav>
+          <div className="container">
+            <div className="row">
+              <Link to="/"><img src="images/symbol.png" width="20px" /></Link>
+              <input type="text" placeholder="Search Empiri" />
+              <span>
+                <a href="#">Browse</a>
+              </span>
+              <span>
+                <a href="#">FAQ</a>
+              </span>
+
+              <button>Sign up</button>
+              <Link to="/sign_in"><button>Sign in</button></Link>
+            </div>
+          </div>
+        </nav>
+      )
     } else {
       return (
         <nav>
@@ -41,8 +59,7 @@ export default class NavBarView extends Component {
                   <PopoverComponent direction="up" content={this.renderAccountDropdown()} />
                 } />
 
-              <button>Sign up</button>
-              <Link to="/user"><button>Sign in</button></Link>
+              <Link to="/user"><button>Log Out</button></Link>
             </div>
           </div>
         </nav>
