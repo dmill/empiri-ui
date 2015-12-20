@@ -5,11 +5,21 @@ import IconElement from '../elements/icon_element'
 import PopoverSelectComponent from '../components/popover_select_component'
 import PopoverComponent from '../components/popover_component'
 import { Link } from 'react-router'
+import { logOut } from '../redux/actions'
 
 export default class NavBarView extends Component {
   componentWillMount() {
     this.state = { profile: store.getState().currentUser.profile }
     store.subscribe(() => this.setState({ profile: store.getState().currentUser.profile }))
+  }
+
+  showLock() {
+    this.props.lock.show()
+  }
+
+  signOut() {
+    localStorage.removeItem('userToken')
+    store.dispatch(logOut())
   }
 
   renderAccountDropdown() {
@@ -34,7 +44,7 @@ export default class NavBarView extends Component {
               </span>
 
               <button>Sign up</button>
-              <Link to="/sign_in"><button>Sign in</button></Link>
+              <button onClick={this.showLock.bind(this)}>Sign in</button>
             </div>
           </div>
         </nav>
@@ -59,7 +69,7 @@ export default class NavBarView extends Component {
                   <PopoverComponent direction="up" content={this.renderAccountDropdown()} />
                 } />
 
-              <Link to="/user"><button>Log Out</button></Link>
+              <button onClick={this.signOut.bind(this)}>Log Out</button>
             </div>
           </div>
         </nav>

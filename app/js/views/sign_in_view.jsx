@@ -4,7 +4,11 @@ import { Link } from 'react-router'
 
 const SignInView = () => {
   return (
-    <div>Please Sign In</div>
+    <div>
+      <h1>Empiri</h1>
+      <h2>The safest place to share your research</h2>
+      <div></div>
+    </div>
   )
 }
 
