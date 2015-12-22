@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { SET_PROFILE, SET_ID_TOKEN } from './actions'
+import { SET_PROFILE, SET_ID_TOKEN, LOG_OUT } from './actions'
 
 const data = {
   category: "Bioinformatics",
@@ -13,6 +13,8 @@ function currentUser(state = null, action) {
       return { idToken: state.idToken, profile: action.payload, data: data }
     case SET_ID_TOKEN:
       return { idToken: action.payload, profile: state.profile, data: data }
+    case LOG_OUT:
+      return { idToken: null, profile: null, data: null }
     default:
       return { profile: null }
   }

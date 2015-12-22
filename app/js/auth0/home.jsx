@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class Home extends Component {
   showLock() {
-    this.props.lock.show()
+    this.props.route.lock.show()
   }
 
   render() {
