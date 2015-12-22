@@ -1,15 +1,34 @@
-import React from "react";
+import React, { Component } from 'react'
 
-var PopoverComponent = React.createClass({
+const PopoverContents = ({direction, items}) => {
+  return (
+    <div className={`popover-component props-caret-${direction}`}>
+      {items.map((item, i) => <div key={i}>{item}</div>)}
+    </div>
+  )
+}
+
+export default class PopoverComponent extends Component {
+  componentWillMount() {
+    this.state = { open: false }
+  }
+
+  handleClick() {
+    this.setState({ open: !this.state.open })
+  }
+
+  renderPopover() {
+    if(this.state.open) {
+      return <PopoverContents direction={this.props.direction} items={this.props.items} />
+    }
+  }
 
   render () {
     return (
-      <div className={`popover-component props-caret-${this.props.direction}`}>
+      <span className="popover-select-component" onClick={this.handleClick.bind(this)}>
         {this.props.content}
-      </div>
-    );
+        {this.renderPopover()}
+      </span>
+    )
   }
-
-});
-
-export default PopoverComponent;
+}

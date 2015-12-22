@@ -50,7 +50,7 @@ nav {
   box-sizing: border-box;
 }
 
-.popover-component.props-caret-up:before {
+.popover-component.props-caret-down:before {
   position: absolute;
   top: -16px;
   left: 1em;
@@ -60,7 +60,7 @@ nav {
   border-bottom-color: #e0e0e0;
 }
 
-.popover-component.props-caret-up:after {
+.popover-component.props-caret-down:after {
   position: absolute;
   top: -15px;
   left: 1em;

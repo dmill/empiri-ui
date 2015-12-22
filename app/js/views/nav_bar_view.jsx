@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
-import DropdownListComponent from '../components/dropdown_list_component'
 import IconElement from '../elements/icon_element'
-import PopoverSelectComponent from '../components/popover_select_component'
 import PopoverComponent from '../components/popover_component'
 import { Link } from 'react-router'
 import { logOut } from '../redux/actions'
@@ -22,10 +20,12 @@ export default class NavBarView extends Component {
     store.dispatch(logOut())
   }
 
-  renderAccountDropdown() {
-    return (
-      <DropdownListComponent items={['your account', 'support', 'log out']}/>
-    )
+  popoverItems() {
+    return ([
+        <Link to="/user">your account</Link>,
+        'support',
+        <Link to="/user">log out</Link>
+    ])
   }
 
   render() {
@@ -63,11 +63,10 @@ export default class NavBarView extends Component {
                 <a href="#">FAQ</a>
               </span>
 
-              <PopoverSelectComponent
+              <PopoverComponent
                 content={<img src={this.state.profile.picture} height="25" width="25" />}
-                popoverContent={
-                  <PopoverComponent direction="up" content={this.renderAccountDropdown()} />
-                } />
+                direction="down"
+                items={this.popoverItems()} />
 
               <button onClick={this.signOut.bind(this)}>Log Out</button>
             </div>

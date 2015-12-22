@@ -28,7 +28,7 @@ var DropdownListComponent = React.createClass({
 
   render () {
     return (
-      <div style={listStyle}>
+      <div>
         {this.props.items.map(function(item, i) {
           return (
               <div
@@ -46,31 +46,5 @@ var DropdownListComponent = React.createClass({
   }
 
 });
-
-var listStyle = {
-  position: "absolute",
-  borderRadius: "3px",
-  border: "1px solid #000000",
-  backgroundColor: "#FFFFFF",
-  boxSizing: "border-box"
-};
-
-var defaultStyle = {
-  backgroundColor: "#FFFFFF",
-  color: "#000000",
-  padding: "3px 5px",
-  fontSize: "12px",
-  boxSizing: "border-box",
-  cursor: "pointer"
-};
-
-var hoverStyle = {
-  backgroundColor: "#666",
-  color: "#FFF",
-  padding: "3px 5px",
-  fontSize: "12px",
-  boxSizing: "border-box",
-  cursor: "pointer"
-};
 
 export default DropdownListComponent;
