@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
+import IconElement from '../elements/icon_element'
 
 const PopoverContents = ({direction, items}) => {
   return (
@@ -28,6 +28,7 @@ export default class PopoverComponent extends Component {
     return (
       <span className="popover-component" onClick={this.handleClick.bind(this)}>
         {this.props.select}
+        <IconElement iconName="caret-down" iconType="fontawesome" />
         {this.renderPopover()}
       </span>
     )
