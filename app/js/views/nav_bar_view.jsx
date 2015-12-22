@@ -65,9 +65,14 @@ export default class NavBarView extends Component {
               </span>
 
               <PopoverComponent
-                select={<img className="popover-select" src={this.state.profile.picture} height="25" width="25" />}
                 direction="down"
-                items={this.popoverItems()} />
+                items={this.popoverItems()}
+                select={
+                  <div className="popover-select">
+                    <img src={this.state.profile.picture} height="25" width="25" />
+                    <IconElement iconName="caret-down" iconType="fontawesome" />
+                  </div>
+                } />
 
               <button onClick={this.signOut.bind(this)}>Log Out</button>
             </div>
