@@ -1,9 +1,15 @@
+@import 'components';
+
 .container {
   max-width: 1200px;
 }
 
 body, html {
   margin: 0;
+}
+
+a, div, span {
+  box-sizing: border-box;
 }
 
 nav {
@@ -31,41 +37,4 @@ nav {
     border-radius: 5px;
     width: 100%;
   }
-}
-
-.popover-select-component {
-  cursor: pointer;
-  position: relative;
-}
-
-.popover-component {
-  position: absolute;
-  border: 1px solid #e0e0e0;
-  border-radius: 2px;
-  background-color: #fff;
-  width: 10em;
-  left: -1em;
-  padding: 0.5em;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
-  box-sizing: border-box;
-}
-
-.popover-component.props-caret-down:before {
-  position: absolute;
-  top: -16px;
-  left: 1em;
-  content: "";
-  display: inline-block;
-  border: 8px solid transparent;
-  border-bottom-color: #e0e0e0;
-}
-
-.popover-component.props-caret-down:after {
-  position: absolute;
-  top: -15px;
-  left: 1em;
-  content: "";
-  display: inline-block;
-  border: 8px solid transparent;
-  border-bottom-color: #fff;
 }

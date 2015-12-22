@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 const PopoverContents = ({direction, items}) => {
   return (
-    <div className={`popover-component props-caret-${direction}`}>
-      {items.map((item, i) => <div key={i}>{item}</div>)}
+    <div className={`popover popover-${direction}`}>
+      {items.map((item, i) => item)}
     </div>
   )
 }
@@ -25,8 +26,8 @@ export default class PopoverComponent extends Component {
 
   render () {
     return (
-      <span className="popover-select-component" onClick={this.handleClick.bind(this)}>
-        {this.props.content}
+      <span className="popover-component" onClick={this.handleClick.bind(this)}>
+        {this.props.select}
         {this.renderPopover()}
       </span>
     )
