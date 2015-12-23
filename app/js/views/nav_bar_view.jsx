@@ -22,10 +22,10 @@ export default class NavBarView extends Component {
 
   popoverItems() {
     return ([
-      <span className="popover-header">Welcome <strong>{this.state.profile.given_name}!</strong></span>,
-      <Link className="popover-item" to="/user">your account</Link>,
-      <Link className="popover-item" to="user">support</Link>,
-      <Link className="popover-item" to="/user">log out</Link>
+      <span key="1" className="popover-header">Welcome <strong>{this.state.profile.given_name}!</strong></span>,
+      <Link key="2" className="popover-item" to="/user">your account</Link>,
+      <Link key="3" className="popover-item" to="user">support</Link>,
+      <Link key="4" className="popover-item" to="/user">log out</Link>
     ])
   }
 
@@ -68,10 +68,10 @@ export default class NavBarView extends Component {
                 direction="down"
                 items={this.popoverItems()}
                 select={
-                  <div className="popover-select">
+                  <span className="popover-select">
                     <img src={this.state.profile.picture} height="25" width="25" />
                     <IconElement iconName="caret-down" iconType="fontawesome" />
-                  </div>
+                  </span>
                 } />
 
               <button onClick={this.signOut.bind(this)}>Log Out</button>
