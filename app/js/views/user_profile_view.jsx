@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import store from '../redux/store'
 
 export default class UserProfileView extends Component {
-  constructor(props) {
-    super(props)
+  componentWillMount() {
     this.state = { profile: store.getState().currentUser.profile }
     store.subscribe(() => this.setState({ profile: store.getState().currentUser.profile }))
   }
