@@ -12,7 +12,17 @@ export default class NavBarView extends Component {
   }
 
   showLock() {
-    this.props.lock.show()
+    this.props.lock.show({
+      icon: 'https://s3-us-west-1.amazonaws.com/www.empiri.co/images/symbol.png',
+      socialBigButtons: true
+    })
+  }
+
+  showSignup() {
+    this.props.lock.showSignup({
+      icon: 'https://s3-us-west-1.amazonaws.com/www.empiri.co/images/symbol.png',
+      socialBigButtons: true
+    })
   }
 
   signOut() {
@@ -44,7 +54,7 @@ export default class NavBarView extends Component {
                 <a href="#">FAQ</a>
               </span>
 
-              <button>Sign up</button>
+              <button onClick={this.showSignup.bind(this)}>Sign up</button>
               <button onClick={this.showLock.bind(this)}>Sign in</button>
             </div>
           </div>
