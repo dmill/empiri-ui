@@ -47,9 +47,7 @@ export default class NavBarView extends Component {
             <div className="row">
               <Link to="/"><img src="images/symbol.png" width="20px" /></Link>
               <input type="text" placeholder="Search Empiri" />
-              <span>
-                <a href="#">Browse</a>
-              </span>
+              <Link to="/browse">Browse</Link>
               <span>
                 <a href="#">FAQ</a>
               </span>
@@ -67,9 +65,7 @@ export default class NavBarView extends Component {
             <div className="row">
               <Link to="/"><img src="images/symbol.png" width="20px" /></Link>
               <input type="text" placeholder="Search Empiri" />
-              <span>
-                <a href="#">Browse</a>
-              </span>
+              <Link to="/browse">Browse</Link>
               <span>
                 <a href="#">FAQ</a>
               </span>

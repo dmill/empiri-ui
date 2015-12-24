@@ -39,10 +39,9 @@ class AppRouter {
     render((
       <Router history={history}>
         <Route path="/" component={App} lock={lock}>
-          <IndexRoute component={HomeView} />
+          <IndexRoute component={HypothesisView} />
           <Route path="/browse" component={BrowseView} />
           <Route path="/user" component={UserProfileView} />
-          <Route path="/hypothesis" component={HypothesisView} />
         </Route>
       </Router>
     ), document.getElementById('root'))

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
+import AvatarComponent from '../components/avatar_component'
 
 const Avatar = (props) => {
   return (
@@ -12,17 +13,19 @@ const Avatar = (props) => {
 
 export default class HypothesisView extends Component {
   render() {
-    const data = store.getState().currentUser.data
-    const user = store.getState().currentUser.profile
+    const data = {
+      title: "TIPR: transcription initiation pattern recognition on a genome scale"
+    }
+    const user = {
+      user_id: "linkedin|2qdTsGouxA",
+      picture: "https://media.licdn.com/mpr/mprx/0_Vu55r8ZE3voudRCP4WNnriodTqxuwZiP4wlVriEVYAwgNpq1nEvWY_Oq7s0tHxGxR7bU0kNQ7Yd9",
+      name: "Andrew Wong"
+    }
     return (
       <div id="hypothesis-view">
         <div className="row">
-          <h2>{data.category}</h2>
           <h1>{data.title}</h1>
-          <Avatar name={user.name} picture={user.picture} />
-          <Avatar name={user.name} picture={user.picture} />
-          <Avatar name={user.name} picture={user.picture} />
-          <Avatar name={user.name} picture={user.picture} />
+          <AvatarComponent id={user.user_id} name={user.name} imgSrc={user.picture} />
         </div>
         <div className="row">
           <h3>Abstract: {data.abstract}</h3>

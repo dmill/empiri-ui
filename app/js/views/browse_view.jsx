@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
 import { Link } from 'react-router'
+import IconElement from '../elements/icon_element'
 
 const PublicationPreview = (props) => {
   return (
-    <div style={{border: "1px solid #bbb", borderRadius: "3px"}}>
+    <div className="publication-preview">
       <Link to="/hypothesis"><h4>{props.title}</h4></Link>
       <img src={props.picture} />
       {props.name}
@@ -19,8 +20,8 @@ export default class BrowseView extends Component {
     return (
       <div id="browse-view">
         <div className="row">
-          <div className="seven columns">
-            <h1>Trending Publications</h1>
+          <div className="eight columns publications-column">
+            <h1><IconElement iconName="trending_up" iconType="material" />Trending Topics</h1>
             <PublicationPreview title={data.title} picture={user.picture} name={user.name} />
             <PublicationPreview title={data.title} picture={user.picture} name={user.name} />
             <PublicationPreview title={data.title} picture={user.picture} name={user.name} />
