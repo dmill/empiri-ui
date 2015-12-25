@@ -5,6 +5,14 @@
   }
 }
 
+.avatar-row-component {
+  margin-bottom: 30px;
+
+  > * {
+    margin-right: 12px;
+  }
+}
+
 .hovercard-component {
   position: relative;
 
