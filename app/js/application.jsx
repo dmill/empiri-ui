@@ -48,5 +48,6 @@ class AppRouter {
   }
 }
 
-const lock = new Auth0().authenticate()
+// const lock = new Auth0().authenticate()
+const lock = () => <div></div>
 new AppRouter().start(lock)

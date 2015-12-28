@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import store from '../redux/store'
 import AvatarRowComponent from '../components/avatar_row_component'
 import AvatarComponent from '../components/avatar_component'
+import ContributionsListView from './contributions_list_view'
 
 const Avatar = (props) => {
   return (
@@ -24,13 +25,13 @@ export default class HypothesisView extends Component {
       name: "Andrew Wong"
     }
     const avatars = [
-      <AvatarComponent id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent id={user.user_id} name={user.name} imgSrc={user.picture} />
+      <AvatarComponent key="1"id={user.user_id} name={user.name} imgSrc={user.picture} />,
+      <AvatarComponent key="2"id={user.user_id} name={user.name} imgSrc={user.picture} />,
+      <AvatarComponent key="3"id={user.user_id} name={user.name} imgSrc={user.picture} />,
+      <AvatarComponent key="4"id={user.user_id} name={user.name} imgSrc={user.picture} />,
+      <AvatarComponent key="5"id={user.user_id} name={user.name} imgSrc={user.picture} />,
+      <AvatarComponent key="6"id={user.user_id} name={user.name} imgSrc={user.picture} />,
+      <AvatarComponent key="7"id={user.user_id} name={user.name} imgSrc={user.picture} />
     ]
     return (
       <div id="hypothesis-view">
@@ -40,6 +41,9 @@ export default class HypothesisView extends Component {
         </div>
         <div className="row">
           <h3>Abstract: {data.abstract}</h3>
+        </div>
+        <div className="row">
+          <ContributionsListView />
         </div>
       </div>
     )

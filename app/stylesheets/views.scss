@@ -16,26 +16,4 @@
     border-radius: 3px 3px 0 0;
     color: #fff;
   }
-
-  .publication-preview {
-    background: linear-gradient(to bottom,#fff,rgba(150,150,150,0.1));
-    border-left: 3px solid #1EAEDB;
-    background-color: #fff;
-    margin-top: 3px;
-    padding: 10px;
-    cursor: pointer;
-    width: calc(100% - 4px);
-    margin-left: 2px;
-    border: 1px solid #c8c8c8;
-    border-radius: 2px;
-
-    h4 {
-      color: #333;
-      font-size: 1.2em;
-    }
-
-    &:hover {
-      box-shadow: 0 0 2px rgba(0,0,0,0.1);
-    }
-  }
 }

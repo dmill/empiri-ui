@@ -14,7 +14,7 @@ export default class HoverCardComponent extends Component {
   }
 
   renderCard() {
-    if(this.state.open) {
+    if(this.state.open && this.props.content) {
       return <span className="hovercard-component-card">{this.props.content}</span>
     }
   }
