@@ -1,6 +1,7 @@
 export const SET_PROFILE = 'SET_PROFILE'
 export const SET_ID_TOKEN = 'SET_ID_TOKEN'
 export const LOG_OUT = 'LOG_OUT'
+export const EXPAND_CONTRIBUTION = 'EXPAND_CONTRIBUTION'
 
 export function setProfile(auth0Profile) {
   return { type: SET_PROFILE, payload: auth0Profile }
@@ -12,4 +13,8 @@ export function setIdToken(idToken) {
 
 export function logOut() {
   return { type: LOG_OUT, payload: null }
+}
+
+export function expandContribution(contributionId) {
+  return { type: EXPAND_CONTRIBUTION, payload: contributionId }
 }
