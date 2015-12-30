@@ -109,4 +109,21 @@
 
 
 .contribution-expanded-element {
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    &:hover {
+      i {
+        color: #777;
+      }
+    }
+
+    i {
+      font-size: 2em;
+      margin: 0;
+      color: #aaa;
+    }
+  }
 }
