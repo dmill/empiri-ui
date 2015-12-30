@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
 import { Link } from 'react-router'
+import IconElement from '../elements/icon_element'
 
-const PublicationPreview = (props) => {
+const PublicationPreview = ({ title, abstract, name, picture }) => {
   return (
-    <div style={{border: "1px solid #bbb", borderRadius: "3px"}}>
-      <Link to="/hypothesis"><h4>{props.title}</h4></Link>
-      <img src={props.picture} />
-      {props.name}
-    </div>
+    <Link to="/hypothesis" className="publication-preview-element">
+      <h2>{title}</h2>
+      <h3>Abstract:</h3>
+      <p>{abstract}</p>
+      <div className="publication-preview-element-footer">
+        <img src={picture} />
+        <div>{name} & 23 others</div>
+      </div>
+    </Link>
   )
 }
 
@@ -19,13 +24,13 @@ export default class BrowseView extends Component {
     return (
       <div id="browse-view">
         <div className="row">
-          <div className="seven columns">
-            <h1>Trending Publications</h1>
-            <PublicationPreview title={data.title} picture={user.picture} name={user.name} />
-            <PublicationPreview title={data.title} picture={user.picture} name={user.name} />
-            <PublicationPreview title={data.title} picture={user.picture} name={user.name} />
-            <PublicationPreview title={data.title} picture={user.picture} name={user.name} />
-            <PublicationPreview title={data.title} picture={user.picture} name={user.name} />
+          <div className="eight columns publications-column">
+            <h1><IconElement iconName="trending_up" iconType="material" />Trending Topics</h1>
+            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.picture} name={user.name} />
+            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.picture} name={user.name} />
+            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.picture} name={user.name} />
+            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.picture} name={user.name} />
+            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.picture} name={user.name} />
           </div>
 
           <div className="four columns">

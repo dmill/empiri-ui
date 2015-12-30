@@ -1,4 +1,6 @@
+@import 'views';
 @import 'components';
+@import 'elements';
 
 .container {
   max-width: 1200px;
@@ -6,10 +8,15 @@
 
 body, html {
   margin: 0;
+  background-color: #f5f5f5;
 }
 
 a, div, span {
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
 }
 
 nav {

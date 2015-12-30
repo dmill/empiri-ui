@@ -1,3 +1,65 @@
+.avatar-component {
+  img {
+    width: 50px;
+    border-radius: 3px;
+  }
+}
+
+.avatar-row-component {
+  margin-bottom: 30px;
+
+  > * {
+    margin-right: 12px;
+  }
+}
+
+.hovercard-component {
+  position: relative;
+
+  .hovercard-component-card-container {
+    position: absolute;
+    width: 250px;
+    text-align: center;
+    left: -142px;
+    top: 15px;
+  }
+
+  .hovercard-component-card {
+    background-color: #000;
+    color: #fff;
+    border-radius: 2px;
+    position: absolute;
+    padding: 5px;
+    font-size: 11px;
+    top: 5px;
+    margin: 0;
+    box-sizing: border-box;
+    opacity: 0.9;
+
+    &:before {
+      position: absolute;
+      top: -13px;
+      left: 33px;
+      content: "";
+      display: inline-block;
+      border: 8px solid transparent;
+      border-bottom-color: #000;
+      opacity: 0.9;
+    }
+
+    &:after {
+      position: absolute;
+      top: -12px;
+      left: 33px;
+      content: "";
+      display: inline-block;
+      border: 8px solid transparent;
+      border-bottom-color: #000;
+      opacity: 0.9;
+    }
+  }
+}
+
 .popover-component {
   position: relative;
 
@@ -62,3 +124,4 @@
     border-bottom-color: #fff;
   }
 }
+

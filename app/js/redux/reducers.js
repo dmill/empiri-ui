@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { SET_PROFILE, SET_ID_TOKEN, LOG_OUT } from './actions'
+import { SET_PROFILE, SET_ID_TOKEN, LOG_OUT, EXPAND_CONTRIBUTION } from './actions'
 
 const data = {
   category: "Bioinformatics",
@@ -8,7 +8,7 @@ const data = {
 }
 
 function currentUser(state = null, action) {
-  switch (action.type) {
+  switch(action.type) {
     case SET_PROFILE:
       return { idToken: state.idToken, profile: action.payload, data: data }
     case SET_ID_TOKEN:
@@ -20,5 +20,14 @@ function currentUser(state = null, action) {
   }
 }
 
-const App = combineReducers({ currentUser })
+function currentHypothesis(state = null, action) {
+  switch(action.type) {
+    case EXPAND_CONTRIBUTION:
+      return { contributionId: action.payload }
+    default:
+      return { contributionId: null }
+  }
+}
+
+const App = combineReducers({ currentUser, currentHypothesis })
 export default App
