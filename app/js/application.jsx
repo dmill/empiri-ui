@@ -39,15 +39,15 @@ class AppRouter {
     render((
       <Router history={history}>
         <Route path="/" component={App} lock={lock}>
-          <IndexRoute component={HypothesisView} />
+          <IndexRoute component={HomeView} />
           <Route path="/browse" component={BrowseView} />
           <Route path="/user" component={UserProfileView} />
+          <Route path="/hypothesis" component={HypothesisView} />
         </Route>
       </Router>
     ), document.getElementById('root'))
   }
 }
 
-// const lock = new Auth0().authenticate()
-const lock = () => <div></div>
+const lock = new Auth0().authenticate()
 new AppRouter().start(lock)
