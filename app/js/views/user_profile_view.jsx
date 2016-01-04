@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
+import { Link } from 'react-router'
 
 export default class UserProfileView extends Component {
   componentWillMount() {
@@ -13,11 +14,16 @@ export default class UserProfileView extends Component {
       return <div>no user</div>
     } else {
       return (
-        <div id="user-profile-view" className="sidebar four columns">
-          <img src={profile.picture} />
-          <h5>{profile.name}</h5>
-          <h6>{profile.headline}</h6>
-          <p>{profile.summary}</p>
+        <div id="user-profile-view">
+          <div className="sidebar six columns">
+            <img src={profile.picture} />
+            <h5>{profile.name}</h5>
+            <h6>{profile.headline}</h6>
+            <p>{profile.summary}</p>
+          </div>
+          <div className="four columns">
+            <Link to="/user/edit"><button>Edit Profile</button></Link>
+          </div>
         </div>
       )
     }

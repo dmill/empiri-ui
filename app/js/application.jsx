@@ -10,8 +10,10 @@ import NavBarView from './views/nav_bar_view'
 import HomeView from './views/home_view'
 import HypothesisView from './views/hypothesis_view'
 import SignInView from './auth0/home'
+import UserProfileEditView from './views/user_profile_edit_view'
 import style from '../stylesheets/application.scss'
 import Auth0 from './auth0/auth0'
+
 
 class App extends Component {
   componentWillMount() {
@@ -43,6 +45,7 @@ class AppRouter {
           <Route path="/browse" component={BrowseView} />
           <Route path="/user" component={UserProfileView} />
           <Route path="/hypothesis" component={HypothesisView} />
+          <Route path="/user/edit" component={UserProfileEditView} />
         </Route>
       </Router>
     ), document.getElementById('root'))
