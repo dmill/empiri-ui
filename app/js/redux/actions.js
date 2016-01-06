@@ -6,7 +6,7 @@ export function setCurrentUser(userData) {
   return { type: SET_CURRENT_USER, payload: userData }
 }
 
-export function logOut() {
+export function logout() {
   return { type: LOG_OUT, payload: null }
 }
 

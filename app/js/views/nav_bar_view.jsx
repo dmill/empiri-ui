@@ -3,7 +3,8 @@ import store from '../redux/store'
 import IconElement from '../elements/icon_element'
 import PopoverComponent from '../components/popover_component'
 import { Link } from 'react-router'
-import { logOut } from '../redux/actions'
+import auth0 from '../auth0/auth0'
+import { logout } from '../redux/actions'
 
 export default class NavBarView extends Component {
   componentWillMount() {
@@ -32,8 +33,7 @@ export default class NavBarView extends Component {
   }
 
   signOut() {
-    localStorage.removeItem('userToken')
-    store.dispatch(logOut())
+    auth0.logout()
   }
 
   popoverItems() {

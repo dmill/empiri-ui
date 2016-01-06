@@ -1,20 +1,17 @@
+import style from '../stylesheets/application.scss' //compiles via babel
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute } from 'react-router'
 import { createHistory, useBasename } from 'history'
+import auth0 from './auth0/auth0'
 import BrowseView from './views/browse_view'
-import store from './redux/store'
-import Home from './auth0/home'
 import UserProfileView from './views/user_profile_view'
 import NavBarView from './views/nav_bar_view'
 import HomeView from './views/home_view'
 import HypothesisView from './views/hypothesis_view'
-import SignInView from './auth0/home'
 import UserProfileEditView from './views/user_profile_edit_view'
-import style from '../stylesheets/application.scss'
-import Auth0 from './auth0/auth0'
+import store from './redux/store'
 import { setCurrentUser } from './redux/actions'
-
 
 class App extends Component {
   componentWillMount() {
@@ -38,11 +35,6 @@ class App extends Component {
 
 class AppRouter {
   start(lock) {
-    $.ajax({
-      contentType: 'application/json',
-      url: 'http://localhost:4000/users',
-      type: 'GET',
-    }).done(({ data }) => { store.dispatch(setCurrentUser(data)) })
     const history = useBasename(createHistory)({ basename: '/' })
     render((
       <Router history={history}>
@@ -58,5 +50,5 @@ class AppRouter {
   }
 }
 
-const lock = new Auth0().authenticate()
+const lock = auth0.authenticate()
 new AppRouter().start(lock)

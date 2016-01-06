@@ -1,19 +1,24 @@
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from './auth0-variables'
 import store from '../redux/store'
-import { setProfile, setIdToken } from '../redux/actions'
+import { setCurrentUser, logout } from '../redux/actions'
 
-export default class Auth0 {
+class Auth0 {
   authenticate() {
     const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
     const idToken = this.getIdToken(lock.parseHash(window.location.hash))
     this.setAuthHeader(idToken)
+    if (idToken) {
+      this.fetchUserData()
+    }
     return lock
   }
 
-  setAuthHeader(idToken) {
-    $.ajaxSetup({
-      headers: { 'Authorization': 'Bearer ' + idToken }
-    })
+  fetchUserData() {
+    $.ajax({
+      contentType: 'application/json',
+      url: 'http://localhost:4000/users',
+      type: 'GET',
+    }).done(({ data }) => store.dispatch(setCurrentUser(data)))
   }
 
   getIdToken(authHash) {
@@ -29,4 +34,17 @@ export default class Auth0 {
     }
     return idToken
   }
+
+  logout() {
+    localStorage.removeItem('userToken')
+    $.ajaxSetup({ headers: {} })
+    store.dispatch(logout())
+  }
+
+  setAuthHeader(idToken) {
+    $.ajaxSetup({ headers: { 'Authorization': 'Bearer ' + idToken } })
+  }
 }
+
+const auth0 = new Auth0()
+export default auth0
