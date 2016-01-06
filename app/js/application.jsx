@@ -18,8 +18,8 @@ import { setCurrentUser } from './redux/actions'
 
 class App extends Component {
   componentWillMount() {
-    this.state = { idToken: store.getState().currentUser.idToken }
-    store.subscribe(() => this.setState({ idToken: store.getState().currentUser.idToken }))
+    this.state = { currentUser: store.getState().currentUser }
+    store.subscribe(() => this.setState({ currentUser: store.getState().currentUser }))
   }
 
   render() {

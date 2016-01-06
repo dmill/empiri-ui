@@ -19,18 +19,22 @@ const PublicationPreview = ({ title, abstract, name, picture }) => {
 
 export default class BrowseView extends Component {
   render() {
-    const user = store.getState().currentUser.profile
-    const data = store.getState().currentUser.data
+    const user = store.getState().currentUser
+    const data = {
+      category: "Bioinformatics",
+      title: "TIPR: transcription initiation pattern recognition on a genome scale",
+      abstract: "The computational identification of gene transcription start sites (TSSs) can provide insights into the regulation and function of genes without performing expensive experiments, particularly in organisms with incomplete annotations. High-resolution general-purpose TSS prediction remains a challenging problem, with little recent progress on the identification and differentiation of TSSs which are arranged in different spatial patterns along the chromosome."
+    }
     return (
       <div id="browse-view">
         <div className="row">
           <div className="eight columns publications-column">
             <h1><IconElement iconName="trending_up" iconType="material" />Trending Topics</h1>
-            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.picture} name={user.name} />
-            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.picture} name={user.name} />
-            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.picture} name={user.name} />
-            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.picture} name={user.name} />
-            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.picture} name={user.name} />
+            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.photo_url} name={user.first_name + " " + user.last_name} />
+            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.photo_url} name={user.first_name + " " + user.last_name} />
+            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.photo_url} name={user.first_name + " " + user.last_name} />
+            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.photo_url} name={user.first_name + " " + user.last_name} />
+            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.photo_url} name={user.first_name + " " + user.last_name} />
           </div>
 
           <div className="four columns">

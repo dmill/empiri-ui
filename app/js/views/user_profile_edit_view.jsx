@@ -3,14 +3,7 @@ import store from '../redux/store'
 
 export default class UserProfileEditView extends Component {
   componentWillMount() {
-    const currentUser = store.getState().currentUser.metadata
-    this.state = {
-      title: currentUser.title,
-      organization: currentUser.organization,
-      first_name: currentUser.first_name,
-      last_name: currentUser.last_name,
-      email: currentUser.email,
-    }
+    this.state = store.getState().currentUser
   }
 
   handleChange(e) {
@@ -23,7 +16,7 @@ export default class UserProfileEditView extends Component {
     $.ajax({
       type: 'PATCH',
       contentType: 'application/json',
-      url: 'http://localhost:4000/users/' + store.getState().currentUser.metadata.id,
+      url: 'http://localhost:4000/users/' + this.state.id,
       data: JSON.stringify({ user: this.state }),
     })
   }

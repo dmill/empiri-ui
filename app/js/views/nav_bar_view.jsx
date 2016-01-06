@@ -7,8 +7,8 @@ import { logOut } from '../redux/actions'
 
 export default class NavBarView extends Component {
   componentWillMount() {
-    this.state = { currentUser: store.getState().currentUser.metadata }
-    store.subscribe(() => this.setState({ currentUser: store.getState().currentUser.metadata }))
+    this.state = { currentUser: store.getState().currentUser }
+    store.subscribe(() => this.setState({ currentUser: store.getState().currentUser }))
   }
 
   showLock() {
