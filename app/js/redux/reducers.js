@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux'
-import { SET_PROFILE, SET_ID_TOKEN, LOG_OUT, EXPAND_CONTRIBUTION } from './actions'
+import {
+  SET_CURRENT_USER,
+  LOG_OUT,
+  EXPAND_CONTRIBUTION,
+} from './actions'
 
 const data = {
   category: "Bioinformatics",
@@ -9,14 +13,12 @@ const data = {
 
 function currentUser(state = null, action) {
   switch(action.type) {
-    case SET_PROFILE:
-      return { idToken: state.idToken, profile: action.payload, data: data }
-    case SET_ID_TOKEN:
-      return { idToken: action.payload, profile: state.profile, data: data }
+    case SET_CURRENT_USER:
+      return { metadata: action.payload, data }
     case LOG_OUT:
-      return { idToken: null, profile: null, data: null }
+      return { metadata: null, data: null }
     default:
-      return { profile: null }
+      return { metadata: null }
   }
 }
 

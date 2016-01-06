@@ -13,6 +13,7 @@ import SignInView from './auth0/home'
 import UserProfileEditView from './views/user_profile_edit_view'
 import style from '../stylesheets/application.scss'
 import Auth0 from './auth0/auth0'
+import { setCurrentUser } from './redux/actions'
 
 
 class App extends Component {
@@ -36,7 +37,12 @@ class App extends Component {
 }
 
 class AppRouter {
-  start() {
+  start(lock) {
+    $.ajax({
+      contentType: 'application/json',
+      url: 'http://localhost:4000/users',
+      type: 'GET',
+    }).done(({ data }) => { store.dispatch(setCurrentUser(data)) })
     const history = useBasename(createHistory)({ basename: '/' })
     render((
       <Router history={history}>

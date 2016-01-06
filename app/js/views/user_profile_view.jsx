@@ -4,22 +4,22 @@ import { Link } from 'react-router'
 
 export default class UserProfileView extends Component {
   componentWillMount() {
-    this.state = { profile: store.getState().currentUser.profile }
-    store.subscribe(() => this.setState({ profile: store.getState().currentUser.profile }))
+    this.state = { currentUser: store.getState().currentUser.metadata }
+    store.subscribe(() => this.setState({ currentUser: store.getState().currentUser.metadata }))
   }
 
   render() {
-    const profile = this.state.profile
-    if(!profile) {
+    const currentUser = this.state.currentUser
+    if(!currentUser) {
       return <div>no user</div>
     } else {
       return (
         <div id="user-profile-view">
           <div className="sidebar six columns">
-            <img src={profile.picture} />
-            <h5>{profile.name}</h5>
-            <h6>{profile.headline}</h6>
-            <p>{profile.summary}</p>
+            <img src={currentUser.photo_url} />
+            <h5>{currentUser.first_name} {currentUser.last_name}</h5>
+            <h6>{currentUser.title}</h6>
+            <p>{currentUser.organization}</p>
           </div>
           <div className="four columns">
             <Link to="/user/edit"><button>Edit Profile</button></Link>

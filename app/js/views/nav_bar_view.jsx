@@ -7,21 +7,27 @@ import { logOut } from '../redux/actions'
 
 export default class NavBarView extends Component {
   componentWillMount() {
-    this.state = { profile: store.getState().currentUser.profile }
-    store.subscribe(() => this.setState({ profile: store.getState().currentUser.profile }))
+    this.state = { currentUser: store.getState().currentUser.metadata }
+    store.subscribe(() => this.setState({ currentUser: store.getState().currentUser.metadata }))
   }
 
   showLock() {
     this.props.lock.show({
       icon: 'https://s3-us-west-1.amazonaws.com/www.empiri.co/images/symbol.png',
-      socialBigButtons: true
+      socialBigButtons: true,
+      authParams: {
+        scope: 'openid email given_name family_name picture'
+      }
     })
   }
 
   showSignup() {
     this.props.lock.showSignup({
       icon: 'https://s3-us-west-1.amazonaws.com/www.empiri.co/images/symbol.png',
-      socialBigButtons: true
+      socialBigButtons: true,
+      authParams: {
+        scope: 'openid email given_name family_name picture'
+      }
     })
   }
 
@@ -32,7 +38,7 @@ export default class NavBarView extends Component {
 
   popoverItems() {
     return ([
-      <span key="1" className="popover-header">Welcome <strong>{this.state.profile.given_name}!</strong></span>,
+      <span key="1" className="popover-header">Welcome <strong>{this.state.currentUser.first_name}!</strong></span>,
       <Link key="2" className="popover-item" to="/user">your account</Link>,
       <Link key="3" className="popover-item" to="user">support</Link>,
       <Link key="4" className="popover-item" to="/user">log out</Link>
@@ -40,7 +46,7 @@ export default class NavBarView extends Component {
   }
 
   render() {
-    if (!this.state.profile) {
+    if (!this.state.currentUser) {
       return (
         <nav>
           <div className="container">
@@ -75,7 +81,7 @@ export default class NavBarView extends Component {
                 items={this.popoverItems()}
                 select={
                   <span className="popover-select">
-                    <img src={this.state.profile.picture} height="25" width="25" />
+                    <img src={this.state.currentUser.photo_url} height="25" width="25" />
                     <IconElement iconName="caret-down" iconType="fontawesome" />
                   </span>
                 } />

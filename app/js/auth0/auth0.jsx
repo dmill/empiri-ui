@@ -6,9 +6,14 @@ export default class Auth0 {
   authenticate() {
     const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
     const idToken = this.getIdToken(lock.parseHash(window.location.hash))
-    this.setAuthorizationHeader(idToken)
-    lock.getProfile(idToken, (err, profile) => this.dispatchCurrentUser(err, idToken, profile))
+    this.setAuthHeader(idToken)
     return lock
+  }
+
+  setAuthHeader(idToken) {
+    $.ajaxSetup({
+      headers: { 'Authorization': 'Bearer ' + idToken }
+    })
   }
 
   getIdToken(authHash) {
@@ -23,24 +28,5 @@ export default class Auth0 {
       }
     }
     return idToken
-  }
-
-  setAuthorizationHeader(idToken) {
-    if (!idToken) {
-      console.error("No idToken to set in Authorization Header.")
-    }
-    $.ajaxSetup({
-      beforeSend: (xhr) => { xhr.setRequestHeader('Authorization', 'Bearer ' + idToken) }
-    })
-  }
-
-  dispatchCurrentUser(err, idToken, profile) {
-    if (err) {
-      console.error('userToken expired, please sign in again')
-      localStorage.removeItem('userToken')
-    } else {
-      store.dispatch(setProfile(profile))
-      store.dispatch(setIdToken(idToken))
-    }
   }
 }

@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 
 export default class Home extends Component {
   showLock() {
-    this.props.route.lock.show()
+    this.props.route.lock.show({
+      authParams: {
+        scope: 'openid email given_name family_name picture'
+      }
+    })
   }
 
   render() {
