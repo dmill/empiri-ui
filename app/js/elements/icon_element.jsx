@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-const IconElement = ({ iconName, iconType }) => {
+const IconElement = ({ iconName, iconType, onClick }) => {
   switch(iconType) {
     case 'fontawesome':
-      return <i className={"fa fa-" + iconName}></i>
+      return <i onClick={onClick} className={"fa fa-" + iconName}></i>
     case 'material':
-      return <i className="material-icons">{iconName}</i>
+      return <i onClick={onClick} className="material-icons">{iconName}</i>
     default:
       return console.error('IconElement: Please specify a correct iconType.')
   }

@@ -1,14 +1,24 @@
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from './auth0-variables'
 import store from '../redux/store'
-import { setProfile, setIdToken } from '../redux/actions'
+import { setCurrentUser, logout } from '../redux/actions'
 
-export default class Auth0 {
+class Auth0 {
   authenticate() {
     const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
     const idToken = this.getIdToken(lock.parseHash(window.location.hash))
-    this.setAuthorizationHeader(idToken)
-    lock.getProfile(idToken, (err, profile) => this.dispatchCurrentUser(err, idToken, profile))
+    this.setAuthHeader(idToken)
+    if (idToken) {
+      this.fetchUserData()
+    }
     return lock
+  }
+
+  fetchUserData() {
+    $.ajax({
+      contentType: 'application/json',
+      url: 'http://localhost:4000/users',
+      type: 'GET',
+    }).done(({ data }) => store.dispatch(setCurrentUser(data)))
   }
 
   getIdToken(authHash) {
@@ -25,22 +35,16 @@ export default class Auth0 {
     return idToken
   }
 
-  setAuthorizationHeader(idToken) {
-    if (!idToken) {
-      console.error("No idToken to set in Authorization Header.")
-    }
-    $.ajaxSetup({
-      beforeSend: (xhr) => { xhr.setRequestHeader('Authorization', 'Bearer ' + idToken) }
-    })
+  logout() {
+    localStorage.removeItem('userToken')
+    $.ajaxSetup({ headers: {} })
+    store.dispatch(logout())
   }
 
-  dispatchCurrentUser(err, idToken, profile) {
-    if (err) {
-      console.error('userToken expired, please sign in again')
-      localStorage.removeItem('userToken')
-    } else {
-      store.dispatch(setProfile(profile))
-      store.dispatch(setIdToken(idToken))
-    }
+  setAuthHeader(idToken) {
+    $.ajaxSetup({ headers: { 'Authorization': 'Bearer ' + idToken } })
   }
 }
+
+const auth0 = new Auth0()
+export default auth0

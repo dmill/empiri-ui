@@ -1,17 +1,12 @@
-export const SET_PROFILE = 'SET_PROFILE'
-export const SET_ID_TOKEN = 'SET_ID_TOKEN'
+export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const LOG_OUT = 'LOG_OUT'
 export const EXPAND_CONTRIBUTION = 'EXPAND_CONTRIBUTION'
 
-export function setProfile(auth0Profile) {
-  return { type: SET_PROFILE, payload: auth0Profile }
+export function setCurrentUser(userData) {
+  return { type: SET_CURRENT_USER, payload: userData }
 }
 
-export function setIdToken(idToken) {
-  return { type: SET_ID_TOKEN, payload: idToken }
-}
-
-export function logOut() {
+export function logout() {
   return { type: LOG_OUT, payload: null }
 }
 

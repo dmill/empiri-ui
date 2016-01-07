@@ -25,7 +25,7 @@ export default class PopoverComponent extends Component {
 
   render () {
     return (
-      <span className="popover-component" onClick={this.handleClick.bind(this)}>
+      <span style={{ zIndex: 1 }} className="popover-component" onClick={this.handleClick.bind(this)}>
         {this.props.select}
         {this.renderPopover()}
       </span>

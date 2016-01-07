@@ -4,7 +4,7 @@ import ContributionExpandedElement from './contribution_expanded_element'
 import store from '../redux/store'
 import { expandContribution } from '../redux/actions'
 
-class ContributionListElement extends Component {
+export default class ContributionListElement extends Component {
   componentWillMount() {
     this.state = { contributionId: store.getState().currentHypothesis.contributionId }
     store.subscribe(() => {
@@ -73,5 +73,3 @@ class ContributionListElement extends Component {
     )
   }
 }
-
-export default ContributionListElement
