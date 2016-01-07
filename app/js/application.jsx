@@ -33,22 +33,26 @@ class App extends Component {
   }
 }
 
-class AppRouter {
-  start(lock) {
-    const history = useBasename(createHistory)({ basename: '/' })
-    render((
-      <Router history={history}>
-        <Route path="/" component={App} lock={lock}>
-          <IndexRoute component={HomeView} />
-          <Route path="/browse" component={BrowseView} />
-          <Route path="/user" component={UserProfileView} />
-          <Route path="/hypothesis" component={HypothesisView} />
-          <Route path="/user/edit" component={UserProfileEditView} />
-        </Route>
-      </Router>
-    ), document.getElementById('root'))
+function requireLogIn(nextState, replaceState) {
+  if (!store.getState().currentUser) {
+    replaceState({ nextPathname: nextState.location.pathname }, '/browse')
   }
 }
 
+function startRouter(lock) {
+  const history = useBasename(createHistory)({ basename: '/' })
+  render((
+    <Router history={history}>
+      <Route path="/" component={App} lock={lock}>
+        <IndexRoute component={HomeView} />
+        <Route path="/browse" component={BrowseView} />
+        <Route path="/profile" component={UserProfileView} />
+        <Route path="/hypothesis" component={HypothesisView} />
+        <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
+      </Route>
+    </Router>
+  ), document.getElementById('root'))
+}
+
 const lock = auth0.authenticate()
-new AppRouter().start(lock)
+startRouter(lock)

@@ -39,9 +39,9 @@ export default class NavBarView extends Component {
   popoverItems() {
     return ([
       <span key="1" className="popover-header">Welcome <strong>{this.state.currentUser.first_name}!</strong></span>,
-      <Link key="2" className="popover-item" to="/user">your account</Link>,
-      <Link key="3" className="popover-item" to="user">support</Link>,
-      <Link key="4" className="popover-item" to="/user">log out</Link>
+      <Link key="2" className="popover-item" to="/profile">your account</Link>,
+      <Link key="3" className="popover-item" to="/profile">support</Link>,
+      <Link key="4" className="popover-item" to="/profile">log out</Link>
     ])
   }
 

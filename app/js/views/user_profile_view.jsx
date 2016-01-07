@@ -22,7 +22,7 @@ export default class UserProfileView extends Component {
             <p>{currentUser.organization}</p>
           </div>
           <div className="four columns">
-            <Link to="/user/edit"><button>Edit Profile</button></Link>
+            <Link to="/profile/edit"><button>Edit Profile</button></Link>
           </div>
         </div>
       )
