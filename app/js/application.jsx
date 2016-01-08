@@ -13,6 +13,10 @@ import UserProfileEditView from './views/user_profile_edit_view'
 import store from './redux/store'
 import { setCurrentUser } from './redux/actions'
 
+import TabsComponent from './components/tabs_component'
+import PeerReviewComponent from './components/peer_review_component'
+import PeerReviewView from './views/peer_review_view'
+
 class App extends Component {
   componentWillMount() {
     this.state = { currentUser: store.getState().currentUser }
@@ -39,6 +43,16 @@ function requireLogIn(nextState, replaceState) {
   }
 }
 
+const tabs = [
+  { name: 'Your Review',
+    body: <PeerReviewComponent />
+  },
+  {
+    name: 'TIPR: transcription initiation pattern recognition on a genome scale',
+    body: 'genome shit'
+  }
+]
+
 function startRouter(lock) {
   const history = useBasename(createHistory)({ basename: '/' })
   render((
@@ -48,6 +62,7 @@ function startRouter(lock) {
         <Route path="/browse" component={BrowseView} />
         <Route path="/profile" component={UserProfileView} />
         <Route path="/hypothesis" component={HypothesisView} />
+        <Route path="/review/new" component={PeerReviewView} tabs={tabs} />
         <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
       </Route>
     </Router>
