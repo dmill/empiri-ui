@@ -23,3 +23,20 @@
     padding: 0;
   }
 }
+
+#new-review-paper-view {
+  input {
+    width: 100%;
+  }
+
+  .removable-input {
+    input {
+      width: calc(100% - 3em)
+    }
+
+    i {
+      float: right;
+      line-height: 38px;
+    }
+  }
+}

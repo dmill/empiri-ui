@@ -3,6 +3,8 @@ import store from '../redux/store'
 import AvatarRowComponent from '../components/avatar_row_component'
 import AvatarComponent from '../components/avatar_component'
 import ContributionsListView from './contributions_list_view'
+import IconElement from '../elements/icon_element'
+import { Link } from 'react-router'
 
 const Avatar = (props) => {
   return (
@@ -43,6 +45,8 @@ export default class HypothesisView extends Component {
           <h3>Abstract: {data.abstract}</h3>
         </div>
         <div className="row">
+          <h1>Contributions</h1>
+          <Link to="/review-papers/new"><IconElement iconType="material" iconName="note_add" /></Link>
           <ContributionsListView />
         </div>
       </div>
