@@ -37,7 +37,7 @@ export default class NewReviewPaperView extends Component {
           <h4>Review paper title</h4>
           <input type="text" />
         </label>
-        {this.state.sections.map((section) => section)}
+        {this.state.sections.map((section, i) => <div key={i}>{section}</div>)}
         <button onClick={this.handleClick.bind(this)}>+ Section</button>
         {this.renderDeleteButton()}
       </div>
