@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import IconElement from './icon_element'
 import store from '../redux/store'
+import { Link } from 'react-router'
 import { expandContribution } from '../redux/actions'
 
 export default class ContributionExpandedElement extends Component {
@@ -19,6 +20,7 @@ export default class ContributionExpandedElement extends Component {
         <p>This is the body of the text. Hello, hello hello. what? This is the body of the text. Hello, hello hello. what? This is the body of the text. Hello, hello hello. what? This is the body of the text. Hello, hello hello. what? This is the body of the text. Hello, hello hello. what?</p>
         <h2>sub title</h2>
         <p>This is the body of the text. Hello, hello hello. what? This is the body of the text. Hello, hello hello. what? This is the body of the text. Hello, hello hello. what? This is the body of the text. Hello, hello hello. what? This is the body of the text. Hello, hello hello. what?</p>
+        <Link to="/review/new"><IconElement iconName="announcement" iconType="material" /></Link>
       </div>
     )
   }

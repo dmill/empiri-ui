@@ -3,7 +3,16 @@ import {
   SET_CURRENT_USER,
   LOG_OUT,
   EXPAND_CONTRIBUTION,
+  UPDATE_PEER_REVIEW,
 } from './actions'
+
+function peerReview(state = null, action) {
+  switch(action.type) {
+    case UPDATE_PEER_REVIEW:
+      return action.payload
+    default: return state
+  }
+}
 
 function currentUser(state = null, action) {
   switch(action.type) {
@@ -25,5 +34,5 @@ function currentHypothesis(state = null, action) {
   }
 }
 
-const App = combineReducers({ currentUser, currentHypothesis })
+const App = combineReducers({ currentUser, currentHypothesis, peerReview })
 export default App

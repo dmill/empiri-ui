@@ -7,9 +7,13 @@ import { expandContribution } from '../redux/actions'
 export default class ContributionListElement extends Component {
   componentWillMount() {
     this.state = { contributionId: store.getState().currentHypothesis.contributionId }
-    store.subscribe(() => {
+    this.unsubscribe = store.subscribe(() => {
       this.setState({ contributionId: store.getState().currentHypothesis.contributionId })
     })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   handleClick() {
