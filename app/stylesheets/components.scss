@@ -180,3 +180,32 @@
     height: 20em;
   }
 }
+
+.image-upload-component {
+  label {
+    cursor: pointer;
+  }
+  input {
+    display: none;
+  }
+}
+
+.editable-image-component {
+  position: relative;
+  cursor: pointer;
+  &:hover {
+    i {
+      display: block;
+    }
+  }
+
+  i {
+    position: absolute;
+    left: calc(50% - 0.5em);
+    top: calc(50% - 0.5em);
+    font-size: 4em;
+    color: #fff;
+    opacity: 0.8;
+    display: none;
+  }
+}
