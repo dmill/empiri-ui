@@ -180,3 +180,13 @@
     height: 20em;
   }
 }
+
+.photo-upload-component {
+  input {
+    display: none;
+  }
+
+  i {
+    cursor: pointer;
+  }
+}

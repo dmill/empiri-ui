@@ -16,6 +16,7 @@ import PeerReviewView from './views/peer_review_view'
 import NewReviewPaperView from './views/new_review_paper_view'
 
 import PeerReviewComponent from './components/peer_review_component'
+import PhotoUploadComponent from './components/photo_upload_component'
 
 class App extends Component {
   componentWillMount() {
@@ -58,7 +59,7 @@ function startRouter(lock) {
   render((
     <Router history={history}>
       <Route path="/" component={App} lock={lock}>
-        <IndexRoute component={NewReviewPaperView} />
+        <IndexRoute component={PhotoUploadComponent} />
         <Route path="/browse" component={BrowseView} />
         <Route path="/profile" component={UserProfileView} />
         <Route path="/hypothesis" component={HypothesisView} />
