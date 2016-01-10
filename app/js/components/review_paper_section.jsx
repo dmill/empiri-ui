@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import IconElement from '../elements/icon_element'
 import InputElement from '../elements/input_element'
+import ImageUploadComponent from './image_upload_component'
 
 const RemovableInput = ({ value, onClick, onChange }) => {
   return (
@@ -51,6 +52,7 @@ export default class ReviewPaperSection extends Component {
           Section Body
           <textarea />
         </label>
+        <ImageUploadComponent />
         <button onClick={this.addReference.bind(this)}>+ Add a reference</button>
         <div>
           {this.renderReferences()}

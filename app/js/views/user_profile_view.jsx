@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
 import { Link } from 'react-router'
+import EditableImageComponent from '../components/editable_image_component'
 
 export default class UserProfileView extends Component {
   componentWillMount() {
@@ -16,7 +17,7 @@ export default class UserProfileView extends Component {
       return (
         <div id="user-profile-view">
           <div className="sidebar six columns">
-            <img src={currentUser.photo_url} />
+            <EditableImageComponent src={currentUser.photo_url} />
             <h5>{currentUser.first_name} {currentUser.last_name}</h5>
             <h6>{currentUser.title}</h6>
             <p>{currentUser.organization}</p>
