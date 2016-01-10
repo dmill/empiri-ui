@@ -12,10 +12,10 @@ import HypothesisView from './views/hypothesis_view'
 import UserProfileEditView from './views/user_profile_edit_view'
 import store from './redux/store'
 import { setCurrentUser } from './redux/actions'
-
-import TabsComponent from './components/tabs_component'
-import PeerReviewComponent from './components/peer_review_component'
 import PeerReviewView from './views/peer_review_view'
+import NewReviewPaperView from './views/new_review_paper_view'
+
+import PeerReviewComponent from './components/peer_review_component'
 
 class App extends Component {
   componentWillMount() {
@@ -58,11 +58,12 @@ function startRouter(lock) {
   render((
     <Router history={history}>
       <Route path="/" component={App} lock={lock}>
-        <IndexRoute component={HomeView} />
+        <IndexRoute component={NewReviewPaperView} />
         <Route path="/browse" component={BrowseView} />
         <Route path="/profile" component={UserProfileView} />
         <Route path="/hypothesis" component={HypothesisView} />
         <Route path="/review/new" component={PeerReviewView} tabs={tabs} />
+        <Route path="/review-papers/new" component={NewReviewPaperView} />
         <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
       </Route>
     </Router>

@@ -168,3 +168,15 @@
     height: 23em;
   }
 }
+
+.review-paper-section-component {
+  input {
+    width: 100%;
+  }
+
+  textarea {
+    width: 100%;
+    resize: none;
+    height: 20em;
+  }
+}
