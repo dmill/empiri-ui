@@ -18,6 +18,13 @@ const PublicationPreview = ({ title, abstract, name, picture }) => {
 }
 
 export default class BrowseView extends Component {
+  componentWillMount() {
+    this.state = { hypotheses: [] }
+    $.get('http://localhost:4000/hypotheses').done(({ data }) => {
+      this.setState({ hypotheses: data })
+    })
+  }
+
   render() {
     const user = store.getState().currentUser
     const data = {
@@ -30,11 +37,7 @@ export default class BrowseView extends Component {
         <div className="row">
           <div className="eight columns publications-column">
             <h1><IconElement iconName="trending_up" iconType="material" />Trending Topics</h1>
-            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.photo_url} name={user.first_name + " " + user.last_name} />
-            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.photo_url} name={user.first_name + " " + user.last_name} />
-            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.photo_url} name={user.first_name + " " + user.last_name} />
-            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.photo_url} name={user.first_name + " " + user.last_name} />
-            <PublicationPreview title={data.title} abstract={data.abstract} picture={user.photo_url} name={user.first_name + " " + user.last_name} />
+            {this.state.hypotheses.map((hypothesis, i) => <PublicationPreview title={hypothesis.title} abstract={hypothesis.synopsis} key={i} />)}
           </div>
 
           <div className="four columns">
