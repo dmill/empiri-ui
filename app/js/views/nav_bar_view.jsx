@@ -39,9 +39,10 @@ export default class NavBarView extends Component {
   popoverItems() {
     return ([
       <span key="1" className="popover-header">Welcome <strong>{this.state.currentUser.first_name}!</strong></span>,
-      <Link key="2" className="popover-item" to="/profile">your account</Link>,
-      <Link key="3" className="popover-item" to="/profile">support</Link>,
-      <Link key="4" className="popover-item" to="/profile">log out</Link>
+      <Link key="2" className="popover-item" to="/hypotheses/new">+ create a hypothesis</Link>,
+      <Link key="3" className="popover-item" to="/profile">your account</Link>,
+      <Link key="4" className="popover-item" to="/profile">support</Link>,
+      <Link key="5" className="popover-item" to="/profile">log out</Link>
     ])
   }
 
@@ -51,7 +52,7 @@ export default class NavBarView extends Component {
         <nav>
           <div className="container">
             <div className="row">
-              <Link to="/"><img src="images/symbol.png" width="20px" /></Link>
+              <Link to="/"><img src="images/symbol.png" /></Link>
               <input type="text" placeholder="Search Empiri" />
               <Link to="/browse">Browse</Link>
               <span>
@@ -69,12 +70,10 @@ export default class NavBarView extends Component {
         <nav>
           <div className="container">
             <div className="row">
-              <Link to="/"><img src="images/symbol.png" width="20px" /></Link>
+              <Link className="link" to="/"><img src="images/symbol.png" width="20px" /></Link>
               <input type="text" placeholder="Search Empiri" />
-              <Link to="/browse">Browse</Link>
-              <span>
-                <a href="#">FAQ</a>
-              </span>
+              <Link className="link" to="/browse">Browse</Link>
+              <Link className="link" to="/browse">FAQ</Link>
 
               <PopoverComponent
                 direction="down"

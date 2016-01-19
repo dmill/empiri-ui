@@ -1,13 +1,15 @@
+@import 'variables';
+
 #browse-view {
   .publications-column {
     background-color: #ddd;
-    margin-top: 1em;
+    margin-top: 2em;
     border-radius: 3px;
     padding-bottom: 2px;
   }
 
   h1 {
-    background: linear-gradient(to bottom,#1565E9,rgba(21,101,233,0.8));
+    background: linear-gradient(to top,$purple,$purple-l);
     box-shadow: 0 0 1px rgba(0,0,0,0.1);
     font-size: 3em;
     padding: 0.4em;
