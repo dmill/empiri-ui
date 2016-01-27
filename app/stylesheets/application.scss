@@ -1,15 +1,15 @@
-@import 'variables';
-@import 'views';
-@import 'components';
-@import 'elements';
-
 body, html {
   margin: 0;
   background-color: #fafafa;
   font-size: 10px;
 }
 
-a, div, span {
+@import 'variables';
+@import 'views';
+@import 'components';
+@import 'elements';
+
+* {
   box-sizing: border-box;
 }
 
@@ -19,40 +19,6 @@ a {
 
 .container {
   max-width: 1200px;
-}
-
-nav {
-  background: linear-gradient(to bottom,$purple-l,$purple);
-  padding: 1rem;
-  box-shadow: 0 2px 2px rgba(0,0,0,0.2);
-  font-size: 1.5rem;
-
-  .container {
-    .row {
-      & > * {
-        height: 100%;
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: 1em;
-      }
-      .link {
-        color: #fff;
-        &:hover {
-          color: #ddd;
-        }
-      }
-    }
-  }
-
-  button {
-    margin-bottom: 0;
-    color: #fff;
-    border-color: #fff;
-  }
-
-  input {
-    margin-bottom: 0;
-  }
 }
 
 #user-profile-view {

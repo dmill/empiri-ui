@@ -52,7 +52,7 @@ export default class NavBarView extends Component {
         <nav>
           <div className="container">
             <div className="row">
-              <Link to="/"><img src="images/symbol.png" /></Link>
+              <Link to="/"><img id="logo" src="images/symbol.png" /></Link>
               <input type="text" placeholder="Search Empiri" />
               <Link to="/browse">Browse</Link>
               <span>
@@ -70,22 +70,23 @@ export default class NavBarView extends Component {
         <nav>
           <div className="container">
             <div className="row">
-              <Link className="link" to="/"><img src="images/symbol.png" width="20px" /></Link>
-              <input type="text" placeholder="Search Empiri" />
-              <Link className="link" to="/browse">Browse</Link>
-              <Link className="link" to="/browse">FAQ</Link>
-
-              <PopoverComponent
-                direction="down"
-                items={this.popoverItems()}
-                select={
-                  <span className="popover-select">
-                    <img src={this.state.currentUser.photo_url} height="25" width="25" />
-                    <IconElement iconName="caret-down" iconType="fontawesome" />
-                  </span>
-                } />
-
-              <button onClick={this.signOut.bind(this)}>Log Out</button>
+              <div className="ten columns">
+                <Link className="link" to="/"><img id="logo" src="images/symbol.png" width="20px" /></Link>
+                <input type="text" placeholder="Search Empiri" />
+                <Link className="link" to="/browse">Browse</Link>
+                <Link className="link" to="/browse">FAQ</Link>
+              </div>
+              <div className="two columns">
+                <PopoverComponent
+                  direction="down"
+                  items={this.popoverItems()}
+                  select={
+                    <span className="popover-select">
+                      <img src={this.state.currentUser.photo_url} height="29" width="29" />
+                      <IconElement iconName="caret-down" iconType="fontawesome" />
+                    </span>
+                  } />
+              </div>
             </div>
           </div>
         </nav>

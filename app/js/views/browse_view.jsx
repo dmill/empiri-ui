@@ -36,7 +36,7 @@ export default class BrowseView extends Component {
       <div id="browse-view">
         <div className="row">
           <div className="eight columns publications-column">
-            <h1><IconElement iconName="trending_up" iconType="material" />Trending Topics</h1>
+            <h1>Trending Topics</h1>
             {this.state.hypotheses.map((hypothesis, i) => <PublicationPreview title={hypothesis.title} abstract={hypothesis.synopsis} key={i} />)}
           </div>
 
