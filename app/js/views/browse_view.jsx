@@ -41,7 +41,7 @@ export default class BrowseView extends Component {
           </div>
 
           <div className="four columns">
-            <h2>Your Updates</h2>
+            <h1>Publishing Tools</h1>
             You dont have any publications yet.  Create one..
           </div>
         </div>

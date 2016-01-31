@@ -64,7 +64,7 @@ function startRouter(lock) {
         <Route path="/profile" component={UserProfileView} />
         <Route path="/hypothesis" component={HypothesisView} />
         <Route path="/review/new" component={PeerReviewView} tabs={tabs} />
-        <Route path="/review-papers/new" component={NewReviewPaperView} />
+        <Route path="/publications/new" component={NewReviewPaperView} />
         <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
         <Route path="/hypotheses/new" onEnter={requireLogIn} component={NewHypothesisView} />
       </Route>
