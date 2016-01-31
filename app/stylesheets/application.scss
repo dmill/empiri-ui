@@ -1,17 +1,15 @@
+body, html {
+  margin: 0;
+  background-color: #fafafa;
+  font-size: 10px;
+}
+
+@import 'variables';
 @import 'views';
 @import 'components';
 @import 'elements';
 
-.container {
-  max-width: 1200px;
-}
-
-body, html {
-  margin: 0;
-  background-color: #f5f5f5;
-}
-
-a, div, span {
+* {
   box-sizing: border-box;
 }
 
@@ -19,22 +17,8 @@ a {
   text-decoration: none;
 }
 
-nav {
-  padding: 1em;
-  border-bottom: 1px solid #999;
-
-  button {
-    margin-bottom: 0;
-  }
-
-  input {
-    margin-bottom: 0;
-  }
-
-  .container > .row > * {
-    vertical-align: middle;
-    margin-left: 1em;
-  }
+.container {
+  max-width: 1200px;
 }
 
 #user-profile-view {

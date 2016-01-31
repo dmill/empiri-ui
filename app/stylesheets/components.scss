@@ -1,3 +1,5 @@
+@import "variables";
+
 .avatar-component {
   img {
     width: 50px;
@@ -62,22 +64,39 @@
 
 .popover-component {
   position: relative;
+  height: 100%;
+  display: inline-block;
 
   .popover-select {
     cursor: pointer;
+    height: 100%;
+    display: inline-block;
+
+    &:hover {
+      i {
+        color: #ccc;
+      }
+    }
 
     img {
       margin-right: 4px;
+      margin: 3px;
+      border-radius: 2px;
+    }
+
+    i {
+      position: relative;
+      top: -25%;
     }
   }
 
   .popover {
     position: absolute;
-    border: 1px solid #e0e0e0;
+    border: 1px solid $purple-d;
     border-radius: 2px;
     background-color: #fff;
     width: 12em;
-    left: -1em;
+    left: -110px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     box-sizing: border-box;
     padding-bottom: 0.5em;
@@ -86,7 +105,7 @@
   .popover-header {
     width: 100%;
     display: block;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid $purple-d;
     padding: 0.5em;
     margin-bottom: 0.5em;
     font-size: 0.8em;
@@ -107,7 +126,7 @@
   &:before {
     position: absolute;
     top: -16px;
-    left: 1em;
+    left: 119px;
     content: "";
     display: inline-block;
     border: 8px solid transparent;
@@ -117,7 +136,7 @@
   &:after {
     position: absolute;
     top: -15px;
-    left: 1em;
+    left: 119px;
     content: "";
     display: inline-block;
     border: 8px solid transparent;

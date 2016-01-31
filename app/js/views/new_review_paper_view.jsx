@@ -32,7 +32,7 @@ export default class NewReviewPaperView extends Component {
   render() {
     return (
       <div id="new-review-paper-view">
-        <h1>Add a new review paper</h1>
+        <h1>Publish a new review paper</h1>
         <label>
           <h4>Review paper title</h4>
           <input type="text" />

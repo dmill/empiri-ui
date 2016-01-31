@@ -17,6 +17,7 @@ import NewReviewPaperView from './views/new_review_paper_view'
 
 import PeerReviewComponent from './components/peer_review_component'
 import ImageUploadComponent from './components/image_upload_component'
+import NewHypothesisView from './views/new_hypothesis_view'
 
 class App extends Component {
   componentWillMount() {
@@ -59,13 +60,13 @@ function startRouter(lock) {
   render((
     <Router history={history}>
       <Route path="/" component={App} lock={lock}>
-        <IndexRoute component={ImageUploadComponent} />
-        <Route path="/browse" component={BrowseView} />
+        <IndexRoute component={BrowseView} />
         <Route path="/profile" component={UserProfileView} />
         <Route path="/hypothesis" component={HypothesisView} />
         <Route path="/review/new" component={PeerReviewView} tabs={tabs} />
-        <Route path="/review-papers/new" component={NewReviewPaperView} />
+        <Route path="/publications/new" component={NewReviewPaperView} />
         <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
+        <Route path="/hypotheses/new" onEnter={requireLogIn} component={NewHypothesisView} />
       </Route>
     </Router>
   ), document.getElementById('root'))

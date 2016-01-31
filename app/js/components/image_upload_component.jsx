@@ -1,9 +1,20 @@
 import React, { Component } from 'react'
 import IconElement from '../elements/icon_element'
+import store from '../redux/store'
+import auth0 from '../auth0/auth0'
 
 export default class ImageUploadComponent extends Component {
   handleChange(e) {
-    e.target.files[0]
+    let formData = new FormData()
+    formData.append('photo', e.target.files[0])
+
+    $.ajax({
+      url: 'http://localhost:4000/users/' + store.getState().currentUser.id + '/photos',
+      data: formData,
+      type: 'POST',
+      processData: false,
+      contentType: false
+    }).done(() => auth0.fetchUserData())
   }
 
   render() {
