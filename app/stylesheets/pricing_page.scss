@@ -3,6 +3,16 @@
 .pricing-page {
   h1, h2 {
     text-align: center;
+  }
+
+  h2 {
+    padding-top: 6rem;
+    font-size: 2.5rem;
+    color: #ddd;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
     color: #fff;
   }
 
@@ -10,7 +20,15 @@
   .box {
     background-color: #fff;
     border-radius: 5px;
-    padding: 2rem;
+    padding: 1.5rem;
+    margin: 5rem 0;
+    width: 32%;
+    display: inline-block;
+    vertical-align: top;
+
+    &:not(:first-child) {
+      margin-left: 1%;
+    }
 
     .title {
       font-size: 2rem;
@@ -18,6 +36,9 @@
     .price {
       float: right;
       font-size: 2rem;
+    }
+    ul {
+      margin-top: 2rem;
     }
   }
 }
