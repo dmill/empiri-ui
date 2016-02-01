@@ -18,6 +18,8 @@ import NewReviewPaperView from './views/new_review_paper_view'
 import PeerReviewComponent from './components/peer_review_component'
 import ImageUploadComponent from './components/image_upload_component'
 import NewHypothesisView from './views/new_hypothesis_view'
+import PricingPage from './views/pricing_page'
+import MembershipForm from './views/membership_form'
 
 class App extends Component {
   componentWillMount() {
@@ -29,11 +31,7 @@ class App extends Component {
     return (
       <div id="layout">
         <NavBarView lock={this.props.route.lock} />
-        <div className="container">
-          <div className="row">
-            {this.props.children}
-          </div>
-        </div>
+        {this.props.children}
       </div>
     )
   }
@@ -60,7 +58,7 @@ function startRouter(lock) {
   render((
     <Router history={history}>
       <Route path="/" component={App} lock={lock}>
-        <IndexRoute component={BrowseView} />
+        <IndexRoute component={PricingPage} />
         <Route path="/profile" component={UserProfileView} />
         <Route path="/hypothesis" component={HypothesisView} />
         <Route path="/review/new" component={PeerReviewView} tabs={tabs} />
@@ -68,6 +66,8 @@ function startRouter(lock) {
         <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
         <Route path="/hypotheses/new" onEnter={requireLogIn} component={NewHypothesisView} />
       </Route>
+      <Route path="/pricing" component={PricingPage} />
+      <Route path="/membership" component={MembershipForm} />
     </Router>
   ), document.getElementById('root'))
 }

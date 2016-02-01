@@ -6,6 +6,7 @@
   <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdn.auth0.com/js/lock-7.js"></script>
   <script src="//use.typekit.net/iws6ohy.js"></script>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
   <link rel="stylesheet" href="app/stylesheets/skeleton.css">
 </head>
 
@@ -16,5 +17,31 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600' rel='stylesheet' type='text/css'>
+  <script>
+  var handler = StripeCheckout.configure({
+    key: 'pk_test_ehE0eth5zcq5pym9ldbE5TDT',
+    image: '/img/documentation/checkout/marketplace.png',
+    locale: 'auto',
+    token: function(token) {
+      // Use the token to create the charge with a server-side script.
+      // You can access the token ID with `token.id`
+    }
+  });
+
+  $('#customButton').on('click', function(e) {
+    // Open Checkout with further options
+    handler.open({
+      name: 'Single Publication',
+      description: 'Publish a single paper',
+      amount: 29900
+    });
+    e.preventDefault();
+  });
+
+  // Close Checkout on page navigation
+  $(window).on('popstate', function() {
+    handler.close();
+  });
+</script>
 </body>
 </html>

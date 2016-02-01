@@ -1,0 +1,23 @@
+@import 'variables';
+
+.pricing-page {
+  h1, h2 {
+    text-align: center;
+    color: #fff;
+  }
+
+  background-color: $purple;
+  .box {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 2rem;
+
+    .title {
+      font-size: 2rem;
+    }
+    .price {
+      float: right;
+      font-size: 2rem;
+    }
+  }
+}

@@ -17,7 +17,7 @@ export default class UserProfileView extends Component {
       return (
         <div id="user-profile-view">
           <div className="sidebar six columns">
-            <EditableImageComponent src={currentUser.photo_url} />
+            <EditableImageComponent className="profile-picture" src={currentUser.photo_url} />
             <h5>{currentUser.first_name} {currentUser.last_name}</h5>
             <h6>{currentUser.title}</h6>
             <p>{currentUser.organization}</p>
