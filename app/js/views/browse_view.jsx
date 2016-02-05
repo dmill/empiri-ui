@@ -33,16 +33,23 @@ export default class BrowseView extends Component {
       abstract: "The computational identification of gene transcription start sites (TSSs) can provide insights into the regulation and function of genes without performing expensive experiments, particularly in organisms with incomplete annotations. High-resolution general-purpose TSS prediction remains a challenging problem, with little recent progress on the identification and differentiation of TSSs which are arranged in different spatial patterns along the chromosome."
     }
     return (
-      <div id="browse-view">
+      <div id="browse-view" className="container">
         <div className="row">
           <div className="eight columns publications-column">
             <h1>Trending Topics</h1>
             {this.state.hypotheses.map((hypothesis, i) => <PublicationPreview title={hypothesis.title} abstract={hypothesis.synopsis} key={i} />)}
           </div>
 
-          <div className="four columns">
-            <h1>Publishing Tools</h1>
-            You dont have any publications yet.  Create one..
+          <div className="four columns publications-feed">
+            <h1>Publication Updates</h1>
+            <div className="feed-menu clear-fix">
+              <Link to="/publications/new" className="menu-item">
+                <IconElement iconType="material" iconName="note_add" />
+                New Publication
+              </Link>
+              <div className="menu-item">Influence: 0</div>
+            </div>
+            <div className="notifications">You dont have any notifications.</div>
           </div>
         </div>
       </div>

@@ -2,12 +2,14 @@ body, html {
   margin: 0;
   background-color: #fafafa;
   font-size: 10px;
+  font-family: 'Open Sans';
 }
 
 @import 'variables';
 @import 'views';
 @import 'components';
 @import 'elements';
+@import 'pricing_page';
 
 * {
   box-sizing: border-box;
@@ -19,6 +21,14 @@ a {
 
 .container {
   max-width: 1200px;
+}
+
+.clear-fix {
+  &:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
 }
 
 #user-profile-view {

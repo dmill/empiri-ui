@@ -1,8 +1,7 @@
 import style from '../stylesheets/application.scss' //compiles via babel
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute } from 'react-router'
-import { createHistory, useBasename } from 'history'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import auth0 from './auth0/auth0'
 import BrowseView from './views/browse_view'
 import UserProfileView from './views/user_profile_view'
@@ -18,6 +17,8 @@ import NewReviewPaperView from './views/new_review_paper_view'
 import PeerReviewComponent from './components/peer_review_component'
 import ImageUploadComponent from './components/image_upload_component'
 import NewHypothesisView from './views/new_hypothesis_view'
+import PricingPage from './views/pricing_page'
+import MembershipForm from './views/membership_form'
 
 class App extends Component {
   componentWillMount() {
@@ -28,12 +29,8 @@ class App extends Component {
   render() {
     return (
       <div id="layout">
-        <NavBarView lock={this.props.route.lock} />
-        <div className="container">
-          <div className="row">
-            {this.props.children}
-          </div>
-        </div>
+        <NavBarView lock={this.props.route.lock} history={this.props.history} />
+        {this.props.children}
       </div>
     )
   }
@@ -56,18 +53,20 @@ const tabs = [
 ]
 
 function startRouter(lock) {
-  const history = useBasename(createHistory)({ basename: '/' })
   render((
-    <Router history={history}>
+    <Router history={browserHistory}>
       <Route path="/" component={App} lock={lock}>
         <IndexRoute component={BrowseView} />
         <Route path="/profile" component={UserProfileView} />
         <Route path="/hypothesis" component={HypothesisView} />
+        <Route path="/browse" component={BrowseView} />
         <Route path="/review/new" component={PeerReviewView} tabs={tabs} />
         <Route path="/publications/new" component={NewReviewPaperView} />
         <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
         <Route path="/hypotheses/new" onEnter={requireLogIn} component={NewHypothesisView} />
       </Route>
+      <Route path="/pricing" component={PricingPage} />
+      <Route path="/membership" component={MembershipForm} />
     </Router>
   ), document.getElementById('root'))
 }
