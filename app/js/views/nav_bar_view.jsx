@@ -2,14 +2,21 @@ import React, { Component } from 'react'
 import store from '../redux/store'
 import IconElement from '../elements/icon_element'
 import PopoverComponent from '../components/popover_component'
-import { Link } from 'react-router'
+import { Link, browserHistory, Navigation } from 'react-router'
 import auth0 from '../auth0/auth0'
 import { logout } from '../redux/actions'
+import { Tour } from 'tether-shepherd'
 
 export default class NavBarView extends Component {
   componentWillMount() {
     this.state = { currentUser: store.getState().currentUser }
     store.subscribe(() => this.setState({ currentUser: store.getState().currentUser }))
+  }
+
+  onSignIn(response) {
+    this.props.history.push('browse/' + '#access_token=' + arguments[3] + '&id_token=' + arguments[2] + '&token_type=Bearer')
+    auth0.authenticate()
+    this.startTour()
   }
 
   showLock() {
@@ -19,7 +26,23 @@ export default class NavBarView extends Component {
       authParams: {
         scope: 'openid email given_name family_name picture'
       }
+    }, this.onSignIn.bind(this))
+  }
+
+  startTour() {
+    const tour = new Tour({ defaults: { classes: 'shepherd-theme-arrows' }})
+    tour.addStep('example', {
+      title: 'Welcome to Empiri',
+      text: 'This is a list of popular publications on Empiri right now',
+      advanceOn: '.docs-link click'
     })
+    tour.addStep('example', {
+      title: 'Get Started!',
+      text: 'Click here to write your first paper!',
+      attachTo: '.popover-select bottom',
+      advanceOn: '.docs-link click'
+    })
+    tour.start()
   }
 
   showSignup() {
@@ -29,7 +52,7 @@ export default class NavBarView extends Component {
       authParams: {
         scope: 'openid email given_name family_name picture'
       }
-    })
+    }, this.startTour)
   }
 
   signOut() {
@@ -55,7 +78,7 @@ export default class NavBarView extends Component {
               <div className="eight columns">
                 <Link className="link" to="/"><img id="logo" src="images/symbol.png" width="20px" /></Link>
                 <input type="text" placeholder="Search Empiri" />
-                <Link className="link" to="/">Browse</Link>
+                <Link className="link" to="/browse">Browse</Link>
                 <Link className="link" to="/">FAQ</Link>
               </div>
               <div className="four columns">
@@ -74,7 +97,7 @@ export default class NavBarView extends Component {
               <div className="ten columns">
                 <Link className="link" to="/"><img id="logo" src="images/symbol.png" width="20px" /></Link>
                 <input type="text" placeholder="Search Empiri" />
-                <Link className="link" to="/">Browse</Link>
+                <Link className="link" to="/browse">Browse</Link>
                 <Link className="link" to="/">FAQ</Link>
               </div>
               <div className="two columns">
@@ -95,3 +118,4 @@ export default class NavBarView extends Component {
     }
   }
 }
+

@@ -2,11 +2,47 @@
 @import 'nav_bar_view';
 
 #browse-view {
-  .publications-column {
+  .publications-column,
+  .publications-feed {
     background-color: #ddd;
     margin-top: 2em;
     border-radius: 3px;
     padding-bottom: 2px;
+    .notifications {
+      margin: 1rem;
+      text-align: center;
+    }
+  }
+
+  .feed-menu {
+    .menu-item {
+      background: linear-gradient(to top,$purple-d,$purple);
+      float: left;
+      width: 50%;
+      height: 4rem;
+      color: #fff;
+      border-top: 1px solid $purple-d;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+      font-size: 1.2rem;
+      padding-left: 1rem;
+      cursor: pointer;
+      &:hover {
+        background: linear-gradient(to top,$purple,$purple-l);
+        color: #eee;
+      }
+      &:active {
+        background: $purple-l;
+        box-shadow: none;
+      }
+      i {
+        transform: translateY(25%);
+        margin-right: 5px;
+      }
+      &:last-child {
+        line-height: 4rem;
+        border-left: 1px solid $purple-d;
+      }
+    }
   }
 
   h1 {

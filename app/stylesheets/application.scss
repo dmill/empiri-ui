@@ -23,6 +23,14 @@ a {
   max-width: 1200px;
 }
 
+.clear-fix {
+  &:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
 #user-profile-view {
   padding: 3em;
 
