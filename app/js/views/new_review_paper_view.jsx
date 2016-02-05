@@ -31,8 +31,8 @@ export default class NewReviewPaperView extends Component {
 
   render() {
     return (
-      <div id="new-review-paper-view">
-        <h1>Publish a new review paper</h1>
+      <div id="new-review-paper-view" className="container">
+        <h1>Write a New Publication</h1>
         <label>
           <h4>Review paper title</h4>
           <input type="text" />
