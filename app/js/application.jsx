@@ -12,7 +12,7 @@ import UserProfileEditView from './views/user_profile_edit_view'
 import store from './redux/store'
 import { setCurrentUser } from './redux/actions'
 import PeerReviewView from './views/peer_review_view'
-import NewReviewPaperView from './views/new_review_paper_view'
+import NewPublicationView from './views/new_publication_view'
 
 import PeerReviewComponent from './components/peer_review_component'
 import ImageUploadComponent from './components/image_upload_component'
@@ -61,7 +61,7 @@ function startRouter(lock) {
         <Route path="/hypothesis" component={HypothesisView} />
         <Route path="/browse" component={BrowseView} />
         <Route path="/review/new" component={PeerReviewView} tabs={tabs} />
-        <Route path="/publications/new" component={NewReviewPaperView} />
+        <Route path="/publications/new" component={NewPublicationView} />
         <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
         <Route path="/hypotheses/new" onEnter={requireLogIn} component={NewHypothesisView} />
       </Route>

@@ -6,9 +6,39 @@ import ContributionExpandedElement from '../elements/contribution_expanded_eleme
 import IconElement from '../elements/icon_element'
 import ReviewPaperSection from '../components/review_paper_section'
 
-export default class NewReviewPaperView extends Component {
+const NewAuthor = () => {
+  return (
+    <div className="new-author">
+      <div>
+        <label>
+          First Name
+          <input type="text" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Last Name
+          <input type="text" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Email
+          <input type="text" />
+        </label>
+      </div>
+    </div>
+  )
+}
+
+export default class NewPublicationView extends Component {
   componentWillMount() {
-    this.state = { sections: [<ReviewPaperSection />] }
+    const currentUser = store.getState().currentUser
+    this.state = { authors: [{
+      first_name: currentUser.first_name,
+      last_name: currentUser.last_name,
+      email: currentUser.email
+    }] }
   }
 
   handleClick() {
@@ -29,9 +59,13 @@ export default class NewReviewPaperView extends Component {
     }
   }
 
+  renderAuthors() {
+    return this.state.authors.map((author, i) => <h6 key={i}>{author.first_name} {author.last_name} {author.email}</h6>)
+  }
+
   render() {
     return (
-      <div id="new-review-paper-view" className="container">
+      <div id="new-publication-view" className="container">
         <h1>Write a New Publication</h1>
         <label>
           <h4>Review paper title</h4>
@@ -40,6 +74,22 @@ export default class NewReviewPaperView extends Component {
         {this.state.sections.map((section, i) => <div key={i}>{section}</div>)}
         <button onClick={this.handleClick.bind(this)}>+ Section</button>
         {this.renderDeleteButton()}
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <div id="new-publication-view" className="container">
+        <h1>Write a new publication</h1>
+        <label>
+          <h3>Publication Title</h3>
+          <input type="text" />
+        </label>
+        <label>
+          <h3>Abstract</h3>
+          <textarea type="text" />
+        </label>
       </div>
     )
   }
