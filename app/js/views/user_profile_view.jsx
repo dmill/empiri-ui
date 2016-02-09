@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
-import { setCurrentUser } from '../redux/actions'
 import { Link } from 'react-router'
 import EditableImageComponent from '../components/editable_image_component'
 
 export default class UserProfileView extends Component {
   componentWillMount() {
     this.state = { currentUser: store.getState().currentUser }
-    store.subscribe(() => setCurrentUser(store.getState().currentUser))
+    store.subscribe(() => this.setState({ currentUser: store.getState().currentUser }))
   }
 
   render() {
