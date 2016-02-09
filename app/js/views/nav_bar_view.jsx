@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
+import auth0 from '../auth0/auth0'
 import store from '../redux/store'
+import { Link, browserHistory, Navigation } from 'react-router'
+import { logout, setCurrentUser } from '../redux/actions'
+import { Tour } from 'tether-shepherd'
 import IconElement from '../elements/icon_element'
 import PopoverComponent from '../components/popover_component'
-import { Link, browserHistory, Navigation } from 'react-router'
-import auth0 from '../auth0/auth0'
-import { logout } from '../redux/actions'
-import { Tour } from 'tether-shepherd'
 
 export default class NavBarView extends Component {
   componentWillMount() {
     this.state = { currentUser: store.getState().currentUser }
-    store.subscribe(() => this.setState({ currentUser: store.getState().currentUser }))
+    store.subscribe(() => setCurrentUser(store.getState().currentUser))
   }
 
   onSignIn(response) {

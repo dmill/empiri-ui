@@ -4,11 +4,10 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import store from './redux/store'
 import BrowseView from './views/browse_view'
 import UserProfileView from './views/user_profile_view'
-import HypothesisView from './views/hypothesis_view'
+import PublicationView from './views/publication_view'
 import UserProfileEditView from './views/user_profile_edit_view'
 import PeerReviewView from './views/peer_review_view'
 import NewPublicationView from './views/new_publication_view'
-import NewHypothesisView from './views/new_hypothesis_view'
 import PeerReviewComponent from './components/peer_review_component'
 import PricingPage from './views/pricing_page'
 import MembershipForm from './views/membership_form'
@@ -35,12 +34,11 @@ export function startRouter(App, lock) {
       <Route path="/" component={App} lock={lock}>
         <IndexRoute component={BrowseView} />
         <Route path="/profile" component={UserProfileView} />
-        <Route path="/hypothesis" component={HypothesisView} />
+        <Route path="/publications/1" component={PublicationView} />
         <Route path="/browse" component={BrowseView} />
         <Route path="/review/new" component={PeerReviewView} tabs={tabs} />
         <Route path="/publications/new" component={NewPublicationView} />
         <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
-        <Route path="/hypotheses/new" onEnter={requireLogIn} component={NewHypothesisView} />
       </Route>
       <Route path="/pricing" component={PricingPage} />
       <Route path="/membership" component={MembershipForm} />

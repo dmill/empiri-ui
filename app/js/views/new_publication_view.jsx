@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
 import { Link } from 'react-router'
-import ContributionListElement from '../elements/contribution_list_element'
-import ContributionExpandedElement from '../elements/contribution_expanded_element'
-import IconElement from '../elements/icon_element'
 import ReviewPaperSection from '../components/review_paper_section'
 
 const NewAuthor = () => {
@@ -34,11 +31,13 @@ const NewAuthor = () => {
 export default class NewPublicationView extends Component {
   componentWillMount() {
     const currentUser = store.getState().currentUser
-    this.state = { authors: [{
-      first_name: currentUser.first_name,
-      last_name: currentUser.last_name,
-      email: currentUser.email
-    }] }
+    this.state = {
+      authors: [{
+        first_name: currentUser.first_name,
+        last_name: currentUser.last_name,
+        email: currentUser.email
+      }]
+    }
   }
 
   handleClick() {

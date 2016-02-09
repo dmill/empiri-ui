@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
+import { Link } from 'react-router'
 import AvatarRowComponent from '../components/avatar_row_component'
 import AvatarComponent from '../components/avatar_component'
 import ContributionsListView from './contributions_list_view'
 import IconElement from '../elements/icon_element'
-import { Link } from 'react-router'
 
 const Avatar = (props) => {
   return (
@@ -15,7 +15,7 @@ const Avatar = (props) => {
   )
 }
 
-export default class HypothesisView extends Component {
+export default class PublicationView extends Component {
   render() {
     const data = {
       title: "TIPR: transcription initiation pattern recognition on a genome scale",
@@ -36,7 +36,7 @@ export default class HypothesisView extends Component {
       <AvatarComponent key="7"id={user.user_id} name={user.name} imgSrc={user.picture} />
     ]
     return (
-      <div id="hypothesis-view">
+      <div id="publication-view">
         <div className="row">
           <h1>{data.title}</h1>
           <AvatarRowComponent avatars={avatars} />

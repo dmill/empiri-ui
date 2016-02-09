@@ -9,7 +9,7 @@ import startRouter from './router'
 class App extends Component {
   componentWillMount() {
     this.state = { currentUser: store.getState().currentUser }
-    store.subscribe(() => this.setCurrentUser(store.getState().currentUser))
+    store.subscribe(() => setCurrentUser(store.getState().currentUser))
   }
 
   render() {

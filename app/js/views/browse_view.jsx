@@ -5,7 +5,7 @@ import IconElement from '../elements/icon_element'
 
 const PublicationPreview = ({ title, abstract, name, picture }) => {
   return (
-    <Link to="/hypothesis" className="publication-preview-element">
+    <Link to="/publications/1" className="publication-preview-element">
       <h2>{title}</h2>
       <h3>Abstract:</h3>
       <p>{abstract}</p>
@@ -26,12 +26,6 @@ export default class BrowseView extends Component {
   }
 
   render() {
-    const user = store.getState().currentUser
-    const data = {
-      category: "Bioinformatics",
-      title: "TIPR: transcription initiation pattern recognition on a genome scale",
-      abstract: "The computational identification of gene transcription start sites (TSSs) can provide insights into the regulation and function of genes without performing expensive experiments, particularly in organisms with incomplete annotations. High-resolution general-purpose TSS prediction remains a challenging problem, with little recent progress on the identification and differentiation of TSSs which are arranged in different spatial patterns along the chromosome."
-    }
     return (
       <div id="browse-view" className="container">
         <div className="row">
@@ -39,7 +33,6 @@ export default class BrowseView extends Component {
             <h1>Trending Topics</h1>
             {this.state.hypotheses.map((hypothesis, i) => <PublicationPreview title={hypothesis.title} abstract={hypothesis.synopsis} key={i} />)}
           </div>
-
           <div className="four columns publications-feed">
             <h1>Publication Updates</h1>
             <div className="feed-menu clear-fix">
