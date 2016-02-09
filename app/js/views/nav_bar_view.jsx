@@ -78,7 +78,7 @@ export default class NavBarView extends Component {
   render() {
     if (!this.state.currentUser) {
       return (
-        <nav>
+        <nav id="nav-bar-view">
           <div className="container">
             <div className="row">
               <div className="eight columns">
@@ -97,7 +97,7 @@ export default class NavBarView extends Component {
       )
     } else {
       return (
-        <nav>
+        <nav id="nav-bar-view">
           <div className="container">
             <div className="row">
               <div className="ten columns">

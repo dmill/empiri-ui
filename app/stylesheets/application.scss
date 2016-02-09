@@ -5,12 +5,6 @@ body, html {
   font-family: 'Open Sans';
 }
 
-@import 'variables';
-@import 'views';
-@import 'components';
-@import 'elements';
-@import 'pricing_page';
-
 * {
   box-sizing: border-box;
 }
@@ -31,11 +25,8 @@ a {
   }
 }
 
-#user-profile-view {
-  padding: 3em;
-
-  img {
-    border-radius: 5px;
-    width: 100%;
-  }
-}
+@import 'variables';
+@import 'views';
+@import 'components';
+@import 'elements';
+@import 'pricing_page';
