@@ -12,7 +12,7 @@ import PeerReviewComponent from './components/peer_review_component'
 import PricingPage from './views/pricing_page'
 import MembershipForm from './views/membership_form'
 import SlideshowComponent from './components/slideshow_component'
-import { SlideComponent, SlideComponent2 } from './components/slide_component'
+import { SlideComponent1, SlideComponent2, SlideComponent3 } from './components/slide_component'
 
 function requireLogIn(nextState, replaceState) {
   if (!store.getState().currentUser) {
@@ -34,7 +34,7 @@ export function startRouter(App, lock) {
   render((
     <Router history={browserHistory}>
       <Route path="/" component={App} lock={lock}>
-        <IndexRoute component={SlideshowComponent} slides={[<SlideComponent key={1} />, <SlideComponent2 key={2} />, <SlideComponent key={3} />]} />
+        <IndexRoute component={SlideshowComponent} slides={[<SlideComponent1 key={1} />, <SlideComponent2 key={2} />, <SlideComponent3 key={3} />]} />
         <Route path="/profile" component={UserProfileView} />
         <Route path="/publications/1" component={PublicationView} />
         <Route path="/browse" component={BrowseView} />

@@ -26,8 +26,8 @@ export default class SlideShowComponent extends Component {
       iconName="arrow-circle-right" />
     return (
       <div className="controls">
-        {prev}
-        {next}
+        <span className="prev">{prev}</span>
+        <span className="next">{next}</span>
       </div>
     )
   }

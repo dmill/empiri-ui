@@ -3,6 +3,11 @@ body, html {
   background-color: #fafafa;
   font-size: 10px;
   font-family: 'Open Sans';
+  height: 100%;
+}
+
+#root, #layout {
+  height: 100%;
 }
 
 * {
@@ -15,6 +20,7 @@ a {
 
 .container {
   max-width: 1200px;
+  height: 100%;
 }
 
 .clear-fix {

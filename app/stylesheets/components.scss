@@ -234,7 +234,7 @@
 
   .slides-container {
     position: relative;
-    min-height: 30rem;
+    width: 100%;
   }
 
   .controls {
@@ -242,6 +242,19 @@
     font-size: 3.5rem;
     cursor: pointer;
     text-align: center;
+    position: absolute;
+    bottom: 35rem;
+    width: 100%;
+
+    .next {
+      position: absolute;
+      right: 5rem;
+    }
+
+    .prev {
+      position: absolute;
+      left: 5rem;
+    }
 
     i:hover {
       color: $purple-d;
@@ -251,11 +264,12 @@
 
 .slide.component {
   text-align: center;
+  width: 100%;
 
   label {
     text-align: left;
-    width: 100%;
     margin: 0 auto;
+    width: 100%;
   }
 
   input, textarea {
