@@ -1,9 +1,9 @@
 @import 'variables';
 
 #nav-bar-view {
-  height: 4rem;
+  height: 5rem;
   background: linear-gradient(to bottom,$purple-l,$purple);
-  padding: 1rem;
+  padding: 0.5rem;
   box-shadow: 0 2px 2px rgba(0,0,0,0.2);
   font-size: 1.5rem;
   position: fixed;
@@ -66,7 +66,7 @@
     font-weight: 600;
     color: #777;
     position: fixed;
-    top: 4rem;
+    top: 5rem;
     padding: 1.5rem 0 0.5rem 0;
     background-color: #fafafa;
     border-bottom: 2px solid #eee;
@@ -97,7 +97,7 @@
     position: fixed;
     right: 10%;
     width: 24%;
-    top: 5.5rem;
+    top: 6.5rem;
   }
 
   .feed-menu {
@@ -153,6 +153,8 @@
 }
 
 #new-publication-view {
+  padding-top: 5rem;
+
   input {
     width: 100%;
   }
