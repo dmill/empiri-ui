@@ -230,6 +230,13 @@
 }
 
 .slideshow.component {
+  padding-top: 6rem;
+
+  .slides-container {
+    position: relative;
+    min-height: 30rem;
+  }
+
   .controls {
     color: #888;
     font-size: 3.5rem;
@@ -247,7 +254,7 @@
 
   label {
     text-align: left;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
   }
 

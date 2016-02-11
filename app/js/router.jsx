@@ -33,8 +33,8 @@ const tabs = [
 export function startRouter(App, lock) {
   render((
     <Router history={browserHistory}>
-      <Route path="/" component={SlideshowComponent} slides={[<SlideComponent />, <SlideComponent2 />, <SlideComponent />]}>
-        <IndexRoute component={BrowseView} />
+      <Route path="/" component={App} lock={lock}>
+        <IndexRoute component={SlideshowComponent} slides={[<SlideComponent key={1} />, <SlideComponent2 key={2} />, <SlideComponent key={3} />]} />
         <Route path="/profile" component={UserProfileView} />
         <Route path="/publications/1" component={PublicationView} />
         <Route path="/browse" component={BrowseView} />

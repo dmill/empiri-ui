@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import IconElement from '../elements/icon_element'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default class SlideShowComponent extends Component {
   componentWillMount() {
-    this.state = { currentSlide: 0 }
+    this.state = { currentSlide: 0, direction: 'left' }
   }
 
   showNextSlide() {
-    this.setState({ currentSlide: this.state.currentSlide + 1 })
+    this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left' })
   }
 
   showPrevSlide() {
-    this.setState({ currentSlide: this.state.currentSlide - 1 })
+    this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right' })
   }
 
   renderControls() {
@@ -31,12 +32,21 @@ export default class SlideShowComponent extends Component {
     )
   }
 
+  renderSlide() {
+    return (
+      <ReactCSSTransitionGroup transitionName={"slide-" + this.state.direction} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
+        {this.props.route.slides[this.state.currentSlide]}
+        {console.log(this.state.direction)}
+      </ReactCSSTransitionGroup>
+    )
+  }
+
   render() {
     return (
-      <div className="slideshow component">
-        <ReactCSSTransitionGroup transitionName="slide-left" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-          {this.props.route.slides[this.state.currentSlide]}
-        </ReactCSSTransitionGroup>
+      <div className="slideshow component container">
+        <div className="slides-container">
+          {this.renderSlide()}
+        </div>
         {this.renderControls()}
       </div>
     )
