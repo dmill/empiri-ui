@@ -1,17 +1,103 @@
 @import 'variables';
-@import 'nav_bar_view';
+
+#nav-bar-view {
+  height: 4rem;
+  background: linear-gradient(to bottom,$purple-l,$purple);
+  padding: 1rem;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+  font-size: 1.5rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+
+  .container {
+    height: 100%;
+    .row {
+      height: 100%;
+      #logo {
+        vertical-align: middle;
+        margin-top: -0.3rem;
+      }
+      input {
+        height: 100%;
+        width: 25rem;
+        font-size: 1.5rem;
+        font-family: "Open Sans";
+      }
+      .columns {
+        height: 100%;
+        & > * {
+          display: inline;
+          margin-right: 1em;
+        }
+        &.two {
+          text-align: right;
+          & > * {
+            text-align: left;
+            margin-right: 0;
+          }
+        }
+      }
+      .link {
+        color: #fff;
+        &:hover {
+          color: #ddd;
+        }
+      }
+    }
+  }
+
+  button {
+    margin-bottom: 0;
+    color: #fff;
+    border-color: #fff;
+  }
+
+  input {
+    margin-bottom: 0;
+  }
+}
 
 #browse-view {
+  padding-top: 6rem;
+
+  #header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #777;
+    position: fixed;
+    top: 4rem;
+    padding: 1.5rem 0 0.5rem 0;
+    background-color: #fafafa;
+    border-bottom: 2px solid #eee;
+    width: 52.33%;
+  }
+
+  .publications-column-container {
+    height: 100%;
+    padding-top: 2rem;
+  }
+
+  .publications-column {
+    height: 100%;
+  }
+
   .publications-column,
   .publications-feed {
     background-color: #ddd;
-    margin-top: 2em;
     border-radius: 3px;
     padding-bottom: 2px;
     .notifications {
       margin: 1rem;
       text-align: center;
     }
+  }
+
+  .publications-feed {
+    position: fixed;
+    right: 10%;
+    width: 24%;
+    margin-top: 0.5rem;
   }
 
   .feed-menu {
@@ -45,6 +131,9 @@
     }
   }
 
+  h6 {
+    display: inline;
+  }
   h1 {
     background: linear-gradient(to top,$purple,$purple-l);
     box-shadow: 0 0 1px rgba(0,0,0,0.1);
@@ -110,57 +199,3 @@
   }
 }
 
-#nav-bar-view {
-  height: 5.5rem;
-  background: linear-gradient(to bottom,$purple-l,$purple);
-  padding: 1rem;
-  box-shadow: 0 2px 2px rgba(0,0,0,0.2);
-  font-size: 1.5rem;
-
-  .container {
-    height: 100%;
-    .row {
-      height: 100%;
-      #logo {
-        vertical-align: middle;
-        margin-top: -0.3rem;
-      }
-      input {
-        height: 100%;
-        width: 25rem;
-        font-size: 1.5rem;
-        font-family: "Open Sans";
-      }
-      .columns {
-        height: 100%;
-        & > * {
-          display: inline;
-          margin-right: 1em;
-        }
-        &.two {
-          text-align: right;
-          & > * {
-            text-align: left;
-            margin-right: 0;
-          }
-        }
-      }
-      .link {
-        color: #fff;
-        &:hover {
-          color: #ddd;
-        }
-      }
-    }
-  }
-
-  button {
-    margin-bottom: 0;
-    color: #fff;
-    border-color: #fff;
-  }
-
-  input {
-    margin-bottom: 0;
-  }
-}

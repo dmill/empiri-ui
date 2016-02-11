@@ -28,21 +28,23 @@ export default class BrowseView extends Component {
   render() {
     return (
       <div id="browse-view" className="container">
+        <div id="header">Top Publications</div>
         <div className="row">
-          <div className="eight columns publications-column">
-            <h1>Trending Topics</h1>
-            {this.state.hypotheses.map((hypothesis, i) => <PublicationPreview title={hypothesis.title} abstract={hypothesis.synopsis} key={i} />)}
-          </div>
-          <div className="four columns publications-feed">
-            <h1>Publication Updates</h1>
-            <div className="feed-menu clear-fix">
-              <Link to="/publications/new" className="menu-item">
-                <IconElement iconType="material" iconName="note_add" />
-                New Publication
-              </Link>
-              <div className="menu-item">Influence: 0</div>
+          <div className="twelve columns publications-column-container">
+            <div className="eight columns publications-column">
+              {this.state.hypotheses.map((hypothesis, i) => <PublicationPreview title={hypothesis.title} abstract={hypothesis.synopsis} key={i} />)}
             </div>
-            <div className="notifications">You dont have any notifications.</div>
+            <div className="four columns publications-feed">
+              <h1>Publication Updates</h1>
+              <div className="feed-menu clear-fix">
+                <Link to="/publications/new" className="menu-item">
+                  <IconElement iconType="material" iconName="note_add" />
+                  New Publication
+                </Link>
+                <div className="menu-item">Influence: 0</div>
+              </div>
+              <div className="notifications">You dont have any notifications.</div>
+            </div>
           </div>
         </div>
       </div>
