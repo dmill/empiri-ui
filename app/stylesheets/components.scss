@@ -228,3 +228,30 @@
     display: none;
   }
 }
+
+.slideshow.component {
+  .controls {
+    color: #888;
+    font-size: 3.5rem;
+    cursor: pointer;
+    text-align: center;
+
+    i:hover {
+      color: $purple-d;
+    }
+  }
+}
+
+.slide.component {
+  text-align: center;
+
+  label {
+    text-align: left;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  input, textarea {
+    width: 100%;
+  }
+}

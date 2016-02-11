@@ -1,0 +1,7 @@
+.slide-left-enter {
+  transform: translateX(-1000);
+
+  .slide-left-enter-active {
+    transform: translateX(0);
+  }
+}

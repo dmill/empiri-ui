@@ -11,6 +11,8 @@ import NewPublicationView from './views/new_publication_view'
 import PeerReviewComponent from './components/peer_review_component'
 import PricingPage from './views/pricing_page'
 import MembershipForm from './views/membership_form'
+import SlideshowComponent from './components/slideshow_component'
+import { SlideComponent, SlideComponent2 } from './components/slide_component'
 
 function requireLogIn(nextState, replaceState) {
   if (!store.getState().currentUser) {
@@ -31,7 +33,7 @@ const tabs = [
 export function startRouter(App, lock) {
   render((
     <Router history={browserHistory}>
-      <Route path="/" component={App} lock={lock}>
+      <Route path="/" component={SlideshowComponent} slides={[<SlideComponent />, <SlideComponent2 />, <SlideComponent />]}>
         <IndexRoute component={BrowseView} />
         <Route path="/profile" component={UserProfileView} />
         <Route path="/publications/1" component={PublicationView} />
