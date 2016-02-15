@@ -67,11 +67,11 @@ export default class NavBarView extends Component {
 
   popoverItems() {
     return ([
-      <span key="1" className="popover-header">Welcome <strong>{this.state.currentUser.first_name}!</strong></span>,
-      <Link key="2" className="popover-item" to="/publications/new">publish a paper</Link>,
-      <Link key="3" className="popover-item" to="/profile">your account</Link>,
-      <Link key="4" className="popover-item" to="/pricing">support</Link>,
-      <Link key="5" className="popover-item" to="/" onClick={this.signOut}>log out</Link>
+      <h6 key="1" className="popover-header">Welcome <strong>{this.state.currentUser.first_name}!</strong></h6>,
+      <Link key="2" className="popover-item" to="/publications/new"><h6>publish a paper</h6></Link>,
+      <Link key="3" className="popover-item" to="/profile"><h6>your account</h6></Link>,
+      <Link key="4" className="popover-item" to="/pricing"><h6>support</h6></Link>,
+      <Link key="5" className="popover-item" to="/" onClick={this.signOut}><h6>log out</h6></Link>
     ])
   }
 
@@ -83,9 +83,8 @@ export default class NavBarView extends Component {
             <div className="row">
               <div className="eight columns">
                 <Link className="link" to="/"><img id="logo" src="images/symbol.png" width="20px" /></Link>
-                <input type="text" placeholder="Search Empiri" />
-                <Link className="link" to="/browse">Browse</Link>
-                <Link className="link" to="/">FAQ</Link>
+                <Link className="link" to="/browse"><h6>Browse</h6></Link>
+                <Link className="link" to="/"><h6>FAQ</h6></Link>
               </div>
               <div className="four columns">
                 <button onClick={this.showSignup.bind(this)}>Sign up</button>
@@ -102,9 +101,8 @@ export default class NavBarView extends Component {
             <div className="row">
               <div className="ten columns">
                 <Link className="link" to="/"><img id="logo" src="images/symbol.png" width="20px" /></Link>
-                <input type="text" placeholder="Search Empiri" />
-                <Link className="link" to="/browse">Browse</Link>
-                <Link className="link" to="/">FAQ</Link>
+                <Link className="link" to="/browse"><h6>Browse</h6></Link>
+                <Link className="link" to="/"><h6>FAQ</h6></Link>
               </div>
               <div className="two columns">
                 <PopoverComponent

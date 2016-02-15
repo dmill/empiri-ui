@@ -2,8 +2,13 @@ body, html {
   margin: 0;
   background-color: #fafafa;
   font-size: 10px;
-  font-family: 'Open Sans';
+  font-family: 'Merriweather';
   height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, label {
+  font-family: 'Pontano Sans';
+  letter-spacing: 0;
 }
 
 #root, #layout {

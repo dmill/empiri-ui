@@ -28,7 +28,7 @@ export default class BrowseView extends Component {
   render() {
     return (
       <div id="browse-view" className="container">
-        <div id="header">Top Publications</div>
+        <div id="header"><h6>Top Publications</h6></div>
         <div className="row">
           <div className="twelve columns publications-column-container">
             <div className="eight columns publications-column">
@@ -39,9 +39,9 @@ export default class BrowseView extends Component {
               <div className="feed-menu clear-fix">
                 <Link to="/publications/new" className="menu-item">
                   <IconElement iconType="material" iconName="note_add" />
-                  New Publication
+                  <h6>New Publication</h6>
                 </Link>
-                <div className="menu-item">Influence: 0</div>
+                <div className="menu-item"><h6>Influence: 0</h6></div>
               </div>
               <div className="notifications">You dont have any notifications.</div>
             </div>
