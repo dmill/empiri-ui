@@ -20,7 +20,7 @@ export default class SlideShowComponent extends Component {
       onClick={this.showPrevSlide.bind(this)}
       iconType="fontawesome"
       iconName="arrow-circle-left" />
-    const next = this.state.currentSlide == this.props.route.slides.length - 1 ? null : <IconElement
+    const next = this.state.currentSlide == this.props.slides.length - 1 ? null : <IconElement
       onClick={this.showNextSlide.bind(this)}
       iconType="fontawesome"
       iconName="arrow-circle-right" />
@@ -35,7 +35,7 @@ export default class SlideShowComponent extends Component {
   renderSlide() {
     return (
       <ReactCSSTransitionGroup transitionName={"slide-" + this.state.direction} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
-        {this.props.route.slides[this.state.currentSlide]}
+        {this.props.slides[this.state.currentSlide]}
       </ReactCSSTransitionGroup>
     )
   }

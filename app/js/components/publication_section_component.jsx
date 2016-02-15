@@ -12,7 +12,7 @@ const RemovableInput = ({ value, onClick, onChange }) => {
   )
 }
 
-export default class ReviewPaperSection extends Component {
+export default class PublicationSection extends Component {
   componentWillMount() {
     this.state = { references: [] }
   }
@@ -43,7 +43,7 @@ export default class ReviewPaperSection extends Component {
 
   render() {
     return (
-      <div className="review-paper-section-component">
+      <div className="publication-paper-section-component">
         <label>
           Section title
           <input type="text" />

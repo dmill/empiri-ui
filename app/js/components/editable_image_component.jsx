@@ -1,10 +1,10 @@
 import React from 'react'
 import ImageUploadComponent from './image_upload_component'
 
-const EditableImageComponent = () => {
+const EditableImageComponent = ({ src }) => {
   return (
     <div className="editable-image-component">
-      <ImageUploadComponent img={<img src={this.props.src} />}/>
+      <ImageUploadComponent img={<img src={src} />} />
     </div>
   )
 }

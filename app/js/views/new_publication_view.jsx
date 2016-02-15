@@ -1,95 +1,86 @@
 import React, { Component } from 'react'
+import SlideshowComponent from '../components/slideshow_component'
 import store from '../redux/store'
-import { Link } from 'react-router'
-import ReviewPaperSection from '../components/review_paper_section'
+import AddableInputsComponent from '../components/addable_inputs_component'
+import NewPublicationSlide from '../views/new_publication_slide'
 
-const NewAuthor = () => {
+let currentUser = store.getState().currentUser
+store.subscribe(() => currentUser = store.getState().currentUser)
+
+export default class NewPublicationView extends Component {
+  render() {
+    return (
+      <SlideshowComponent slides={[<Slide0 key={0} />, <Slide1 key={1} />, <Slide2 key={2} />, <Slide3 key={3} />, <Slide4 key={4} />, <Slide5 key={5} />]} />
+    )
+  }
+}
+
+const Slide0 = () => {
   return (
-    <div className="new-author">
-      <div>
-        <label>
-          First Name
-          <input type="text" />
-        </label>
-      </div>
-      <div>
-        <label>
-          Last Name
-          <input type="text" />
-        </label>
-      </div>
-      <div>
-        <label>
-          Email
-          <input type="text" />
-        </label>
-      </div>
+    <div>
+      <h1>Welcome to Empiri&rsquo;s Publishing System</h1>
+      <h3>Here you can publish your work safely</h3>
+      <p>More instructions on how it works and its benefits</p>
     </div>
   )
 }
 
-export default class NewPublicationView extends Component {
-  componentWillMount() {
-    const currentUser = store.getState().currentUser
-    this.state = {
-      authors: [{
-        first_name: currentUser.first_name,
-        last_name: currentUser.last_name,
-        email: currentUser.email
-      }]
-    }
-  }
+const Slide1 = () => {
+  return (
+    <div className="slide component">
+      <h1>Welcome to your new publication!</h1>
+      <h3>What will you call it?</h3>
+      <label>
+        Publication Title
+        <input type="text" />
+      </label>
+    </div>
+  )
+}
 
-  handleClick() {
-    let sections = this.state.sections
-    sections = this.state.sections.concat([<ReviewPaperSection />])
-    this.setState({ sections })
-  }
+const Slide2 = () => {
+  return (
+    <div className="slide component">
+      <h2>What is your paper about?</h2>
+      <label>
+        Abstract
+        <textarea type="text" />
+      </label>
+    </div>
+  )
+}
 
-  deleteSection() {
-    let sections = [].concat(this.state.sections)
-    sections.pop()
-    this.setState({ sections })
-  }
+const defaultItem = {
+  first_name: '',
+  last_name: '',
+  title: '',
+  email: ''
+}
 
-  renderDeleteButton() {
-    if (this.state.sections.length > 1) {
-      return <button onClick={this.deleteSection.bind(this)}>Delete Last Section</button>
-    }
-  }
+const Slide3 = () => {
+  return (
+    <div className="slide component">
+      <h2>Who helped you?</h2>
+      <label>
+        First Author:
+        <h6>{currentUser.first_name} {currentUser.last_name}</h6>
+      </label>
+      <label>
+        Contributing Authors
+        <AddableInputsComponent defaultItem={defaultItem} />
+      </label>
+    </div>
+  )
+}
 
-  renderAuthors() {
-    return this.state.authors.map((author, i) => <h6 key={i}>{author.first_name} {author.last_name} {author.email}</h6>)
-  }
+const Slide4 = () => <NewPublicationSlide />
 
-  render() {
-    return (
-      <div id="new-publication-view" className="container">
-        <h1>Write a New Publication</h1>
-        <label>
-          <h4>Review paper title</h4>
-          <input type="text" />
-        </label>
-        {this.state.sections.map((section, i) => <div key={i}>{section}</div>)}
-        <button onClick={this.handleClick.bind(this)}>+ Section</button>
-        {this.renderDeleteButton()}
-      </div>
-    )
-  }
-
-  render() {
-    return (
-      <div id="new-publication-view" className="container">
-        <h1>Write a new publication</h1>
-        <label>
-          <h3>Publication Title</h3>
-          <input type="text" />
-        </label>
-        <label>
-          <h3>Abstract</h3>
-          <textarea type="text" />
-        </label>
-      </div>
-    )
-  }
+const Slide5 = () => {
+  return (
+    <div className="slide component">
+      <h2>Almost Finished!</h2>
+      <button>Save For Later</button>
+      <button>Publish Now!</button>
+    </div>
+  )
 }
