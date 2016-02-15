@@ -35,7 +35,7 @@ export default class BrowseView extends Component {
               {this.state.hypotheses.map((hypothesis, i) => <PublicationPreview title={hypothesis.title} abstract={hypothesis.synopsis} key={i} />)}
             </div>
             <div className="four columns publications-feed">
-              <h1>Publication Updates</h1>
+              <h6 className="title">Publication Updates</h6>
               <div className="feed-menu clear-fix">
                 <Link to="/publications/new" className="menu-item">
                   <IconElement iconType="material" iconName="note_add" />
