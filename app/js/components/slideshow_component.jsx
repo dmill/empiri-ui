@@ -36,7 +36,6 @@ export default class SlideShowComponent extends Component {
     return (
       <ReactCSSTransitionGroup transitionName={"slide-" + this.state.direction} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
         {this.props.route.slides[this.state.currentSlide]}
-        {console.log(this.state.direction)}
       </ReactCSSTransitionGroup>
     )
   }

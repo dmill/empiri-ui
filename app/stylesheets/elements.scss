@@ -127,3 +127,30 @@
     }
   }
 }
+
+.addable-author-element {
+  label.first-name, label.last-name {
+    width: calc(50% - 7.5px - 2rem);
+    float: left;
+
+    input {
+      margin-bottom: 0;
+    }
+  }
+
+  label.first-name {
+    margin-right: 5px;
+  }
+
+  label.title {
+    width: 20%;
+    float: left;
+    margin-right: 5px;
+  }
+
+  label.email {
+    width: calc(80% - 4rem - 15px);
+    margin-right: 10px;
+    float: left;
+  }
+}
