@@ -4,7 +4,16 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default class SlideShowComponent extends Component {
   componentWillMount() {
-    this.state = { currentSlide: 0, direction: 'left' }
+    this.state = { currentSlide: 0, direction: 'left', publicationId: null }
+  }
+
+  onNextSlide() {
+    if(publicationId) {
+      $.post('http://localhost:4000/publications/' + publicationId,)
+    } else {
+      $.post('http://localhost:4000/publications/' + publicationId,)
+    }
+
   }
 
   showNextSlide() {

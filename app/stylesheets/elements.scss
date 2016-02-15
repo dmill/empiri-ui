@@ -1,12 +1,9 @@
 .publication-preview-element {
   font-size: 1.5rem;
-  background: linear-gradient(to bottom,#fff,rgba(150,150,150,0.1));
-  background-color: #fff;
   padding: 10px;
   cursor: pointer;
   width: calc(100% - 4px);
   margin-left: 2px;
-  border: 1px solid #c8c8c8;
   border-radius: 2px;
   display: block;
 
@@ -24,10 +21,6 @@
   p {
     font-size: 1em;
     color: #5f5f5f;
-  }
-
-  &:hover {
-    box-shadow: 0 0 2px rgba(0,0,0,0.1);
   }
 
   .publication-preview-element-footer {
