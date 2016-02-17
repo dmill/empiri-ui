@@ -136,13 +136,19 @@
   }
 
   label.title {
-    width: 20%;
+    width: 15%;
     float: left;
     margin-right: 5px;
   }
 
+  label.organization {
+    width: 20%;
+    float: left;
+    margin-right: 5px
+  }
+
   label.email {
-    width: calc(80% - 4rem - 15px);
+    width: calc(65% - 4rem - 20px);
     margin-right: 10px;
     float: left;
   }

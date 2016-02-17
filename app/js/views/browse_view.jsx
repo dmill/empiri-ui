@@ -20,8 +20,8 @@ const PublicationPreview = ({ title, abstract, name, picture }) => {
 export default class BrowseView extends Component {
   componentWillMount() {
     this.state = { publications: [] }
-    $.get('http://localhost:4000/publications').done(({ data }) => {
-      this.setState({ publications: data })
+    $.get('http://localhost:4000/publications').done(({ publications }) => {
+      this.setState({ publications })
     })
   }
 

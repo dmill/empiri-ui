@@ -18,7 +18,7 @@ class Auth0 {
       contentType: 'application/json',
       url: 'http://localhost:4000/users',
       type: 'GET',
-    }).done(({ data }) => store.dispatch(setCurrentUser(data)))
+    }).done(({ user }) => store.dispatch(setCurrentUser(user)))
   }
 
   getIdToken(authHash) {

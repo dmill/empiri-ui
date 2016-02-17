@@ -1,17 +1,30 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
+import { updatePublication } from '../redux/actions'
 import { Link } from 'react-router'
 import PublicationSection from '../components/publication_section_component'
 
+const defaultSection = {
+  title: '',
+  body: '',
+  index: 0
+}
+
 export default class PublicationSectionsComponent extends Component {
   componentWillMount() {
-    this.state = { sections: [<PublicationSection />] }
+    this.state = { sections: [Object.assign({}, defaultSection)] }
+    store.dispatch(updatePublication({ sections: this.state.sections }))
+    store.subscribe(() => this.setState({ sections: store.getState().publicationInProgress.sections }))
   }
 
   handleClick() {
     let sections = this.state.sections
-    sections = this.state.sections.concat([<PublicationSection />])
+    sections = this.state.sections.concat([Object.assign({}, defaultSection, { index: this.state.sections.length })])
     this.setState({ sections })
+  }
+
+  onChange() {
+    store.dispatch(updatePublication({ sections: this.state.sections }))
   }
 
   deleteSection() {
@@ -29,12 +42,8 @@ export default class PublicationSectionsComponent extends Component {
   render() {
     return (
       <div id="new-publication-slide" className="container">
-        <h1>Write a New Publication</h1>
-        <label>
-          <h4>Review paper title</h4>
-          <input type="text" />
-        </label>
-        {this.state.sections.map((section, i) => <div key={i}>{section}</div>)}
+        <h1>Add Content to Your Publication</h1>
+        {this.state.sections.map((section, i) => <PublicationSection key={i} onChange={this.onChange.bind(this)} title={section.title} body={section.body} />)}
         <button onClick={this.handleClick.bind(this)}>+ Section</button>
         {this.renderDeleteButton()}
       </div>

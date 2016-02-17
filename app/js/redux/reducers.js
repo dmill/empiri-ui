@@ -4,7 +4,8 @@ import {
   LOG_OUT,
   EXPAND_CONTRIBUTION,
   UPDATE_PEER_REVIEW,
-  UPDATE_PUBLICATION
+  UPDATE_PUBLICATION,
+  ADD_AUTHOR
 } from './actions'
 
 function peerReview(state = null, action) {
@@ -38,13 +39,17 @@ function currentHypothesis(state = null, action) {
 const defaultPublication = {
   id: null,
   title: null,
-  abstract: null
+  abstract: null,
+  authors: []
 }
 
 function publicationInProgress(state = defaultPublication, action) {
   switch(action.type) {
     case UPDATE_PUBLICATION:
       return Object.assign({}, state, action.payload)
+    case ADD_AUTHOR:
+      const authors = state.authors.concat(action.payload)
+      return Object.assign({}, state, { authors: authors })
     default:
       return state
   }

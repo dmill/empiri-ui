@@ -31,15 +31,15 @@ export default class SlideShowComponent extends Component {
   }
 
   showNextSlide() {
-    this.onSlideChange().done(() => {
+    // this.onSlideChange().done(() => {
       this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left' })
-    })
+    // })
   }
 
   showPrevSlide() {
-    this.onSlideChange().done(() => {
+    // this.onSlideChange().done(() => {
       this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right' })
-    })
+    // })
   }
 
   renderControls() {
