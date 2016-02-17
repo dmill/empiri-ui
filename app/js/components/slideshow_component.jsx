@@ -1,27 +1,45 @@
 import React, { Component } from 'react'
 import IconElement from '../elements/icon_element'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import store from '../redux/store'
+import { updatePublication } from '../redux/actions'
 
 export default class SlideShowComponent extends Component {
   componentWillMount() {
     this.state = { currentSlide: 0, direction: 'left', publicationId: null }
   }
 
-  onNextSlide() {
-    if(publicationId) {
-      $.post('http://localhost:4000/publications/' + publicationId,)
+  onSlideChange() {
+    const publicationId = store.getState().publicationInProgress.id
+    if(this.state.currentSlide == 0) {
+      return { done: (callback) => {callback()} }
+    } else if(publicationId) {
+      return $.ajax({
+        type: 'PATCH',
+        url: 'http://localhost:4000/publications/' + publicationId,
+        contentType: 'application/json',
+        data: JSON.stringify({ publication: store.getState().publicationInProgress})
+      })
     } else {
-      $.post('http://localhost:4000/publications/' + publicationId,)
+      return $.ajax({
+        type: 'POST',
+        url:'http://localhost:4000/publications/',
+        data: JSON.stringify({ publication: store.getState().publicationInProgress }),
+        contentType: 'application/json'
+      }).done((response) => store.dispatch(updatePublication({ id: response.data.id })))
     }
-
   }
 
   showNextSlide() {
-    this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left' })
+    this.onSlideChange().done(() => {
+      this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left' })
+    })
   }
 
   showPrevSlide() {
-    this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right' })
+    this.onSlideChange().done(() => {
+      this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right' })
+    })
   }
 
   renderControls() {

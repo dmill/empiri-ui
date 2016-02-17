@@ -2,15 +2,26 @@ import React, { Component } from 'react'
 import SlideshowComponent from '../components/slideshow_component'
 import store from '../redux/store'
 import AddableInputsComponent from '../components/addable_inputs_component'
-import NewPublicationSlide from '../views/new_publication_slide'
+import PublicationSectionsComponent from '../components/publication_sections_component'
+import { updatePublication } from '../redux/actions'
 
 let currentUser = store.getState().currentUser
 store.subscribe(() => currentUser = store.getState().currentUser)
 
 export default class NewPublicationView extends Component {
+  updateStore(e) {
+    let payload = {}
+    payload[e.target.name] = e.target.value
+    store.dispatch(updatePublication(payload))
+  }
+
+  publishPublication() {
+    store.dispatch(updatePublication({ published: true }))
+  }
+
   render() {
     return (
-      <SlideshowComponent slides={[<Slide0 key={0} />, <Slide1 key={1} />, <Slide2 key={2} />, <Slide3 key={3} />, <Slide4 key={4} />, <Slide5 key={5} />]} />
+      <SlideshowComponent slides={[<Slide0 key={0} />, <Slide1 onChange={this.updateStore.bind(this)} key={1} />, <Slide2 onChange={this.updateStore.bind(this)} key={2} />, <Slide3 onChange={this.updateStore.bind(this)} key={3} />, <Slide4 onChange={this.updateStore.bind(this)} key={4} />, <Slide5 onClick={this.publishPublication.bind(this)} key={5} />]} />
     )
   }
 }
@@ -25,26 +36,26 @@ const Slide0 = () => {
   )
 }
 
-const Slide1 = () => {
+const Slide1 = ({ onChange }) => {
   return (
     <div className="slide component">
       <h1>Welcome to your new publication!</h1>
       <h3>What will you call it?</h3>
       <label>
         Publication Title
-        <input type="text" />
+        <input type="text" name="title" onChange={onChange} />
       </label>
     </div>
   )
 }
 
-const Slide2 = () => {
+const Slide2 = ({ onChange }) => {
   return (
     <div className="slide component">
       <h2>What is your paper about?</h2>
       <label>
         Abstract
-        <textarea type="text" />
+        <textarea type="text" name="abstract" onChange={onChange} />
       </label>
     </div>
   )
@@ -57,7 +68,7 @@ const defaultItem = {
   email: ''
 }
 
-const Slide3 = () => {
+const Slide3 = ({ onChange }) => {
   return (
     <div className="slide component">
       <h2>Who helped you?</h2>
@@ -73,14 +84,14 @@ const Slide3 = () => {
   )
 }
 
-const Slide4 = () => <NewPublicationSlide />
+const Slide4 = () => <PublicationSectionsComponent />
 
-const Slide5 = () => {
+const Slide5 = ({ onClick }) => {
   return (
     <div className="slide component">
       <h2>Almost Finished!</h2>
       <button>Save For Later</button>
-      <button>Publish Now!</button>
+      <button onClick={onClick}>Publish Now!</button>
     </div>
   )
 }

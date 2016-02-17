@@ -4,6 +4,7 @@ import {
   LOG_OUT,
   EXPAND_CONTRIBUTION,
   UPDATE_PEER_REVIEW,
+  UPDATE_PUBLICATION
 } from './actions'
 
 function peerReview(state = null, action) {
@@ -30,9 +31,24 @@ function currentHypothesis(state = null, action) {
     case EXPAND_CONTRIBUTION:
       return { contributionId: action.payload }
     default:
-      return { state }
+      return state
   }
 }
 
-const App = combineReducers({ currentUser, currentHypothesis, peerReview })
+const defaultPublication = {
+  id: null,
+  title: null,
+  abstract: null
+}
+
+function publicationInProgress(state = defaultPublication, action) {
+  switch(action.type) {
+    case UPDATE_PUBLICATION:
+      return Object.assign({}, state, action.payload)
+    default:
+      return state
+  }
+}
+
+const App = combineReducers({ currentUser, currentHypothesis, peerReview, publicationInProgress })
 export default App

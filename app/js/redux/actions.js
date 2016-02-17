@@ -2,6 +2,11 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const LOG_OUT = 'LOG_OUT'
 export const EXPAND_CONTRIBUTION = 'EXPAND_CONTRIBUTION'
 export const UPDATE_PEER_REVIEW = 'UPDATE_PEER_REVIEW'
+export const UPDATE_PUBLICATION = 'UPDATE_PUBLICATION'
+
+export function updatePublication(publicationData) {
+  return { type: UPDATE_PUBLICATION, payload: publicationData }
+}
 
 export function setCurrentUser(userData) {
   return { type: SET_CURRENT_USER, payload: userData }
@@ -18,3 +23,4 @@ export function expandContribution(contributionId) {
 export function updatePeerReview(text) {
   return { type: UPDATE_PEER_REVIEW, payload: text }
 }
+

@@ -3,7 +3,7 @@ import store from '../redux/store'
 import { Link } from 'react-router'
 import PublicationSection from '../components/publication_section_component'
 
-export default class NewPublicationSlide extends Component {
+export default class PublicationSectionsComponent extends Component {
   componentWillMount() {
     this.state = { sections: [<PublicationSection />] }
   }

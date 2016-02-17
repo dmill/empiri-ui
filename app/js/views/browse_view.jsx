@@ -19,9 +19,9 @@ const PublicationPreview = ({ title, abstract, name, picture }) => {
 
 export default class BrowseView extends Component {
   componentWillMount() {
-    this.state = { hypotheses: [] }
-    $.get('http://localhost:4000/hypotheses').done(({ data }) => {
-      this.setState({ hypotheses: data })
+    this.state = { publications: [] }
+    $.get('http://localhost:4000/publications').done(({ data }) => {
+      this.setState({ publications: data })
     })
   }
 
@@ -32,7 +32,7 @@ export default class BrowseView extends Component {
         <div className="row">
           <div className="twelve columns publications-column-container">
             <div className="eight columns publications-column">
-              {this.state.hypotheses.map((hypothesis, i) => <PublicationPreview title={hypothesis.title} abstract={hypothesis.synopsis} key={i} />)}
+              {this.state.publications.map((publication, i) => <PublicationPreview title={publication.title} abstract={publication.abstract} key={i} />)}
             </div>
             <div className="four columns publications-feed">
               <h6 className="title">Publication Updates</h6>

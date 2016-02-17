@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import IconElement from '../elements/icon_element'
+import store from '../redux/store'
+import { updatePublication } from '../redux/actions'
 
 const RemovableInput = ({ value, onClick, onChange }) => {
   return (
@@ -27,23 +29,25 @@ const RemovableInput = ({ value, onClick, onChange }) => {
 export default class AddableInputsComponent extends Component {
   componentWillMount() {
     this.state = { items: [Object.assign({}, this.props.defaultItem)] }
+    store.dispatch(updatePublication({ users: this.state.items }))
+    store.subscribe(() => this.setState({ items: store.getState().publicationInProgress.users }))
   }
 
   addItem() {
     let items = this.state.items
     items = items.concat([Object.assign({}, this.props.defaultItem)])
-    this.setState({ items })
+    store.dispatch(updatePublication({ users: items }))
   }
 
   updateItem(e) {
     let items = [].concat(this.state.items)
     items[items.length - 1][e.target.name] = e.target.value
-    this.setState({ items })
+    store.dispatch(updatePublication({ users: items }))
   }
 
   deleteItem(e) {
     const items = this.state.items.filter((item) => item !== e.target.previousElementSibling.value)
-    this.setState({ items })
+    store.dispatch(updatePublication({ users: items }))
   }
 
   renderItems() {
