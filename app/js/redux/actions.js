@@ -4,6 +4,7 @@ export const EXPAND_CONTRIBUTION = 'EXPAND_CONTRIBUTION'
 export const UPDATE_PEER_REVIEW = 'UPDATE_PEER_REVIEW'
 export const UPDATE_PUBLICATION = 'UPDATE_PUBLICATION'
 export const ADD_AUTHOR = 'ADD_AUTHOR'
+export const DELETE_AUTHOR = 'DELETE_AUTHOR'
 
 export function updatePublication(publicationData) {
   return { type: UPDATE_PUBLICATION, payload: publicationData }
@@ -29,3 +30,6 @@ export function addAuthor(data) {
   return { type: ADD_AUTHOR, payload: data }
 }
 
+export function deleteAuthor(email) {
+  return { type: DELETE_AUTHOR, payload: email }
+}

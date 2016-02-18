@@ -3,7 +3,8 @@ import SlideshowComponent from '../components/slideshow_component'
 import store from '../redux/store'
 import AddableAuthorComponent from '../components/addable_author_component'
 import PublicationSectionsComponent from '../components/publication_sections_component'
-import { updatePublication } from '../redux/actions'
+import { updatePublication, deleteAuthor } from '../redux/actions'
+import IconElement from '../elements/icon_element'
 
 let currentUser = store.getState().currentUser
 store.subscribe(() => currentUser = store.getState().currentUser)
@@ -61,7 +62,7 @@ class Slide1 extends Component {
 }
 
 class Slide2 extends Component {
-  componentWillUnMount() {
+  componentWillUnmount() {
     $.ajax({
       type: 'PATCH',
       url:'http://localhost:4000/publications/' + store.getState().publicationInProgress.id,
@@ -91,29 +92,26 @@ const defaultAuthor = {
   organization: ''
 }
 
-const SavedAuthor = ({ author }) => <div>{author.first_name} {author.last_name}, {author.title} {author.email}</div>
+class SavedAuthor extends Component {
+  deleteAuthor() {
+    debugger
+    store.dispatch(deleteAuthor(this.props.author.email))
+  }
+
+  render() {
+    return(
+      <div>
+        {this.props.author.first_name} {this.props.author.last_name}, {this.props.author.title} {this.props.author.email}
+        <IconElement iconType="fontawesome" iconName="close" onClick={this.deleteAuthor.bind(this)} />
+      </div>
+    )
+  }
+}
 
 class Slide3 extends Component {
   componentWillMount() {
-    this.state = { authors: [] }
-    store.dispatch(updatePublication({ authors: this.state.authors }))
+    this.state = { authors: store.getState().publicationInProgress.authors }
     store.subscribe(() => this.setState({ authors: store.getState().publicationInProgress.authors }))
-  }
-
-  addAuthor() {
-    let authors = this.state.authors
-    authors = authors.concat([Object.assign({}, this.props.defaultAuthor)])
-  }
-
-  updateAuthor(e) {
-    let authors = [].concat(this.state.authors)
-    authors[authors.length - 1][e.target.name] = e.target.value
-    store.dispatch(updatePublication({ authors: authors }))
-  }
-
-  deleteAuthor(e) {
-    const authors = this.state.authors.filter((author) => author !== e.target.previousElementSibling.value)
-    store.dispatch(updatePublication({ authors: authors }))
   }
 
   render() {
@@ -126,7 +124,7 @@ class Slide3 extends Component {
         </label>
         <label>
           Contributing Authors
-          {this.state.authors.map((author, i) => <SavedAuthor author={author} key={i} />)}
+          {this.state.authors.map((author, i) => <SavedAuthor author={author} index={i} key={i} />)}
           <AddableAuthorComponent />
         </label>
       </div>

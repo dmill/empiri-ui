@@ -5,7 +5,8 @@ import {
   EXPAND_CONTRIBUTION,
   UPDATE_PEER_REVIEW,
   UPDATE_PUBLICATION,
-  ADD_AUTHOR
+  ADD_AUTHOR,
+  DELETE_AUTHOR
 } from './actions'
 
 function peerReview(state = null, action) {
@@ -44,12 +45,17 @@ const defaultPublication = {
 }
 
 function publicationInProgress(state = defaultPublication, action) {
+  let authors
   switch(action.type) {
     case UPDATE_PUBLICATION:
       return Object.assign({}, state, action.payload)
     case ADD_AUTHOR:
-      const authors = state.authors.concat(action.payload)
-      return Object.assign({}, state, { authors: authors })
+      authors = state.authors.concat(action.payload)
+      return Object.assign({}, state, { authors })
+    case DELETE_AUTHOR:
+      authors = state.authors.filter((author) => author.email !== action.payload)
+      debugger
+      return Object.assign({}, state, { authors })
     default:
       return state
   }
