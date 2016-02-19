@@ -94,7 +94,6 @@ const defaultAuthor = {
 
 class SavedAuthor extends Component {
   deleteAuthor() {
-    debugger
     store.dispatch(deleteAuthor(this.props.author.email))
   }
 
@@ -134,12 +133,24 @@ class Slide3 extends Component {
 
 const Slide4 = () => <PublicationSectionsComponent />
 
-const Slide5 = ({ onClick }) => {
-  return (
-    <div className="slide component">
-      <h2>Almost Finished!</h2>
-      <button>Save For Later</button>
-      <button onClick={onClick}>Publish Now!</button>
-    </div>
-  )
+class Slide5 extends Component {
+  publishPublication() {
+    const publicationId = store.getState().publicationInProgress.id
+    $.ajax({
+      type: 'PATCH',
+      url: `http://localhost:4000/publications/${publicationId}`,
+      data: JSON.stringify({ publication: { published: true } }),
+      contentType: 'application/json',
+    })
+  }
+
+  render() {
+    return (
+      <div className="slide component">
+        <h2>Almost Finished!</h2>
+        <button>Save For Later</button>
+        <button onClick={this.publishPublication.bind(this)}>Publish Now!</button>
+      </div>
+    )
+  }
 }

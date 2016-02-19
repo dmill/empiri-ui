@@ -16,38 +16,27 @@ const Avatar = (props) => {
 }
 
 export default class PublicationView extends Component {
+  componentWillMount() {
+    this.state = {}
+    const publicationId = this.props.routeParams.publicationId
+    $.get(`http://localhost:4000/publications/${publicationId}`)
+      .done(({ publication }) => {
+        this.state = publication
+      })
+  }
+
   render() {
-    const data = {
-      title: "TIPR: transcription initiation pattern recognition on a genome scale",
-      abstract: "The computational identification of gene transcription start sites (TSSs) can provide insights into the regulation and function of genes without performing expensive experiments, particularly in organisms with incomplete annotations. High-resolution general-purpose TSS prediction remains a challenging problem, with little recent progress on the identification and differentiation of TSSs which are arranged in different spatial patterns along the chromosome."
-    }
     const user = {
       user_id: "linkedin|2qdTsGouxA",
-      picture: "https://media.licdn.com/mpr/mprx/0_Vu55r8ZE3voudRCP4WNnriodTqxuwZiP4wlVriEVYAwgNpq1nEvWY_Oq7s0tHxGxR7bU0kNQ7Yd9",
+      picture: "http://a.deviantart.net/avatars/y/_/y-u-no-guyplz.png?1",
       name: "Andrew Wong"
     }
-    const avatars = [
-      <AvatarComponent key="1"id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent key="2"id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent key="3"id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent key="4"id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent key="5"id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent key="6"id={user.user_id} name={user.name} imgSrc={user.picture} />,
-      <AvatarComponent key="7"id={user.user_id} name={user.name} imgSrc={user.picture} />
-    ]
+
     return (
-      <div id="publication-view">
-        <div className="row">
-          <h1>{data.title}</h1>
-          <AvatarRowComponent avatars={avatars} />
-        </div>
-        <div className="row">
-          <h3>Abstract: {data.abstract}</h3>
-        </div>
+      <div id="publication-view" className="container">
         <div className="row">
           <h1>Contributions</h1>
           <Link to="/review-papers/new"><IconElement iconType="material" iconName="note_add" /></Link>
-          <ContributionsListView />
         </div>
       </div>
     )

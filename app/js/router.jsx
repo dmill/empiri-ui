@@ -35,10 +35,10 @@ export function startRouter(App, lock) {
       <Route path="/" component={App} lock={lock}>
         <IndexRoute component={BrowseView} />
         <Route path="/profile" component={UserProfileView} />
-        <Route path="/publications/1" component={PublicationView} />
+        <Route path="/publications/new" component={NewPublicationView} />
+        <Route path="/publications/:publicationId" component={PublicationView} />
         <Route path="/browse" component={BrowseView} />
         <Route path="/review/new" component={PeerReviewView} tabs={tabs} />
-        <Route path="/publications/new" component={NewPublicationView} />
         <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
       </Route>
       <Route path="/pricing" component={PricingPage} />

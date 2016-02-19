@@ -9,37 +9,12 @@ export default class SlideShowComponent extends Component {
     this.state = { currentSlide: 0, direction: 'left', publicationId: null }
   }
 
-  onSlideChange() {
-    const publicationId = store.getState().publicationInProgress.id
-    if(this.state.currentSlide == 0) {
-      return { done: (callback) => {callback()} }
-    } else if(publicationId) {
-      return $.ajax({
-        type: 'PATCH',
-        url: 'http://localhost:4000/publications/' + publicationId,
-        contentType: 'application/json',
-        data: JSON.stringify({ publication: store.getState().publicationInProgress})
-      })
-    } else {
-      return $.ajax({
-        type: 'POST',
-        url:'http://localhost:4000/publications/',
-        data: JSON.stringify({ publication: store.getState().publicationInProgress }),
-        contentType: 'application/json'
-      }).done((response) => store.dispatch(updatePublication({ id: response.data.id })))
-    }
-  }
-
   showNextSlide() {
-    // this.onSlideChange().done(() => {
-      this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left' })
-    // })
+    this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left' })
   }
 
   showPrevSlide() {
-    // this.onSlideChange().done(() => {
-      this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right' })
-    // })
+    this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right' })
   }
 
   renderControls() {
