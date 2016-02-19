@@ -36,6 +36,10 @@ a {
   }
 }
 
+img.circle {
+  border-radius: 50%;
+}
+
 @import 'variables';
 @import 'views';
 @import 'components';

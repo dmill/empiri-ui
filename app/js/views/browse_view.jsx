@@ -3,17 +3,23 @@ import store from '../redux/store'
 import { Link } from 'react-router'
 import IconElement from '../elements/icon_element'
 
-const PublicationPreview = ({ publicationId, title, abstract, name, photoUrl }) => {
+const PublicationPreview = ({ updatedAt, publicationId, title, abstract, firstName, lastName, photoUrl }) => {
   return (
-    <Link to={`/publications/${publicationId}`} className="publication-preview-element">
-      <h2>{title}</h2>
-      <h3>Abstract:</h3>
+    <div className="publication-preview-element">
+      <Link to={`/publications/${publicationId}`}>
+        <h1>{title}</h1>
+      </Link>
+      <img className="circle" src={photoUrl} />
+      <div className="author-data">
+        <div className="author">{firstName} {lastName}</div>
+        <div className="updated-at">updated Jan 28, 2016</div>
+      </div>
+      <h2>Abstract</h2>
       <p>{abstract}</p>
       <div className="publication-preview-element-footer">
-        <img src={photoUrl} />
-        <div>{name} & 23 others</div>
+        <Link to={`/publications/${publicationId}`}>Full publication...</Link>
       </div>
-    </Link>
+    </div>
   )
 }
 
@@ -38,7 +44,10 @@ export default class BrowseView extends Component {
                     publicationId={publication.id}
                     title={publication.title}
                     abstract={publication.abstract}
+                    firstName={publication._embedded.users[0].first_name}
+                    lastName={publication._embedded.users[0].last_name}
                     key={i}
+                    updatedAt={publication.updated_at}
                     photoUrl={publication._embedded.users[0].photo_url}
                   />
                 )
