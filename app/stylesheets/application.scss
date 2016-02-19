@@ -1,3 +1,5 @@
+@import 'variables';
+
 body, html {
   margin: 0;
   background-color: #fafafa;
@@ -21,6 +23,11 @@ h1, h2, h3, h4, h5, h6, label, a {
 
 a {
   text-decoration: none;
+  color: $purple-ll;
+
+  &:hover {
+    color: $purple;
+  }
 }
 
 .container {
@@ -40,7 +47,6 @@ img.circle {
   border-radius: 50%;
 }
 
-@import 'variables';
 @import 'views';
 @import 'components';
 @import 'elements';
