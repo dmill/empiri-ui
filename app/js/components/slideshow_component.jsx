@@ -6,11 +6,20 @@ import { updatePublication } from '../redux/actions'
 
 export default class SlideShowComponent extends Component {
   componentWillMount() {
-    this.state = { currentSlide: 0, direction: 'left', publicationId: null }
+    this.state = { currentSlide: 0, direction: 'left', publicationId: null, slideIsValid: false }
+  }
+
+  displayErrorMessage() {
+    this.errorMessage.innerText = 'Please enter valid information'
   }
 
   showNextSlide() {
-    this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left' })
+    if(this.state.slideIsValid) {
+      this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left', slideIsValid: false })
+      this.errorMessage.innerText = ''
+    } else {
+      this.displayErrorMessage()
+    }
   }
 
   showPrevSlide() {
@@ -34,10 +43,14 @@ export default class SlideShowComponent extends Component {
     )
   }
 
+  validateSlide() {
+    this.setState({ slideIsValid: true })
+  }
+
   renderSlide() {
     return (
       <ReactCSSTransitionGroup transitionName={"slide-" + this.state.direction} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
-        {this.props.slides[this.state.currentSlide]}
+        {React.cloneElement(this.props.slides[this.state.currentSlide], { validateSlide: this.validateSlide.bind(this) })}
       </ReactCSSTransitionGroup>
     )
   }
@@ -49,6 +62,7 @@ export default class SlideShowComponent extends Component {
           {this.renderSlide()}
         </div>
         {this.renderControls()}
+        <div ref={(ref) => { this.errorMessage = ref }.bind(this)}></div>
       </div>
     )
   }

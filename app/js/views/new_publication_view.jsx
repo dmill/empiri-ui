@@ -10,9 +10,9 @@ let currentUser = store.getState().currentUser
 store.subscribe(() => currentUser = store.getState().currentUser)
 
 export default class NewPublicationView extends Component {
-  updateStore(e) {
+  updateStore(name, value) {
     let payload = {}
-    payload[e.target.name] = e.target.value
+    payload[name] = value
     store.dispatch(updatePublication(payload))
   }
 
@@ -22,19 +22,25 @@ export default class NewPublicationView extends Component {
 
   render() {
     return (
-      <SlideshowComponent slides={[<Slide0 key={0} />, <Slide1 onChange={this.updateStore.bind(this)} key={1} />, <Slide2 onChange={this.updateStore.bind(this)} key={2} />, <Slide3 onChange={this.updateStore.bind(this)} key={3} />, <Slide4 onChange={this.updateStore.bind(this)} key={4} />, <Slide5 onClick={this.publishPublication.bind(this)} key={5} />]} />
+      <SlideshowComponent slides={[<Slide0 key={0} />, <Slide1 updateStore={this.updateStore.bind(this)} key={1} />, <Slide2 updateStore={this.updateStore.bind(this)} key={2} />, <Slide3 updateStore={this.updateStore.bind(this)} onChange={this.updateStore.bind(this)} key={3} />, <Slide4 updateStore={this.updateStore.bind(this)} onChange={this.updateStore.bind(this)} key={4} />, <Slide5 history={this.props.history} key={5} />]} />
     )
   }
 }
 
-const Slide0 = () => {
-  return (
-    <div>
-      <h1>Welcome to Empiri&rsquo;s Publishing System</h1>
-      <h3>Here you can publish your work safely</h3>
-      <p>More instructions on how it works and its benefits</p>
-    </div>
-  )
+class Slide0 extends Component {
+  componentWillMount() {
+    this.props.validateSlide()
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Welcome to Empiri&rsquo;s Publishing System</h1>
+        <h3>Here you can publish your work safely</h3>
+        <p>More instructions on how it works and its benefits</p>
+      </div>
+    )
+  }
 }
 
 class Slide1 extends Component {
@@ -47,6 +53,13 @@ class Slide1 extends Component {
     }).done(({ publication }) => store.dispatch(updatePublication({ id: publication.id })))
   }
 
+  onChange(e) {
+    if(e.target.value.length > 20) {
+      this.props.validateSlide()
+      this.props.updateStore(e.target.name, e.target.value)
+    }
+  }
+
   render() {
     return (
       <div className="slide component">
@@ -54,7 +67,7 @@ class Slide1 extends Component {
         <h3>What will you call it?</h3>
         <label>
           Publication Title
-          <input type="text" name="title" onChange={this.props.onChange} />
+          <input type="text" name="title" onChange={this.onChange.bind(this)} />
         </label>
       </div>
     )
@@ -71,13 +84,20 @@ class Slide2 extends Component {
     })
   }
 
+  onChange(e) {
+    if(e.target.value.length > 20) {
+      this.props.validateSlide()
+      this.props.updateStore(e.target.name, e.target.value)
+    }
+  }
+
   render() {
     return (
       <div className="slide component">
         <h2>What is your paper about?</h2>
         <label>
           Abstract
-          <textarea type="text" name="abstract" onChange={this.props.onChange} />
+          <textarea type="text" name="abstract" onChange={this.onChange.bind(this)} />
         </label>
       </div>
     )
@@ -109,6 +129,7 @@ class SavedAuthor extends Component {
 
 class Slide3 extends Component {
   componentWillMount() {
+    this.props.validateSlide()
     this.state = { authors: store.getState().publicationInProgress.authors }
     store.subscribe(() => this.setState({ authors: store.getState().publicationInProgress.authors }))
   }
@@ -131,9 +152,13 @@ class Slide3 extends Component {
   }
 }
 
-const Slide4 = () => <PublicationSectionsComponent />
+const Slide4 = ({ validateSlide }) => <PublicationSectionsComponent validateSlide={validateSlide} />
 
 class Slide5 extends Component {
+  componentWillMount() {
+    this.props.validateSlide()
+  }
+
   publishPublication() {
     const publicationId = store.getState().publicationInProgress.id
     $.ajax({
@@ -141,6 +166,9 @@ class Slide5 extends Component {
       url: `http://localhost:4000/publications/${publicationId}`,
       data: JSON.stringify({ publication: { published: true } }),
       contentType: 'application/json',
+    }).done(() => {
+      store.dispatch(updatePublication({ published: true }))
+      this.props.history.push(`/publications/${publicationId}`)
     })
   }
 

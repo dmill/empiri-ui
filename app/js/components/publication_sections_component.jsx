@@ -12,6 +12,7 @@ const defaultSection = {
 
 export default class PublicationSectionsComponent extends Component {
   componentWillMount() {
+    this.props.validateSlide()
     this.state = { sections: [Object.assign({}, defaultSection)] }
     store.dispatch(updatePublication({ sections: this.state.sections }))
     store.subscribe(() => this.setState({ sections: store.getState().publicationInProgress.sections }))
