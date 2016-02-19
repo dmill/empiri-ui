@@ -3,14 +3,14 @@ import store from '../redux/store'
 import { Link } from 'react-router'
 import IconElement from '../elements/icon_element'
 
-const PublicationPreview = ({ id, title, abstract, name, picture }) => {
+const PublicationPreview = ({ publicationId, title, abstract, name, photoUrl }) => {
   return (
-    <Link to={`/publications/${id}`} className="publication-preview-element">
+    <Link to={`/publications/${publicationId}`} className="publication-preview-element">
       <h2>{title}</h2>
       <h3>Abstract:</h3>
       <p>{abstract}</p>
       <div className="publication-preview-element-footer">
-        <img src={picture} />
+        <img src={photoUrl} />
         <div>{name} & 23 others</div>
       </div>
     </Link>
@@ -32,7 +32,17 @@ export default class BrowseView extends Component {
         <div className="row">
           <div className="twelve columns publications-column-container">
             <div className="eight columns publications-column">
-              {this.state.publications.map((publication, i) => <PublicationPreview id={publication.id} title={publication.title} abstract={publication.abstract} key={i} />)}
+              {this.state.publications.map((publication, i) => {
+                return (
+                  <PublicationPreview
+                    publicationId={publication.id}
+                    title={publication.title}
+                    abstract={publication.abstract}
+                    key={i}
+                    photoUrl={publication._embedded.users[0].photo_url}
+                  />
+                )
+              })}
             </div>
             <div className="four columns publications-feed">
               <h6 className="title">Publication Updates</h6>
