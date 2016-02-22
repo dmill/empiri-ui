@@ -27,18 +27,30 @@ export default class PublicationsListComponent extends Component {
     }
   }
 
+  renderPublications() {
+    if (this.props.publications.length) {
+      return (
+        <div>
+          {this.props.publications.map((publication, i) => {
+            return (
+              <Link to={`/publications/${publication.id}`} className={`publication ${this.renderClassName(publication.published)}`} key={i}>
+                {this.renderIcon(publication.published)}
+                <div className="title">{publication.title}</div>
+                {this.renderStatus(publication.published)}
+              </Link>
+            )
+          })}
+        </div>
+      )
+    } else {
+      return <div>You don&rsquo;t have any publications yet.  Write one!</div>
+    }
+  }
+
   render() {
     return (
       <div className="publications-list-component">
-        {this.props.publications.map((publication, i) => {
-          return (
-            <Link to={`/publications/${publication.id}`} className={`publication ${this.renderClassName(publication.published)}`} key={i}>
-              {this.renderIcon(publication.published)}
-              <div className="title">{publication.title}</div>
-              {this.renderStatus(publication.published)}
-            </Link>
-          )
-        })}
+        {this.renderPublications()}
       </div>
     )
   }

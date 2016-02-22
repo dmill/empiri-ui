@@ -28,6 +28,7 @@ export default class UserProfileView extends Component {
           <div className="nine columns">
             <h1>Your Publications</h1>
             <PublicationsListComponent publications={this.state.currentUser._embedded.publications} />
+            <Link to="/publications/new"><button>Write a new publication</button></Link>
           </div>
         </div>
       )
