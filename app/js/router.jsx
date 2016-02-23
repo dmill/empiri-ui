@@ -38,7 +38,7 @@ export function startRouter(App, lock) {
         <Route path="/publications/new" component={NewPublicationView} />
         <Route path="/publications/:publicationId" component={PublicationView} />
         <Route path="/browse" component={BrowseView} />
-        <Route path="/review/new" component={PeerReviewView} tabs={tabs} />
+        <Route path="/reviews/new" component={PeerReviewView} tabs={tabs} />
         <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
       </Route>
       <Route path="/pricing" component={PricingPage} />

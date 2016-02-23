@@ -34,6 +34,7 @@ export default class PublicationsListComponent extends Component {
           {this.props.publications.map((publication, i) => {
             return (
               <Link to={`/publications/${publication.id}`} className={`publication ${this.renderClassName(publication.published)}`} key={i}>
+                <button>edit</button>
                 {this.renderIcon(publication.published)}
                 <div className="title">{publication.title}</div>
                 {this.renderStatus(publication.published)}

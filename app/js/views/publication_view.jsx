@@ -40,7 +40,7 @@ export default class PublicationView extends Component {
           </div>
           <h2>Abstract</h2>
           <p>{this.state.abstract}</p>
-          <Link to="/review-papers/new"><IconElement iconType="material" iconName="rate_review" /></Link>
+          <Link to="/reviews/new"><IconElement iconType="material" iconName="rate_review" /></Link>
         </div>
       </div>
     )

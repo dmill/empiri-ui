@@ -295,6 +295,11 @@
     cursor: pointer;
     display: block;
 
+    button {
+      float: right;
+      margin: 0 2rem 0 0;
+    }
+
     &:hover {
       background-image: linear-gradient(to bottom, #fff, #f2f2f2);
       box-shadow: inset 0px 0px 1px #999;
