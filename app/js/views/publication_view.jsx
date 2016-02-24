@@ -40,6 +40,15 @@ export default class PublicationView extends Component {
           </div>
           <h2>Abstract</h2>
           <p>{this.state.abstract}</p>
+          <h2>Sections</h2>
+          {this.state._embedded.sections.map((section) => {
+            return (
+              <div>
+                <h6>{section.title}</h6>
+                <p>{section.body}</p>
+              </div>
+            )
+          })}
           <Link to="/reviews/new"><IconElement iconType="material" iconName="rate_review" /></Link>
         </div>
       </div>

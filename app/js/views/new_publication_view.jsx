@@ -3,7 +3,7 @@ import SlideshowComponent from '../components/slideshow_component'
 import store from '../redux/store'
 import AddableAuthorComponent from '../components/addable_author_component'
 import PublicationSectionsComponent from '../components/publication_sections_component'
-import { updatePublication, deleteAuthor } from '../redux/actions'
+import { updatePublication, deleteAuthor, newPublication } from '../redux/actions'
 import IconElement from '../elements/icon_element'
 
 function updateStore(name, value) {
@@ -16,6 +16,10 @@ function publishPublication() {
 }
 
 export default class NewPublicationView extends Component {
+  componentDidMount() {
+    store.dispatch(newPublication())
+  }
+
   render() {
     return (
       <SlideshowComponent slides={[
@@ -152,7 +156,7 @@ class Slide3 extends Component {
   }
 }
 
-const Slide4 = () => <PublicationSectionsComponent />
+const Slide4 = () => <PublicationSectionsComponent sections={store.getState().publicationInProgress._embedded.sections} />
 
 class Slide5 extends Component {
   publishPublication() {

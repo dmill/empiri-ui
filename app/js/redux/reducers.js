@@ -6,7 +6,9 @@ import {
   UPDATE_PEER_REVIEW,
   UPDATE_PUBLICATION,
   ADD_AUTHOR,
-  DELETE_AUTHOR
+  DELETE_AUTHOR,
+  ADD_SECTION,
+  NEW_PUBLICATION
 } from './actions'
 
 function peerReview(state = null, action) {
@@ -42,14 +44,18 @@ const defaultPublication = {
   title: null,
   abstract: null,
   _embedded: {
-    authors: []
+    authors: [],
+    sections: []
   }
 }
 
 function publicationInProgress(state = defaultPublication, action) {
   let authors
   let newState
+  let sections
   switch(action.type) {
+    case NEW_PUBLICATION:
+      return Object.assign({}, defaultPublication)
     case UPDATE_PUBLICATION:
       return Object.assign({}, state, action.payload)
     case ADD_AUTHOR:
@@ -61,6 +67,11 @@ function publicationInProgress(state = defaultPublication, action) {
       authors = state._embedded.authors.filter((author) => author.email !== action.payload)
       newState = Object.assign({}, state)
       newState._embedded.authors = authors
+      return newState
+    case ADD_SECTION:
+      sections = state._embedded.sections.concat(action.payload)
+      newState = Object.assign({}, state)
+      newState._embedded.sections = sections
       return newState
     default:
       return state

@@ -13,10 +13,15 @@ function updateStore(name, value) {
 
 export default class PublicationEditView extends Component {
   componentWillMount() {
-    this.state = { title: '', abstract: '' }
+    this.state = { title: '', abstract: '', _embedded: { sections: [] } }
+  }
+
+  componentDidMount() {
     const publicationId = this.props.routeParams.publicationId
     $.get(`http://localhost:4000/publications/${publicationId}`).done(({ publication }) => {
-      this.unsubscribe = store.subscribe(() => this.setState(store.getState().publicationInProgress))
+      this.unsubscribe = store.subscribe(() => {
+        this.setState(store.getState().publicationInProgress)
+      })
       store.dispatch(updatePublication(publication))
     })
   }
@@ -35,7 +40,7 @@ export default class PublicationEditView extends Component {
         <Slide1 title={this.state.title} key={1} />,
         <Slide2 abstract={this.state.abstract} key={2} />,
         <Slide3 key={3} />,
-        <Slide4 key={4} />,
+        <Slide4 key={4} sections={this.state._embedded.sections} />,
         <Slide5 history={this.props.history} key={5} />
       ]} />
     )
@@ -151,7 +156,7 @@ class Slide3 extends Component {
   }
 }
 
-const Slide4 = () => <PublicationSectionsComponent />
+const Slide4 = ({ sections }) => <PublicationSectionsComponent sections={sections} />
 
 class Slide5 extends Component {
   publishPublication() {

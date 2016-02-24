@@ -5,6 +5,8 @@ export const UPDATE_PEER_REVIEW = 'UPDATE_PEER_REVIEW'
 export const UPDATE_PUBLICATION = 'UPDATE_PUBLICATION'
 export const ADD_AUTHOR = 'ADD_AUTHOR'
 export const DELETE_AUTHOR = 'DELETE_AUTHOR'
+export const ADD_SECTION = 'ADD_SECTION'
+export const NEW_PUBLICATION = 'NEW_PUBLICATION'
 
 export function updatePublication(publicationData) {
   return { type: UPDATE_PUBLICATION, payload: publicationData }
@@ -32,4 +34,12 @@ export function addAuthor(data) {
 
 export function deleteAuthor(email) {
   return { type: DELETE_AUTHOR, payload: email }
+}
+
+export function addSection(section) {
+  return { type: ADD_SECTION, payload: section }
+}
+
+export function newPublication() {
+  return { type: NEW_PUBLICATION, payload: null }
 }
