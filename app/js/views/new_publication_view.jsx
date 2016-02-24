@@ -47,7 +47,7 @@ class Slide1 extends Component {
   componentWillUnmount() {
     $.ajax({
       type: 'POST',
-      url:'http://localhost:4000/publications/',
+      url: 'http://localhost:4000/publications/',
       data: JSON.stringify({ publication: { title: store.getState().publicationInProgress.title }}),
       contentType: 'application/json'
     }).done(({ publication }) => store.dispatch(updatePublication({ id: publication.id })))

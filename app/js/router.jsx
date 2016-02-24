@@ -12,6 +12,7 @@ import PeerReviewComponent from './components/peer_review_component'
 import PricingPage from './views/pricing_page'
 import MembershipForm from './views/membership_form'
 import SlideshowComponent from './components/slideshow_component'
+import PublicationEditView from './views/publication_edit_view'
 
 function requireLogIn(nextState, replaceState) {
   if (!store.getState().currentUser) {
@@ -34,12 +35,13 @@ export function startRouter(App, lock) {
     <Router history={browserHistory}>
       <Route path="/" component={App} lock={lock}>
         <IndexRoute component={BrowseView} />
-        <Route path="/profile" component={UserProfileView} />
+        <Route path="/users/:userId" component={UserProfileView} />
         <Route path="/publications/new" component={NewPublicationView} />
         <Route path="/publications/:publicationId" component={PublicationView} />
         <Route path="/browse" component={BrowseView} />
         <Route path="/reviews/new" component={PeerReviewView} tabs={tabs} />
-        <Route path="/profile/edit" onEnter={requireLogIn} component={UserProfileEditView} />
+        <Route path="/users/edit" onEnter={requireLogIn} component={UserProfileEditView} />
+        <Route path="/publications/:publicationId/edit" component={PublicationEditView} />
       </Route>
       <Route path="/pricing" component={PricingPage} />
       <Route path="/membership" component={MembershipForm} />

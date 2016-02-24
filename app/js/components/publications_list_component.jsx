@@ -33,12 +33,12 @@ export default class PublicationsListComponent extends Component {
         <div>
           {this.props.publications.map((publication, i) => {
             return (
-              <Link to={`/publications/${publication.id}`} className={`publication ${this.renderClassName(publication.published)}`} key={i}>
-                <button>edit</button>
+              <div className={`publication ${this.renderClassName(publication.published)}`} key={i}>
+                <Link to={`/publications/${publication.id}/edit`}><button>edit</button></Link>
                 {this.renderIcon(publication.published)}
-                <div className="title">{publication.title}</div>
+                <Link to={`/publications/${publication.id}`} className="title clear-fix">{publication.title}</Link>
                 {this.renderStatus(publication.published)}
-              </Link>
+              </div>
             )
           })}
         </div>

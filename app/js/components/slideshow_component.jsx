@@ -14,12 +14,13 @@ export default class SlideShowComponent extends Component {
   }
 
   showNextSlide() {
-    if(this.state.slideIsValid) {
-      this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left', slideIsValid: false })
-      this.errorMessage.innerText = ''
-    } else {
-      this.displayErrorMessage()
-    }
+    this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left', slideIsValid: false })
+    // if(this.state.slideIsValid) {
+    //   this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left', slideIsValid: false })
+    //   this.errorMessage.innerText = ''
+    // } else {
+    //   this.displayErrorMessage()
+    // }
   }
 
   showPrevSlide() {

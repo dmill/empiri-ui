@@ -46,16 +46,20 @@ const defaultPublication = {
 
 function publicationInProgress(state = defaultPublication, action) {
   let authors
+  let newState
   switch(action.type) {
     case UPDATE_PUBLICATION:
       return Object.assign({}, state, action.payload)
     case ADD_AUTHOR:
-      authors = state.authors.concat(action.payload)
-      return Object.assign({}, state, { authors })
+      authors = state._embedded.authors.concat(action.payload)
+      newState = Object.assign({}, state)
+      newState._embedded.authors = authors
+      return newState
     case DELETE_AUTHOR:
-      authors = state.authors.filter((author) => author.email !== action.payload)
-      debugger
-      return Object.assign({}, state, { authors })
+      authors = state._embedded.authors.filter((author) => author.email !== action.payload)
+      newState = Object.assign({}, state)
+      newState._embedded.authors = authors
+      return newState
     default:
       return state
   }
