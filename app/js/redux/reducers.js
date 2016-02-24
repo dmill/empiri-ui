@@ -41,7 +41,9 @@ const defaultPublication = {
   id: null,
   title: null,
   abstract: null,
-  authors: []
+  _embedded: {
+    authors: []
+  }
 }
 
 function publicationInProgress(state = defaultPublication, action) {

@@ -6,32 +6,31 @@ import PublicationSectionsComponent from '../components/publication_sections_com
 import { updatePublication, deleteAuthor } from '../redux/actions'
 import IconElement from '../elements/icon_element'
 
-let currentUser = store.getState().currentUser
-store.subscribe(() => currentUser = store.getState().currentUser)
+function updateStore(name, value) {
+  const payload = { [name]: value }
+  store.dispatch(updatePublication(payload))
+}
+
+function publishPublication() {
+  store.dispatch(updatePublication({ published: true }))
+}
 
 export default class NewPublicationView extends Component {
-  updateStore(name, value) {
-    let payload = {}
-    payload[name] = value
-    store.dispatch(updatePublication(payload))
-  }
-
-  publishPublication() {
-    store.dispatch(updatePublication({ published: true }))
-  }
-
   render() {
     return (
-      <SlideshowComponent slides={[<Slide0 key={0} />, <Slide1 updateStore={this.updateStore.bind(this)} key={1} />, <Slide2 updateStore={this.updateStore.bind(this)} key={2} />, <Slide3 updateStore={this.updateStore.bind(this)} onChange={this.updateStore.bind(this)} key={3} />, <Slide4 updateStore={this.updateStore.bind(this)} onChange={this.updateStore.bind(this)} key={4} />, <Slide5 history={this.props.history} key={5} />]} />
+      <SlideshowComponent slides={[
+        <Slide0 key={0} />,
+        <Slide1 key={1} />,
+        <Slide2 key={2} />,
+        <Slide3 key={3} />,
+        <Slide4 key={4} />,
+        <Slide5 history={this.props.history} key={5} />
+      ]} />
     )
   }
 }
 
 class Slide0 extends Component {
-  componentWillMount() {
-    this.props.validateSlide()
-  }
-
   render() {
     return (
       <div>
@@ -54,10 +53,7 @@ class Slide1 extends Component {
   }
 
   onChange(e) {
-    if(e.target.value.length > 20) {
-      this.props.validateSlide()
-      this.props.updateStore(e.target.name, e.target.value)
-    }
+    updateStore(e.target.name, e.target.value)
   }
 
   render() {
@@ -67,7 +63,7 @@ class Slide1 extends Component {
         <h3>What will you call it?</h3>
         <label>
           Publication Title
-          <input type="text" name="title" onChange={this.onChange.bind(this)} />
+          <input type="text" name="title" onChange={this.onChange} />
         </label>
       </div>
     )
@@ -85,10 +81,7 @@ class Slide2 extends Component {
   }
 
   onChange(e) {
-    if(e.target.value.length > 20) {
-      this.props.validateSlide()
-      this.props.updateStore(e.target.name, e.target.value)
-    }
+    updateStore(e.target.name, e.target.value)
   }
 
   render() {
@@ -97,7 +90,7 @@ class Slide2 extends Component {
         <h2>What is your paper about?</h2>
         <label>
           Abstract
-          <textarea type="text" name="abstract" onChange={this.onChange.bind(this)} />
+          <textarea type="text" name="abstract" onChange={this.onChange} />
         </label>
       </div>
     )
@@ -129,12 +122,19 @@ class SavedAuthor extends Component {
 
 class Slide3 extends Component {
   componentWillMount() {
-    this.props.validateSlide()
-    this.state = { authors: store.getState().publicationInProgress.authors }
-    store.subscribe(() => this.setState({ authors: store.getState().publicationInProgress.authors }))
+    this.state = { authors: store.getState().publicationInProgress._embedded.authors }
+  }
+
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => this.setState({ authors: store.getState().publicationInProgress._embedded.authors }))
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   render() {
+    const currentUser = store.getState().currentUser
     return (
       <div className="slide component">
         <h2>Who helped you?</h2>
@@ -152,13 +152,9 @@ class Slide3 extends Component {
   }
 }
 
-const Slide4 = ({ validateSlide }) => <PublicationSectionsComponent validateSlide={validateSlide} />
+const Slide4 = () => <PublicationSectionsComponent />
 
 class Slide5 extends Component {
-  componentWillMount() {
-    this.props.validateSlide()
-  }
-
   publishPublication() {
     const publicationId = store.getState().publicationInProgress.id
     $.ajax({

@@ -6,21 +6,11 @@ import { updatePublication } from '../redux/actions'
 
 export default class SlideShowComponent extends Component {
   componentWillMount() {
-    this.state = { currentSlide: 0, direction: 'left', publicationId: null, slideIsValid: false }
-  }
-
-  displayErrorMessage() {
-    this.errorMessage.innerText = 'Please enter valid information'
+    this.state = { currentSlide: 0, direction: 'left', publicationId: null }
   }
 
   showNextSlide() {
-    this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left', slideIsValid: false })
-    // if(this.state.slideIsValid) {
-    //   this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left', slideIsValid: false })
-    //   this.errorMessage.innerText = ''
-    // } else {
-    //   this.displayErrorMessage()
-    // }
+    this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left' })
   }
 
   showPrevSlide() {
@@ -44,14 +34,10 @@ export default class SlideShowComponent extends Component {
     )
   }
 
-  validateSlide() {
-    this.setState({ slideIsValid: true })
-  }
-
   renderSlide() {
     return (
       <ReactCSSTransitionGroup transitionName={"slide-" + this.state.direction} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
-        {React.cloneElement(this.props.slides[this.state.currentSlide], { validateSlide: this.validateSlide.bind(this) })}
+        {this.props.slides[this.state.currentSlide]}
       </ReactCSSTransitionGroup>
     )
   }
