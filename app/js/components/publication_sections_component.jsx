@@ -21,9 +21,9 @@ export default class PublicationSectionsComponent extends Component {
     this.setState({ sections })
   }
 
-  deleteSection() {
+  deleteSection(position) {
     let sections = [].concat(this.state.sections)
-    sections.pop()
+    sections.splice(position, 1)
     this.setState({ sections })
   }
 
@@ -34,11 +34,10 @@ export default class PublicationSectionsComponent extends Component {
   }
 
   render() {
-    debugger
     return (
       <div id="new-publication-slide" className="container">
         <h1>Add Content to Your Publication</h1>
-        {this.state.sections.map((section, i) => <PublicationSection key={i} position={i} title={section.title} body={section.body} />)}
+        {this.state.sections.map((section, i) => <PublicationSection key={i} position={i} title={section.title} body={section.body} deleteSection={this.deleteSection.bind(this)} />)}
         <button onClick={this.handleClick.bind(this)}>+ Section</button>
         {this.renderDeleteButton()}
       </div>

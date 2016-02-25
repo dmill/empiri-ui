@@ -6,15 +6,6 @@ import PublicationSectionsComponent from '../components/publication_sections_com
 import { updatePublication, deleteAuthor, newPublication } from '../redux/actions'
 import IconElement from '../elements/icon_element'
 
-function updateStore(name, value) {
-  const payload = { [name]: value }
-  store.dispatch(updatePublication(payload))
-}
-
-function publishPublication() {
-  store.dispatch(updatePublication({ published: true }))
-}
-
 export default class NewPublicationView extends Component {
   componentDidMount() {
     store.dispatch(newPublication())
@@ -47,17 +38,36 @@ class Slide0 extends Component {
 }
 
 class Slide1 extends Component {
+  componentWillMount() {
+    this.state = { title: store.getState().publication.get('title') }
+  }
+
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => this.setState({ title: store.getState().publication.get('title') }))
+  }
+
   componentWillUnmount() {
-    $.ajax({
-      type: 'POST',
-      url: 'http://localhost:4000/publications/',
-      data: JSON.stringify({ publication: { title: store.getState().publicationInProgress.title }}),
-      contentType: 'application/json'
-    }).done(({ publication }) => store.dispatch(updatePublication({ id: publication.id })))
+    this.unsubscribe()
+    const publicationId = store.getState().publication.get('id')
+    if (publicationId) {
+      $.ajax({
+        type: 'PATCH',
+        url: `http://localhost:4000/publications/${publicationId}`,
+        data: JSON.stringify({ publication: { title: this.state.title }}),
+        contentType: 'application/json'
+      }).done(({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title })))
+    } else {
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:4000/publications/',
+        data: JSON.stringify({ publication: { title: this.state.title }}),
+        contentType: 'application/json'
+      }).done(({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title })))
+    }
   }
 
   onChange(e) {
-    updateStore(e.target.name, e.target.value)
+    this.setState({ title: e.target.value })
   }
 
   render() {
@@ -67,7 +77,7 @@ class Slide1 extends Component {
         <h3>What will you call it?</h3>
         <label>
           Publication Title
-          <input type="text" name="title" onChange={this.onChange} />
+          <input type="text" name="title" value={this.state.title} onChange={this.onChange.bind(this)} />
         </label>
       </div>
     )
@@ -75,17 +85,27 @@ class Slide1 extends Component {
 }
 
 class Slide2 extends Component {
+  componentWillMount() {
+    this.state = { abstract: store.getState().publication.get('abstract') }
+  }
+
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => this.setState({ abstract: store.getState().publication.get('abstract' ) }))
+  }
+
   componentWillUnmount() {
+    this.unsubscribe()
+    const publication = store.getState().publication
     $.ajax({
       type: 'PATCH',
-      url:'http://localhost:4000/publications/' + store.getState().publicationInProgress.id,
-      data: JSON.stringify({ publication: { abstract: store.getState().publicationInProgress.abstract }}),
+      url: `http://localhost:4000/publications/${publication.get('id')}`,
+      data: JSON.stringify({ publication: { abstract: this.state.abstract }}),
       contentType: 'application/json'
-    })
+    }).done(({ publication }) => store.dispatch(updatePublication({ abstract: publication.abstract })))
   }
 
   onChange(e) {
-    updateStore(e.target.name, e.target.value)
+    this.setState({ abstract: e.target.value })
   }
 
   render() {
@@ -94,7 +114,7 @@ class Slide2 extends Component {
         <h2>What is your paper about?</h2>
         <label>
           Abstract
-          <textarea type="text" name="abstract" onChange={this.onChange} />
+          <textarea type="text" name="abstract" value={this.state.abstract} onChange={this.onChange.bind(this)} />
         </label>
       </div>
     )
@@ -156,7 +176,7 @@ class Slide3 extends Component {
   }
 }
 
-const Slide4 = () => <PublicationSectionsComponent sections={Object.assign({}, store.getState().publicationInProgress._embedded.sections)} />
+const Slide4 = () => <PublicationSectionsComponent sections={[].concat(store.getState().publicationInProgress._embedded.sections)} />
 
 class Slide5 extends Component {
   publishPublication() {
@@ -181,4 +201,13 @@ class Slide5 extends Component {
       </div>
     )
   }
+}
+
+function updateStore(name, value) {
+  const payload = { [name]: value }
+  store.dispatch(updatePublication(payload))
+}
+
+function publishPublication() {
+  store.dispatch(updatePublication({ published: true }))
 }

@@ -14,7 +14,17 @@ export default class PublicationSection extends Component {
     }
   }
 
-  componentWillUnmount() {
+  deleteSection() {
+    const publicationId = store.getState().publicationInProgress.id
+    const sectionId = this.state.position
+    $.ajax({
+      type: 'DELETE',
+      url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}`,
+      contentType: 'application/json'
+    }).done(() => this.props.deleteSection(this.state.position))
+  }
+
+  saveSection() {
     const publicationId = store.getState().publicationInProgress.id
     $.ajax({
       type: 'POST',
@@ -42,6 +52,8 @@ export default class PublicationSection extends Component {
           <textarea name="body" value={this.state.body} onChange={this.onChange.bind(this)} />
         </label>
         <ImageUploadComponent />
+        <button onClick={this.saveSection.bind(this)}>save this section</button>
+        <button onClick={this.deleteSection.bind(this)}>delete this section</button>
       </div>
     )
   }

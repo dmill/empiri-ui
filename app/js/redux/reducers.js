@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import Immutable from 'immutable'
 import {
   SET_CURRENT_USER,
   LOG_OUT,
@@ -39,7 +40,7 @@ function currentHypothesis(state = null, action) {
   }
 }
 
-const defaultPublication = {
+const defaultPublication = Immutable.fromJS({
   id: null,
   title: null,
   abstract: null,
@@ -47,17 +48,19 @@ const defaultPublication = {
     authors: [],
     sections: []
   }
-}
+})
 
-function publicationInProgress(state = defaultPublication, action) {
+function publication(state = defaultPublication, action) {
   let authors
   let newState
   let sections
   switch(action.type) {
     case NEW_PUBLICATION:
-      return Object.assign({}, state)
+      return defaultPublication
+
     case UPDATE_PUBLICATION:
-      return Object.assign({}, state, action.payload)
+      return state.merge(action.payload)
+
     case ADD_AUTHOR:
       authors = state._embedded.authors.concat(action.payload)
       newState = Object.assign({}, state)
@@ -78,5 +81,5 @@ function publicationInProgress(state = defaultPublication, action) {
   }
 }
 
-const App = combineReducers({ currentUser, currentHypothesis, peerReview, publicationInProgress })
+const App = combineReducers({ currentUser, peerReview, publication })
 export default App
