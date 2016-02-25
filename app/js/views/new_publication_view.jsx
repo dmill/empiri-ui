@@ -121,36 +121,13 @@ class Slide2 extends Component {
   }
 }
 
-const defaultAuthor = {
-  first_name: '',
-  last_name: '',
-  title: '',
-  email: '',
-  organization: ''
-}
-
-class SavedAuthor extends Component {
-  deleteAuthor() {
-    store.dispatch(deleteAuthor(this.props.author.email))
-  }
-
-  render() {
-    return(
-      <div>
-        {this.props.author.first_name} {this.props.author.last_name}, {this.props.author.title} {this.props.author.email}
-        <IconElement iconType="fontawesome" iconName="close" onClick={this.deleteAuthor.bind(this)} />
-      </div>
-    )
-  }
-}
-
 class Slide3 extends Component {
   componentWillMount() {
-    this.state = { authors: store.getState().publicationInProgress._embedded.authors }
+    this.state = { authors: store.getState().publication.getIn(['_embedded', 'authors']) }
   }
 
   componentDidMount() {
-    this.unsubscribe = store.subscribe(() => this.setState({ authors: store.getState().publicationInProgress._embedded.authors }))
+    this.unsubscribe = store.subscribe(() => this.setState({ authors: store.getState().publication.getIn(['_embedded', 'authors']) }))
   }
 
   componentWillUnmount() {
@@ -171,6 +148,21 @@ class Slide3 extends Component {
           {this.state.authors.map((author, i) => <SavedAuthor author={author} index={i} key={i} />)}
           <AddableAuthorComponent />
         </label>
+      </div>
+    )
+  }
+}
+
+class SavedAuthor extends Component {
+  deleteAuthor() {
+    store.dispatch(deleteAuthor(this.props.index))
+  }
+
+  render() {
+    return(
+      <div>
+        {this.props.author.first_name} {this.props.author.last_name}, {this.props.author.title} {this.props.author.email}
+        <IconElement iconType="fontawesome" iconName="close" onClick={this.deleteAuthor.bind(this)} />
       </div>
     )
   }

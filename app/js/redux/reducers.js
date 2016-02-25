@@ -62,15 +62,11 @@ function publication(state = defaultPublication, action) {
       return state.merge(action.payload)
 
     case ADD_AUTHOR:
-      authors = state._embedded.authors.concat(action.payload)
-      newState = Object.assign({}, state)
-      newState._embedded.authors = authors
-      return newState
+      return state.updateIn(['_embedded', 'authors'], (authors) => authors.push(action.payload))
+
     case DELETE_AUTHOR:
-      authors = state._embedded.authors.filter((author) => author.email !== action.payload)
-      newState = Object.assign({}, state)
-      newState._embedded.authors = authors
-      return newState
+      return state.updateIn(['_embedded', 'authors'], (authors) => authors.delete(action.payload))
+
     case ADD_SECTION:
       sections = state._embedded.sections.concat(action.payload)
       newState = Object.assign({}, state)

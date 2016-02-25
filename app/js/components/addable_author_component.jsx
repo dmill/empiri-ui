@@ -9,7 +9,7 @@ export default class AddableAuthorComponent extends Component {
   }
 
   addAuthor() {
-    const publicationId = store.getState().publicationInProgress.id
+    const publicationId = store.getState().publication.get('id')
     $.ajax({
       type: 'POST',
       url: `http://localhost:4000/publications/${publicationId}/authors`,
