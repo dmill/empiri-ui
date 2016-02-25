@@ -55,6 +55,7 @@ function publicationInProgress(state = defaultPublication, action) {
   let sections
   switch(action.type) {
     case NEW_PUBLICATION:
+      debugger
       return Object.assign({}, defaultPublication)
     case UPDATE_PUBLICATION:
       return Object.assign({}, state, action.payload)

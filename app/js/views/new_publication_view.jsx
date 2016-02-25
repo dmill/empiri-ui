@@ -156,7 +156,7 @@ class Slide3 extends Component {
   }
 }
 
-const Slide4 = () => <PublicationSectionsComponent sections={store.getState().publicationInProgress._embedded.sections} />
+const Slide4 = () => <PublicationSectionsComponent sections={Object.assign({}, store.getState().publicationInProgress._embedded.sections)} />
 
 class Slide5 extends Component {
   publishPublication() {
