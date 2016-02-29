@@ -1,6 +1,21 @@
 import React, { Component } from 'react'
+import PeerReviewComponent from './peer_review_component'
+import PublicationView from '../views/publication_view'
 
 export default class TabsComponent extends Component {
+  constructor(props) {
+    super(props)
+    this.tabs = [
+      { name: 'Your Review',
+        body: <PeerReviewComponent />
+      },
+      {
+        name: 'TIPR: transcription initiation pattern recognition on a genome scale',
+        body: <PublicationView routeParams={this.props.routeParams} />
+      }
+    ]
+  }
+
   componentWillMount() {
     this.state = { activeTab: 0 }
   }
@@ -21,12 +36,12 @@ export default class TabsComponent extends Component {
     return (
       <div className="tabs-component">
         <div className="tabs">
-          {this.props.tabs.map((tab, i) => {
+          {this.tabs.map((tab, i) => {
             return <span className={this.getClassName(i)} onClick={this.handleClick.bind(this)} key={i} id={i}>{tab.name}</span>
           })}
         </div>
         <div className="pane">
-          <div>{this.props.tabs[this.state.activeTab].body}</div>
+          <div>{this.tabs[this.state.activeTab].body}</div>
         </div>
       </div>
     )

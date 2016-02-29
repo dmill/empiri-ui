@@ -10,7 +10,8 @@ import {
   DELETE_AUTHOR,
   ADD_SECTION,
   NEW_PUBLICATION,
-  DELETE_SECTION
+  DELETE_SECTION,
+  ADD_FIGURE
 } from './actions'
 
 function peerReview(state = null, action) {
@@ -61,6 +62,9 @@ function publication(state = defaultPublication, action) {
 
     case DELETE_SECTION:
       return state.updateIn(['_embedded', 'sections'], (sections) => sections.filterNot(section => section.get('id') === action.payload))
+
+    case ADD_FIGURE:
+      return state.updateIn(['_embedded', 'figures'], (figures) => figures.push(Immutable.fromJS(action.payload)))
 
     default:
       return state

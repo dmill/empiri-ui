@@ -20,16 +20,6 @@ function requireLogIn(nextState, replaceState) {
   }
 }
 
-const tabs = [
-  { name: 'Your Review',
-    body: <PeerReviewComponent />
-  },
-  {
-    name: 'TIPR: transcription initiation pattern recognition on a genome scale',
-    body: 'genome shit'
-  }
-]
-
 export function startRouter(App, lock) {
   render((
     <Router history={browserHistory}>
@@ -39,7 +29,7 @@ export function startRouter(App, lock) {
         <Route path="/publications/new" component={NewPublicationView} />
         <Route path="/publications/:publicationId" component={PublicationView} />
         <Route path="/browse" component={BrowseView} />
-        <Route path="/reviews/new" component={PeerReviewView} tabs={tabs} />
+        <Route path="/publications/:publicationId/reviews/new" component={PeerReviewView} />
         <Route path="/users/edit" onEnter={requireLogIn} component={UserProfileEditView} />
         <Route path="/publications/:publicationId/edit" component={PublicationEditView} />
       </Route>

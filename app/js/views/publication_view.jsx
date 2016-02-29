@@ -49,7 +49,7 @@ export default class PublicationView extends Component {
               </div>
             )
           })}
-          <Link to="/reviews/new"><IconElement iconType="material" iconName="rate_review" /></Link>
+          <Link to={`/publications/${this.props.routeParams.publicationId}/reviews/new`}><IconElement iconType="material" iconName="rate_review" /></Link>
         </div>
       </div>
     )

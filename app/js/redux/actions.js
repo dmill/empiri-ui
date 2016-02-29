@@ -8,6 +8,7 @@ export const DELETE_AUTHOR = 'DELETE_AUTHOR'
 export const ADD_SECTION = 'ADD_SECTION'
 export const DELETE_SECTION = 'DELETE_SECTION'
 export const NEW_PUBLICATION = 'NEW_PUBLICATION'
+export const ADD_FIGURE = 'ADD_FIGURE'
 
 export function updatePublication(publicationData) {
   return { type: UPDATE_PUBLICATION, payload: publicationData }
@@ -47,4 +48,8 @@ export function newPublication() {
 
 export function deleteSection(position) {
   return { type: DELETE_SECTION, payload: position }
+}
+
+export function addFigure(figure) {
+  return { type: ADD_FIGURE, payload: figure }
 }

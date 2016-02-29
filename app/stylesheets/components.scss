@@ -164,6 +164,7 @@
 }
 
 .tabs-component {
+  height: 75%;
   .tab {
     border: 1px solid #888;
     border-radius: 5px 5px 0 0;
@@ -180,10 +181,12 @@
   }
 
   .pane {
+    height: 100%;
     border: 1px solid #888;
     background-color: #fff;
     border-radius: 0 3px 3px 3px;
-    height: 23em;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 }
 
