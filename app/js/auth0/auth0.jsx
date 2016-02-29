@@ -16,9 +16,9 @@ class Auth0 {
   fetchUserData() {
     $.ajax({
       contentType: 'application/json',
-      url: 'http://localhost:4000/users',
+      url: 'http://localhost:4000/users/login',
       type: 'GET',
-    }).done(({ data }) => store.dispatch(setCurrentUser(data)))
+    }).done(({ user }) => store.dispatch(setCurrentUser(user)))
   }
 
   getIdToken(authHash) {

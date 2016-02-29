@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import IconElement from '../elements/icon_element'
 import store from '../redux/store'
 import auth0 from '../auth0/auth0'
+import IconElement from '../elements/icon_element'
 
 export default class ImageUploadComponent extends Component {
   handleChange(e) {

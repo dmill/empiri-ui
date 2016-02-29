@@ -1,7 +1,6 @@
 module.exports = {
   entry: {
-    main: "./app/js/application.jsx",
-    test: "./__tests__/spec_runner.js"
+    main: "./app/js/application.jsx"
   },
   output: {
     path: "build",

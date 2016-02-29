@@ -3,53 +3,67 @@ import store from '../redux/store'
 import { Link } from 'react-router'
 import IconElement from '../elements/icon_element'
 
-const PublicationPreview = ({ title, abstract, name, picture }) => {
+const PublicationPreview = ({ updatedAt, publicationId, title, abstract, firstName, lastName, photoUrl }) => {
   return (
-    <Link to="/hypothesis" className="publication-preview-element">
-      <h2>{title}</h2>
-      <h3>Abstract:</h3>
+    <div className="publication-preview-element">
+      <Link to={`/publications/${publicationId}`}>
+        <h1>{title}</h1>
+      </Link>
+      <img className="circle" src={photoUrl} />
+      <div className="author-data">
+        <div className="author">{firstName} {lastName}</div>
+        <div className="updated-at">updated Jan 28, 2016</div>
+      </div>
+      <h2>Abstract</h2>
       <p>{abstract}</p>
       <div className="publication-preview-element-footer">
-        <img src={picture} />
-        <div>{name} & 23 others</div>
+        <Link to={`/publications/${publicationId}`}>Full publication...</Link>
       </div>
-    </Link>
+    </div>
   )
 }
 
 export default class BrowseView extends Component {
   componentWillMount() {
-    this.state = { hypotheses: [] }
-    $.get('http://localhost:4000/hypotheses').done(({ data }) => {
-      this.setState({ hypotheses: data })
+    this.state = { publications: [] }
+    $.get('http://localhost:4000/publications').done(({ publications }) => {
+      this.setState({ publications })
     })
   }
 
   render() {
-    const user = store.getState().currentUser
-    const data = {
-      category: "Bioinformatics",
-      title: "TIPR: transcription initiation pattern recognition on a genome scale",
-      abstract: "The computational identification of gene transcription start sites (TSSs) can provide insights into the regulation and function of genes without performing expensive experiments, particularly in organisms with incomplete annotations. High-resolution general-purpose TSS prediction remains a challenging problem, with little recent progress on the identification and differentiation of TSSs which are arranged in different spatial patterns along the chromosome."
-    }
     return (
       <div id="browse-view" className="container">
+        <div id="header"><h6>Top Publications</h6></div>
         <div className="row">
-          <div className="eight columns publications-column">
-            <h1>Trending Topics</h1>
-            {this.state.hypotheses.map((hypothesis, i) => <PublicationPreview title={hypothesis.title} abstract={hypothesis.synopsis} key={i} />)}
-          </div>
-
-          <div className="four columns publications-feed">
-            <h1>Publication Updates</h1>
-            <div className="feed-menu clear-fix">
-              <Link to="/publications/new" className="menu-item">
-                <IconElement iconType="material" iconName="note_add" />
-                New Publication
-              </Link>
-              <div className="menu-item">Influence: 0</div>
+          <div className="twelve columns publications-column-container">
+            <div className="eight columns publications-column">
+              {this.state.publications.map((publication, i) => {
+                return (
+                  <PublicationPreview
+                    publicationId={publication.id}
+                    title={publication.title}
+                    abstract={publication.abstract}
+                    firstName={publication._embedded.users[0].first_name}
+                    lastName={publication._embedded.users[0].last_name}
+                    key={i}
+                    updatedAt={publication.updated_at}
+                    photoUrl={publication._embedded.users[0].photo_url}
+                  />
+                )
+              })}
             </div>
-            <div className="notifications">You dont have any notifications.</div>
+            <div className="four columns publications-feed">
+              <h6 className="title">Publication Updates</h6>
+              <div className="feed-menu clear-fix">
+                <Link to="/publications/new" className="menu-item">
+                  <IconElement iconType="material" iconName="note_add" />
+                  <h6>New Publication</h6>
+                </Link>
+                <div className="menu-item"><h6>Influence: 0</h6></div>
+              </div>
+              <div className="notifications">You dont have any notifications.</div>
+            </div>
           </div>
         </div>
       </div>

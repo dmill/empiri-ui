@@ -12,7 +12,6 @@ export default class UserProfileEditView extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const user = store.getState().currentUser
     $.ajax({
       type: 'PATCH',
       contentType: 'application/json',

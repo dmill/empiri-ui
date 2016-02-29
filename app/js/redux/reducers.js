@@ -1,9 +1,16 @@
 import { combineReducers } from 'redux'
+import Immutable from 'immutable'
 import {
   SET_CURRENT_USER,
   LOG_OUT,
   EXPAND_CONTRIBUTION,
   UPDATE_PEER_REVIEW,
+  UPDATE_PUBLICATION,
+  ADD_AUTHOR,
+  DELETE_AUTHOR,
+  ADD_SECTION,
+  NEW_PUBLICATION,
+  DELETE_SECTION
 } from './actions'
 
 function peerReview(state = null, action) {
@@ -30,9 +37,44 @@ function currentHypothesis(state = null, action) {
     case EXPAND_CONTRIBUTION:
       return { contributionId: action.payload }
     default:
-      return { state }
+      return state
   }
 }
 
-const App = combineReducers({ currentUser, currentHypothesis, peerReview })
+const defaultPublication = Immutable.fromJS({
+  id: null,
+  title: null,
+  abstract: null,
+  _embedded: {
+    authors: [],
+    sections: []
+  }
+})
+
+function publication(state = defaultPublication, action) {
+  switch(action.type) {
+    case NEW_PUBLICATION:
+      return defaultPublication
+
+    case UPDATE_PUBLICATION:
+      return state.mergeDeep(Immutable.fromJS(action.payload))
+
+    case ADD_AUTHOR:
+      return state.updateIn(['_embedded', 'authors'], (authors) => authors.push(Immutable.fromJS(action.payload)))
+
+    case DELETE_AUTHOR:
+      return state.updateIn(['_embedded', 'authors'], (authors) => authors.filterNot(author => author.get('id') === action.payload))
+
+    case ADD_SECTION:
+      return state.updateIn(['_embedded', 'sections'], (sections) => sections.push(Immutable.fromJS(action.payload)))
+
+    case DELETE_SECTION:
+      return state.updateIn(['_embedded', 'sections'], (sections) => sections.filterNot(section => section.get('id') === action.payload))
+
+    default:
+      return state
+  }
+}
+
+const App = combineReducers({ currentUser, peerReview, publication })
 export default App

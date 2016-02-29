@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 const PricingPage = () => {
   return(
-    <div className="pricing-page">
+    <div id="pricing-page">
       <div className="container">
         <h2>Start Publishing Today</h2>
         <h1>Pick your membership</h1>

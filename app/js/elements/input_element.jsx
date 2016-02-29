@@ -9,10 +9,6 @@ export default class InputElement extends Component {
     }
   }
 
-  componentWillUnmount() {
-    debugger
-  }
-
   handleChange(e) {
     this.setState({ value: e.target.value })
   }

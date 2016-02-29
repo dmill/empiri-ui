@@ -1,15 +1,35 @@
 .publication-preview-element {
   font-size: 1.5rem;
-  background: linear-gradient(to bottom,#fff,rgba(150,150,150,0.1));
-  background-color: #fff;
-  margin-top: 3px;
   padding: 10px;
-  cursor: pointer;
   width: calc(100% - 4px);
   margin-left: 2px;
-  border: 1px solid #c8c8c8;
   border-radius: 2px;
   display: block;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4rem;
+
+  .author-data {
+    font-family: "Pontano Sans";
+    font-size: 1.5rem;
+    margin-left: 53px;
+
+    .author {
+      color: $purple-ll;
+    }
+
+    .updated-at {
+      margin-top: -4px;
+      color: #aaa;
+    }
+  }
+
+  .circle {
+    height: 45px;
+    width: 45px;
+    display: block;
+    float: left;
+    border-radius: 50%;
+  }
 
   h2 {
     color: #1EAEDB;
@@ -27,14 +47,12 @@
     color: #5f5f5f;
   }
 
-  &:hover {
-    box-shadow: 0 0 2px rgba(0,0,0,0.1);
-  }
-
   .publication-preview-element-footer {
-    img {
-      width: 3em;
-      border-radius: 2px;
+    a {
+      color: $purple-ll;
+      &:hover {
+        color: $purple;
+      }
     }
   }
 }
@@ -126,5 +144,38 @@
       margin: 0;
       color: #aaa;
     }
+  }
+}
+
+.addable-author-element {
+  label.first-name, label.last-name {
+    width: calc(50% - 7.5px - 2rem);
+    float: left;
+
+    input {
+      margin-bottom: 0;
+    }
+  }
+
+  label.first-name {
+    margin-right: 5px;
+  }
+
+  label.title {
+    width: 15%;
+    float: left;
+    margin-right: 5px;
+  }
+
+  label.organization {
+    width: 20%;
+    float: left;
+    margin-right: 5px
+  }
+
+  label.email {
+    width: calc(65% - 4rem - 20px);
+    margin-right: 10px;
+    float: left;
   }
 }
