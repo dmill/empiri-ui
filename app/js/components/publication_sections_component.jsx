@@ -49,7 +49,13 @@ export default class PublicationSectionsComponent extends Component {
       <div id="new-publication-slide" className="container">
         <h1>Add Content to Your Publication</h1>
         {this.state.sections.map((section, i) => {
-          return <PublicationSection key={section.get('id')} position={i} id={section.get('id')} title={section.get('title')} body={section.get('body')} />
+          return <PublicationSection
+            key={section.get('id')}
+            position={i}
+            id={section.get('id')}
+            title={section.get('title')}
+            body={section.get('body')}
+            figures={section.get('figures')} />
         })}
         <button onClick={this.addSection.bind(this)}>+ Section</button>
       </div>

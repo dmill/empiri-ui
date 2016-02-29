@@ -9,7 +9,8 @@ export default class PublicationSection extends Component {
   componentWillMount() {
     this.state = {
       title: this.props.title,
-      body: this.props.body
+      body: this.props.body,
+      figures: this.props.figures
     }
   }
 
@@ -21,6 +22,10 @@ export default class PublicationSection extends Component {
       url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}`,
       contentType: 'application/json'
     }).done(() => store.dispatch(deleteSection(sectionId)))
+  }
+
+  addFigure() {
+
   }
 
   saveSection() {
@@ -52,7 +57,7 @@ export default class PublicationSection extends Component {
           Section Body
           <textarea name="body" value={this.state.body} onChange={this.onChange.bind(this)} />
         </label>
-        <ImageUploadComponent />
+        <ImageUploadComponent onClick={this.addFigure.bind(this)} />
         <button onClick={this.saveSection.bind(this)}>save this section</button>
         <button onClick={this.deleteSection.bind(this)}>delete this section</button>
       </div>

@@ -32,15 +32,6 @@ function currentUser(state = null, action) {
   }
 }
 
-function currentHypothesis(state = null, action) {
-  switch(action.type) {
-    case EXPAND_CONTRIBUTION:
-      return { contributionId: action.payload }
-    default:
-      return state
-  }
-}
-
 const defaultPublication = Immutable.fromJS({
   id: null,
   title: null,
