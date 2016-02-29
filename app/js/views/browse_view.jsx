@@ -3,15 +3,15 @@ import store from '../redux/store'
 import { Link } from 'react-router'
 import IconElement from '../elements/icon_element'
 
-const PublicationPreview = ({ updatedAt, publicationId, title, abstract, firstName, lastName, photoUrl }) => {
+const PublicationPreview = ({ updatedAt, publicationId, title, abstract, firstName, lastName, photoUrl, authorId }) => {
   return (
     <div className="publication-preview-element">
       <Link to={`/publications/${publicationId}`}>
         <h1>{title}</h1>
       </Link>
-      <img className="circle" src={photoUrl} />
+      <Link to={`/users/${authorId}`}><img className="circle" src={photoUrl} /></Link>
       <div className="author-data">
-        <div className="author">{firstName} {lastName}</div>
+        <Link to={`/users/${authorId}`}><div className="author">{firstName} {lastName}</div></Link>
         <div className="updated-at">updated Jan 28, 2016</div>
       </div>
       <h2>Abstract</h2>
@@ -49,6 +49,7 @@ export default class BrowseView extends Component {
                     key={i}
                     updatedAt={publication.updated_at}
                     photoUrl={publication._embedded.users[0].photo_url}
+                    authorId={publication._embedded.users[0].id}
                   />
                 )
               })}

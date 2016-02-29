@@ -4,6 +4,7 @@ import AddableAuthorComponent from '../components/addable_author_component'
 import PublicationSectionsComponent from '../components/publication_sections_component'
 import { updatePublication, deleteAuthor } from '../redux/actions'
 import IconElement from '../elements/icon_element'
+import { Link } from 'react-router'
 
 export class Slide0 extends Component {
   render() {
@@ -172,7 +173,7 @@ export class Slide5 extends Component {
     return (
       <div className="slide component">
         <h2>Almost Finished!</h2>
-        <button>Save For Later</button>
+        <Link to={`/users/${store.getState().currentUser.id}`}><button>Save For Later</button></Link>
         <button onClick={this.publishPublication.bind(this)}>Publish Now!</button>
       </div>
     )

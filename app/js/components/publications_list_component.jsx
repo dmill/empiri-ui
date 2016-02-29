@@ -27,6 +27,12 @@ export default class PublicationsListComponent extends Component {
     }
   }
 
+  renderEditButton(publication) {
+    if (this.props.editable) {
+      return <Link to={`/publications/${publication.id}/edit`}><button>edit</button></Link>
+    }
+  }
+
   renderPublications() {
     if (this.props.publications.length) {
       return (
@@ -34,7 +40,7 @@ export default class PublicationsListComponent extends Component {
           {this.props.publications.map((publication, i) => {
             return (
               <div className={`publication ${this.renderClassName(publication.published)}`} key={i}>
-                <Link to={`/publications/${publication.id}/edit`}><button>edit</button></Link>
+                {this.renderEditButton(publication)}
                 {this.renderIcon(publication.published)}
                 <Link to={`/publications/${publication.id}`} className="title clear-fix">{publication.title}</Link>
                 {this.renderStatus(publication.published)}

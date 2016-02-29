@@ -35,6 +35,28 @@ export default class UserProfileView extends Component {
     }).done(() => auth0.fetchUserData())
   }
 
+  renderTitle() {
+    if (this.props.routeParams.userId == store.getState().currentUser.id) {
+      return <h1>Your Publications</h1>
+    } else {
+      return <h1>{this.state.first_name}&rsquo;s Publications</h1>
+    }
+  }
+
+  renderEditButton() {
+    if (this.props.routeParams.userId == store.getState().currentUser.id) {
+      return <Link to="/user/edit"><button>Edit Profile</button></Link>
+    }
+  }
+
+  publicationsEditable() {
+    if (this.props.routeParams.userId == store.getState().currentUser.id) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   render() {
     return (
       <div id="user-profile-view" className="container">
@@ -43,11 +65,11 @@ export default class UserProfileView extends Component {
           <h5>{this.state.first_name} {this.state.last_name}</h5>
           <h6>{this.state.title}</h6>
           <p>{this.state.organization}</p>
-          <Link to="/profile/edit"><button>Edit Profile</button></Link>
+          {this.renderEditButton()}
         </div>
         <div className="nine columns">
-          <h1>Your Publications</h1>
-          <PublicationsListComponent publications={this.state._embedded.publications} />
+          {this.renderTitle()}
+          <PublicationsListComponent editable={this.publicationsEditable.bind(this)()} publications={this.state._embedded.publications} />
           <Link to="/publications/new"><button className="new-publication">Write a new publication</button></Link>
         </div>
       </div>
