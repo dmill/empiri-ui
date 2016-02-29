@@ -15,8 +15,8 @@ export default class AddableAuthorComponent extends Component {
       url: `http://localhost:4000/publications/${publicationId}/authors`,
       data: JSON.stringify({ author: this.state }),
       contentType: 'application/json'
-    }).done(() => {
-      store.dispatch(addAuthor(this.state))
+    }).done(({ author }) => {
+      store.dispatch(addAuthor(author))
       this.setState({ first_name: '', last_name: '', email: '', title: '', organization: '' })
     })
   }

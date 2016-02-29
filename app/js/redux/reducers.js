@@ -63,7 +63,7 @@ function publication(state = defaultPublication, action) {
       return state.updateIn(['_embedded', 'authors'], (authors) => authors.push(Immutable.Map(action.payload)))
 
     case DELETE_AUTHOR:
-      return state.updateIn(['_embedded', 'authors'], (authors) => authors.delete(Immutable.Map(action.payload)))
+      return state.updateIn(['_embedded', 'authors'], (authors) => authors.filterNot(author => author.get('id') === action.payload))
 
     case ADD_SECTION:
       return state.updateIn(['_embedded', 'sections'], (sections) => sections.push(Immutable.Map(action.payload)))

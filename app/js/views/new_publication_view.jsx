@@ -145,7 +145,7 @@ class Slide3 extends Component {
         </label>
         <label>
           Contributing Authors
-          {this.state.authors.map((author, i) => <SavedAuthor author={author} index={i} key={i} />)}
+          {this.state.authors.map((author) => <SavedAuthor author={author} key={author.get('id')} />)}
           <AddableAuthorComponent />
         </label>
       </div>
@@ -155,13 +155,19 @@ class Slide3 extends Component {
 
 class SavedAuthor extends Component {
   deleteAuthor() {
-    store.dispatch(deleteAuthor(this.props.index))
+    const publicationId = store.getState().publication.get('id')
+    const authorId = this.props.author.get('id')
+    $.ajax({
+      type: 'DELETE',
+      url: `http://localhost:4000/publications/${publicationId}/authors/${authorId}`,
+      contentType: 'application/json'
+    }).done(() => store.dispatch(deleteAuthor(authorId)))
   }
 
   render() {
     return(
       <div>
-        {this.props.author.first_name} {this.props.author.last_name}, {this.props.author.title} {this.props.author.email}
+        {this.props.author.get('first_name')} {this.props.author.get('last_name')}, {this.props.author.get('title')} {this.props.author.get('email')}
         <IconElement iconType="fontawesome" iconName="close" onClick={this.deleteAuthor.bind(this)} />
       </div>
     )
@@ -170,7 +176,7 @@ class SavedAuthor extends Component {
 
 class Slide5 extends Component {
   publishPublication() {
-    const publicationId = store.getState().publicationInProgress.id
+    const publicationId = store.getState().publication.get('id')
     $.ajax({
       type: 'PATCH',
       url: `http://localhost:4000/publications/${publicationId}`,
