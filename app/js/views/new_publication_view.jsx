@@ -18,7 +18,7 @@ export default class NewPublicationView extends Component {
         <Slide1 key={1} />,
         <Slide2 key={2} />,
         <Slide3 key={3} />,
-        <Slide4 key={4} />,
+        <PublicationSectionsComponent key={4} />,
         <Slide5 history={this.props.history} key={5} />
       ]} />
     )
@@ -167,8 +167,6 @@ class SavedAuthor extends Component {
     )
   }
 }
-
-const Slide4 = () => <PublicationSectionsComponent sections={[].concat(store.getState().publicationInProgress._embedded.sections)} />
 
 class Slide5 extends Component {
   publishPublication() {

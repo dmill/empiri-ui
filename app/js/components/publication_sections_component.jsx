@@ -1,45 +1,57 @@
 import React, { Component } from 'react'
+import Immutable from 'immutable'
 import store from '../redux/store'
 import { addSection, updatePublication } from '../redux/actions'
 import { Link } from 'react-router'
 import PublicationSection from '../components/publication_section_component'
 
-const defaultSection = {
+const defaultSection = Immutable.fromJS([{
   title: '',
   body: '',
   position: 0
-}
+}])
 
 export default class PublicationSectionsComponent extends Component {
   componentWillMount() {
-    this.state = { sections: [defaultSection].concat(this.props.sections) }
+    this.state = { sections: store.getState().publication.getIn(['_embedded', 'sections']) }
   }
 
-  handleClick() {
-    let sections = this.state.sections
-    sections = this.state.sections.concat(Object.assign({}, defaultSection, { position: this.state.sections.length }))
-    this.setState({ sections })
-  }
-
-  deleteSection(position) {
-    let sections = [].concat(this.state.sections)
-    sections.splice(position, 1)
-    this.setState({ sections })
-  }
-
-  renderDeleteButton() {
-    if (this.state.sections.length > 1) {
-      return <button onClick={this.deleteSection.bind(this)}>Delete Last Section</button>
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => this.setState({ sections: store.getState().publication.getIn(['_embedded', 'sections']) }))
+    if (this.state.sections.size === 0) {
+      this.addSection()
     }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
+  }
+
+  addSection() {
+    const publicationId = store.getState().publication.get('id')
+    const defaultSection = { section: {
+      title: '',
+      body: '',
+      position: this.state.sections.size
+    }}
+    $.ajax({
+      type: 'POST',
+      url: `http://localhost:4000/publications/${publicationId}/sections`,
+      contentType: 'application/json',
+      data: JSON.stringify(defaultSection)
+    }).done(({ section }) => {
+      store.dispatch(addSection(section))
+    })
   }
 
   render() {
     return (
       <div id="new-publication-slide" className="container">
         <h1>Add Content to Your Publication</h1>
-        {this.state.sections.map((section, i) => <PublicationSection key={i} position={i} title={section.title} body={section.body} deleteSection={this.deleteSection.bind(this)} />)}
-        <button onClick={this.handleClick.bind(this)}>+ Section</button>
-        {this.renderDeleteButton()}
+        {this.state.sections.map((section, i) => {
+          return <PublicationSection key={section.get('id')} position={i} id={section.get('id')} title={section.get('title')} body={section.get('body')} />
+        })}
+        <button onClick={this.addSection.bind(this)}>+ Section</button>
       </div>
     )
   }

@@ -6,6 +6,7 @@ export const UPDATE_PUBLICATION = 'UPDATE_PUBLICATION'
 export const ADD_AUTHOR = 'ADD_AUTHOR'
 export const DELETE_AUTHOR = 'DELETE_AUTHOR'
 export const ADD_SECTION = 'ADD_SECTION'
+export const DELETE_SECTION = 'DELETE_SECTION'
 export const NEW_PUBLICATION = 'NEW_PUBLICATION'
 
 export function updatePublication(publicationData) {
@@ -42,4 +43,8 @@ export function addSection(section) {
 
 export function newPublication() {
   return { type: NEW_PUBLICATION, payload: null }
+}
+
+export function deleteSection(position) {
+  return { type: DELETE_SECTION, payload: position }
 }

@@ -9,7 +9,8 @@ import {
   ADD_AUTHOR,
   DELETE_AUTHOR,
   ADD_SECTION,
-  NEW_PUBLICATION
+  NEW_PUBLICATION,
+  DELETE_SECTION
 } from './actions'
 
 function peerReview(state = null, action) {
@@ -51,27 +52,25 @@ const defaultPublication = Immutable.fromJS({
 })
 
 function publication(state = defaultPublication, action) {
-  let authors
-  let newState
-  let sections
   switch(action.type) {
     case NEW_PUBLICATION:
       return defaultPublication
 
     case UPDATE_PUBLICATION:
-      return state.merge(action.payload)
+      return state.merge(Immutable.Map(action.payload))
 
     case ADD_AUTHOR:
-      return state.updateIn(['_embedded', 'authors'], (authors) => authors.push(action.payload))
+      return state.updateIn(['_embedded', 'authors'], (authors) => authors.push(Immutable.Map(action.payload)))
 
     case DELETE_AUTHOR:
-      return state.updateIn(['_embedded', 'authors'], (authors) => authors.delete(action.payload))
+      return state.updateIn(['_embedded', 'authors'], (authors) => authors.delete(Immutable.Map(action.payload)))
 
     case ADD_SECTION:
-      sections = state._embedded.sections.concat(action.payload)
-      newState = Object.assign({}, state)
-      newState._embedded.sections = sections
-      return newState
+      return state.updateIn(['_embedded', 'sections'], (sections) => sections.push(Immutable.Map(action.payload)))
+
+    case DELETE_SECTION:
+      return state.updateIn(['_embedded', 'sections'], (sections) => sections.filterNot(section => section.get('id') === action.payload))
+
     default:
       return state
   }

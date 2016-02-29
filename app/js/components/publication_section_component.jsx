@@ -3,36 +3,37 @@ import IconElement from '../elements/icon_element'
 import InputElement from '../elements/input_element'
 import ImageUploadComponent from './image_upload_component'
 import store from '../redux/store'
-import { addSection } from '../redux/actions'
+import { addSection, deleteSection } from '../redux/actions'
 
 export default class PublicationSection extends Component {
   componentWillMount() {
     this.state = {
       title: this.props.title,
-      body: this.props.body,
-      position: this.props.position
+      body: this.props.body
     }
   }
 
   deleteSection() {
-    const publicationId = store.getState().publicationInProgress.id
-    const sectionId = this.state.position
+    const publicationId = store.getState().publication.get('id')
+    const sectionId = this.props.id
     $.ajax({
       type: 'DELETE',
       url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}`,
       contentType: 'application/json'
-    }).done(() => this.props.deleteSection(this.state.position))
+    }).done(() => store.dispatch(deleteSection(sectionId)))
   }
 
   saveSection() {
-    const publicationId = store.getState().publicationInProgress.id
+    if (this.state.title === '' || this.state.body === '') {
+      return
+    }
+    const publicationId = store.getState().publication.get('id')
+    const sectionId = this.props.id
     $.ajax({
-      type: 'POST',
-      url: `http://localhost:4000/publications/${publicationId}/sections`,
+      type: 'PATCH',
+      url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}`,
       data: JSON.stringify({ section: this.state }),
       contentType: 'application/json'
-    }).done(({ section }) => {
-      store.dispatch(addSection(section))
     })
   }
 
