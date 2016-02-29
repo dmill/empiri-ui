@@ -57,16 +57,16 @@ function publication(state = defaultPublication, action) {
       return defaultPublication
 
     case UPDATE_PUBLICATION:
-      return state.merge(Immutable.Map(action.payload))
+      return state.mergeDeep(Immutable.fromJS(action.payload))
 
     case ADD_AUTHOR:
-      return state.updateIn(['_embedded', 'authors'], (authors) => authors.push(Immutable.Map(action.payload)))
+      return state.updateIn(['_embedded', 'authors'], (authors) => authors.push(Immutable.fromJS(action.payload)))
 
     case DELETE_AUTHOR:
       return state.updateIn(['_embedded', 'authors'], (authors) => authors.filterNot(author => author.get('id') === action.payload))
 
     case ADD_SECTION:
-      return state.updateIn(['_embedded', 'sections'], (sections) => sections.push(Immutable.Map(action.payload)))
+      return state.updateIn(['_embedded', 'sections'], (sections) => sections.push(Immutable.fromJS(action.payload)))
 
     case DELETE_SECTION:
       return state.updateIn(['_embedded', 'sections'], (sections) => sections.filterNot(section => section.get('id') === action.payload))
