@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PeerReviewComponent from './peer_review_component'
 import PublicationView from '../views/publication_view'
+import store from '../redux/store'
 
 export default class TabsComponent extends Component {
   constructor(props) {

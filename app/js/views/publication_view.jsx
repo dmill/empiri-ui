@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
+import { newPublication, updatePublication } from '../redux/actions'
 import { Link } from 'react-router'
 import AvatarRowComponent from '../components/avatar_row_component'
 import AvatarComponent from '../components/avatar_component'
@@ -17,10 +18,19 @@ const Avatar = (props) => {
 
 export default class PublicationView extends Component {
   componentWillMount() {
-    this.state = {}
+    store.dispatch(newPublication())
+    this.state = store.getState().publication
+  }
+
+  componentDidMount() {
     const publicationId = this.props.routeParams.publicationId
+    this.unsubscribe = store.subscribe(() => this.setState(store.getState().publication))
     $.get(`http://localhost:4000/publications/${publicationId}`)
-      .done(({ publication }) => this.setState(publication))
+      .done(({ publication }) => store.dispatch(updatePublication(publication)))
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   render() {

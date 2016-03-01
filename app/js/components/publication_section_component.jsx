@@ -70,7 +70,7 @@ export default class PublicationSection extends Component {
           Section Body
           <textarea name="body" value={this.state.body} onChange={this.onChange.bind(this)} />
         </label>
-        <ImageUploadComponent onChange={this.addFigure.bind(this)} />
+        <button><ImageUploadComponent onChange={this.addFigure.bind(this)} /> add figure</button>
         {this.state.figures.map(figure => {
           <FigureComponent title={figure.get('title')} />
         })}
