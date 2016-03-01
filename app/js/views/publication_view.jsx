@@ -19,14 +19,16 @@ const Avatar = (props) => {
 export default class PublicationView extends Component {
   componentWillMount() {
     store.dispatch(newPublication())
-    this.state = store.getState().publication
+    this.state = { publication: store.getState().publication }
   }
 
   componentDidMount() {
     const publicationId = this.props.routeParams.publicationId
-    this.unsubscribe = store.subscribe(() => this.setState(store.getState().publication))
+    this.unsubscribe = store.subscribe(() => this.setState({ publication: store.getState().publication }))
     $.get(`http://localhost:4000/publications/${publicationId}`)
-      .done(({ publication }) => store.dispatch(updatePublication(publication)))
+      .done(({ publication }) => {
+        store.dispatch(updatePublication(publication))
+      })
   }
 
   componentWillUnmount() {
@@ -34,28 +36,28 @@ export default class PublicationView extends Component {
   }
 
   render() {
-    if(!this.state.title) {
+    const publication = this.state.publication
+    const user = publication.getIn(['_embedded', 'authors']).get(0)
+    if (!user) {
       return <div></div>
     }
-    const user = this.state._embedded.users[0]
-
     return (
       <div id="publication-view" className="container">
         <div className="row">
-          <h1>{this.state.title}</h1>
-          <img className="circle" src={user.photo_url} />
+          <h1>{publication.get('title')}</h1>
+          <img className="circle" src={user.get('photo_url')} />
           <div className="author-data">
-            <div className="author">{user.first_name} {user.last_name}</div>
+            <div className="author">{user.get('first_name')} {user.get('last_name')}</div>
             <div className="updated-at">updated Jan 28, 2016</div>
           </div>
           <h2>Abstract</h2>
-          <p>{this.state.abstract}</p>
+          <p>{publication.get('abstract')}</p>
           <h2>Sections</h2>
-          {this.state._embedded.sections.map((section) => {
+          {publication.getIn(['_embedded', 'sections']).map((section) => {
             return (
-              <div>
-                <h6>{section.title}</h6>
-                <p>{section.body}</p>
+              <div key={section.get('id')}>
+                <h6>{section.get('title')}</h6>
+                <p>{section.get('body')}</p>
               </div>
             )
           })}
