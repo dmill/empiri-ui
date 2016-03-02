@@ -64,7 +64,8 @@ function publication(state = defaultPublication, action) {
       return state.updateIn(['_embedded', 'sections'], (sections) => sections.filterNot(section => section.get('id') === action.payload))
 
     case ADD_FIGURE:
-      return state.updateIn(['_embedded', 'figures'], (figures) => figures.push(Immutable.fromJS(action.payload)))
+      const index = action.payload.position ? action.payload.position : 0
+      return state.updateIn(['_embedded', 'sections', index, 'figures'], (figures) => figures.push(Immutable.fromJS(action.payload)))
 
     default:
       return state

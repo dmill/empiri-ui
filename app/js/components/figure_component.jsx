@@ -11,7 +11,6 @@ export default class FigureComponent extends Component {
   }
 
   saveTitle(e) {
-    debugger
     store.dispatch(updateFigureTitle(this.props.id, e.target.value))
   }
 

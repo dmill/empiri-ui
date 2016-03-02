@@ -15,6 +15,14 @@ export default class PublicationSection extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      title: nextProps.title,
+      body: nextProps.body,
+      figures: nextProps.figures
+    })
+  }
+
   deleteSection() {
     const publicationId = store.getState().publication.get('id')
     const sectionId = this.props.id
@@ -32,7 +40,7 @@ export default class PublicationSection extends Component {
     formData.append('photo', e.target.files[0])
 
     $.ajax({
-      url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}/figures`,
+      url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}/photos`,
       data: formData,
       type: 'POST',
       processData: false,
@@ -70,10 +78,12 @@ export default class PublicationSection extends Component {
           Section Body
           <textarea name="body" value={this.state.body} onChange={this.onChange.bind(this)} />
         </label>
-        <button><ImageUploadComponent onChange={this.addFigure.bind(this)} /> add figure</button>
-        {this.state.figures.map(figure => {
-          <FigureComponent title={figure.get('title')} />
-        })}
+        <button><ImageUploadComponent onChange={this.addFigure.bind(this)} /></button>
+        <div className="figures clear-fix">
+          {this.state.figures.map(figure => {
+            return <FigureComponent key={figure.get('id')} photo_url={figure.get('photo_url')} title={figure.get('title')} />
+          })}
+        </div>
         <button onClick={this.saveSection.bind(this)}>save this section</button>
         <button onClick={this.deleteSection.bind(this)}>delete this section</button>
       </div>

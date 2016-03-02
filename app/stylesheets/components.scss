@@ -200,6 +200,10 @@
     resize: none;
     height: 20em;
   }
+
+  .figures {
+    width: 100%;
+  }
 }
 
 .image-upload-component {
@@ -351,5 +355,17 @@
       margin-top: -2px;
       font-family: "Pontano Sans";
     }
+  }
+}
+
+.figure.component {
+  float: left;
+  width: 32%;
+  img {
+    max-width: 100%;
+    max-height: 40rem;
+  }
+  &:not(:first-child) {
+    margin-left: 1%;
   }
 }
