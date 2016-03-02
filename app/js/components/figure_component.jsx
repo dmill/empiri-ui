@@ -36,8 +36,14 @@ export default class FigureComponent extends Component {
     return (
       <div className="figure component">
         {<img src={this.props.photo_url} />}
-        <IconElement iconType="material" onClick={this.editTitle.bind(this)} iconName="mode_edit" />
-        <IconElement iconType="material" iconName="mode_edit" />
+        <div className="title">
+          <input type="text" value="Figure Title" disabled="true" />
+          <IconElement iconType="material" onClick={this.editTitle.bind(this)} iconName="mode_edit" />
+        </div>
+        <div className="caption">
+          <input type="text" value="Figure Caption" disabled="true" />
+          <IconElement iconType="material" iconName="mode_edit" />
+        </div>
       </div>
     )
   }
