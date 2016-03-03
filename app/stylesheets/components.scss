@@ -361,11 +361,40 @@
 .figure.component {
   float: left;
   width: 32%;
+  height: 30rem;
   img {
     max-width: 100%;
     max-height: 20rem;
   }
   &:not(:first-child) {
     margin-left: 1%;
+  }
+
+  .title, .caption {
+    position: relative;
+
+    i {
+      position: absolute;
+      right: 0.5rem;
+      font-size: 2rem;
+      top: 1px;
+      color: #999;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
+    }
+    input {
+      height: auto;
+      padding: 5px;
+      margin-bottom: 2px;
+
+      &.disabled {
+        border: none;
+        border-radius: 0;
+        background-color: #eee;
+      }
+    }
   }
 }

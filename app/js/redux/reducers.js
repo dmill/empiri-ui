@@ -11,7 +11,8 @@ import {
   ADD_SECTION,
   NEW_PUBLICATION,
   DELETE_SECTION,
-  ADD_FIGURE
+  ADD_FIGURE,
+  UPDATE_FIGURE
 } from './actions'
 
 function peerReview(state = null, action) {
@@ -66,6 +67,15 @@ function publication(state = defaultPublication, action) {
     case ADD_FIGURE:
       const index = action.payload.position ? action.payload.position : 0
       return state.updateIn(['_embedded', 'sections', index, 'figures'], (figures) => figures.push(Immutable.fromJS(action.payload)))
+
+    case UPDATE_FIGURE:
+      const currentSection = state.getIn(['_embedded', 'sections']).filter(section => section.get('id') === action.payload.section_id).get(0)
+      const prunedFigures = currentSection.get('figures').filterNot(figure => figure.get('id') === action.payload.id)
+      const updatedFigures = prunedFigures.insert(action.payload.position, Immutable.fromJS(action.payload))
+      const updatedSection = currentSection.update('figures', figures => updatedFigures)
+      const prunedSections = state.getIn(['_embedded', 'sections']).filterNot(section => section.get('id') === action.payload.section_id)
+      const updatedSections = prunedSections.insert(currentSection.get('position'), updatedSection)
+      return state.updateIn(['_embedded', 'sections'], sections => updatedSections)
 
     default:
       return state

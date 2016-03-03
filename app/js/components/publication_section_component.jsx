@@ -81,7 +81,7 @@ export default class PublicationSection extends Component {
         <button><ImageUploadComponent onChange={this.addFigure.bind(this)} /></button>
         <div className="figures clear-fix">
           {this.state.figures.map(figure => {
-            return <FigureComponent key={figure.get('id')} photo_url={figure.get('photo_url')} title={figure.get('title')} />
+            return <FigureComponent key={figure.get('id')} figure={figure} />
           })}
         </div>
         <button onClick={this.saveSection.bind(this)}>save this section</button>

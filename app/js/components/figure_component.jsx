@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import IconElement from '../elements/icon_element'
+import { updateFigure } from '../redux/actions'
+import store from '../redux/store'
 
 export default class FigureComponent extends Component {
   componentWillMount() {
@@ -10,8 +12,59 @@ export default class FigureComponent extends Component {
     this.setState({ editingTitle: true })
   }
 
+  editCaption() {
+    this.setState({ editingCaption: true })
+  }
+
   saveTitle(e) {
-    store.dispatch(updateFigureTitle(this.props.id, e.target.value))
+    const publicationId = store.getState().publication.get('id')
+    const sectionId = this.props.figure.get('section_id')
+    const figureId = this.props.figure.get('id')
+    const data = { figure: { title: e.target.previousElementSibling.value } }
+    $.ajax({
+      type: 'PATCH',
+      url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    }).done(({ figure }) => {
+      this.setState({ editingTitle: false })
+      store.dispatch(updateFigure(figure))
+    })
+  }
+
+  saveCaption(e) {
+    const publicationId = store.getState().publication.get('id')
+    const sectionId = this.props.figure.get('section_id')
+    const figureId = this.props.figure.get('id')
+    const data = { figure: { caption: e.target.previousElementSibling.value } }
+    $.ajax({
+      type: 'PATCH',
+      url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    }).done(({ figure }) => {
+      this.setState({ editingCaption: false })
+      store.dispatch(updateFigure(figure))
+    })
+  }
+
+  renderCaption() {
+    if (this.state.editingCaption) {
+      return (
+        <div className="caption">
+          <input type="text" />
+          <IconElement onClick={this.saveCaption.bind(this)} iconType="material" iconName="check_circle" />
+        </div>
+      )
+    } else {
+      const caption = this.props.figure.get('caption') ? this.props.figure.get('caption') : "Figure Caption"
+      return (
+        <div className="caption">
+          <input className="disabled" type="text" value={caption} />
+          <IconElement iconType="material" onClick={this.editCaption.bind(this)} iconName="mode_edit" />
+        </div>
+      )
+    }
   }
 
   renderTitle() {
@@ -19,14 +72,15 @@ export default class FigureComponent extends Component {
       return (
         <div className="title">
           <input type="text" />
-          <IconElement onClick={this.saveTitle.bind(this)} iconType="material" iconName="save" />
+          <IconElement onClick={this.saveTitle.bind(this)} iconType="material" iconName="check_circle" />
         </div>
       )
     } else {
+      const title = this.props.figure.get('title') ? this.props.figure.get('title') : "Figure Title"
       return (
         <div className="title">
-          <div>{this.props.title}</div>
-          <IconElement iconType="material" iconName="mode_edit" />
+          <input className="disabled" type="text" value={title} />
+          <IconElement iconType="material" onClick={this.editTitle.bind(this)} iconName="mode_edit" />
         </div>
       )
     }
@@ -35,15 +89,9 @@ export default class FigureComponent extends Component {
   render() {
     return (
       <div className="figure component">
-        {<img src={this.props.photo_url} />}
-        <div className="title">
-          <input type="text" value="Figure Title" disabled="true" />
-          <IconElement iconType="material" onClick={this.editTitle.bind(this)} iconName="mode_edit" />
-        </div>
-        <div className="caption">
-          <input type="text" value="Figure Caption" disabled="true" />
-          <IconElement iconType="material" iconName="mode_edit" />
-        </div>
+        {<img src={this.props.figure.get('photo_url')} />}
+        {this.renderTitle()}
+        {this.renderCaption()}
       </div>
     )
   }
