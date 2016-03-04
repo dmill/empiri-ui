@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
+import ajax from '../lib/ajax'
 
 export default class UserProfileEditView extends Component {
   componentWillMount() {
@@ -12,11 +13,13 @@ export default class UserProfileEditView extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    $.ajax({
+    const userId = store.getState().currentUser.id
+    ajax.request({
       type: 'PATCH',
       contentType: 'application/json',
-      url: 'http://localhost:4000/users/' + this.state.id,
+      url: 'https://localhost:4000/users/' + this.state.id,
       data: JSON.stringify({ user: this.state }),
+      success: () => this.props.history.push(`/users/${userId}`)
     })
   }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import IconElement from '../elements/icon_element'
 import { updateFigure } from '../redux/actions'
 import store from '../redux/store'
+import ajax from '../lib/ajax'
 
 export default class FigureComponent extends Component {
   componentWillMount() {
@@ -21,14 +22,15 @@ export default class FigureComponent extends Component {
     const sectionId = this.props.figure.get('section_id')
     const figureId = this.props.figure.get('id')
     const data = { figure: { title: e.target.previousElementSibling.value } }
-    $.ajax({
+    ajax.request({
       type: 'PATCH',
-      url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
+      url: `https://localhost:4000/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
       data: JSON.stringify(data),
-      contentType: 'application/json'
-    }).done(({ figure }) => {
-      this.setState({ editingTitle: false })
-      store.dispatch(updateFigure(figure))
+      contentType: 'application/json',
+      success: ({ figure }) => {
+        this.setState({ editingTitle: false })
+        store.dispatch(updateFigure(figure))
+      }
     })
   }
 
@@ -37,14 +39,15 @@ export default class FigureComponent extends Component {
     const sectionId = this.props.figure.get('section_id')
     const figureId = this.props.figure.get('id')
     const data = { figure: { caption: e.target.previousElementSibling.value } }
-    $.ajax({
+    ajax.request({
       type: 'PATCH',
-      url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
+      url: `https://localhost:4000/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
       data: JSON.stringify(data),
-      contentType: 'application/json'
-    }).done(({ figure }) => {
-      this.setState({ editingCaption: false })
-      store.dispatch(updateFigure(figure))
+      contentType: 'application/json',
+      success: ({ figure }) => {
+        this.setState({ editingCaption: false })
+        store.dispatch(updateFigure(figure))
+      }
     })
   }
 

@@ -27,7 +27,8 @@ export default class PublicationView extends Component {
     const publicationId = this.props.routeParams.publicationId
     this.unsubscribe = store.subscribe(() => this.setState({ publication: store.getState().publication }))
     ajax.request({
-      url: `http://localhost:4000/publications/${publicationId}`,
+      type: 'GET',
+      url: `https://localhost:4000/publications/${publicationId}`,
       success: ({ publication }) => store.dispatch(updatePublication(publication))
     })
   }

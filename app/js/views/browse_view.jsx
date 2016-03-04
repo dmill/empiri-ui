@@ -29,7 +29,7 @@ export default class BrowseView extends Component {
     this.state = { publications: [] }
     ajax.request({
       type: 'GET',
-      url: 'http://localhost:4000/publications',
+      url: 'https://localhost:4000/publications',
       success: ({ publications }) => this.setState({ publications }),
     })
   }

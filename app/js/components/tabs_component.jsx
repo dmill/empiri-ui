@@ -8,7 +8,7 @@ export default class TabsComponent extends Component {
     super(props)
     this.tabs = [
       { name: 'Your Review',
-        body: <PeerReviewComponent />
+        body: <PeerReviewComponent history={this.props.history} />
       },
       {
         name: 'TIPR: transcription initiation pattern recognition on a genome scale',
@@ -43,7 +43,7 @@ export default class TabsComponent extends Component {
         </div>
         <div className="pane">
           <div>{this.tabs.map((tab, i) => {
-            return (<div className={`pane-content ${this.getClassName(i)}`}>
+            return (<div key={i} className={`pane-content ${this.getClassName(i)}`}>
               {tab.body}
             </div>)
           })}

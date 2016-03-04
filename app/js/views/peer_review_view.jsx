@@ -3,21 +3,24 @@ import store from '../redux/store'
 import { Link } from 'react-router'
 import { updatePublication } from '../redux/actions'
 import TabsComponent from '../components/tabs_component'
+import ajax from '../lib/ajax'
 
 export default class PeerReviewView extends Component {
   componentDidMount() {
     const publicationId = this.props.routeParams.publicationId
-    $.ajax({
+    ajax.request({
       type: 'GET',
-      url: `http://localhost:4000/publications/${publicationId}`,
+      url: `https://localhost:4000/publications/${publicationId}`,
       contentType: 'application/json',
-    }).done(({ publication }) => store.dispatch(updatePublication(publication)))
+      success: ({ publication }) => store.dispatch(updatePublication(publication))
+    })
   }
+
   render() {
     return (
       <div id="peer-review-view" className="container">
         <h1>New Peer Review</h1>
-        <TabsComponent routeParams={this.props.routeParams} />
+        <TabsComponent history={this.props.history} routeParams={this.props.routeParams} />
       </div>
     )
   }

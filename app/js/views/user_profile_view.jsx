@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import EditableImageComponent from '../components/editable_image_component'
 import PublicationsListComponent from '../components/publications_list_component'
 import auth0 from '../auth0/auth0'
+import ajax from '../lib/ajax'
 
 export default class UserProfileView extends Component {
   componentWillMount() {
@@ -12,8 +13,10 @@ export default class UserProfileView extends Component {
 
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.setState(store.getState().currentUser))
-    $.get(`http://localhost:4000/users/${this.props.routeParams.userId}`).done(({ user }) => {
-      this.setState(user)
+    ajax.request({
+      type: 'GET',
+      url: `https://localhost:4000/users/${this.props.routeParams.userId}`,
+      success: ({ user }) => this.setState(user)
     })
   }
 
@@ -26,13 +29,14 @@ export default class UserProfileView extends Component {
     const userId = store.getState().currentUser.id
     formData.append('photo', e.target.files[0])
 
-    $.ajax({
-      url: `http://localhost:4000/users/${userId}/photos`,
+    ajax.request({
+      url: `https://localhost:4000/users/${userId}/photos`,
       data: formData,
       type: 'POST',
       processData: false,
-      contentType: false
-    }).done(() => auth0.fetchUserData())
+      file: true,
+      success: () => auth0.fetchUserData()
+    })
   }
 
   renderTitle() {

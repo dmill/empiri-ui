@@ -13,7 +13,7 @@ export default class AddableAuthorComponent extends Component {
     const publicationId = store.getState().publication.get('id')
     ajax.request({
       type: 'POST',
-      url: `http://localhost:4000/publications/${publicationId}/authors`,
+      url: `https://localhost:4000/publications/${publicationId}/authors`,
       data: JSON.stringify({ author: this.state }),
       contentType: 'application/json',
       success: ({ author }) => {

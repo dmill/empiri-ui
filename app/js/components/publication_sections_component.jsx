@@ -39,7 +39,7 @@ export default class PublicationSectionsComponent extends Component {
     }}
     ajax.request({
       type: 'POST',
-      url: `http://localhost:4000/publications/${publicationId}/sections`,
+      url: `https://localhost:4000/publications/${publicationId}/sections`,
       contentType: 'application/json',
       data: JSON.stringify(defaultSection),
       success: ({ section }) => store.dispatch(addSection(section))

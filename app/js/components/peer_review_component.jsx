@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import store from '../redux/store'
 import AvatarComponent from './avatar_component'
 import IconElement from '../elements/icon_element'
+import ajax from '../lib/ajax'
 
 export default class PeerReviewComponent extends Component {
   componentWillMount() {
@@ -19,12 +20,13 @@ export default class PeerReviewComponent extends Component {
   saveReview(e) {
     e.preventDefault()
     const publicationId = store.getState().publication.get('id')
-    $.ajax({
+    ajax.request({
       type: 'POST',
-      url: `http://localhost:4000/publications/${publicationId}/reviews`,
+      url: `https://localhost:4000/publications/${publicationId}/reviews`,
       data: JSON.stringify({ review: this.state }),
-      contentType: 'application/json'
-    }).done(({ review }) => this.props.history.push(`/publications/${review.publication_id}`))
+      contentType: 'application/json',
+      success: ({ review }) => this.props.history.push(`/publications/${review.publication_id}`)
+    })
   }
 
   renderRating(rating) {
