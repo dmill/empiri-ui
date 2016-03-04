@@ -10,6 +10,7 @@ export const DELETE_SECTION = 'DELETE_SECTION'
 export const NEW_PUBLICATION = 'NEW_PUBLICATION'
 export const ADD_FIGURE = 'ADD_FIGURE'
 export const UPDATE_FIGURE = 'UPDATE_FIGURE'
+export const NEW_PEER_REVIEW = 'NEW_PEER_REVIEW'
 
 export function updatePublication(publicationData) {
   return { type: UPDATE_PUBLICATION, payload: publicationData }

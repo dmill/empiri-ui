@@ -12,14 +12,25 @@ import {
   NEW_PUBLICATION,
   DELETE_SECTION,
   ADD_FIGURE,
-  UPDATE_FIGURE
+  UPDATE_FIGURE,
+  NEW_PEER_REVIEW
 } from './actions'
 
-function peerReview(state = null, action) {
+const defaultPeerReview = Immutable.fromJS({
+  title: '',
+  body: ''
+})
+
+function peerReview(state = defaultPeerReview, action) {
   switch(action.type) {
+    case NEW_PEER_REVIEW:
+      return defaultPeerReview
+
     case UPDATE_PEER_REVIEW:
       return action.payload
-    default: return state
+
+    default:
+      return state
   }
 }
 

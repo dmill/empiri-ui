@@ -161,6 +161,22 @@
   button {
     float: right;
   }
+
+  .rating {
+    input[type="radio"] {
+      display: none;
+    }
+    label {
+      float: left;
+      border-radius: 3px;
+      border: 1px solid #555;
+      cursor: pointer;
+
+      &.checked {
+        background-color: #eee;
+      }
+    }
+  }
 }
 
 .tabs-component {
@@ -187,6 +203,14 @@
     border-radius: 0 3px 3px 3px;
     overflow-x: hidden;
     overflow-y: scroll;
+
+    .pane-content {
+      display: none;
+    }
+
+    .pane-content.active {
+      display: block;
+    }
   }
 }
 

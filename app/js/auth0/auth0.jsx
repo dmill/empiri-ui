@@ -37,12 +37,12 @@ class Auth0 {
 
   logout() {
     localStorage.removeItem('userToken')
-    $.ajaxSetup({ headers: {} })
+    $.ajaxSettings({ headers: {} })
     store.dispatch(logout())
   }
 
   setAuthHeader(idToken) {
-    $.ajaxSetup({ headers: { 'Authorization': 'Bearer ' + idToken } })
+    $.ajaxSettings({ headers: { 'Authorization': 'Bearer ' + idToken } })
   }
 }
 

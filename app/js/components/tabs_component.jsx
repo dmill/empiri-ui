@@ -42,7 +42,12 @@ export default class TabsComponent extends Component {
           })}
         </div>
         <div className="pane">
-          <div>{this.tabs[this.state.activeTab].body}</div>
+          <div>{this.tabs.map((tab, i) => {
+            return (<div className={`pane-content ${this.getClassName(i)}`}>
+              {tab.body}
+            </div>)
+          })}
+          </div>
         </div>
       </div>
     )
