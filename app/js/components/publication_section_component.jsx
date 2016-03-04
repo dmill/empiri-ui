@@ -5,6 +5,7 @@ import ImageUploadComponent from './image_upload_component'
 import store from '../redux/store'
 import { addSection, deleteSection, addFigure } from '../redux/actions'
 import FigureComponent from '../components/figure_component'
+import ajax from '../lib/ajax'
 
 export default class PublicationSection extends Component {
   componentWillMount() {
@@ -26,11 +27,12 @@ export default class PublicationSection extends Component {
   deleteSection() {
     const publicationId = store.getState().publication.get('id')
     const sectionId = this.props.id
-    $.ajax({
+    ajax.request({
       type: 'DELETE',
       url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}`,
-      contentType: 'application/json'
-    }).done(() => store.dispatch(deleteSection(sectionId)))
+      contentType: 'application/json',
+      success: () => store.dispatch(deleteSection(sectionId))
+    })
   }
 
   addFigure(e) {
@@ -39,13 +41,14 @@ export default class PublicationSection extends Component {
     let formData = new FormData()
     formData.append('photo', e.target.files[0])
 
-    $.ajax({
+    ajax.request({
       url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}/photos`,
       data: formData,
       type: 'POST',
-      processData: false,
-      contentType: false
-    }).done(({ figure }) => store.dispatch(addFigure(figure)))
+      file: true,
+      contentType: false,
+      success: ({ figure }) => store.dispatch(addFigure(figure))
+    })
   }
 
   saveSection() {
@@ -55,7 +58,7 @@ export default class PublicationSection extends Component {
 
     const publicationId = store.getState().publication.get('id')
     const sectionId = this.props.id
-    $.ajax({
+    ajax.request({
       type: 'PATCH',
       url: `http://localhost:4000/publications/${publicationId}/sections/${sectionId}`,
       data: JSON.stringify({ section: this.state }),

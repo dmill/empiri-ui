@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import store from '../redux/store'
 import { Link } from 'react-router'
 import IconElement from '../elements/icon_element'
+import ajax from '../lib/ajax'
 
 const PublicationPreview = ({ updatedAt, publicationId, title, abstract, firstName, lastName, photoUrl, authorId }) => {
   return (
@@ -26,8 +27,10 @@ const PublicationPreview = ({ updatedAt, publicationId, title, abstract, firstNa
 export default class BrowseView extends Component {
   componentWillMount() {
     this.state = { publications: [] }
-    $.get('http://localhost:4000/publications').done(({ publications }) => {
-      this.setState({ publications })
+    ajax.request({
+      type: 'GET',
+      url: 'http://localhost:4000/publications',
+      success: ({ publications }) => this.setState({ publications }),
     })
   }
 

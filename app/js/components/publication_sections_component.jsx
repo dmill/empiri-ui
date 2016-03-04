@@ -4,6 +4,7 @@ import store from '../redux/store'
 import { addSection, updatePublication } from '../redux/actions'
 import { Link } from 'react-router'
 import PublicationSection from '../components/publication_section_component'
+import ajax from '../lib/ajax'
 
 const defaultSection = Immutable.fromJS([{
   title: '',
@@ -36,13 +37,12 @@ export default class PublicationSectionsComponent extends Component {
       body: '',
       position: this.state.sections.size
     }}
-    $.ajax({
+    ajax.request({
       type: 'POST',
       url: `http://localhost:4000/publications/${publicationId}/sections`,
       contentType: 'application/json',
-      data: JSON.stringify(defaultSection)
-    }).done(({ section }) => {
-      store.dispatch(addSection(section))
+      data: JSON.stringify(defaultSection),
+      success: ({ section }) => store.dispatch(addSection(section))
     })
   }
 

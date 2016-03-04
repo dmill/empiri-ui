@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import IconElement from '../elements/icon_element'
 import store from '../redux/store'
 import { addAuthor } from '../redux/actions'
+import ajax from '../lib/ajax'
 
 export default class AddableAuthorComponent extends Component {
   componentWillMount() {
@@ -10,14 +11,15 @@ export default class AddableAuthorComponent extends Component {
 
   addAuthor() {
     const publicationId = store.getState().publication.get('id')
-    $.ajax({
+    ajax.request({
       type: 'POST',
       url: `http://localhost:4000/publications/${publicationId}/authors`,
       data: JSON.stringify({ author: this.state }),
-      contentType: 'application/json'
-    }).done(({ author }) => {
-      store.dispatch(addAuthor(author))
-      this.setState({ first_name: '', last_name: '', email: '', title: '', organization: '' })
+      contentType: 'application/json',
+      success: ({ author }) => {
+        store.dispatch(addAuthor(author))
+        this.setState({ first_name: '', last_name: '', email: '', title: '', organization: '' })
+      }
     })
   }
 

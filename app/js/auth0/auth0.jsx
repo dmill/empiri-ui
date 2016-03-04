@@ -1,6 +1,7 @@
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from './auth0-variables'
 import store from '../redux/store'
 import { setCurrentUser, logout } from '../redux/actions'
+import ajax from '../lib/ajax'
 
 class Auth0 {
   authenticate() {
@@ -14,11 +15,12 @@ class Auth0 {
   }
 
   fetchUserData() {
-    $.ajax({
+    ajax.request({
       contentType: 'application/json',
       url: 'http://localhost:4000/users/login',
       type: 'GET',
-    }).done(({ user }) => store.dispatch(setCurrentUser(user)))
+      success: ({ user }) => store.dispatch(setCurrentUser(user))
+    })
   }
 
   getIdToken(authHash) {
@@ -37,12 +39,12 @@ class Auth0 {
 
   logout() {
     localStorage.removeItem('userToken')
-    $.ajaxSettings({ headers: {} })
+    ajax.beforeSend = (request) => request.setRequestHeader('Authorization', '')
     store.dispatch(logout())
   }
 
   setAuthHeader(idToken) {
-    $.ajaxSettings({ headers: { 'Authorization': 'Bearer ' + idToken } })
+    ajax.beforeSend = (request) => request.setRequestHeader('Authorization', 'Bearer ' + idToken)
   }
 }
 

@@ -5,6 +5,7 @@ import PublicationSectionsComponent from '../components/publication_sections_com
 import { updatePublication, deleteAuthor } from '../redux/actions'
 import IconElement from '../elements/icon_element'
 import { Link } from 'react-router'
+import ajax from '../lib/ajax'
 
 export class Slide0 extends Component {
   render() {
@@ -31,19 +32,21 @@ export class Slide1 extends Component {
     this.unsubscribe()
     const publicationId = store.getState().publication.get('id')
     if (publicationId) {
-      $.ajax({
+      ajax.request({
         type: 'PATCH',
         url: `http://localhost:4000/publications/${publicationId}`,
         data: JSON.stringify({ publication: { title: this.state.title }}),
-        contentType: 'application/json'
-      }).done(({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title })))
+        contentType: 'application/json',
+        success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title }))
+      })
     } else {
-      $.ajax({
+      ajax.request({
         type: 'POST',
         url: 'http://localhost:4000/publications/',
         data: JSON.stringify({ publication: { title: this.state.title }}),
-        contentType: 'application/json'
-      }).done(({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title })))
+        contentType: 'application/json',
+        success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title }))
+      })
     }
   }
 
@@ -77,12 +80,13 @@ export class Slide2 extends Component {
   componentWillUnmount() {
     this.unsubscribe()
     const publication = store.getState().publication
-    $.ajax({
+    ajax.request({
       type: 'PATCH',
       url: `http://localhost:4000/publications/${publication.get('id')}`,
       data: JSON.stringify({ publication: { abstract: this.state.abstract }}),
-      contentType: 'application/json'
-    }).done(({ publication }) => store.dispatch(updatePublication({ abstract: publication.abstract })))
+      contentType: 'application/json',
+      success: ({ publication }) => store.dispatch(updatePublication({ abstract: publication.abstract }))
+    })
   }
 
   onChange(e) {
@@ -138,11 +142,12 @@ class SavedAuthor extends Component {
   deleteAuthor() {
     const publicationId = store.getState().publication.get('id')
     const authorId = this.props.author.get('id')
-    $.ajax({
+    ajax.request({
       type: 'DELETE',
       url: `http://localhost:4000/publications/${publicationId}/authors/${authorId}`,
-      contentType: 'application/json'
-    }).done(() => store.dispatch(deleteAuthor(authorId)))
+      contentType: 'application/json',
+      success: () => store.dispatch(deleteAuthor(authorId))
+    })
   }
 
   render() {
@@ -158,14 +163,15 @@ class SavedAuthor extends Component {
 export class Slide5 extends Component {
   publishPublication() {
     const publicationId = store.getState().publication.get('id')
-    $.ajax({
+    ajax.request({
       type: 'PATCH',
       url: `http://localhost:4000/publications/${publicationId}`,
       data: JSON.stringify({ publication: { published: true } }),
       contentType: 'application/json',
-    }).done(() => {
-      store.dispatch(updatePublication({ published: true }))
-      this.props.history.push(`/publications/${publicationId}`)
+      success: () => {
+        store.dispatch(updatePublication({ published: true }))
+        this.props.history.push(`/publications/${publicationId}`)
+      }
     })
   }
 

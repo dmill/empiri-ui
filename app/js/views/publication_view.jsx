@@ -6,6 +6,7 @@ import AvatarRowComponent from '../components/avatar_row_component'
 import AvatarComponent from '../components/avatar_component'
 import ContributionsListView from './contributions_list_view'
 import IconElement from '../elements/icon_element'
+import ajax from '../lib/ajax'
 
 const Avatar = (props) => {
   return (
@@ -25,10 +26,10 @@ export default class PublicationView extends Component {
   componentDidMount() {
     const publicationId = this.props.routeParams.publicationId
     this.unsubscribe = store.subscribe(() => this.setState({ publication: store.getState().publication }))
-    $.get(`http://localhost:4000/publications/${publicationId}`)
-      .done(({ publication }) => {
-        store.dispatch(updatePublication(publication))
-      })
+    ajax.request({
+      url: `http://localhost:4000/publications/${publicationId}`,
+      success: ({ publication }) => store.dispatch(updatePublication(publication))
+    })
   }
 
   componentWillUnmount() {
