@@ -1,4 +1,11 @@
 class Ajax {
+  getDomain() {
+    if (__PROD__) {
+      return 'https://desolate-thicket-91367.herokuapp.com/'
+    } else {
+      return 'http://localhost:4000'
+    }
+  }
   request(options) {
     const xhr = new XMLHttpRequest()
     xhr.open(options.type, encodeURI(options.url))

@@ -16,4 +16,3 @@ const App = ({ children, history, route }) => {
 
 const lock = auth0.authenticate()
 startRouter(App, lock)
-

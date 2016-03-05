@@ -1,3 +1,9 @@
+var webpack = require('webpack')
+
+var envPlugin = new webpack.DefinePlugin({
+   __PROD__: JSON.stringify(JSON.parse(process.env.BUILD_PROD || 'false'))
+});
+
 module.exports = {
   entry: {
     main: "./app/js/application.jsx"
@@ -22,5 +28,6 @@ module.exports = {
   },
   resolve: {
     extensions: ["", ".js", ".jsx"],
-  }
+  },
+  plugins: [envPlugin]
 };

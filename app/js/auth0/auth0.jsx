@@ -17,7 +17,7 @@ class Auth0 {
   fetchUserData() {
     ajax.request({
       contentType: 'application/json',
-      url: 'https://localhost:4000/users/login',
+      url: `${ajax.getDomain()}/users/login`,
       type: 'GET',
       success: ({ user }) => store.dispatch(setCurrentUser(user))
     })
