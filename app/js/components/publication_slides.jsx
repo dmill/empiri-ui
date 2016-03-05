@@ -34,7 +34,7 @@ export class Slide1 extends Component {
     if (publicationId) {
       ajax.request({
         type: 'PATCH',
-        url: `https://localhost:4000/publications/${publicationId}`,
+        url: `${ajax.getDomain()}/publications/${publicationId}`,
         data: JSON.stringify({ publication: { title: this.state.title }}),
         contentType: 'application/json',
         success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title }))
@@ -42,7 +42,7 @@ export class Slide1 extends Component {
     } else {
       ajax.request({
         type: 'POST',
-        url: 'https://localhost:4000/publications/',
+        url: '${ajax.getDomain()}/publications/',
         data: JSON.stringify({ publication: { title: this.state.title }}),
         contentType: 'application/json',
         success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title }))
@@ -82,7 +82,7 @@ export class Slide2 extends Component {
     const publication = store.getState().publication
     ajax.request({
       type: 'PATCH',
-      url: `https://localhost:4000/publications/${publication.get('id')}`,
+      url: `${ajax.getDomain()}/publications/${publication.get('id')}`,
       data: JSON.stringify({ publication: { abstract: this.state.abstract }}),
       contentType: 'application/json',
       success: ({ publication }) => store.dispatch(updatePublication({ abstract: publication.abstract }))
@@ -144,7 +144,7 @@ class SavedAuthor extends Component {
     const authorId = this.props.author.get('id')
     ajax.request({
       type: 'DELETE',
-      url: `https://localhost:4000/publications/${publicationId}/authors/${authorId}`,
+      url: `${ajax.getDomain()}/publications/${publicationId}/authors/${authorId}`,
       contentType: 'application/json',
       success: () => store.dispatch(deleteAuthor(authorId))
     })
@@ -165,7 +165,7 @@ export class Slide5 extends Component {
     const publicationId = store.getState().publication.get('id')
     ajax.request({
       type: 'PATCH',
-      url: `https://localhost:4000/publications/${publicationId}`,
+      url: `${ajax.getDomain()}/publications/${publicationId}`,
       data: JSON.stringify({ publication: { published: true } }),
       contentType: 'application/json',
       success: () => {

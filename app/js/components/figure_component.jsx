@@ -24,7 +24,7 @@ export default class FigureComponent extends Component {
     const data = { figure: { title: e.target.previousElementSibling.value } }
     ajax.request({
       type: 'PATCH',
-      url: `https://localhost:4000/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
+      url: `${ajax.getDomain()}/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
       data: JSON.stringify(data),
       contentType: 'application/json',
       success: ({ figure }) => {
@@ -41,7 +41,7 @@ export default class FigureComponent extends Component {
     const data = { figure: { caption: e.target.previousElementSibling.value } }
     ajax.request({
       type: 'PATCH',
-      url: `https://localhost:4000/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
+      url: `${ajax.getDomain()}/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
       data: JSON.stringify(data),
       contentType: 'application/json',
       success: ({ figure }) => {

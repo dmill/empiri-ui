@@ -22,7 +22,7 @@ export default class PeerReviewComponent extends Component {
     const publicationId = store.getState().publication.get('id')
     ajax.request({
       type: 'POST',
-      url: `https://localhost:4000/publications/${publicationId}/reviews`,
+      url: `${ajax.getDomain()}/publications/${publicationId}/reviews`,
       data: JSON.stringify({ review: this.state }),
       contentType: 'application/json',
       success: ({ review }) => this.props.history.push(`/publications/${review.publication_id}`)

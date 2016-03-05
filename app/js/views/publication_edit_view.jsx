@@ -13,7 +13,7 @@ export default class PublicationEditView extends Component {
     const publicationId = this.props.routeParams.publicationId
     ajax.request({
       type: 'GET',
-      url: `https://localhost:4000/publications/${publicationId}`,
+      url: `${ajax.getDomain()}/publications/${publicationId}`,
       success:({ publication }) => {
         this.unsubscribe = store.subscribe(() => this.setState(store.getState().publication))
         store.dispatch(updatePublication(publication))

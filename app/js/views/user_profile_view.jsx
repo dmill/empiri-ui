@@ -15,7 +15,7 @@ export default class UserProfileView extends Component {
     this.unsubscribe = store.subscribe(() => this.setState(store.getState().currentUser))
     ajax.request({
       type: 'GET',
-      url: `https://localhost:4000/users/${this.props.routeParams.userId}`,
+      url: `${ajax.getDomain()}/users/${this.props.routeParams.userId}`,
       success: ({ user }) => this.setState(user)
     })
   }
@@ -30,7 +30,7 @@ export default class UserProfileView extends Component {
     formData.append('photo', e.target.files[0])
 
     ajax.request({
-      url: `https://localhost:4000/users/${userId}/photos`,
+      url: `${ajax.getDomain()}/users/${userId}/photos`,
       data: formData,
       type: 'POST',
       processData: false,

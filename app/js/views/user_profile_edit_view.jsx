@@ -17,7 +17,7 @@ export default class UserProfileEditView extends Component {
     ajax.request({
       type: 'PATCH',
       contentType: 'application/json',
-      url: 'https://localhost:4000/users/' + this.state.id,
+      url: `${ajax.getDomain()}/users/${this.state.id}`,
       data: JSON.stringify({ user: this.state }),
       success: () => this.props.history.push(`/users/${userId}`)
     })

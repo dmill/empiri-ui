@@ -10,7 +10,7 @@ export default class PeerReviewView extends Component {
     const publicationId = this.props.routeParams.publicationId
     ajax.request({
       type: 'GET',
-      url: `https://localhost:4000/publications/${publicationId}`,
+      url: `${ajax.getDomain()}/publications/${publicationId}`,
       contentType: 'application/json',
       success: ({ publication }) => store.dispatch(updatePublication(publication))
     })

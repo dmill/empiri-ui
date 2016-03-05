@@ -29,7 +29,7 @@ export default class PublicationSection extends Component {
     const sectionId = this.props.id
     ajax.request({
       type: 'DELETE',
-      url: `https://localhost:4000/publications/${publicationId}/sections/${sectionId}`,
+      url: `${ajax.getDomain()}/publications/${publicationId}/sections/${sectionId}`,
       contentType: 'application/json',
       success: () => store.dispatch(deleteSection(sectionId))
     })
@@ -42,7 +42,7 @@ export default class PublicationSection extends Component {
     formData.append('photo', e.target.files[0])
 
     ajax.request({
-      url: `https://localhost:4000/publications/${publicationId}/sections/${sectionId}/photos`,
+      url: `${ajax.getDomain()}/publications/${publicationId}/sections/${sectionId}/photos`,
       data: formData,
       type: 'POST',
       file: true,
@@ -60,7 +60,7 @@ export default class PublicationSection extends Component {
     const sectionId = this.props.id
     ajax.request({
       type: 'PATCH',
-      url: `https://localhost:4000/publications/${publicationId}/sections/${sectionId}`,
+      url: `${ajax.getDomain()}/publications/${publicationId}/sections/${sectionId}`,
       data: JSON.stringify({ section: this.state }),
       contentType: 'application/json'
     })
