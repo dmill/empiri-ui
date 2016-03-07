@@ -42,7 +42,7 @@ export class Slide1 extends Component {
     } else {
       ajax.request({
         type: 'POST',
-        url: '${ajax.getDomain()}/publications/',
+        url: `${ajax.getDomain()}/publications/`,
         data: JSON.stringify({ publication: { title: this.state.title }}),
         contentType: 'application/json',
         success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title }))
