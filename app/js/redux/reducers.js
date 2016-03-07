@@ -51,7 +51,8 @@ const defaultPublication = Immutable.fromJS({
   abstract: null,
   _embedded: {
     authors: [],
-    sections: []
+    sections: [],
+    users: []
   }
 })
 

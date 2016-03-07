@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import auth0 from '../auth0/auth0'
 import store from '../redux/store'
 import { Link, browserHistory, Navigation } from 'react-router'
-import { Tour } from 'tether-shepherd'
+// import { Tour } from 'tether-shepherd'
 import IconElement from '../elements/icon_element'
 import PopoverComponent from '../components/popover_component'
 
@@ -15,7 +15,7 @@ export default class NavBarView extends Component {
   onSignIn(response) {
     this.props.history.push('browse/' + '#access_token=' + arguments[3] + '&id_token=' + arguments[2] + '&token_type=Bearer')
     auth0.authenticate()
-    this.startTour()
+    // this.startTour()
   }
 
   showLock() {
@@ -58,7 +58,8 @@ export default class NavBarView extends Component {
       authParams: {
         scope: 'openid email given_name family_name picture'
       }
-    }, this.startTour)
+    })
+    // }, this.startTour)
   }
 
   signOut() {

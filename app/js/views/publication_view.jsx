@@ -39,7 +39,7 @@ export default class PublicationView extends Component {
 
   render() {
     const publication = this.state.publication
-    const user = publication.getIn(['_embedded', 'authors']).get(0)
+    const user = publication.getIn(['_embedded', 'users']).get(0)
     if (!user) {
       return <div></div>
     }
@@ -49,7 +49,7 @@ export default class PublicationView extends Component {
           <h1>{publication.get('title')}</h1>
           <img className="circle" src={user.get('photo_url')} />
           <div className="author-data">
-            <div className="author">{user.get('first_name')} {user.get('last_name')}</div>
+            <Link to={`users/${user.get('id')}`}><div className="author">{user.get('first_name')} {user.get('last_name')}</div></Link>
             <div className="updated-at">updated Jan 28, 2016</div>
           </div>
           <h2>Abstract</h2>
