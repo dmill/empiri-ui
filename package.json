@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack --watch",
-    "build": "BUILD_PROD=1 webpack -p",
+    "build": "NODE_ENV=production BUILD_PROD=1 webpack -p",
     "test": "open __tests__/index.html",
     "lint": "eslint app"
   },

@@ -70,7 +70,6 @@ export default class NavBarView extends Component {
       <h6 key="1" className="popover-header">Welcome <strong>{this.state.currentUser.first_name}!</strong></h6>,
       <Link key="2" className="popover-item" to="/publications/new"><h6>publish a paper</h6></Link>,
       <Link key="3" className="popover-item" to={`/users/${this.state.currentUser.id}`}><h6>your account</h6></Link>,
-      <Link key="4" className="popover-item" to="/pricing"><h6>support</h6></Link>,
       <Link key="5" className="popover-item" to="/" onClick={this.signOut}><h6>log out</h6></Link>
     ])
   }
