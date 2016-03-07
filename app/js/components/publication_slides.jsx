@@ -11,7 +11,7 @@ export class Slide0 extends Component {
   render() {
     return (
       <div>
-        <h1>Welcome to Empiri&rsquo;s Publishing System</h1>
+        <h1>Welcome to Empiri&#39;s Publishing System</h1>
         <h3>Here you can publish your work safely</h3>
         <p>More instructions on how it works and its benefits</p>
       </div>
