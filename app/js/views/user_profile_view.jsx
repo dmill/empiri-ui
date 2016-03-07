@@ -53,7 +53,13 @@ export default class UserProfileView extends Component {
     }
   }
 
-  publicationsEditable() {
+  renderPublishButton() {
+    if (this.props.routeParams.userId == store.getState().currentUser.id) {
+      return <Link to="/publications/new"><button className="new-publication">Write a new publication</button></Link>
+    }
+  }
+
+  isEditable() {
     if (this.props.routeParams.userId == store.getState().currentUser.id) {
       return true
     } else {
@@ -65,7 +71,7 @@ export default class UserProfileView extends Component {
     return (
       <div id="user-profile-view" className="container">
         <div className="sidebar three columns">
-          <EditableImageComponent className="profile-picture" onChange={this.uploadImage} src={this.state.photo_url} />
+          <EditableImageComponent isEditable={this.isEditable.bind(this)()} className="profile-picture" onChange={this.uploadImage} src={this.state.photo_url} />
           <h5>{this.state.first_name} {this.state.last_name}</h5>
           <h6>{this.state.title}</h6>
           <p>{this.state.organization}</p>
@@ -73,8 +79,8 @@ export default class UserProfileView extends Component {
         </div>
         <div className="nine columns">
           {this.renderTitle()}
-          <PublicationsListComponent editable={this.publicationsEditable.bind(this)()} publications={this.state._embedded.publications} />
-          <Link to="/publications/new"><button className="new-publication">Write a new publication</button></Link>
+          <PublicationsListComponent editable={this.isEditable.bind(this)()} publications={this.state._embedded.publications} />
+          {this.renderPublishButton()}
         </div>
       </div>
     )

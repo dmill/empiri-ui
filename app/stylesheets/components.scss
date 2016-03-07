@@ -231,7 +231,7 @@
 }
 
 .image-upload-component {
-  label {
+  label.true {
     cursor: pointer;
   }
   input {
@@ -241,8 +241,7 @@
 
 .editable-image-component {
   position: relative;
-  cursor: pointer;
-  &:hover {
+  &.true:hover {
     i {
       display: block;
     }
@@ -250,11 +249,14 @@
 
   i {
     position: absolute;
-    left: calc(50% - 0.5em);
-    top: calc(50% - 0.5em);
+    left: calc(50% - 30px);
+    top: calc(50% - 30px);
     font-size: 4em;
     color: #fff;
     opacity: 0.8;
+    border-radius: 50%;
+    border: 10px solid #333;
+    background-color: #333;
     display: none;
   }
 }

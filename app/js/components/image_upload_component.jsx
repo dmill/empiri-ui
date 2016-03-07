@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import IconElement from '../elements/icon_element'
 
-const ImageUploadComponent = ({ img, onChange }) => {
+function renderInput(isEditable, onChange) {
+  if (isEditable) {
+    return <input type="file" onChange={onChange} />
+  }
+}
+
+const ImageUploadComponent = ({ img, onChange, isEditable }) => {
   return (
     <div className="image-upload-component">
-      <label>
+      <label className={`${isEditable}`}>
         <IconElement iconName="add_a_photo" iconType="material" />
         {img}
-        <input type="file" onChange={onChange} />
+        {renderInput(isEditable, onChange)}
       </label>
     </div>
   )
