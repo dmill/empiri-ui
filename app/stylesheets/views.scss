@@ -1,5 +1,9 @@
 @import 'variables';
 
+.view {
+  padding-top: 6rem;
+}
+
 #peer-reviews-view {
   padding-top: 6rem;
 }
@@ -288,5 +292,14 @@
     span {
       position: absolute;
     }
+  }
+}
+
+.user-profile-edit.view {
+  label {
+    display: block;
+  }
+  input {
+    width: 100%;
   }
 }

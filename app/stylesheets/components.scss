@@ -279,13 +279,15 @@
     width: 100%;
 
     .next {
-      position: absolute;
-      right: 5rem;
+      position: fixed;
+      top: 50%;
+      right: 4rem;
     }
 
     .prev {
-      position: absolute;
-      left: 5rem;
+      position: fixed;
+      top: 50%;
+      left: 4rem;
     }
 
     i:hover {

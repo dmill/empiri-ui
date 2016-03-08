@@ -17,7 +17,6 @@ const App = ({ children, history, route }) => {
 }
 
 function requireLogin() {
-  debugger
   if (!store.getState().currentUser.id) {
     lock.showSignup({
       icon: 'https://s3-us-west-1.amazonaws.com/www.empiri.co/images/symbol.png',
