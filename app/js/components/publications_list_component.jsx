@@ -50,7 +50,7 @@ export default class PublicationsListComponent extends Component {
         </div>
       )
     } else {
-      return <div>You don&rsquo;t have any publications yet.  Write one!</div>
+      return <div>You don&#39;t have any publications yet.  Write one!</div>
     }
   }
 

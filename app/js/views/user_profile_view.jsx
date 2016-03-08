@@ -43,7 +43,7 @@ export default class UserProfileView extends Component {
     if (this.props.routeParams.userId == store.getState().currentUser.id) {
       return <h1>Your Publications</h1>
     } else {
-      return <h1>{this.state.first_name}&rsquo;s Publications</h1>
+      return <h1>{this.state.first_name}&#39;s Publications</h1>
     }
   }
 
