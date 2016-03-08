@@ -5,6 +5,8 @@ import store from './redux/store'
 import NavBarView from './views/nav_bar_view'
 import { startRouter } from './router'
 
+const lock = auth0.authenticate()
+
 const App = ({ children, history, route }) => {
   return (
     <div id="layout">
@@ -14,5 +16,17 @@ const App = ({ children, history, route }) => {
   )
 }
 
-const lock = auth0.authenticate()
-startRouter(App, lock)
+function requireLogin() {
+  debugger
+  if (!store.getState().currentUser.id) {
+    lock.showSignup({
+      icon: 'https://s3-us-west-1.amazonaws.com/www.empiri.co/images/symbol.png',
+      socialBigButtons: true,
+      authParams: {
+        scope: 'openid email given_name family_name picture'
+      }
+    })
+  }
+}
+
+startRouter(App, lock, requireLogin)

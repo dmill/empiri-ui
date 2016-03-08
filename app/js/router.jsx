@@ -15,25 +15,19 @@ import SlideshowComponent from './components/slideshow_component'
 import PublicationEditView from './views/publication_edit_view'
 import PeerReviewsView from './views/peer_reviews_view'
 
-function requireLogIn(nextState, replaceState) {
-  if (!store.getState().currentUser) {
-    replaceState({ nextPathname: nextState.location.pathname }, '/browse')
-  }
-}
-
-export function startRouter(App, lock) {
+export function startRouter(App, lock, requireLogin) {
   render((
     <Router history={browserHistory}>
       <Route path="/" component={App} lock={lock}>
         <IndexRoute component={BrowseView} />
         <Route path="/browse" component={BrowseView} />
-        <Route path="/user/edit" onEnter={requireLogIn} component={UserProfileEditView} />
+        <Route path="/user/edit" onEnter={requireLogin} component={UserProfileEditView} />
         <Route path="/users/:userId" component={UserProfileView} />
-        <Route path="/publications/:publicationId/reviews/new" component={PeerReviewView} />
+        <Route path="/publications/new" onEnter={requireLogin} component={NewPublicationView} />
+        <Route path="/publications/:publicationId/reviews/new" onEnter={requireLogin} component={PeerReviewView} />
         <Route path="/publications/:publicationId/reviews" component={PeerReviewsView} />
-        <Route path="/publications/:publicationId/edit" component={PublicationEditView} />
+        <Route path="/publications/:publicationId/edit" onEnter={requireLogin} component={PublicationEditView} />
         <Route path="/publications/:publicationId" component={PublicationView} />
-        <Route path="/publications/new" component={NewPublicationView} />
       </Route>
       <Route path="/pricing" component={PricingPage} />
       <Route path="/membership" component={MembershipForm} />

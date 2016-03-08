@@ -19,7 +19,7 @@ export default class PeerReviewsView extends Component {
   render() {
     return (
       <div id="peer-reviews-view" className="container">
-        {this.state.reviews.map((review) => <ReviewComponent review={review} />)}
+        {this.state.reviews.map((review) => <ReviewComponent key={review.get('id')} review={review} />)}
       </div>
     )
   }

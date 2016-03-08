@@ -34,12 +34,13 @@ function peerReview(state = defaultPeerReview, action) {
   }
 }
 
-function currentUser(state = null, action) {
+const defaultUser = { id: null }
+function currentUser(state = defaultUser, action) {
   switch(action.type) {
     case SET_CURRENT_USER:
       return action.payload
     case LOG_OUT:
-      return null
+      return defaultUser
     default:
       return state
   }
