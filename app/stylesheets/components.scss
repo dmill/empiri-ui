@@ -22,7 +22,7 @@
     position: absolute;
     width: 250px;
     text-align: center;
-    left: -142px;
+    left: -187px;
     top: 15px;
   }
 
@@ -33,7 +33,7 @@
     position: absolute;
     padding: 5px;
     font-size: 11px;
-    top: 5px;
+    top: -5px;
     margin: 0;
     box-sizing: border-box;
     opacity: 0.9;
@@ -41,7 +41,7 @@
     &:before {
       position: absolute;
       top: -13px;
-      left: 33px;
+      left: 54px;
       content: "";
       display: inline-block;
       border: 8px solid transparent;
@@ -52,7 +52,7 @@
     &:after {
       position: absolute;
       top: -12px;
-      left: 33px;
+      left: 54px;
       content: "";
       display: inline-block;
       border: 8px solid transparent;
@@ -422,5 +422,54 @@
         background-color: #eee;
       }
     }
+  }
+}
+
+.figures-component {
+  width: 100%;
+
+  &:last-child:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.ratings.component {
+  border: 1px solid #ccc;
+  width: 25rem;
+  float: right;
+  margin: 10px 0;
+  border-radius: 2px;
+  padding: 0.5rem;
+  cursor: pointer;
+
+  &.left {
+    float: left;
+  }
+
+  .rating-box {
+    float: left;
+    width: calc(33.33%);
+    background-color: #fff;
+    text-align: center;
+
+    .type {
+      font-size: 1rem;
+      font-family: "Pontano Sans";
+      display: block;
+    }
+
+    .count {
+      font-size: 2rem;
+      font-family: "Pontano Sans";
+      display: block;
+    }
+  }
+}
+
+.review.component {
+  img {
+    max-width: 50px;
   }
 }

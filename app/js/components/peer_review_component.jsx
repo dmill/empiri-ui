@@ -25,7 +25,7 @@ export default class PeerReviewComponent extends Component {
       url: `${ajax.getDomain()}/publications/${publicationId}/reviews`,
       data: JSON.stringify({ review: this.state }),
       contentType: 'application/json',
-      success: ({ review }) => this.props.history.push(`/publications/${review.publication_id}`)
+      success: ({ review }) => this.props.history.push(`/publications/${review.publication_id}/reviews`)
     })
   }
 
@@ -38,7 +38,7 @@ export default class PeerReviewComponent extends Component {
   render() {
     const currentUser = store.getState().currentUser
     const currentUserFullName = `${currentUser.first_name} ${currentUser.last_name}`
-    const author = store.getState().publication.getIn(['_embedded', 'authors']).get(0)
+    const author = store.getState().publication.getIn(['_embedded', 'users']).get(0)
     const authorFullName = `${author.get('first_name')} ${author.get('last_name')}`
 
     return (

@@ -6,6 +6,7 @@ class Ajax {
       return 'http://localhost:4000'
     }
   }
+
   request(options) {
     const xhr = new XMLHttpRequest()
     xhr.open(options.type, encodeURI(options.url))

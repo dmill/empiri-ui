@@ -7,6 +7,8 @@ import AvatarComponent from '../components/avatar_component'
 import ContributionsListView from './contributions_list_view'
 import IconElement from '../elements/icon_element'
 import ajax from '../lib/ajax'
+import FiguresComponent from '../components/figures_component'
+import RatingsComponent from '../components/ratings_component'
 
 const Avatar = (props) => {
   return (
@@ -46,6 +48,7 @@ export default class PublicationView extends Component {
     return (
       <div id="publication-view" className="container">
         <div className="row">
+          <RatingsComponent publication={publication} />
           <h1>{publication.get('title')}</h1>
           <img className="circle" src={user.get('photo_url')} />
           <div className="author-data">
@@ -60,10 +63,15 @@ export default class PublicationView extends Component {
               <div key={section.get('id')}>
                 <h6>{section.get('title')}</h6>
                 <p>{section.get('body')}</p>
+                <FiguresComponent figures={section.get('figures')} />
               </div>
             )
           })}
-          <Link to={`/publications/${this.props.routeParams.publicationId}/reviews/new`}><IconElement iconType="material" iconName="rate_review" /></Link>
+          <h3>Contribute to this Publication</h3>
+          <RatingsComponent position="left" publication={publication} />
+          <div className="contribute-review-container">
+            <Link to={`/publications/${this.props.routeParams.publicationId}/reviews/new`}><IconElement iconType="material" iconName="rate_review" /> contribute a review</Link>
+          </div>
         </div>
       </div>
     )
