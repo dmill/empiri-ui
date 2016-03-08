@@ -81,7 +81,7 @@ export default class PublicationSection extends Component {
           Section Body
           <textarea name="body" value={this.state.body} onChange={this.onChange.bind(this)} />
         </label>
-        <button><ImageUploadComponent onChange={this.addFigure.bind(this)} /></button>
+        <button><ImageUploadComponent isEditable={true} onChange={this.addFigure.bind(this)} /></button>
         <div className="figures clear-fix">
           {this.state.figures.map(figure => {
             return <FigureComponent key={figure.get('id')} figure={figure} />

@@ -7,10 +7,12 @@ export default class FiguresComponent extends Component {
       <div className="figures component row">
         {this.props.figures.map((figure) => {
           return (
-            <div className="figure four columns" key={figure.get('id')}>
-              <img src={figure.get('photo_url')} />
-              <h5>{figure.get('title')}</h5>
-              <h6>{figure.get('caption')}</h6>
+            <div className="figure" key={figure.get('id')}>
+              <img src={figure.get('thumbnail_photo_url')} />
+              <div className="text-container">
+                <div className="title">{figure.get('title')}</div>
+                <div className="caption">{figure.get('caption')}</div>
+              </div>
             </div>
           )
         })}

@@ -276,12 +276,45 @@
   font-size: 1.5rem;
   color: #5f5f5f;
 
-  .figure {
-    float: left;
-    max-width: 32%;
+  .figures {
+    width: 100%;
 
-    img {
-      width: 100%;
+    .figure {
+      float: left;
+      width: 32%;
+      text-align: center;
+      height: 200px;
+      background-color: #ccc;
+      margin: 0 1% 1rem 0;
+      position: relative;
+
+      img {
+        max-width: 100%;
+      }
+
+      .text-container {
+        position: absolute;
+        top: 155px;
+        width: 100%;
+        opacity: 0.8;
+        background-color: #222;
+        padding: 5px;
+
+        .title {
+          text-decoration: underline;
+        }
+
+        .caption, .title {
+          opacity: 1;
+          text-align: left;
+          color: #fff;
+          font-family: "Pontano Sans";
+          font-size: 1.2rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
     }
   }
 
