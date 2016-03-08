@@ -82,12 +82,12 @@ export default class NavBarView extends Component {
         <nav id="nav-bar-view">
           <div className="container">
             <div className="row">
-              <div className="eight columns">
+              <div className="five columns">
                 <Link className="link" to="/"><img id="logo" src="images/symbol.png" width="20px" /></Link>
                 <Link className="link" to="/browse"><h6>Browse</h6></Link>
                 <Link className="link" to="/"><h6>FAQ</h6></Link>
               </div>
-              <div className="four columns">
+              <div className="seven columns login-buttons">
                 <button onClick={this.showSignup.bind(this)}>Sign up</button>
                 <button onClick={this.showLock.bind(this)}>Sign in</button>
               </div>
@@ -100,12 +100,12 @@ export default class NavBarView extends Component {
         <nav id="nav-bar-view">
           <div className="container">
             <div className="row">
-              <div className="ten columns">
+              <div className="five columns">
                 <Link className="link" to="/"><img id="logo" src="images/symbol.png" width="20px" /></Link>
                 <Link className="link" to="/browse"><h6>Browse</h6></Link>
                 <Link className="link" to="/"><h6>FAQ</h6></Link>
               </div>
-              <div className="two columns">
+              <div className="seven columns secondary">
                 <PopoverComponent
                   direction="down"
                   items={this.popoverItems()}

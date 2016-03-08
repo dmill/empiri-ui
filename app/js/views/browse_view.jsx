@@ -64,7 +64,6 @@ export default class BrowseView extends Component {
                   <IconElement iconType="material" iconName="note_add" />
                   <h6>New Publication</h6>
                 </Link>
-                <div className="menu-item"><h6>Influence: 0</h6></div>
               </div>
               <div className="notifications">You dont have any notifications.</div>
             </div>
