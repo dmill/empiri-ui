@@ -3,12 +3,13 @@ import store from '../redux/store'
 import { Link } from 'react-router'
 import EditableImageComponent from '../components/editable_image_component'
 import PublicationsListComponent from '../components/publications_list_component'
+import ReviewsListComponent from '../components/reviews_list_component'
 import auth0 from '../auth0/auth0'
 import ajax from '../lib/ajax'
 
 export default class UserProfileView extends Component {
   componentWillMount() {
-    this.state = { photo_url: '', first_name: '', last_name: '', title: '', organization: '', _embedded: { publications: [] } }
+    this.state = { photo_url: '', first_name: '', last_name: '', title: '', organization: '', _embedded: { publications: [], reviews: [] } }
   }
 
   componentDidMount() {
@@ -39,11 +40,11 @@ export default class UserProfileView extends Component {
     })
   }
 
-  renderTitle() {
+  renderTitle(type) {
     if (this.props.routeParams.userId == store.getState().currentUser.id) {
-      return <h1>Your Publications</h1>
+      return <h1>Your {type}</h1>
     } else {
-      return <h1>{this.state.first_name}&#39;s Publications</h1>
+      return <h1>{this.state.first_name}&#39;s {type}</h1>
     }
   }
 
@@ -78,9 +79,11 @@ export default class UserProfileView extends Component {
           {this.renderEditButton()}
         </div>
         <div className="nine columns">
-          {this.renderTitle()}
+          {this.renderTitle("Publications")}
           <PublicationsListComponent editable={this.isEditable.bind(this)()} publications={this.state._embedded.publications} />
           {this.renderPublishButton()}
+          {this.renderTitle("Reviews")}
+          <ReviewsListComponent editable={this.isEditable.bind(this)()} reviews={this.state._embedded.reviews} />
         </div>
       </div>
     )
