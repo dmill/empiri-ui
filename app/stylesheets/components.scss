@@ -267,6 +267,15 @@
   .slides-container {
     position: relative;
     width: 100%;
+
+    h1 {
+      text-align: center;
+    }
+
+    h4 {
+      position: relative;
+      text-align: center;
+    }
   }
 
   .controls {

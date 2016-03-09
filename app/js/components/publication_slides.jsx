@@ -12,8 +12,8 @@ export class Slide0 extends Component {
     return (
       <div>
         <h1>Welcome to Empiri&#39;s Publishing System</h1>
-        <h3>Here you can publish your work safely</h3>
-        <p>More instructions on how it works and its benefits</p>
+        <h4>Empiri allows you to publish and edit your work instantaneously.
+        Follow the instructions to begin creating a publication.</h4>
       </div>
     )
   }
@@ -57,8 +57,7 @@ export class Slide1 extends Component {
   render() {
     return (
       <div className="slide component">
-        <h1>Welcome to your new publication!</h1>
-        <h3>What will you call it?</h3>
+        <h2>What is the title of your publication?</h2>
         <label>
           Publication Title
           <input type="text" name="title" value={this.state.title} onChange={this.onChange.bind(this)} />
@@ -74,7 +73,7 @@ export class Slide2 extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = store.subscribe(() => this.setState({ abstract: store.getState().publication.get('abstract' ) }))
+    this.unsubscribe = store.subscribe(() => this.setState({ abstract: store.getState().publication.get('abstract') }))
   }
 
   componentWillUnmount() {
@@ -96,7 +95,7 @@ export class Slide2 extends Component {
   render() {
     return (
       <div className="slide component">
-        <h2>What is your paper about?</h2>
+        <h2>Submit your abstract</h2>
         <label>
           Abstract
           <textarea type="text" name="abstract" value={this.state.abstract} onChange={this.onChange.bind(this)} />
