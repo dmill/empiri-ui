@@ -35,7 +35,9 @@ class Ajax {
     if (!options.file) {
       xhr.setRequestHeader('Content-Type', 'application/json')
     }
-    this.beforeSend(xhr)
+    if(this.beforeSend) {
+      this.beforeSend(xhr)
+    }
     xhr.send(options.data)
   }
 }

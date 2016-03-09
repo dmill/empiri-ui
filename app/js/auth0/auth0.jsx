@@ -7,8 +7,8 @@ class Auth0 {
   authenticate() {
     const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
     const idToken = this.getIdToken(lock.parseHash(window.location.hash))
-    this.setAuthHeader(idToken)
     if (idToken) {
+      this.setAuthHeader(idToken)
       this.fetchUserData()
     }
     return lock
@@ -39,7 +39,7 @@ class Auth0 {
 
   logout() {
     localStorage.removeItem('userToken')
-    ajax.beforeSend = (request) => request.setRequestHeader('Authorization', '')
+    ajax.beforeSend = () => null
     store.dispatch(logout())
   }
 
