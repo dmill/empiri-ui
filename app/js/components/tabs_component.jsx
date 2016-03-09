@@ -26,7 +26,7 @@ export default class TabsComponent extends Component {
   }
 
   getClassName(i) {
-    let className = 'tab'
+    let className = ''
     if (this.state.activeTab == i) {
       className += ' active'
     }
@@ -38,7 +38,7 @@ export default class TabsComponent extends Component {
       <div className="tabs-component">
         <div className="tabs">
           {this.tabs.map((tab, i) => {
-            return <span className={this.getClassName(i)} onClick={this.handleClick.bind(this)} key={i} id={i}>{tab.name}</span>
+            return <span className={`tab ${this.getClassName(i)}`} onClick={this.handleClick.bind(this)} key={i} id={i}>{tab.name}</span>
           })}
         </div>
         <div className="pane">

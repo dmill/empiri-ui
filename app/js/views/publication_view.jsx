@@ -67,10 +67,12 @@ export default class PublicationView extends Component {
               </div>
             )
           })}
-          <h1>Contribute to this Publication</h1>
-          <RatingsComponent position="left" publication={publication} />
-          <div className="contribute-review-container">
-            <Link to={`/publications/${this.props.routeParams.publicationId}/reviews/new`}><IconElement iconType="material" iconName="rate_review" /> contribute a review</Link>
+          <div className="contribute-container">
+            <h1>Contribute to this Publication</h1>
+            <RatingsComponent position="left" publication={publication} />
+            <div className="contribute-review-container">
+              <Link to={`/publications/${this.props.routeParams.publicationId}/reviews/new`}><IconElement iconType="material" iconName="rate_review" /> contribute a review</Link>
+            </div>
           </div>
         </div>
       </div>
