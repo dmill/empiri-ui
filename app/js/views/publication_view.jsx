@@ -9,6 +9,7 @@ import IconElement from '../elements/icon_element'
 import ajax from '../lib/ajax'
 import FiguresComponent from '../components/figures_component'
 import RatingsComponent from '../components/ratings_component'
+import AuthorMetadataElement from '../elements/author_metadata_element'
 
 const Avatar = (props) => {
   return (
@@ -50,11 +51,7 @@ export default class PublicationView extends Component {
         <div className="row">
           <RatingsComponent publication={publication} />
           <h1>{publication.get('title')}</h1>
-          <img className="circle" src={user.get('photo_url')} />
-          <div className="author-data">
-            <Link to={`users/${user.get('id')}`}><div className="author">{user.get('first_name')} {user.get('last_name')}</div></Link>
-            <div className="updated-at">updated Jan 28, 2016</div>
-          </div>
+          <AuthorMetadataElement author={user} />
           <h2>Abstract</h2>
           <p>{publication.get('abstract')}</p>
           <h2>Sections</h2>

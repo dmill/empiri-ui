@@ -6,6 +6,13 @@
 
 #peer-reviews-view {
   padding-top: 6rem;
+
+  .no-reviews {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-family: "Pontano Sans";
+    font-size: 2.5rem;
+  }
 }
 
 #nav-bar-view {
@@ -257,21 +264,6 @@
     &.left {
       float: left;
       margin: 0;
-    }
-  }
-
-  .author-data {
-    font-family: "Pontano Sans";
-    font-size: 1.5rem;
-    margin-left: 53px;
-
-    .author {
-      color: $purple-ll;
-    }
-
-    .updated-at {
-      margin-top: -4px;
-      color: #aaa;
     }
   }
 

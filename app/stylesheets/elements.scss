@@ -179,3 +179,28 @@
     float: left;
   }
 }
+
+.author-metadata.element {
+  font-family: "Pontano Sans";
+  font-size: 1.5rem;
+
+  img {
+    float: left;
+    width: 45px;
+    height: 45px;
+  }
+
+  .metadata {
+    margin-left: 53px;
+    padding-top: 2px;
+
+    .author {
+      color: $purple-ll;
+    }
+
+    .updated-at {
+      margin-top: -4px;
+      color: #aaa;
+    }
+  }
+}
