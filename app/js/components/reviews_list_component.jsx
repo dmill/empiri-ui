@@ -3,16 +3,15 @@ import IconElement from '../elements/icon_element'
 import { Link } from 'react-router'
 
 export default class ReviewsListComponent extends Component {
-  renderIcon() {
-    return <IconElement iconType="material" iconName="public" />
-  }
-
-  renderClassName() {
-    return "published"
-  }
-
-  renderStatus() {
-    return <div className="status">submitted</div>
+  renderType(review) {
+    switch (review.rating) {
+      case -1:
+        return <div className="status red">rejection</div>
+      case 0:
+        return <div className="status gold">revision request</div>
+      case 1:
+        return <div className="status green">endorsement</div>
+    }
   }
 
   renderEditButton(review) {
@@ -27,11 +26,11 @@ export default class ReviewsListComponent extends Component {
         <div>
           {this.props.reviews.map((review, i) => {
             return (
-              <div className={`publication ${this.renderClassName()}`} key={i}>
+              <div className={`publication`} key={i}>
                 {this.renderEditButton(review)}
-                {this.renderIcon()}
+                <IconElement iconType="material" iconName="public" />
                 <Link to={`publications/${review.publication_id}/reviews`} className="title clear-fix">{review.title}</Link>
-                {this.renderStatus()}
+                {this.renderType(section)}
               </div>
             )
           })}
