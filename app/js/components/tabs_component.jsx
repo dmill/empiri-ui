@@ -8,10 +8,14 @@ export default class TabsComponent extends Component {
     super(props)
     this.tabs = [
       { name: 'Your Review',
-        body: <PeerReviewComponent history={this.props.history} />
+        body: <PeerReviewComponent
+                history={this.props.history}
+                existingReview={this.props.existingReview}
+                routeParams={this.props.routeParams}
+              />
       },
       {
-        name: 'TIPR: transcription initiation pattern recognition on a genome scale',
+        name: 'The Publication',
         body: <PublicationView routeParams={this.props.routeParams} />
       }
     ]
