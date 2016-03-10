@@ -19,7 +19,9 @@ export default class AddableAuthorComponent extends Component {
       success: ({ author }) => {
         store.dispatch(addAuthor(author))
         this.setState({ first_name: '', last_name: '', email: '', title: '', organization: '' })
-      }
+        this.props.onSuccess()
+      },
+      error: () => this.props.onError()
     })
   }
 

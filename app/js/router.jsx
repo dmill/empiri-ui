@@ -11,7 +11,6 @@ import NewPublicationView from './views/new_publication_view'
 import PeerReviewComponent from './components/peer_review_component'
 import PricingPage from './views/pricing_page'
 import MembershipForm from './views/membership_form'
-import SlideshowComponent from './components/slideshow_component'
 import PublicationEditView from './views/publication_edit_view'
 import PeerReviewsView from './views/peer_reviews_view'
 

@@ -379,6 +379,12 @@
       margin: 0 2rem 0 0;
     }
 
+    .rating-badge {
+      padding: 1px 5px;
+      border-radius: 2px;
+      font-size: 1.1rem;
+    }
+
     // &:hover {
     //   background-image: linear-gradient(to bottom, #fff, #f2f2f2);
     //   box-shadow: inset 0px 0px 1px #999;
@@ -395,7 +401,7 @@
       vertical-align: middle;
       margin-right: 6px;
       float: left;
-      line-height: 38px;
+      line-height: 36px;
       font-size: 2.5rem;
       color: $purple-ll;
     }
@@ -528,18 +534,6 @@
     padding: 0.5rem;
     float: right;
 
-    &.gold {
-      background-color: $gold;
-    }
-
-    &.green {
-      background-color: $green;
-    }
-
-    &.red {
-      background-color: $red;
-    }
-
     i {
       float: left;
       margin: 5px 5px 0 0;
@@ -554,4 +548,30 @@
       color: #fff;
     }
   }
+}
+
+.rating-badge {
+  display: inline-block;
+  color: white;
+    &.gold {
+      background-color: $gold;
+    }
+
+    &.green {
+      background-color: $green;
+    }
+
+    &.red {
+      background-color: $red;
+    }
+}
+
+.error-message {
+  border-radius: 3px;
+  background-color: $red;
+  display: inline-block;
+  padding: 5px;
+  color: #fff;
+  opacity: 0.8;
+  font-size: 1.2rem;
 }
