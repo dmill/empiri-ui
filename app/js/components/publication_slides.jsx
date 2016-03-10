@@ -37,7 +37,8 @@ export class Slide1 extends Component {
         url: `${ajax.getDomain()}/publications/${publicationId}`,
         data: JSON.stringify({ publication: { title: this.state.title }}),
         contentType: 'application/json',
-        success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title }))
+        success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title })),
+        error: (error) => this.props.onError(error)
       })
     } else {
       ajax.request({
@@ -45,13 +46,20 @@ export class Slide1 extends Component {
         url: `${ajax.getDomain()}/publications/`,
         data: JSON.stringify({ publication: { title: this.state.title }}),
         contentType: 'application/json',
-        success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title }))
+        success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title })),
+        error: (error) => this.props.onError(error)
       })
     }
   }
 
   onChange(e) {
     this.setState({ title: e.target.value })
+  }
+
+  renderErrorMessage() {
+    if (this.props.errorMessage) {
+      return <div className="error-message">{this.props.errorMessage}</div>
+    }
   }
 
   render() {
@@ -62,6 +70,7 @@ export class Slide1 extends Component {
         <label>
           Publication Title
           <input type="text" name="title" value={this.state.title} onChange={this.onChange.bind(this)} />
+          {this.renderErrorMessage.bind(this)()}
         </label>
       </div>
     )
@@ -85,12 +94,19 @@ export class Slide2 extends Component {
       url: `${ajax.getDomain()}/publications/${publication.get('id')}`,
       data: JSON.stringify({ publication: { abstract: this.state.abstract }}),
       contentType: 'application/json',
-      success: ({ publication }) => store.dispatch(updatePublication({ abstract: publication.abstract }))
+      success: ({ publication }) => store.dispatch(updatePublication({ abstract: publication.abstract })),
+      error: (error) => this.props.onError(error)
     })
   }
 
   onChange(e) {
     this.setState({ abstract: e.target.value })
+  }
+
+  renderErrorMessage() {
+    if (this.props.errorMessage) {
+      return <div className="error-message">{this.props.errorMessage}</div>
+    }
   }
 
   render() {
@@ -100,6 +116,7 @@ export class Slide2 extends Component {
         <label>
           Abstract
           <textarea type="text" name="abstract" value={this.state.abstract} onChange={this.onChange.bind(this)} />
+          {this.renderErrorMessage.bind(this)()}
         </label>
       </div>
     )
@@ -119,6 +136,12 @@ export class Slide3 extends Component {
     this.unsubscribe()
   }
 
+  renderErrorMessage() {
+    if (this.props.errorMessage) {
+      return <div className="error-message">{this.props.errorMessage}</div>
+    }
+  }
+
   render() {
     const currentUser = store.getState().currentUser
     return (
@@ -132,6 +155,7 @@ export class Slide3 extends Component {
           Contributing Authors
           {this.state.authors.map((author) => <SavedAuthor author={author} key={author.get('id')} />)}
           <AddableAuthorComponent />
+          {this.renderErrorMessage.bind(this)()}
         </label>
       </div>
     )
@@ -146,7 +170,8 @@ class SavedAuthor extends Component {
       type: 'DELETE',
       url: `${ajax.getDomain()}/publications/${publicationId}/authors/${authorId}`,
       contentType: 'application/json',
-      success: () => store.dispatch(deleteAuthor(authorId))
+      success: () => store.dispatch(deleteAuthor(authorId)),
+      error: (error) => this.props.onError(error)
     })
   }
 
@@ -171,7 +196,8 @@ export class Slide5 extends Component {
       success: () => {
         store.dispatch(updatePublication({ published: true }))
         this.props.history.push(`/publications/${publicationId}`)
-      }
+      },
+      error: (error) => this.props.onError(error)
     })
   }
 

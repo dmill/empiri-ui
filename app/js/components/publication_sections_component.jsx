@@ -42,8 +42,15 @@ export default class PublicationSectionsComponent extends Component {
       url: `${ajax.getDomain()}/publications/${publicationId}/sections`,
       contentType: 'application/json',
       data: JSON.stringify(defaultSection),
-      success: ({ section }) => store.dispatch(addSection(section))
+      success: ({ section }) => store.dispatch(addSection(section)),
+      error: (error) => this.onError(error)
     })
+  }
+
+  renderErrorMessage() {
+    if (this.props.errorMessage) {
+      return <div className="error-message">{this.props.errorMessage}</div>
+    }
   }
 
   render() {
@@ -59,6 +66,7 @@ export default class PublicationSectionsComponent extends Component {
             body={section.get('body')}
             figures={section.get('figures')} />
         )})}
+        {this.renderErrorMessage.bind(this)()}
         <button onClick={this.addSection.bind(this)}>+ Section</button>
       </div>
     )
