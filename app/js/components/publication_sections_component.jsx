@@ -30,6 +30,10 @@ export default class PublicationSectionsComponent extends Component {
     this.unsubscribe()
   }
 
+  componentWillReceiveProps(nextProps) {
+    nextProps.changeSlides()
+  }
+
   addSection() {
     const publicationId = store.getState().publication.get('id')
     const defaultSection = { section: {

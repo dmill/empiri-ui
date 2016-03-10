@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import SlideshowComponent from '../components/slideshow_component'
 import store from '../redux/store'
 import PublicationSectionsComponent from '../components/publication_sections_component'
 import { newPublication, updatePublication } from '../redux/actions'
@@ -10,19 +9,27 @@ import { browserHistory } from 'react-router'
 
 export default class NewPublicationView extends Component {
   componentWillMount() {
-    this.state = { currentSlide: 0, direction: 'left', publicationId: null, errorMessage: null }
+    this.state = { currentSlide: 0, direction: 'left', publicationId: null, errorMessage: null, changeSlides: () => null }
   }
 
   componentDidMount() {
     store.dispatch(newPublication())
   }
 
+  save() {
+    this.setState({ saving: true })
+  }
+
   showNextSlide() {
-    this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left', errorMessage: null })
+    this.setState({ changeSlides: () => {
+      this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left' })
+    }})
   }
 
   showPrevSlide() {
-    this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right', errorMessage: null })
+    this.setState({ changeSlides: () => {
+      this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right' })
+    }})
   }
 
   renderControls() {
@@ -30,7 +37,7 @@ export default class NewPublicationView extends Component {
       onClick={this.showPrevSlide.bind(this)}
       iconType="fontawesome"
       iconName="arrow-circle-left" />
-    const next = this.state.currentSlide == 4 ? null : <IconElement
+    const next = this.state.currentSlide == 5 ? null : <IconElement
       onClick={this.showNextSlide.bind(this)}
       iconType="fontawesome"
       iconName="arrow-circle-right" />
@@ -42,43 +49,23 @@ export default class NewPublicationView extends Component {
     )
   }
 
-  errorSlide1() {
-    const direction = this.state.direction === 'left' ? 'right' : 'left'
-    this.setState({ currentSlide: 1, direction, errorMessage: 'Please enter a publication title' })
-  }
-
-  errorSlide2() {
-    const direction = this.state.direction === 'left' ? 'right' : 'left'
-    this.setState({ currentSlide: 2, direction, errorMessage: 'Please enter an abstract' })
-  }
-
-  errorSlide3() {
-    const direction = this.state.direction === 'left' ? 'right' : 'left'
-    this.setState({ currentSlide: 3, direction, errorMessage: 'Please enter a valid email' })
-  }
-
-  errorSlide4() {
-    const direction = this.state.direction === 'left' ? 'right' : 'left'
-    this.setState({ currentSlide: 4, direction, errorMessage: 'Please enter a section title' })
-  }
-
   renderSlide() {
     return (
       <ReactCSSTransitionGroup transitionName={"slide-" + this.state.direction} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
         {() => {
           switch (this.state.currentSlide) {
             case 0:
-              return <Slide0 key={0} />
+              return <Slide0 key={0} changeSlides={this.state.changeSlides.bind(this)} />
             case 1:
-              return <Slide1 key={1} onError={this.errorSlide1.bind(this)} errorMessage={this.state.errorMessage}  />
+              return <Slide1 key={1} changeSlides={this.state.changeSlides.bind(this)} />
             case 2:
-              return <Slide2 key={2} onError={this.errorSlide2.bind(this)} errorMessage={this.state.errorMessage} />
+              return <Slide2 key={2} changeSlides={this.state.changeSlides.bind(this)} />
             case 3:
-              return <Slide3 key={3} onError={this.errorSlide3.bind(this)} errorMessage={this.state.errorMessage} />
+              return <Slide3 key={3} changeSlides={this.state.changeSlides.bind(this)} />
             case 4:
-              return <PublicationSectionsComponent onError={this.errorSlide4.bind(this)} errorMessage={this.state.errorMessage} key={4} />
+              return <PublicationSectionsComponent key={4} changeSlides={this.state.changeSlides.bind(this)} />
             case 5:
-              return <Slide5 history={this.props.history} key={5} />
+              return <Slide5 key={5} history={this.props.history} changeSlides={this.state.changeSlides.bind(this)} />
             default:
               return console.error("Invalid slide state in NewPublicationView")
           }

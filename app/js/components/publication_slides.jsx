@@ -8,6 +8,10 @@ import { Link } from 'react-router'
 import ajax from '../lib/ajax'
 
 export class Slide0 extends Component {
+  componentWillReceiveProps(nextProps) {
+    nextProps.changeSlides()
+  }
+
   render() {
     return (
       <div>
@@ -21,15 +25,18 @@ export class Slide0 extends Component {
 
 export class Slide1 extends Component {
   componentWillMount() {
-    this.state = { title: store.getState().publication.get('title') }
+    this.state = { title: store.getState().publication.get('title'), error: null }
   }
 
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.setState({ title: store.getState().publication.get('title') }))
   }
 
-  componentWillUnmount() {
-    this.unsubscribe()
+  componentWillReceiveProps(nextProps) {
+    this.saveSlide(nextProps.changeSlides)
+  }
+
+  saveSlide(callback) {
     const publicationId = store.getState().publication.get('id')
     if (publicationId) {
       ajax.request({
@@ -37,8 +44,11 @@ export class Slide1 extends Component {
         url: `${ajax.getDomain()}/publications/${publicationId}`,
         data: JSON.stringify({ publication: { title: this.state.title }}),
         contentType: 'application/json',
-        success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title })),
-        error: (error) => this.props.onError(error)
+        success: ({ publication }) => {
+          store.dispatch(updatePublication({ id: publication.id, title: this.state.title }))
+          callback()
+        },
+        error: (error) => this.setState({ error: true })
       })
     } else {
       ajax.request({
@@ -46,10 +56,17 @@ export class Slide1 extends Component {
         url: `${ajax.getDomain()}/publications/`,
         data: JSON.stringify({ publication: { title: this.state.title }}),
         contentType: 'application/json',
-        success: ({ publication }) => store.dispatch(updatePublication({ id: publication.id, title: this.state.title })),
-        error: (error) => this.props.onError(error)
+        success: ({ publication }) => {
+          store.dispatch(updatePublication({ id: publication.id, title: this.state.title }))
+          callback()
+        },
+        error: (error) => this.setState({ error: true })
       })
     }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   onChange(e) {
@@ -57,8 +74,8 @@ export class Slide1 extends Component {
   }
 
   renderErrorMessage() {
-    if (this.props.errorMessage) {
-      return <div className="error-message">{this.props.errorMessage}</div>
+    if (this.state.error) {
+      return <div className="error-message">Please enter a title</div>
     }
   }
 
@@ -79,24 +96,34 @@ export class Slide1 extends Component {
 
 export class Slide2 extends Component {
   componentWillMount() {
-    this.state = { abstract: store.getState().publication.get('abstract') }
+    this.state = { abstract: store.getState().publication.get('abstract'), error: false }
   }
 
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.setState({ abstract: store.getState().publication.get('abstract' ) }))
   }
 
-  componentWillUnmount() {
-    this.unsubscribe()
+  componentWillReceiveProps(nextProps) {
+    this.saveSlide(nextProps.changeSlides)
+  }
+
+  saveSlide(callback) {
     const publication = store.getState().publication
     ajax.request({
       type: 'PATCH',
       url: `${ajax.getDomain()}/publications/${publication.get('id')}`,
       data: JSON.stringify({ publication: { abstract: this.state.abstract }}),
       contentType: 'application/json',
-      success: ({ publication }) => store.dispatch(updatePublication({ abstract: publication.abstract })),
-      error: (error) => this.props.onError(error)
+      success: ({ publication }) => {
+        store.dispatch(updatePublication({ abstract: publication.abstract }))
+        callback()
+      },
+      error: (error) => this.setState({ error: true})
     })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   onChange(e) {
@@ -104,8 +131,8 @@ export class Slide2 extends Component {
   }
 
   renderErrorMessage() {
-    if (this.props.errorMessage) {
-      return <div className="error-message">{this.props.errorMessage}</div>
+    if (this.state.error) {
+      return <div className="error-message">Please enter a valid abstract</div>
     }
   }
 
@@ -125,7 +152,7 @@ export class Slide2 extends Component {
 
 export class Slide3 extends Component {
   componentWillMount() {
-    this.state = { authors: store.getState().publication.getIn(['_embedded', 'authors']) }
+    this.state = { authors: store.getState().publication.getIn(['_embedded', 'authors']), error: false }
   }
 
   componentDidMount() {
@@ -136,10 +163,22 @@ export class Slide3 extends Component {
     this.unsubscribe()
   }
 
+  componentWillReceiveProps(nextProps) {
+    nextProps.changeSlides()
+  }
+
   renderErrorMessage() {
-    if (this.props.errorMessage) {
-      return <div className="error-message">{this.props.errorMessage}</div>
+    if (this.state.error) {
+      return <div className="error-message">Please enter a valid email address</div>
     }
+  }
+
+  onError() {
+    this.setState({ error: true })
+  }
+
+  onSuccess() {
+    this.setState({ error: false })
   }
 
   render() {
@@ -153,8 +192,8 @@ export class Slide3 extends Component {
         </label>
         <label>
           Contributing Authors
-          {this.state.authors.map((author) => <SavedAuthor author={author} key={author.get('id')} />)}
-          <AddableAuthorComponent />
+          {this.state.authors.map((author) => <SavedAuthor author={author} key={author.get('id')} onError={this.onError.bind(this)} />)}
+          <AddableAuthorComponent onError={this.onError.bind(this)} onSuccess={this.onSuccess.bind(this)} />
           {this.renderErrorMessage.bind(this)()}
         </label>
       </div>
@@ -171,7 +210,7 @@ class SavedAuthor extends Component {
       url: `${ajax.getDomain()}/publications/${publicationId}/authors/${authorId}`,
       contentType: 'application/json',
       success: () => store.dispatch(deleteAuthor(authorId)),
-      error: (error) => this.props.onError(error)
+      error: () => this.props.onError()
     })
   }
 
@@ -186,6 +225,10 @@ class SavedAuthor extends Component {
 }
 
 export class Slide5 extends Component {
+  componentWillReceiveProps(nextProps) {
+    nextProps.changeSlides()
+  }
+
   publishPublication() {
     const publicationId = store.getState().publication.get('id')
     ajax.request({
@@ -197,7 +240,7 @@ export class Slide5 extends Component {
         store.dispatch(updatePublication({ published: true }))
         this.props.history.push(`/publications/${publicationId}`)
       },
-      error: (error) => this.props.onError(error)
+      error: (error) => console.error(error)
     })
   }
 
