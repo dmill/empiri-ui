@@ -92,11 +92,15 @@ function publication(state = defaultPublication, action) {
       return state.updateIn(['_embedded', 'sections'], (sections) => sections.filterNot(section => section.get('id') === action.payload))
 
     case ADD_FIGURE:
-      currentSection = state.getIn(['_embedded', 'sections']).filter(section => section.get('id') === action.payload.section_id).get(0)
-      updatedSection = currentSection.update('figures', (figures) => figures.push(Immutable.fromJS(action.payload)))
-      prunedSections = state.getIn(['_embedded', 'sections']).filterNot(section => section.get('id') === action.payload.section_id)
-      updatedSections = prunedSections.insert(updatedSection.get('position'), updatedSection)
-      return state.updateIn(['_embedded', 'sections'], sections => updatedSections)
+      return state.updateIn(['_embedded', 'sections'], (sections) => {
+        return sections.map((section) => {
+          if (section.get('id') == action.payload.section_id) {
+            return section.update('figures', (figures) => figures.push(Immutable.fromJS(action.payload)))
+          } else {
+            return section
+          }
+        })
+      })
 
     case UPDATE_FIGURE:
       currentSection = state.getIn(['_embedded', 'sections']).filter(section => section.get('id') === action.payload.section_id).get(0)
