@@ -45,8 +45,8 @@ export class Slide1 extends Component {
         data: JSON.stringify({ publication: { title: this.state.title }}),
         contentType: 'application/json',
         success: ({ publication }) => {
-          store.dispatch(updatePublication({ id: publication.id, title: this.state.title }))
           callback()
+          store.dispatch(updatePublication({ title: this.state.title }))
         },
         error: (error) => this.setState({ error: true })
       })
@@ -104,21 +104,23 @@ export class Slide2 extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.saveSlide(nextProps.changeSlides)
+    if (nextProps.changeSlides) {
+      this.saveSlide(nextProps.changeSlides)
+    }
   }
 
   saveSlide(callback) {
-    const publication = store.getState().publication
+    const publicationId = store.getState().publication.get('id')
     ajax.request({
       type: 'PATCH',
-      url: `${ajax.getDomain()}/publications/${publication.get('id')}`,
+      url: `${ajax.getDomain()}/publications/${publicationId}`,
       data: JSON.stringify({ publication: { abstract: this.state.abstract }}),
       contentType: 'application/json',
       success: ({ publication }) => {
-        store.dispatch(updatePublication({ abstract: publication.abstract }))
         callback()
+        store.dispatch(updatePublication({ abstract: publication.abstract }))
       },
-      error: (error) => this.setState({ error: true})
+      error: (error) => this.setState({ error: true })
     })
   }
 
@@ -164,12 +166,14 @@ export class Slide3 extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    nextProps.changeSlides()
+    if (nextProps.changeSlides) {
+      nextProps.changeSlides()
+    }
   }
 
   renderErrorMessage() {
     if (this.state.error) {
-      return <div className="error-message">Please enter a valid email address</div>
+      return <div className="error-message">Please enter a valid information</div>
     }
   }
 

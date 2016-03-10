@@ -17,13 +17,13 @@ export default class NewPublicationView extends Component {
 
   showNextSlide() {
     this.setState({ changeSlides: () => {
-      this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left' })
+      this.setState({ currentSlide: this.state.currentSlide + 1, direction: 'left', changeSlides: () => null })
     }})
   }
 
   showPrevSlide() {
     this.setState({ changeSlides: () => {
-      this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right' })
+      this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right', changeSlides: () => null })
     }})
   }
 
