@@ -1,23 +1,18 @@
 import React, { Component } from 'react'
 import store from '../redux/store'
 import PublicationSectionsComponent from '../components/publication_sections_component'
-import { newPublication, updatePublication } from '../redux/actions'
+import { newPublication } from '../redux/actions'
 import { Slide0, Slide1, Slide2, Slide3, Slide5 } from '../components/publication_slides'
 import IconElement from '../elements/icon_element'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import { browserHistory } from 'react-router'
 
 export default class NewPublicationView extends Component {
   componentWillMount() {
-    this.state = { currentSlide: 0, direction: 'left', publicationId: null, errorMessage: null, changeSlides: () => null }
+    this.state = { currentSlide: 0, direction: 'left', publicationId: null, changeSlides: () => null }
   }
 
   componentDidMount() {
     store.dispatch(newPublication())
-  }
-
-  save() {
-    this.setState({ saving: true })
   }
 
   showNextSlide() {
