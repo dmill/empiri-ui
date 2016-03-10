@@ -379,16 +379,10 @@
       margin: 0 2rem 0 0;
     }
 
-    .red {
-      color: $red;
-    }
-
-    .green {
-      color: $green;
-    }
-
-    .gold {
-      color: $gold;
+    .rating-badge {
+      padding: 1px 5px;
+      border-radius: 2px;
+      font-size: 1.1rem;
     }
 
     // &:hover {
@@ -407,7 +401,7 @@
       vertical-align: middle;
       margin-right: 6px;
       float: left;
-      line-height: 38px;
+      line-height: 36px;
       font-size: 2.5rem;
       color: $purple-ll;
     }
@@ -540,18 +534,6 @@
     padding: 0.5rem;
     float: right;
 
-    &.gold {
-      background-color: $gold;
-    }
-
-    &.green {
-      background-color: $green;
-    }
-
-    &.red {
-      background-color: $red;
-    }
-
     i {
       float: left;
       margin: 5px 5px 0 0;
@@ -566,4 +548,20 @@
       color: #fff;
     }
   }
+}
+
+.rating-badge {
+  display: inline-block;
+  color: white;
+    &.gold {
+      background-color: $gold;
+    }
+
+    &.green {
+      background-color: $green;
+    }
+
+    &.red {
+      background-color: $red;
+    }
 }

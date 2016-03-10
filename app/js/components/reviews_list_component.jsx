@@ -6,17 +6,25 @@ export default class ReviewsListComponent extends Component {
   renderType(review) {
     switch (review.rating) {
       case -1:
-        return <div className="status red">rejection</div>
+        return <div className="rating-badge red">rejection</div>
       case 0:
-        return <div className="status gold">revision request</div>
+        return <div className="rating-badge gold">revision request</div>
       case 1:
-        return <div className="status green">endorsement</div>
+        return <div className="rating-badge green">endorsement</div>
     }
   }
 
   renderEditButton(review) {
     if (this.props.editable) {
       return <Link to={`publications/${review.publication_id}/reviews/${review.id}/edit`}><button>edit</button></Link>
+    }
+  }
+
+  renderMessage() {
+    if (this.props.editable) {
+      return <div>You don&#39;t have any reviews yet.  Write one!</div>
+    } else {
+      return <div>No reviews yet.</div>
     }
   }
 
@@ -28,16 +36,16 @@ export default class ReviewsListComponent extends Component {
             return (
               <div className={`publication`} key={i}>
                 {this.renderEditButton(review)}
-                <IconElement iconType="material" iconName="public" />
+                <IconElement iconType="material" iconName="rate_review" />
                 <Link to={`publications/${review.publication_id}/reviews`} className="title clear-fix">{review.title}</Link>
-                {this.renderType(section)}
+                {this.renderType(review)}
               </div>
             )
           })}
         </div>
       )
     } else {
-      return <div>You don&#39;t have any reviews yet.  Write one!</div>
+      return this.renderMessage()
     }
   }
 
