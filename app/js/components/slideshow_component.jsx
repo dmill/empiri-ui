@@ -21,11 +21,9 @@ export default class SlideShowComponent extends Component {
   nextButton() {
     switch(this.state.currentSlide) {
       case 0:
-        return <ButtonElement
-                onClick={this.showNextSlide.bind(this)}
-                buttonText="Get Started"
-                buttonName="initiate-publication-button"
-               />
+        return  <button onClick={this.showNextSlide.bind(this)} className="initiate-publication-button">
+                  "Get Started"
+                </button>
       case (this.props.slides.length - 1):
         return null
       default:
