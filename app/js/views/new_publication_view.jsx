@@ -60,7 +60,7 @@ export default class NewPublicationView extends Component {
             case 4:
               return <PublicationSectionsComponent key={4} changeSlides={this.state.changeSlides.bind(this)} />
             case 5:
-              return <Slide5 key={5} history={this.props.history} changeSlides={this.state.changeSlides.bind(this)} />
+              return <Slide5 key={5} changeSlides={this.state.changeSlides.bind(this)} />
             default:
               return console.error("Invalid slide state in NewPublicationView")
           }
