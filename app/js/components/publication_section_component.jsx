@@ -3,7 +3,7 @@ import IconElement from '../elements/icon_element'
 import InputElement from '../elements/input_element'
 import ImageUploadComponent from './image_upload_component'
 import store from '../redux/store'
-import { addSection, deleteSection, addFigure } from '../redux/actions'
+import { addSection, deleteSection, addFigure, updateSection } from '../redux/actions'
 import FigureComponent from '../components/figure_component'
 import ajax from '../lib/ajax'
 
@@ -62,7 +62,8 @@ export default class PublicationSection extends Component {
       type: 'PATCH',
       url: `${ajax.getDomain()}/publications/${publicationId}/sections/${sectionId}`,
       data: JSON.stringify({ section: this.state }),
-      contentType: 'application/json'
+      contentType: 'application/json',
+      success: ({ section }) => store.dispatch(updateSection(section))
     })
   }
 
@@ -75,11 +76,19 @@ export default class PublicationSection extends Component {
       <div className="publication-paper-section-component">
         <label>
           Section title
-          <input type="text" name="title" value={this.state.title} onChange={this.onChange.bind(this)} />
+          <input type="text" name="title"
+            value={this.state.title}
+            onChange={this.onChange.bind(this)}
+            onBlur={this.saveSection.bind(this)}
+          />
         </label>
         <label>
           Section Body
-          <textarea name="body" value={this.state.body} onChange={this.onChange.bind(this)} />
+          <textarea name="body"
+            value={this.state.body}
+            onChange={this.onChange.bind(this)}
+            onBlur={this.saveSection.bind(this)}
+          />
         </label>
         <button><ImageUploadComponent isEditable={true} onChange={this.addFigure.bind(this)} /></button>
         <div className="figures clear-fix">
@@ -87,7 +96,6 @@ export default class PublicationSection extends Component {
             return <FigureComponent key={figure.get('id')} figure={figure} />
           })}
         </div>
-        <button onClick={this.saveSection.bind(this)}>save this section</button>
         <button onClick={this.deleteSection.bind(this)}>delete this section</button>
       </div>
     )

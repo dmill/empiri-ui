@@ -13,7 +13,8 @@ import {
   DELETE_SECTION,
   ADD_FIGURE,
   UPDATE_FIGURE,
-  NEW_PEER_REVIEW
+  NEW_PEER_REVIEW,
+  UPDATE_SECTION
 } from './actions'
 
 const defaultPeerReview = Immutable.fromJS({
@@ -75,6 +76,17 @@ function publication(state = defaultPublication, action) {
 
     case ADD_SECTION:
       return state.updateIn(['_embedded', 'sections'], (sections) => sections.push(Immutable.fromJS(action.payload)))
+
+    case UPDATE_SECTION:
+      return state.updateIn(['_embedded', 'sections'], (sections) => {
+        return sections.map((section) => {
+          if (section.get('id') == action.payload.id) {
+            return Immutable.fromJS(action.payload)
+          } else {
+            return section
+          }
+        })
+      })
 
     case DELETE_SECTION:
       return state.updateIn(['_embedded', 'sections'], (sections) => sections.filterNot(section => section.get('id') === action.payload))

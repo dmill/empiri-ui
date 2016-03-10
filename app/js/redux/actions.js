@@ -11,6 +11,7 @@ export const NEW_PUBLICATION = 'NEW_PUBLICATION'
 export const ADD_FIGURE = 'ADD_FIGURE'
 export const UPDATE_FIGURE = 'UPDATE_FIGURE'
 export const NEW_PEER_REVIEW = 'NEW_PEER_REVIEW'
+export const UPDATE_SECTION = 'UPDATE_SECTION'
 
 export function updatePublication(publicationData) {
   return { type: UPDATE_PUBLICATION, payload: publicationData }
@@ -58,4 +59,8 @@ export function addFigure(figure) {
 
 export function updateFigure(payload) {
   return { type: UPDATE_FIGURE, payload: payload }
+}
+
+export function updateSection(payload) {
+  return { type: UPDATE_SECTION, payload: payload }
 }
