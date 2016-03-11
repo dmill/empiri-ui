@@ -1,7 +1,8 @@
 export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const LOG_OUT = 'LOG_OUT'
 export const EXPAND_CONTRIBUTION = 'EXPAND_CONTRIBUTION'
-export const UPDATE_PEER_REVIEW = 'UPDATE_PEER_REVIEW'
+export const UPDATE_REVIEW = 'UPDATE_REVIEW'
+export const NEW_REVIEW = 'NEW_REVIEW'
 export const UPDATE_PUBLICATION = 'UPDATE_PUBLICATION'
 export const ADD_AUTHOR = 'ADD_AUTHOR'
 export const DELETE_AUTHOR = 'DELETE_AUTHOR'
@@ -10,11 +11,18 @@ export const DELETE_SECTION = 'DELETE_SECTION'
 export const NEW_PUBLICATION = 'NEW_PUBLICATION'
 export const ADD_FIGURE = 'ADD_FIGURE'
 export const UPDATE_FIGURE = 'UPDATE_FIGURE'
-export const NEW_PEER_REVIEW = 'NEW_PEER_REVIEW'
 export const UPDATE_SECTION = 'UPDATE_SECTION'
 
 export function updatePublication(publicationData) {
   return { type: UPDATE_PUBLICATION, payload: publicationData }
+}
+
+export function updateReview(reviewData) {
+  return { type: UPDATE_REVIEW, payload: reviewData }
+}
+
+export function newReview() {
+  return { type: NEW_REVIEW, payload: null }
 }
 
 export function setCurrentUser(userData) {
@@ -27,10 +35,6 @@ export function logout() {
 
 export function expandContribution(contributionId) {
   return { type: EXPAND_CONTRIBUTION, payload: contributionId }
-}
-
-export function updatePeerReview(text) {
-  return { type: UPDATE_PEER_REVIEW, payload: text }
 }
 
 export function addAuthor(data) {

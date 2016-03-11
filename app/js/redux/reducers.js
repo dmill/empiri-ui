@@ -4,7 +4,7 @@ import {
   SET_CURRENT_USER,
   LOG_OUT,
   EXPAND_CONTRIBUTION,
-  UPDATE_PEER_REVIEW,
+  UPDATE_REVIEW,
   UPDATE_PUBLICATION,
   ADD_AUTHOR,
   DELETE_AUTHOR,
@@ -13,22 +13,45 @@ import {
   DELETE_SECTION,
   ADD_FIGURE,
   UPDATE_FIGURE,
-  NEW_PEER_REVIEW,
+  NEW_REVIEW,
   UPDATE_SECTION
 } from './actions'
 
 const defaultPeerReview = Immutable.fromJS({
-  title: '',
-  body: ''
+  title: null,
+  body: null,
+  rating: null,
+  publication_id: null,
+  id: null,
+  _embedded: {
+    user: {
+      title: null,
+      photo_url: null,
+      organization: null,
+      last_name: null,
+      id: null,
+      first_name: null,
+      email: null
+    },
+    author: {
+      title: null,
+      photo_url: null,
+      organization: null,
+      last_name: null,
+      id: null,
+      first_name: null,
+      email: null
+    }
+  }
 })
 
 function peerReview(state = defaultPeerReview, action) {
   switch(action.type) {
-    case NEW_PEER_REVIEW:
+    case NEW_REVIEW:
       return defaultPeerReview
 
-    case UPDATE_PEER_REVIEW:
-      return action.payload
+    case UPDATE_REVIEW:
+      return Immutable.fromJS(action.payload)
 
     default:
       return state

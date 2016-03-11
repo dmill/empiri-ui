@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import store from '../redux/store'
 import IconElement from '../elements/icon_element'
 import { Link } from 'react-router'
 

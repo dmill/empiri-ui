@@ -24,6 +24,7 @@ export function startRouter(App, lock, requireLogin) {
         <Route path="/users/:userId" component={UserProfileView} />
         <Route path="/publications/new" onEnter={requireLogin} component={NewPublicationView} />
         <Route path="/publications/:publicationId/reviews/new" onEnter={requireLogin} component={PeerReviewView} />
+        <Route path="/publications/:publicationId/reviews/:reviewId/edit" component={PeerReviewView} />
         <Route path="/publications/:publicationId/reviews" component={PeerReviewsView} />
         <Route path="/publications/:publicationId/edit" onEnter={requireLogin} component={PublicationEditView} />
         <Route path="/publications/:publicationId" component={PublicationView} />
