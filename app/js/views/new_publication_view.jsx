@@ -8,7 +8,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default class NewPublicationView extends Component {
   componentWillMount() {
-    this.state = { currentSlide: 0, direction: 'left', publicationId: null, changeSlides: () => null }
+    this.state = { currentSlide: 0, direction: 'left', publicationId: null, changeSlides: () => null, bypass: false }
   }
 
   componentDidMount() {
@@ -22,7 +22,7 @@ export default class NewPublicationView extends Component {
   }
 
   showPrevSlide() {
-    this.setState({ changeSlides: () => {
+    this.setState({ bypass: true, changeSlides: () => {
       this.setState({ currentSlide: this.state.currentSlide - 1, direction: 'right', changeSlides: () => null })
     }})
   }
@@ -52,7 +52,7 @@ export default class NewPublicationView extends Component {
             case 0:
               return <Slide0 key={0} changeSlides={this.state.changeSlides.bind(this)} />
             case 1:
-              return <Slide1 key={1} changeSlides={this.state.changeSlides.bind(this)} />
+              return <Slide1 key={1} changeSlides={this.state.changeSlides.bind(this)} bypass={this.state.bypass} />
             case 2:
               return <Slide2 key={2} changeSlides={this.state.changeSlides.bind(this)} />
             case 3:
