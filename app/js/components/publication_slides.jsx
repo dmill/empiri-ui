@@ -15,10 +15,21 @@ export class Slide0 extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Welcome to Empiri&#39;s Publishing System</h1>
-        <h3>Here you can publish your work safely</h3>
-        <p>More instructions on how it works and its benefits</p>
+      <div className="new-publication-intro">
+        <h1>Welcome to Empiri&#39;s Open Science Publishing System</h1>
+        <h2>Contribute to the reformation of science</h2>
+        <div className="benefits-container">
+          <h2>How our process works:</h2>
+          <ol>
+            <li>Write your paper using the system here</li>
+            <li>As soon as you press &#39;publish&#39; your work becomes publicly available</li>
+            <li>Once published, your work accumulates peer reviews over time</li>
+            <li>There is no limit to the number of reviews your paper can receive</li>
+            <li>Reviews are aggregated over time to reveal the community&#39;s consensus on your paper</li>
+            <li>Your paper remains revisable indefinitely for you to add new content as your research continues</li>
+          </ol>
+        </div>
+        <h2>Together we can bring an end to the old way of publishing, and discover a new paradigm that is <em>Transparent</em>, <em>Merit-Based</em>, and truly <em>Empirical</em></h2>
       </div>
     )
   }
@@ -34,7 +45,11 @@ export class Slide1 extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.saveSlide(nextProps.changeSlides)
+    if (nextProps.bypass && !this.state.title) {
+      nextProps.changeSlides()
+    } else {
+      this.saveSlide(nextProps.changeSlides)
+    }
   }
 
   saveSlide(callback) {
@@ -46,8 +61,8 @@ export class Slide1 extends Component {
         data: JSON.stringify({ publication: { title: this.state.title }}),
         contentType: 'application/json',
         success: ({ publication }) => {
-          callback()
           store.dispatch(updatePublication({ title: this.state.title }))
+          callback()
         },
         error: (error) => this.setState({ error: true })
       })
