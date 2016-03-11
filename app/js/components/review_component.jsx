@@ -33,10 +33,11 @@ export default class ReviewComponent extends Component {
 
   render() {
     const author = this.props.review.getIn(['_embedded', 'user'])
+    const updatedAt = this.props.review.get('updated_at')
     return (
       <div className="review component">
         {this.renderBadge()}
-        <AuthorMetadataElement author={author} />
+        <AuthorMetadataElement author={author} updatedAt={updatedAt} />
         <h1 className="title">{this.props.review.get('title')}</h1>
         <p>{this.props.review.get('body')}</p>
       </div>
