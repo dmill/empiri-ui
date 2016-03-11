@@ -32,7 +32,7 @@ export default class PeerReviewComponent extends Component {
 
 
   saveReview(e) {
-    if(this.props.existingReview) {
+    if(this.props.routeParams.reviewId) {
       this.updateReview(e)
     }
     else {
