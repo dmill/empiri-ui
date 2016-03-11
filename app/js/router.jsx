@@ -7,7 +7,6 @@ import UserProfileView from './views/user_profile_view'
 import PublicationView from './views/publication_view'
 import UserProfileEditView from './views/user_profile_edit_view'
 import PeerReviewView from './views/peer_review_view'
-import PeerReviewEditView from './views/peer_review_edit_view'
 import NewPublicationView from './views/new_publication_view'
 import PeerReviewComponent from './components/peer_review_component'
 import PricingPage from './views/pricing_page'
@@ -25,7 +24,7 @@ export function startRouter(App, lock, requireLogin) {
         <Route path="/users/:userId" component={UserProfileView} />
         <Route path="/publications/new" onEnter={requireLogin} component={NewPublicationView} />
         <Route path="/publications/:publicationId/reviews/new" onEnter={requireLogin} component={PeerReviewView} />
-        <Route path="/publications/:publicationId/reviews/:reviewId/edit" component={PeerReviewEditView} />
+        <Route path="/publications/:publicationId/reviews/:reviewId/edit" component={PeerReviewView} />
         <Route path="/publications/:publicationId/reviews" component={PeerReviewsView} />
         <Route path="/publications/:publicationId/edit" onEnter={requireLogin} component={PublicationEditView} />
         <Route path="/publications/:publicationId" component={PublicationView} />

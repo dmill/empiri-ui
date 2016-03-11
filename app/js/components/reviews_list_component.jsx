@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import store from '../redux/store'
 import IconElement from '../elements/icon_element'
 import { Link } from 'react-router'
 
@@ -16,7 +17,7 @@ export default class ReviewsListComponent extends Component {
 
   renderEditButton(review) {
     if (this.props.editable) {
-      return <Link to={`publications/${review.publication_id}/reviews/${review.id}/edit`} state={review}><button>edit</button></Link>
+      return <Link to={`publications/${review.publication_id}/reviews/${review.id}/edit`}><button>edit</button></Link>
     }
   }
 

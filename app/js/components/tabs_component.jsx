@@ -10,7 +10,6 @@ export default class TabsComponent extends Component {
       { name: 'Your Review',
         body: <PeerReviewComponent
                 history={this.props.history}
-                existingReview={this.props.existingReview}
                 routeParams={this.props.routeParams}
               />
       },
