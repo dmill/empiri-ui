@@ -21,7 +21,7 @@ export default class FigureComponent extends Component {
     const publicationId = store.getState().publication.get('id')
     const sectionId = this.props.figure.get('section_id')
     const figureId = this.props.figure.get('id')
-    const data = { figure: { title: e.target.previousElementSibling.value } }
+    const data = { figure: { title: e.target.value } }
     ajax.request({
       type: 'PATCH',
       url: `${ajax.getDomain()}/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
@@ -38,7 +38,7 @@ export default class FigureComponent extends Component {
     const publicationId = store.getState().publication.get('id')
     const sectionId = this.props.figure.get('section_id')
     const figureId = this.props.figure.get('id')
-    const data = { figure: { caption: e.target.previousElementSibling.value } }
+    const data = { figure: { caption: e.target.value } }
     ajax.request({
       type: 'PATCH',
       url: `${ajax.getDomain()}/publications/${publicationId}/sections/${sectionId}/figures/${figureId}`,
@@ -52,38 +52,36 @@ export default class FigureComponent extends Component {
   }
 
   renderCaption() {
+    const caption = this.props.figure.get('caption') ? this.props.figure.get('caption') : "Figure Caption"
     if (this.state.editingCaption) {
       return (
         <div className="caption">
-          <input type="text" />
-          <IconElement onClick={this.saveCaption.bind(this)} iconType="material" iconName="check_circle" />
+          <input type="text" onBlur={this.saveCaption.bind(this)} defaultValue={caption} />
         </div>
       )
     } else {
-      const caption = this.props.figure.get('caption') ? this.props.figure.get('caption') : "Figure Caption"
       return (
         <div className="caption">
-          <input className="disabled" type="text" value={caption} />
-          <IconElement iconType="material" onClick={this.editCaption.bind(this)} iconName="mode_edit" />
+          <input className="disabled" type="text" defaultValue={caption} onClick={this.editCaption.bind(this)} />
+          <IconElement iconType="material" iconName="mode_edit" onClick={this.editCaption.bind(this)} />
         </div>
       )
     }
   }
 
   renderTitle() {
+    const title = this.props.figure.get('title') ? this.props.figure.get('title') : "Figure Title"
     if (this.state.editingTitle) {
       return (
         <div className="title">
-          <input type="text" />
-          <IconElement onClick={this.saveTitle.bind(this)} iconType="material" iconName="check_circle" />
+          <input type="text" onBlur={this.saveTitle.bind(this)} defaultValue={title} />
         </div>
       )
     } else {
-      const title = this.props.figure.get('title') ? this.props.figure.get('title') : "Figure Title"
       return (
         <div className="title">
-          <input className="disabled" type="text" value={title} />
-          <IconElement iconType="material" onClick={this.editTitle.bind(this)} iconName="mode_edit" />
+          <input className="disabled" type="text" defaultValue={title} onClick={this.editTitle.bind(this)} />
+          <IconElement iconType="material" iconName="mode_edit" onClick={this.editTitle.bind(this)} />
         </div>
       )
     }

@@ -6,6 +6,7 @@ import { updatePublication, deleteAuthor } from '../redux/actions'
 import IconElement from '../elements/icon_element'
 import { Link } from 'react-router'
 import ajax from '../lib/ajax'
+import { browserHistory } from 'react-router'
 
 export class Slide0 extends Component {
   componentWillReceiveProps(nextProps) {
@@ -242,7 +243,7 @@ export class Slide5 extends Component {
       contentType: 'application/json',
       success: () => {
         store.dispatch(updatePublication({ published: true }))
-        this.props.history.push(`/publications/${publicationId}`)
+        browserHistory.push(`/publications/${publicationId}`)
       },
       error: (error) => console.error(error)
     })

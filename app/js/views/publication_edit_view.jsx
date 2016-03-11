@@ -18,10 +18,6 @@ export default class PublicationEditView extends Component {
     })
   }
 
-  componentWillUnmount() {
-    this.unsubscribe()
-  }
-
   render() {
     return (
       <NewPublicationView />

@@ -13,7 +13,8 @@ import {
   DELETE_SECTION,
   ADD_FIGURE,
   UPDATE_FIGURE,
-  NEW_REVIEW
+  NEW_REVIEW,
+  UPDATE_SECTION
 } from './actions'
 
 const defaultPeerReview = Immutable.fromJS({
@@ -99,24 +100,47 @@ function publication(state = defaultPublication, action) {
     case ADD_SECTION:
       return state.updateIn(['_embedded', 'sections'], (sections) => sections.push(Immutable.fromJS(action.payload)))
 
+    case UPDATE_SECTION:
+      return state.updateIn(['_embedded', 'sections'], (sections) => {
+        return sections.map((section) => {
+          if (section.get('id') == action.payload.id) {
+            return Immutable.fromJS(action.payload)
+          } else {
+            return section
+          }
+        })
+      })
+
     case DELETE_SECTION:
       return state.updateIn(['_embedded', 'sections'], (sections) => sections.filterNot(section => section.get('id') === action.payload))
 
     case ADD_FIGURE:
-      currentSection = state.getIn(['_embedded', 'sections']).filter(section => section.get('id') === action.payload.section_id).get(0)
-      updatedSection = currentSection.update('figures', (figures) => figures.push(Immutable.fromJS(action.payload)))
-      prunedSections = state.getIn(['_embedded', 'sections']).filterNot(section => section.get('id') === action.payload.section_id)
-      updatedSections = prunedSections.insert(updatedSection.get('position'), updatedSection)
-      return state.updateIn(['_embedded', 'sections'], sections => updatedSections)
+      return state.updateIn(['_embedded', 'sections'], (sections) => {
+        return sections.map((section) => {
+          if (section.get('id') == action.payload.section_id) {
+            return section.update('figures', (figures) => figures.push(Immutable.fromJS(action.payload)))
+          } else {
+            return section
+          }
+        })
+      })
 
     case UPDATE_FIGURE:
-      currentSection = state.getIn(['_embedded', 'sections']).filter(section => section.get('id') === action.payload.section_id).get(0)
-      prunedFigures = currentSection.get('figures').filterNot(figure => figure.get('id') === action.payload.id)
-      updatedFigures = prunedFigures.insert(action.payload.position, Immutable.fromJS(action.payload))
-      updatedSection = currentSection.update('figures', figures => updatedFigures)
-      prunedSections = state.getIn(['_embedded', 'sections']).filterNot(section => section.get('id') === action.payload.section_id)
-      updatedSections = prunedSections.insert(currentSection.get('position'), updatedSection)
-      return state.updateIn(['_embedded', 'sections'], sections => updatedSections)
+      return state.updateIn(['_embedded', 'sections'], (sections) => {
+        return sections.map((section) => {
+          if (section.get('id') == action.payload.section_id) {
+            return section.update('figures', (figures) => {
+              return figures.map((figure) => {
+                if (figure.get('id') == action.payload.id) {
+                  return Immutable.fromJS(action.payload)
+                } else {
+                  return figure
+                }
+              })
+            })
+          }
+        })
+      })
 
     default:
       return state
