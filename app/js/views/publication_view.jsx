@@ -51,7 +51,7 @@ export default class PublicationView extends Component {
         <div className="row">
           <RatingsComponent publication={publication} />
           <h1>{publication.get('title')}</h1>
-          <AuthorMetadataElement author={user} />
+          <AuthorMetadataElement author={user} updatedAt={publication.get('updated_at')} />
           <h2>Abstract</h2>
           <p>{publication.get('abstract')}</p>
           <h2>Sections</h2>

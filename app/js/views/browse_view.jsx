@@ -3,18 +3,16 @@ import store from '../redux/store'
 import { Link } from 'react-router'
 import IconElement from '../elements/icon_element'
 import ajax from '../lib/ajax'
+import AuthorMetadataElement from '../elements/author_metadata_element'
+import Immutable from 'immutable'
 
-const PublicationPreview = ({ updatedAt, publicationId, title, abstract, firstName, lastName, photoUrl, authorId }) => {
+const PublicationPreview = ({ updatedAt, publicationId, title, abstract, author }) => {
   return (
     <div className="publication-preview-element">
       <Link to={`/publications/${publicationId}`}>
         <h1>{title}</h1>
       </Link>
-      <Link to={`/users/${authorId}`}><img className="circle" src={photoUrl} /></Link>
-      <div className="author-data">
-        <Link to={`/users/${authorId}`}><div className="author">{firstName} {lastName}</div></Link>
-        <div className="updated-at">updated Jan 28, 2016</div>
-      </div>
+      <AuthorMetadataElement author={author} updatedAt={updatedAt} />
       <h2>Abstract</h2>
       <p>{abstract}</p>
       <div className="publication-preview-element-footer">
@@ -47,12 +45,9 @@ export default class BrowseView extends Component {
                     publicationId={publication.id}
                     title={publication.title}
                     abstract={publication.abstract}
-                    firstName={publication._embedded.users[0].first_name}
-                    lastName={publication._embedded.users[0].last_name}
+                    author={Immutable.fromJS(publication._embedded.users[0])}
                     key={i}
                     updatedAt={publication.updated_at}
-                    photoUrl={publication._embedded.users[0].photo_url}
-                    authorId={publication._embedded.users[0].id}
                   />
                 )
               })}
