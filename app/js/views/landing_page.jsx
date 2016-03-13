@@ -22,7 +22,7 @@ export default class LandingPage extends Component {
       <div id="landing-page">
         <section className="gradient" id="intro">
           <div className="container">
-            <img src="/buid/images/symbol.png" />
+            <img src="/build/images/symbol.png" />
             <h1 className="heading">Empiri</h1>
             <h2>Open Scientific Publishing</h2>
             <h2>Transparent, Merit-Based, and Fast</h2>
