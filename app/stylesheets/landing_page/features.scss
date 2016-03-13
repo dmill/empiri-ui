@@ -1,0 +1,36 @@
+#features {
+  padding: 75px 40px;
+  border-bottom: 1px solid #0f0f0f;
+
+  img {
+    width: 100%;
+  }
+}
+
+#demo {
+  padding: 75px 40px;
+  border-bottom: 1px solid #0f0f0f;
+  background-color: #F6C200;
+  position: relative;
+
+  img {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    max-width: 500px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+#cta {
+  padding: 75px 40px;
+  text-align: center;
+
+  .form-container {
+    display: inline-block;
+  }
+
+  h1 {
+    text-align: center;
+  }
+}

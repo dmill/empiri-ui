@@ -1,0 +1,121 @@
+@import 'features';
+@import 'forms';
+@import 'intro';
+@import '../variables';
+
+#landing-page {
+  font-size: 10px;
+
+  #intro {
+    padding-top: 160px;
+  }
+  p {
+    font-size: 1.8rem;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Pontano Sans";
+  }
+
+  section {
+    padding: 100px 40px 40px 40px;
+  }
+
+  section.gradient {
+    // background-color: $purple;
+    background: linear-gradient(to bottom,$purple 40px,$purple-hl);
+    font-size: 1.8rem;
+    // background: #000 url(../../images/gradient-from-black.jpg) no-repeat center top/cover;
+  }
+
+  .heading {
+    font-size: 70px;
+  }
+
+  h2 {
+    letter-spacing: -.02em;
+    font-size: 32px;
+    line-height: 55px;
+    margin-bottom: 40px;
+  }
+
+  h3 {
+    letter-spacing: -.02em;
+    font-size: 24px;
+    line-height: 35px;
+  }
+
+  section.black {
+    background: linear-gradient(to bottom, #f5f5f5, #ddd);
+    background-color: #f5f5f5;
+    font-size: 2rem;
+  }
+
+  section.white {
+    background-color: #FFF;
+    color: #000;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  #features .material-icons {
+    color: #F6C200;
+    font-size: 115px;
+  }
+
+  #features p {
+    text-align: justify;
+    font-size: 18px;
+  }
+
+  #info img {
+    max-width: 100%;
+  }
+
+  button {
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 0 30px;
+    color: #FFF;
+    height: auto;
+    border: 2px solid #FFF;
+    transition: 0.2s;
+    margin: 40px;
+  }
+
+  button:hover {
+    background-color: #FFF;
+    border: 2px solid #FFF;
+  }
+
+  #form button {
+    color: #000;
+    border: 2px solid #000;
+  }
+
+  #form button:hover {
+    color: #FFF;
+    background-color: #000;
+    border: 2px solid #000;
+  }
+
+  img {
+    opacity: 0.9;
+  }
+
+  img.footer {
+    width: 45px;
+  }
+
+  .profile {
+    width: 50%;
+    float: left;
+    margin-bottom: 30px;
+  }
+
+  .white-link {
+    color: white;
+  }
+}

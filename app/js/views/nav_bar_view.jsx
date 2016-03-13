@@ -57,6 +57,11 @@ export default class NavBarView extends Component {
       socialBigButtons: true,
       authParams: {
         scope: 'openid email given_name family_name picture'
+      },
+      dict: {
+        signup: {
+          title: 'Join the Beta'
+        }
       }
     })
     // }, this.startTour)

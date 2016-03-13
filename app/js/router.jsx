@@ -13,12 +13,13 @@ import PricingPage from './views/pricing_page'
 import MembershipForm from './views/membership_form'
 import PublicationEditView from './views/publication_edit_view'
 import PeerReviewsView from './views/peer_reviews_view'
+import LandingPage from './views/landing_page'
 
 export function startRouter(App, lock, requireLogin) {
   render((
     <Router history={browserHistory}>
       <Route path="/" component={App} lock={lock}>
-        <IndexRoute component={BrowseView} />
+        <IndexRoute component={LandingPage} lock={lock} />
         <Route path="/browse" component={BrowseView} />
         <Route path="/user/edit" onEnter={requireLogin} component={UserProfileEditView} />
         <Route path="/users/:userId" component={UserProfileView} />
