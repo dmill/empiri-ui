@@ -22,7 +22,7 @@ export default class LandingPage extends Component {
       <div id="landing-page">
         <section className="gradient" id="intro">
           <div className="container">
-            <img src="images/symbol.png" />
+            <img src="/buid/images/symbol.png" />
             <h1 className="heading">Empiri</h1>
             <h2>Open Science Publishing Platform</h2>
             <h2>Transparent, Merit-Based, and Empirical</h2>
@@ -81,7 +81,7 @@ export default class LandingPage extends Component {
               </div>
 
               <div className="six columns">
-                <img src="images/mock.png" />
+                <img src="/build/images/mock.png" />
               </div>
             </div>
           </div>
@@ -95,14 +95,14 @@ export default class LandingPage extends Component {
                   <h2>Doug Mill</h2>
                   <h6><a className="white-link" href="mailto:doug@empiri.co">doug@empiri.co</a></h6>
                   <a target="_blank" href="https://www.linkedin.com/in/doug-mill-b5643249">
-                    <img src="images/doug-circle.png" width="250" />
+                    <img src="/build/images/doug-circle.png" width="250" />
                   </a>
                 </div>
                 <div className="profile">
                   <h2>Andrew Wong</h2>
                   <h6><a className="white-link" href="mailto:andrew@empiri.co">andrew@empiri.co</a></h6>
                   <a target="_blank" href="https://www.linkedin.com/in/arwong09">
-                    <img src="images/andrew-circle.png" width="250" />
+                    <img src="/build/images/andrew-circle.png" width="250" />
                   </a>
                 </div>
 
@@ -134,7 +134,7 @@ export default class LandingPage extends Component {
 
               </div>
             </div>
-            <image className="footer" src="images/symbol.png" />
+            <image className="footer" src="/build/images/symbol.png" />
           </div>
         </section>
       </div>
