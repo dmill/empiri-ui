@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 export default class LandingPage extends Component {
   showSignup() {
@@ -25,7 +26,7 @@ export default class LandingPage extends Component {
             <h1 className="heading">Empiri</h1>
             <h2>Open Science Publishing Platform</h2>
             <h2>Transparent, Merit-Based, and Empirical</h2>
-            <button onclick="window.location.href='#form'">Help US Test the Beta</button>
+            <button onClick={this.showSignup.bind(this)}>Help US Test the Beta</button>
           </div>
         </section>
 
@@ -74,9 +75,9 @@ export default class LandingPage extends Component {
                 inexpensive. We believe that your work should be judged on its merits
                 in an open forum - not by anonymous reviewers or unilateral editorial
                 decisions. For more detailed information on how this works, check out
-                our <a href="faq.html" className="white-link">FAQ</a>.</p>
+                our <Link to="/faq" className="white-link">FAQ</Link>.</p>
 
-                <button onclick="window.location.href='faq.html'">Read FAQ</button>
+                <button><Link to="/faq" className="white-link">Read FAQ</Link></button>
               </div>
 
               <div className="six columns">
