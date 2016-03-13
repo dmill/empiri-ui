@@ -24,8 +24,8 @@ export default class LandingPage extends Component {
           <div className="container">
             <img src="images/symbol.png" />
             <h1 className="heading">Empiri</h1>
-            <h2>Open Science Publishing Platform</h2>
-            <h2>Transparent, Merit-Based, and Empirical</h2>
+            <h2>Open Scientific Publishing</h2>
+            <h2>Transparent, Merit-Based, and Fast</h2>
             <button onClick={this.showSignup.bind(this)}>Help US Test the Beta</button>
           </div>
         </section>
@@ -117,7 +117,7 @@ export default class LandingPage extends Component {
           <div className="container">
             <h1>We Need Your Help!</h1>
             <p>Empiri is currently in the beta testing phase.  This means the majority of the software development has been done, and we need <em>your</em> feedback to tell us what more you would like to see from the publishing system.</p>
-            <p>We believe science should be open, transparent, and community-driven.  Likewise we run Empiri the same way.  We value each and every one of your inputs and we will personally respond to any feedback you have on how this platform can best serve Open Science.</p>
+            <p>We believe science should be open, transparent, and community-driven.  Likewise we run Empiri the same way.  We value the input of each and every one of you and we will personally respond to any feedback you have on how this platform can best serve Open Science.</p>
             <button onClick={this.showSignup.bind(this)}>Help Us test the beta</button>
           </div>
         </section>
