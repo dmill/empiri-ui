@@ -249,6 +249,21 @@ export class Slide5 extends Component {
     nextProps.changeSlides()
   }
 
+  saveUnpublished() {
+    const publicationId = store.getState().publication.get('id')
+    ajax.request({
+      type: 'PATCH',
+      url: `${ajax.getDomain()}/publications/${publicationId}`,
+      data: JSON.stringify({ publication: { published: false } }),
+      contentType: 'application/json',
+      success: ({ publication }) => {
+        store.dispatch(updatePublication(publication))
+        browserHistory.push(`/publications/${publicationId}`)
+      },
+      error: (error) => console.error(error)
+    })
+  }
+
   publishPublication() {
     const publicationId = store.getState().publication.get('id')
     ajax.request({
@@ -268,7 +283,7 @@ export class Slide5 extends Component {
     return (
       <div className="slide component">
         <h2>Almost Finished!</h2>
-        <Link to={`/users/${store.getState().currentUser.id}`}><button>Save For Later</button></Link>
+        <button onClick={this.saveUnpublished.bind(this)}>Save Unpublished</button>
         <button onClick={this.publishPublication.bind(this)}>Publish Now!</button>
       </div>
     )

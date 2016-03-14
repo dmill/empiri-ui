@@ -40,6 +40,12 @@ export default class PublicationView extends Component {
     this.unsubscribe()
   }
 
+  isPublished() {
+    if (!this.state.publication.get('published')) {
+      return <span className="unpublished-badge">unpublished</span>
+    }
+  }
+
   render() {
     const publication = this.state.publication
     const user = publication.getIn(['_embedded', 'users']).get(0)
@@ -50,6 +56,7 @@ export default class PublicationView extends Component {
       <div id="publication-view" className="container">
         <div className="row">
           <RatingsComponent publication={publication} />
+          {this.isPublished()}
           <h1>{publication.get('title')}</h1>
           <AuthorMetadataElement author={user} updatedAt={publication.get('updated_at')} />
           <h2>Abstract</h2>
