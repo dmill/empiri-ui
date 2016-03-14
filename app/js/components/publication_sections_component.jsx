@@ -38,8 +38,7 @@ export default class PublicationSectionsComponent extends Component {
     const publicationId = store.getState().publication.get('id')
     const defaultSection = { section: {
       title: '',
-      body: '',
-      position: this.state.sections.size
+      body: ''
     }}
     ajax.request({
       type: 'POST',
@@ -61,10 +60,10 @@ export default class PublicationSectionsComponent extends Component {
     return (
       <div id="new-publication-slide" className="container">
         <h1>Add Content to Your Publication</h1>
-        {this.state.sections.map((section, i) => {
+        {this.state.sections.map((section) => {
           return (<PublicationSection
             key={section.get('id')}
-            position={i}
+            position={section.get('position')}
             id={section.get('id')}
             title={section.get('title')}
             body={section.get('body')}
