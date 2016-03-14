@@ -109,7 +109,7 @@ export default class NavBarView extends Component {
               <div className="five columns">
                 <Link className="link" to="/"><img id="logo" src="/build/images/symbol.png" width="20px" /></Link>
                 <Link className="link" to="/browse"><h6>Browse</h6></Link>
-                <Link className="link" to="/"><h6>FAQ</h6></Link>
+                <Link className="link" to="/faq"><h6>FAQ</h6></Link>
                 <a className="link" href="mailto:andrew@empiri.co">Contact Us</a>
               </div>
               <div className="seven columns secondary">
