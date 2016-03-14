@@ -6,11 +6,10 @@ import { Link } from 'react-router'
 import PublicationSection from '../components/publication_section_component'
 import ajax from '../lib/ajax'
 
-const defaultSection = Immutable.fromJS([{
+const defaultSection = Immutable.fromJS({
   title: '',
-  body: '',
-  position: 0
-}])
+  body: ''
+})
 
 export default class PublicationSectionsComponent extends Component {
   componentWillMount() {
@@ -36,17 +35,12 @@ export default class PublicationSectionsComponent extends Component {
 
   addSection() {
     const publicationId = store.getState().publication.get('id')
-    const defaultSection = { section: {
-      title: '',
-      body: ''
-    }}
     ajax.request({
       type: 'POST',
       url: `${ajax.getDomain()}/publications/${publicationId}/sections`,
       contentType: 'application/json',
-      data: JSON.stringify(defaultSection),
+      data: JSON.stringify({ section: defaultSection }),
       success: ({ section }) => store.dispatch(addSection(section)),
-      error: (error) => this.onError(error)
     })
   }
 

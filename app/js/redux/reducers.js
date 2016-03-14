@@ -89,7 +89,8 @@ function publication(state = defaultPublication, action) {
       return defaultPublication
 
     case UPDATE_PUBLICATION:
-      return state.mergeDeep(Immutable.fromJS(action.payload))
+      const updatedPublication = state.mergeDeep(Immutable.fromJS(action.payload))
+      return updatedPublication.updateIn(['_embedded', 'sections'], (sections) => sections.sort((a, b) => a.get('position') - b.get('position')))
 
     case ADD_AUTHOR:
       return state.updateIn(['_embedded', 'authors'], (authors) => authors.push(Immutable.fromJS(action.payload)))
