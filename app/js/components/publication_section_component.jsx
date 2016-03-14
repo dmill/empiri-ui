@@ -8,7 +8,8 @@ import FigureComponent from '../components/figure_component'
 import ajax from '../lib/ajax'
 
 export default class PublicationSection extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     this.state = {
       title: this.props.title,
       body: this.props.body,
@@ -52,7 +53,7 @@ export default class PublicationSection extends Component {
   }
 
   saveSection() {
-    if (this.state.title === '' && this.state.body === '') {
+    if (this.state.title == '' && this.state.body == '') {
       return
     }
 

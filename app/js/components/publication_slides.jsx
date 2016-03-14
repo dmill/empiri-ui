@@ -189,7 +189,7 @@ export class Slide3 extends Component {
 
   renderErrorMessage() {
     if (this.state.error) {
-      return <div className="error-message">Please enter a valid information</div>
+      return <div className="error-message">Please enter valid information</div>
     }
   }
 

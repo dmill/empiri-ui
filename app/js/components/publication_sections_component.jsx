@@ -44,12 +44,6 @@ export default class PublicationSectionsComponent extends Component {
     })
   }
 
-  renderErrorMessage() {
-    if (this.props.errorMessage) {
-      return <div className="error-message">{this.props.errorMessage}</div>
-    }
-  }
-
   render() {
     return (
       <div id="new-publication-slide" className="container">
@@ -63,7 +57,6 @@ export default class PublicationSectionsComponent extends Component {
             body={section.get('body')}
             figures={section.get('figures')} />
         )})}
-        {this.renderErrorMessage.bind(this)()}
         <button onClick={this.addSection.bind(this)}>+ Section</button>
       </div>
     )
