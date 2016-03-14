@@ -52,7 +52,7 @@ export default class PublicationSection extends Component {
   }
 
   saveSection() {
-    if (this.state.title === '' || this.state.body === '') {
+    if (this.state.title === '' && this.state.body === '') {
       return
     }
 
