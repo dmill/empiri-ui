@@ -67,8 +67,8 @@ export default class PublicationSection extends Component {
     })
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
+  onChange(name, e) {
+    this.setState({ [name]: e.target.value })
   }
 
   render() {
@@ -78,7 +78,7 @@ export default class PublicationSection extends Component {
           Section title
           <input type="text" name="title"
             value={this.state.title}
-            onChange={this.onChange.bind(this)}
+            onChange={this.onChange.bind(this, 'title')}
             onBlur={this.saveSection.bind(this)}
           />
         </label>
@@ -86,7 +86,7 @@ export default class PublicationSection extends Component {
           Section Body
           <textarea name="body"
             value={this.state.body}
-            onChange={this.onChange.bind(this)}
+            onChange={this.onChange.bind(this, 'body')}
             onBlur={this.saveSection.bind(this)}
           />
         </label>
