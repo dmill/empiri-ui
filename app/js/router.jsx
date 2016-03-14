@@ -16,21 +16,29 @@ import PeerReviewsView from './views/peer_reviews_view'
 import LandingPage from './views/landing_page'
 import Faq from './views/faq'
 
+function gaPv(nextState) {
+  const pathname = nextState.location.pathname
+  const userId = store.getState().currentUser.id
+  ga('set', 'userId', userId ? userId : 'noUser')
+  ga('set', 'page', pathname)
+  ga('send', 'pageview')
+}
+
 export function startRouter(App, lock, requireLogin) {
   render((
     <Router history={browserHistory}>
       <Route path="/" component={App} lock={lock}>
-        <IndexRoute component={LandingPage} lock={lock} />
-        <Route path="/faq" component={Faq} />
-        <Route path="/browse" component={BrowseView} />
+        <IndexRoute component={LandingPage} lock={lock} onEnter={gaPv} />
+        <Route path="/faq" component={Faq} onEnter={gaPv} />
+        <Route path="/browse" component={BrowseView} onEnter={gaPv} />
         <Route path="/user/edit" onEnter={requireLogin} component={UserProfileEditView} />
-        <Route path="/users/:userId" component={UserProfileView} />
+        <Route path="/users/:userId" component={UserProfileView} onEnter={gaPv} />
         <Route path="/publications/new" onEnter={requireLogin} component={NewPublicationView} />
         <Route path="/publications/:publicationId/reviews/new" onEnter={requireLogin} component={PeerReviewView} />
-        <Route path="/publications/:publicationId/reviews/:reviewId/edit" component={PeerReviewView} />
-        <Route path="/publications/:publicationId/reviews" component={PeerReviewsView} />
+        <Route path="/publications/:publicationId/reviews/:reviewId/edit" component={PeerReviewView} onEnter={gaPv} />
+        <Route path="/publications/:publicationId/reviews" component={PeerReviewsView} onEnter={gaPv} />
         <Route path="/publications/:publicationId/edit" onEnter={requireLogin} component={PublicationEditView} />
-        <Route path="/publications/:publicationId" component={PublicationView} />
+        <Route path="/publications/:publicationId" component={PublicationView} onEnter={gaPv} />
       </Route>
       <Route path="/pricing" component={PricingPage} />
       <Route path="/membership" component={MembershipForm} />

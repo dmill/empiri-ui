@@ -16,7 +16,7 @@ const App = ({ children, history, route }) => {
   )
 }
 
-function requireLogin() {
+function requireLogin(nextState) {
   if (!store.getState().currentUser.id) {
     lock.showSignup({
       icon: 'https://s3-us-west-1.amazonaws.com/www.empiri.co/images/symbol.png',
@@ -26,6 +26,12 @@ function requireLogin() {
       }
     })
   }
+
+  const pathname = nextState.location.pathname
+  const userId = store.getState().currentUser.id
+  ga('set', 'userId', userId ? userId : 'noUser')
+  ga('set', 'page', pathname)
+  ga('send', 'pageview')
 }
 
 startRouter(App, lock, requireLogin)
