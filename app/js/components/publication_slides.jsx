@@ -283,7 +283,7 @@ export class Slide5 extends Component {
     return (
       <div className="slide component">
         <h2>Almost Finished!</h2>
-        <button onClick={this.saveUnpublished.bind(this)}>Save Unpublished</button>
+        <button onClick={this.saveUnpublished.bind(this)}>Save As Draft</button>
         <button onClick={this.publishPublication.bind(this)}>Publish Now!</button>
       </div>
     )
