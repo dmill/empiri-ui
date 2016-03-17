@@ -7,10 +7,10 @@ function renderInput(isEditable, onChange) {
   }
 }
 
-const ImageUploadComponent = ({ img, onChange, isEditable }) => {
+const ImageUploadComponent = ({ img, onChange, isEditable, type }) => {
   return (
     <div className="image-upload-component">
-      <label className={`${isEditable}`}>
+      <label className={`${isEditable} ${type}`}>
         <IconElement iconName="add_a_photo" iconType="material" />
         {img}
         {renderInput(isEditable, onChange)}

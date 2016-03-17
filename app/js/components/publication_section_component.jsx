@@ -91,7 +91,7 @@ export default class PublicationSection extends Component {
             onBlur={this.saveSection.bind(this)}
           />
         </label>
-        <button><ImageUploadComponent isEditable={true} onChange={this.addFigure.bind(this)} /></button>
+        <ImageUploadComponent type="button" isEditable={true} onChange={this.addFigure.bind(this)} />
         <div className="figures clear-fix">
           {this.state.figures.map(figure => {
             return <FigureComponent key={figure.get('id')} figure={figure} />

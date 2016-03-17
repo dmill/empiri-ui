@@ -281,6 +281,11 @@
   input {
     display: none;
   }
+  .button {
+    &:after {
+      content: "add figure"
+    }
+  }
 }
 
 .editable-image-component {
