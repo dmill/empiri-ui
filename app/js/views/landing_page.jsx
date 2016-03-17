@@ -95,7 +95,7 @@ export default class LandingPage extends Component {
                   <h2>Doug Mill</h2>
                   <h6><a className="white-link" href="mailto:doug@empiri.co">doug@empiri.co</a></h6>
                   <a target="_blank" href="https://www.linkedin.com/in/doug-mill-b5643249">
-                    <img src="/build/images/doug-circle.png" width="250" />
+                    <img className="circle" src="/build/images/doug_bricks.jpg" width="250" />
                   </a>
                 </div>
                 <div className="profile">
