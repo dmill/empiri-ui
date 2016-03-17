@@ -32,22 +32,28 @@ export default class BrowseView extends Component {
     })
   }
 
+  sortPublications() {
+    const publications = Immutable.fromJS(this.state.publications)
+    return publications.sort((a, b) => a.get('id') - b.get('id'))
+  }
+
   render() {
+    const publications = this.sortPublications.bind(this)()
     return (
       <div id="browse-view" className="container">
         <div id="header"><h6>Top Publications</h6></div>
         <div className="row">
           <div className="twelve columns publications-column-container">
             <div className="eight columns publications-column">
-              {this.state.publications.map((publication, i) => {
+              {publications.map((publication) => {
                 return (
                   <PublicationPreview
-                    publicationId={publication.id}
-                    title={publication.title}
-                    abstract={publication.abstract}
-                    author={Immutable.fromJS(publication._embedded.users[0])}
-                    key={i}
-                    updatedAt={publication.updated_at}
+                    publicationId={publication.get('id')}
+                    title={publication.get('title')}
+                    abstract={publication.get('abstract')}
+                    author={publication.getIn(['_embedded', 'users', 0])}
+                    key={publication.get('id')}
+                    updatedAt={publication.get('updated_at')}
                   />
                 )
               })}
