@@ -12,7 +12,13 @@ const ImageUploadComponent = ({ img, onChange, isEditable, type }) => {
     <div className="image-upload-component">
       <label className={`${isEditable} ${type}`}>
         <IconElement iconName="add_a_photo" iconType="material" />
-        {img}
+        {() => {
+          if (img) {
+            return img
+          } else {
+            return "Add Figure"
+          }
+        }()}
         {renderInput(isEditable, onChange)}
       </label>
     </div>

@@ -275,16 +275,26 @@
 }
 
 .image-upload-component {
+  text-align: left;
+  margin-bottom: 2rem;
+
+  .button {
+    i {
+      vertical-align: middle;
+      margin-right: 1rem;
+      margin-top: -6px;
+    }
+  }
+
+  label {
+    width: auto;
+  }
+
   label.true {
     cursor: pointer;
   }
   input {
     display: none;
-  }
-  .button {
-    &:after {
-      content: "add figure"
-    }
   }
 }
 
@@ -352,7 +362,7 @@
   label {
     text-align: left;
     margin: 0 auto;
-    width: 100%;
+    font-size: 1.8rem;
   }
 
   input, textarea {

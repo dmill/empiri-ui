@@ -46,7 +46,7 @@ export default class PublicationSectionsComponent extends Component {
 
   render() {
     return (
-      <div id="new-publication-slide" className="container">
+      <div id="new-publication-slide" className="container slide component">
         <h1>Add Content to Your Publication</h1>
         {this.state.sections.map((section) => {
           return (<PublicationSection
