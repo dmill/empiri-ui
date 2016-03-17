@@ -1,7 +1,7 @@
 class Ajax {
   getDomain() {
     if (__PROD__) {
-      return 'https://desolate-thicket-91367.herokuapp.com/'
+      return 'https://desolate-thicket-91367.herokuapp.com'
     } else {
       return 'http://localhost:4000'
     }
