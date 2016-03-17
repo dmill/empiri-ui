@@ -1,39 +1,40 @@
 #faq {
+  font-size: 1.8rem;
+
   nav {
-  margin-top: -100px;
-  margin-bottom: 40px;
-}
+    margin-top: -100px;
+    margin-bottom: 40px;
+  }
 
-#mc_embed_signup input {
-  border-bottom: 2px solid rgba(256, 256, 256, 0.8);
-}
+  #mc_embed_signup input {
+    border-bottom: 2px solid rgba(256, 256, 256, 0.8);
+  }
 
-#form button {
-  color: #FFF;
-  border: 2px solid #FFF;
-}
-
-#form button:hover {
-  color: #000;
-  background-color: #FFF;
-  border: 2px solid #000;
-}
-
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  #form button {
     color: #FFF;
-    opacity: 0.75;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #FFF;
-   opacity: 0.75;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #FFF;
-   opacity: 0.75;
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #FFF;
-   opacity: 0.75;
-}
+    border: 2px solid #FFF;
+  }
 
+  #form button:hover {
+    color: #000;
+    background-color: #FFF;
+    border: 2px solid #000;
+  }
+
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color: #FFF;
+      opacity: 0.75;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+     color:    #FFF;
+     opacity: 0.75;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+     color:    #FFF;
+     opacity: 0.75;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+     color:    #FFF;
+     opacity: 0.75;
+  }
 }

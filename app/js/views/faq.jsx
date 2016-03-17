@@ -28,7 +28,7 @@ export default class Faq extends Component {
         <p>Yes. Our model makes so-called "crowd-sourced" science much more feasible. Scientists working on the same project can easily share and discuss results.</p>
 
         <h3>What is a shared hypothesis?</h3>
-        <p>Shared hypotheses provide a mechanism for authors supporting the same hypothesis to compile their work together in a central location. For example, a group of medicinal chemists developing a new pharmaceutical to treat Parkinson&#39;s Diesease could combine their work with that of neuroscientists, clinicians, and epidemiologists who are all supporting the efficacy of the new drug.</p>
+        <p>Shared hypotheses provide a mechanism for authors supporting the same hypothesis to compile their work together in a central location. For example, a group of medicinal chemists developing a new pharmaceutical to treat Parkinson&#39;s Disease could combine their work with that of neuroscientists, clinicians, and epidemiologists who are all supporting the efficacy of the new drug.</p>
 
         <h3>How can I learn more? How can I contribute?</h3>
         <p>If the open science movement is something that you&#39;re passionate about, we would love to work with you more closely. We want our platform to work the way that you want it to work, and in order to make that happen we need your suggestions, criticisms and general feedback. If you would like to participate in our private beta or have any questions at all please contact us at <a href="mailto:doug@empiri.co">doug@empiri.co</a> or <a href="mailto:andrew@empiri.co">andrew@empiri.co</a></p>
